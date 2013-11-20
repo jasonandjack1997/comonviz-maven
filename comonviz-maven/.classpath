@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src/test/java" output="target/test-classes" including="**/*.java"/>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/googlecode/genericdao/dao-hibernate/1.2.0/dao-hibernate-1.2.0.jar" sourcepath="M2_REPO/com/googlecode/genericdao/dao-hibernate/1.2.0/dao-hibernate-1.2.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/googlecode/genericdao/dao/1.2.0/dao-1.2.0.jar" sourcepath="M2_REPO/com/googlecode/genericdao/dao/1.2.0/dao-1.2.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/googlecode/genericdao/search/1.2.0/search-1.2.0.jar" sourcepath="M2_REPO/com/googlecode/genericdao/search/1.2.0/search-1.2.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.2/slf4j-api-1.7.2.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.7.2/slf4j-api-1.7.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/googlecode/genericdao/search-hibernate/1.2.0/search-hibernate-1.2.0.jar" sourcepath="M2_REPO/com/googlecode/genericdao/search-hibernate/1.2.0/search-hibernate-1.2.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-core/4.2.0.CR1/hibernate-core-4.2.0.CR1.jar" sourcepath="M2_REPO/org/hibernate/hibernate-core/4.2.0.CR1/hibernate-core-4.2.0.CR1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jboss/logging/jboss-logging/3.1.0.GA/jboss-logging-3.1.0.GA.jar" sourcepath="M2_REPO/org/jboss/logging/jboss-logging/3.1.0.GA/jboss-logging-3.1.0.GA-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jboss/spec/javax/transaction/jboss-transaction-api_1.1_spec/1.0.0.Final/jboss-transaction-api_1.1_spec-1.0.0.Final.jar" sourcepath="M2_REPO/org/jboss/spec/javax/transaction/jboss-transaction-api_1.1_spec/1.0.0.Final/jboss-transaction-api_1.1_spec-1.0.0.Final-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" sourcepath="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final.jar" sourcepath="M2_REPO/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.15.0-GA/javassist-3.15.0-GA.jar" sourcepath="M2_REPO/org/javassist/javassist/3.15.0-GA/javassist-3.15.0-GA-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hibernate/common/hibernate-commons-annotations/4.0.1.Final/hibernate-commons-annotations-4.0.1.Final.jar" sourcepath="M2_REPO/org/hibernate/common/hibernate-commons-annotations/4.0.1.Final/hibernate-commons-annotations-4.0.1.Final-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.7.2/slf4j-log4j12-1.7.2.jar" sourcepath="M2_REPO/org/slf4j/slf4j-log4j12/1.7.2/slf4j-log4j12-1.7.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17.jar" sourcepath="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/h2database/h2/1.3.170/h2-1.3.170.jar" sourcepath="M2_REPO/com/h2database/h2/1.3.170/h2-1.3.170-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-context/3.2.1.RELEASE/spring-context-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-context/3.2.1.RELEASE/spring-context-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-beans/3.2.1.RELEASE/spring-beans-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-beans/3.2.1.RELEASE/spring-beans-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/3.2.1.RELEASE/spring-core-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-core/3.2.1.RELEASE/spring-core-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-aop/3.2.1.RELEASE/spring-aop-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-aop/3.2.1.RELEASE/spring-aop-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" sourcepath="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/3.2.1.RELEASE/spring-expression-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-expression/3.2.1.RELEASE/spring-expression-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-web/3.2.1.RELEASE/spring-web-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-web/3.2.1.RELEASE/spring-web-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-webmvc/3.2.1.RELEASE/spring-webmvc-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-webmvc/3.2.1.RELEASE/spring-webmvc-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-orm/3.2.1.RELEASE/spring-orm-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-orm/3.2.1.RELEASE/spring-orm-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-jdbc/3.2.1.RELEASE/spring-jdbc-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-jdbc/3.2.1.RELEASE/spring-jdbc-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/3.2.1.RELEASE/spring-tx-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-tx/3.2.1.RELEASE/spring-tx-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/3.2.1.RELEASE/spring-test-3.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-test/3.2.1.RELEASE/spring-test-3.2.1.RELEASE-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/jgoodies/looks/2.2.2/looks-2.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/metawidget/modules/metawidget-all/3.6/metawidget-all-3.6.jar" sourcepath="M2_REPO/org/metawidget/modules/metawidget-all/3.6/metawidget-all-3.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/local/eclipse/zest/layouts/1.0.0/layouts-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/piccolo2d/piccolo2d-core/1.3.1/piccolo2d-core-1.3.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/piccolo2d/piccolo2d-extras/1.3.1/piccolo2d-extras-1.3.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sourceforge/owlapi/owlapi-distribution/3.4.3/owlapi-distribution-3.4.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sourceforge/owlapi/owlapi-contract/3.4.3/owlapi-contract-3.4.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sourceforge/owlapi/owlapi-apibinding/3.4.3/owlapi-apibinding-3.4.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sourceforge/owlapi/owlapi-api/3.4.3/owlapi-api-3.4.3.jar" sourcepath="M2_REPO/net/sourceforge/owlapi/owlapi-api/3.4.3/owlapi-api-3.4.3-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sourceforge/owlapi/owlapi-impl/3.4.3/owlapi-impl-3.4.3.jar" sourcepath="M2_REPO/net/sourceforge/owlapi/owlapi-impl/3.4.3/owlapi-impl-3.4.3-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sourceforge/owlapi/owlapi-parsers/3.4.3/owlapi-parsers-3.4.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sourceforge/owlapi/owlapi-tools/3.4.3/owlapi-tools-3.4.3.jar"/>
+</classpath>
