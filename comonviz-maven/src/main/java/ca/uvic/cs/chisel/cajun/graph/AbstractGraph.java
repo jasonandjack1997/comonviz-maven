@@ -555,8 +555,8 @@ public abstract class AbstractGraph extends PCanvas implements Graph {
 		addLayout(new LayoutAction(LayoutConstants.LAYOUT_SPRING, ResourceHandler.getIcon("icon_spring_layout.gif"), new SpringLayoutAlgorithm(style), this));
 		addLayout(new LayoutAction(LayoutConstants.LAYOUT_TREE_VERTICAL, ResourceHandler.getIcon("icon_tree_layout.gif"), new TreeLayoutAlgorithm(style), this));
 		addLayout(new LayoutAction(LayoutConstants.LAYOUT_TREE_HORIZONTAL, ResourceHandler.getIcon("icon_tree_layout_horizontal.gif"), new HorizontalTreeLayoutAlgorithm(style), this));
-		addLayout(new LayoutAction(LayoutConstants.LAYOUT_DIRECTED_VERTICAL, ResourceHandler.getIcon("icon_tree_layout.gif"), new DirectedGraphLayoutAlgorithm(style), this));
-		addLayout(new LayoutAction(LayoutConstants.LAYOUT_DIRECTED_HORIZONTAL, ResourceHandler.getIcon("icon_tree_layout_horizontal.gif"), new HorizontalDirectedGraphLayoutAlgorithm(style), this));
+		//addLayout(new LayoutAction(LayoutConstants.LAYOUT_DIRECTED_VERTICAL, ResourceHandler.getIcon("icon_tree_layout.gif"), new DirectedGraphLayoutAlgorithm(style), this));
+		//addLayout(new LayoutAction(LayoutConstants.LAYOUT_DIRECTED_HORIZONTAL, ResourceHandler.getIcon("icon_tree_layout_horizontal.gif"), new HorizontalDirectedGraphLayoutAlgorithm(style), this));
 		
 		// important - set the last layout
 		this.lastLayout = getLayout(LayoutConstants.LAYOUT_DIRECTED_VERTICAL);
