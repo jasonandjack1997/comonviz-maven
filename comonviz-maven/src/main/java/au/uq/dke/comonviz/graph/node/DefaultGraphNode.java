@@ -111,6 +111,8 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 	private HiddenChildrenCountIcon childrenCountIcon;
 
 	private final static int MAX_TOOLTIP_LINES = 20;
+	
+	
 
 	// This nodes uses an internal Ellipse2D to define its shape.
 	public Ellipse2D getEllipse() {
@@ -725,6 +727,7 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 
 	@Override
 	protected void paint(PPaintContext paintContext) {
+		this.setText(((OntologyClass)this.getUserObject()).getName());
 		Graphics2D g2 = paintContext.getGraphics();
 
 		// this.setB

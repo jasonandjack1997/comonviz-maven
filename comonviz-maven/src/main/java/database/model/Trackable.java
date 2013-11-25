@@ -14,7 +14,7 @@ import edu.umd.cs.piccolo.PNode;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Trackable   extends PNode {
+public class Trackable {
 	
 
 	@Id
@@ -40,6 +40,14 @@ public class Trackable   extends PNode {
 	
 	public String toString(){
 		return "id: " + id + "," + "name: " + name ;
+	}
+	
+	
+	/** update itself using the new object
+	 * @param o
+	 */
+	public void update(Trackable o){
+		this.setName(o.name);
 	}
 
 	@Override

@@ -1,17 +1,12 @@
 package database.model.ontology;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
+import org.metawidget.inspector.annotation.UiHidden;
+
 import database.model.Trackable;
-import edu.umd.cs.piccolo.PNode;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "ID")
@@ -26,6 +21,7 @@ public class OntologyClass extends Trackable{
 	public Long getBranchId() {
 		return branchId;
 	}
+
 
 	public String getDiscription() {
 		return discription;
@@ -64,8 +60,17 @@ public class OntologyClass extends Trackable{
 		this.siblingRank = order;
 	}
 	
+	@UiHidden
 	public String getNameAndIRI(){
 		return super.toString() + ", iri: " + iri;
+	}
+	
+	public void update(OntologyClass c){
+		this.setBranchId(c.getBranchId());
+		this.setDiscription(c.getDiscription());
+		this.setIri(c.getIri());
+		this.setSiblingRank(c.getSiblingRank());
+		super.update(c);
 	}
 
 

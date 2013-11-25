@@ -1,4 +1,4 @@
-package metawidget;
+package test.metawidget;
 
 public class Person {
 	private String	mName;

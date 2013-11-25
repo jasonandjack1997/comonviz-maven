@@ -1,4 +1,4 @@
-package metawidget;
+package test.metawidget;
 
 import javax.swing.JFrame;
 import javax.swing.JTree;
