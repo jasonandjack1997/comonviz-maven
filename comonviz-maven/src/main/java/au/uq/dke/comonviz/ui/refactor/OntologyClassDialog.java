@@ -12,6 +12,7 @@ import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingPro
 import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessorConfig;
 import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBindingProcessor;
 
+import au.uq.dke.comonviz.EntryPoint;
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import database.model.ontology.OntologyClass;
@@ -64,6 +65,8 @@ public class OntologyClassDialog extends JDialog {
 		this.ontologyClass.update(c);
 		//defaultMutableTreeNode.setUserObject(c);
 		this.classesCRUDDialog.getTreeModel().reload(defaultMutableTreeNode);
+        EntryPoint.getTopView().getTreeModel().reload(defaultMutableTreeNode);
+
 		((DefaultGraphNode)this.graphNode).invalidatePaint();
 		((DefaultGraphNode)this.graphNode).repaint();
 		((DefaultGraphNode)this.graphNode).validateFullPaint();

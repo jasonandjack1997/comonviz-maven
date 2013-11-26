@@ -182,14 +182,12 @@ public class TopView extends JPanel {
 		// initialize();
 	}
 
-	public void initialize() {
+	public void initialize(DefaultMutableTreeNode root) {
 		// this.ontologyTree = ontologyTree;
 
 		EntryPoint.getjFrame().add(this);
 		this.add(getToolBar(), BorderLayout.NORTH);
 
-		DefaultMutableTreeNode root = EntryPoint.getGraphModel()
-				.generateMutableTree();
 
 		treeModel = new DefaultTreeModel(root);
 

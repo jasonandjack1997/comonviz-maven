@@ -71,6 +71,8 @@ public class EntryPoint {
 
 	/** the model representation of the graph, nodes and edges */
 	private static NewGraphModel graphModel;
+	
+	private static DefaultMutableTreeNode ontologyTreeRoot;
 
 	private static TopView topView;
 
@@ -134,7 +136,10 @@ public class EntryPoint {
 				null, new RadialLayoutAlgorithm(1), EntryPoint.getFlatGraph());
 
 		graphModel.init();
-		topView.initialize();
+		ontologyTreeRoot = graphModel
+				.generateMutableTree();
+
+		topView.initialize(ontologyTreeRoot);
 
 		styleManager = StyleManager.getStyleManager();
 
@@ -179,6 +184,10 @@ public class EntryPoint {
 		// e.printStackTrace();
 		// }
 
+	}
+
+	public static DefaultMutableTreeNode getOntologyTreeRoot() {
+		return ontologyTreeRoot;
 	}
 
 	public static LayoutAction getRadicalLayoutAction() {

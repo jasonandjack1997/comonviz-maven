@@ -251,8 +251,8 @@ public class NewGraphModel extends DefaultGraphModel {
 		for (OntologyClass cls : classList) {
 			GraphNode node = this.findGraphNode(cls);
 			if (node == null) {
-				throw new NullPointerException(
-						"can't find peer graphNode by ontology class");
+				//throw new NullPointerException(
+				//		"can't find peer graphNode by ontology class");
 			} else {
 				graphNodeList.add(node);
 			}

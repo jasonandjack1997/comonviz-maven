@@ -41,9 +41,9 @@ public class ClassesCRUDDialog extends JDialog {
 		return treeModel;
 	}
 
-	public ClassesCRUDDialog() {
-		EntryPoint entryPoint = new EntryPoint();
-		entryPoint.start();
+	public ClassesCRUDDialog(DefaultMutableTreeNode root ) {
+		this.root = root;
+
 		ontologyClassSwingMetawidget = new SwingMetawidget();
 		ontologyClassSwingMetawidget.addWidgetProcessor( new BeansBindingProcessor( new BeansBindingProcessorConfig()
 		));
@@ -53,8 +53,6 @@ public class ClassesCRUDDialog extends JDialog {
 		// DefaultMutableTreeNode root = EntryPoint.getGraphModel()
 		// .generateMutableTree();
 
-		root = EntryPoint.getGraphModel()
-				.generateMutableTree();
 
 		
 		treeModel = new DefaultTreeModel(root);
@@ -82,12 +80,17 @@ public class ClassesCRUDDialog extends JDialog {
 	        if (currentSelection != null) {
 	            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode)
 	                         (currentSelection.getLastPathComponent());
+	            GraphNode graphNode = (GraphNode) currentNode.getUserObject();
+	            EntryPoint.getGraphModel().removeNode(graphNode.getUserObject());
 	            MutableTreeNode parent = (MutableTreeNode)(currentNode.getParent());
 	            if (parent != null) {
 	                treeModel.removeNodeFromParent(currentNode);
+	                EntryPoint.getTopView().getTreeModel().reload();
 	                return;
 	            }
 	        } 
+	        
+
 	}
 
 	@UiAction
@@ -153,15 +156,15 @@ public class ClassesCRUDDialog extends JDialog {
 
 		@Override
 		public void valueChanged(TreeSelectionEvent e) {
-			// TODO Auto-generated method stub
-			DefaultMutableTreeNode selectedTreeNode = (DefaultMutableTreeNode) ((JTree) e
-					.getSource()).getLastSelectedPathComponent();
-			GraphNode selectedGraphNode = (GraphNode) selectedTreeNode
-					.getUserObject();
-			OntologyClass ontologyClass = (OntologyClass) selectedGraphNode
-					.getUserObject();
-			
-			//ontologyClass.setName("hehe");
+//			// TODO Auto-generated method stub
+//			DefaultMutableTreeNode selectedTreeNode = (DefaultMutableTreeNode) ((JTree) e
+//					.getSource()).getLastSelectedPathComponent();
+//			GraphNode selectedGraphNode = (GraphNode) selectedTreeNode
+//					.getUserObject();
+//			OntologyClass ontologyClass = (OntologyClass) selectedGraphNode
+//					.getUserObject();
+//			
+//			//ontologyClass.setName("hehe");
 
 		}
 
@@ -191,7 +194,9 @@ public class ClassesCRUDDialog extends JDialog {
 	};
 
 	public static void main(String args[]) {
-		new ClassesCRUDDialog();
+		EntryPoint entryPoint = new EntryPoint();
+		entryPoint.start();
+		new ClassesCRUDDialog(EntryPoint.getOntologyTreeRoot());
 	}
 	
 	
