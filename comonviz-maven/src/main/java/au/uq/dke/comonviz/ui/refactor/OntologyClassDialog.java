@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.JDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 
 import org.metawidget.inspector.annotation.UiAction;
 import org.metawidget.swing.SwingMetawidget;
@@ -29,9 +30,30 @@ public class OntologyClassDialog extends JDialog {
 	public OntologyClassDialog(ClassesCRUDDialog classesCRUDDialog,
 			DefaultMutableTreeNode defaultMutableTreeNode) {
 		this.defaultMutableTreeNode = defaultMutableTreeNode;
-		this.graphNode = (GraphNode) defaultMutableTreeNode.getUserObject();
-		this.classesCRUDDialog = classesCRUDDialog;
-		ontologyClass = (OntologyClass) graphNode.getUserObject();
+
+		//create a new node, we should generate some information: id, branchId, level
+		if (defaultMutableTreeNode.getUserObject() == null) {
+			DefaultMutableTreeNode parentTreeNode = (DefaultMutableTreeNode) defaultMutableTreeNode.getParent();
+			GraphNode parentGraphNode = (GraphNode) parentTreeNode.getUserObject();
+			OntologyClass parentOntologyClass = (OntologyClass) parentGraphNode.getUserObject();
+
+			defaultMutableTreeNode.setUserObject(new DefaultGraphNode(
+					new OntologyClass()));
+
+			// generate an id
+			EntryPoint.getOntologyClassService().save(
+					(OntologyClass) ((DefaultGraphNode) defaultMutableTreeNode
+							.getUserObject()).getUserObject());
+			this.graphNode = (GraphNode) defaultMutableTreeNode.getUserObject();
+			this.classesCRUDDialog = classesCRUDDialog;
+			ontologyClass = (OntologyClass) graphNode.getUserObject();
+			ontologyClass.setBranchId(parentOntologyClass.getBranchId());
+			ontologyClass.setLevel(parentOntologyClass.getLevel() + 1);
+		} else {
+			this.graphNode = (GraphNode) defaultMutableTreeNode.getUserObject();
+			this.classesCRUDDialog = classesCRUDDialog;
+			ontologyClass = (OntologyClass) graphNode.getUserObject();
+		}
 		ontologyClassSwingMetawidget = new SwingMetawidget();
 		ontologyClassSwingMetawidget
 				.addWidgetProcessor(new BeansBindingProcessor(
@@ -63,20 +85,30 @@ public class OntologyClassDialog extends JDialog {
 				BeansBindingProcessor.class).save(ontologyClassSwingMetawidget);
 		OntologyClass c = ontologyClassSwingMetawidget.getToInspect();
 		this.ontologyClass.update(c);
-		//defaultMutableTreeNode.setUserObject(c);
-		this.classesCRUDDialog.getTreeModel().reload(defaultMutableTreeNode);
-        EntryPoint.getTopView().getTreeModel().reload(defaultMutableTreeNode);
-
-		((DefaultGraphNode)this.graphNode).invalidatePaint();
-		((DefaultGraphNode)this.graphNode).repaint();
-		((DefaultGraphNode)this.graphNode).validateFullPaint();
+		// defaultMutableTreeNode.setUserObject(c);
+		this.classesCRUDDialog.getTreeModel().reload(
+				defaultMutableTreeNode.getParent());
+		this.classesCRUDDialog.getjTree().scrollPathToVisible(
+				new TreePath(defaultMutableTreeNode.getPath()));
 		
+		EntryPoint.getTopView().getTreeModel()
+				.reload(defaultMutableTreeNode.getParent());
+		EntryPoint.getTopView().getjTree().scrollPathToVisible(new TreePath(defaultMutableTreeNode.getPath()));
+
+		EntryPoint.getGraphModel().addNode(ontologyClass);
+
+		((DefaultGraphNode) this.graphNode).invalidatePaint();
+		((DefaultGraphNode) this.graphNode).repaint();
+		((DefaultGraphNode) this.graphNode).validateFullPaint();
 
 		return;
 	}
 
 	@UiAction
 	public void cancel() {
+		DefaultMutableTreeNode parentTreeNode = (DefaultMutableTreeNode) this.defaultMutableTreeNode.getParent();
+		parentTreeNode.remove(this.defaultMutableTreeNode);
+		
 
 	}
 }

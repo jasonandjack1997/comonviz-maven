@@ -37,24 +37,25 @@ public class ClassesCRUDDialog extends JDialog {
 	private DefaultTreeModel treeModel;
 	private boolean isEditing = false;
 	DefaultMutableTreeNode root;
+
 	public DefaultTreeModel getTreeModel() {
 		return treeModel;
 	}
 
-	public ClassesCRUDDialog(DefaultMutableTreeNode root ) {
+	public ClassesCRUDDialog(DefaultMutableTreeNode root) {
 		this.root = root;
 
 		ontologyClassSwingMetawidget = new SwingMetawidget();
-		ontologyClassSwingMetawidget.addWidgetProcessor( new BeansBindingProcessor( new BeansBindingProcessorConfig()
-		));
-		ontologyClassSwingMetawidget.addWidgetProcessor(new ReflectionBindingProcessor());
+		ontologyClassSwingMetawidget
+				.addWidgetProcessor(new BeansBindingProcessor(
+						new BeansBindingProcessorConfig()));
+		ontologyClassSwingMetawidget
+				.addWidgetProcessor(new ReflectionBindingProcessor());
 		ontologyClassSwingMetawidget.setToInspect(this);
-		//root = new DefaultMutableTreeNode("root1");
+		// root = new DefaultMutableTreeNode("root1");
 		// DefaultMutableTreeNode root = EntryPoint.getGraphModel()
 		// .generateMutableTree();
 
-
-		
 		treeModel = new DefaultTreeModel(root);
 		jTree = new JTree(treeModel);
 		jTree.setSelectionRow(0);
@@ -72,31 +73,40 @@ public class ClassesCRUDDialog extends JDialog {
 		this.setVisible(true);
 	}
 
-
 	@UiAction
 	@UiAttribute(name = HIDDEN, value = "${this.isEditing")
 	public void delete() {
-	       TreePath currentSelection = jTree.getSelectionPath();
-	        if (currentSelection != null) {
-	            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode)
-	                         (currentSelection.getLastPathComponent());
-	            GraphNode graphNode = (GraphNode) currentNode.getUserObject();
-	            EntryPoint.getGraphModel().removeNode(graphNode.getUserObject());
-	            MutableTreeNode parent = (MutableTreeNode)(currentNode.getParent());
-	            if (parent != null) {
-	                treeModel.removeNodeFromParent(currentNode);
-	                EntryPoint.getTopView().getTreeModel().reload();
-	                return;
-	            }
-	        } 
-	        
+		TreePath currentSelection = jTree.getSelectionPath();
+		if (currentSelection != null) {
+			DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) (currentSelection
+					.getLastPathComponent());
+			GraphNode graphNode = (GraphNode) currentNode.getUserObject();
+			EntryPoint.getGraphModel().removeNode(graphNode.getUserObject());
+			MutableTreeNode parent = (MutableTreeNode) (currentNode.getParent());
+			if (parent != null) {
+				treeModel.removeNodeFromParent(currentNode);
+				EntryPoint.getTopView().getTreeModel().reload();
+				return;
+			}
+		}
 
+	}
+
+	public JTree getjTree() {
+		return jTree;
 	}
 
 	@UiAction
 	public void add() {
-		String child = "child";
-		this.addObject(child);
+
+		TreePath path = jTree.getSelectionPath();
+		if (path != null) {
+			DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) (path.getLastPathComponent());
+			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
+			parentNode.add(newNode);
+			new OntologyClassDialog(this, newNode).setVisible(true);
+		}
+
 	}
 
 	public boolean isEditing() {
@@ -109,16 +119,14 @@ public class ClassesCRUDDialog extends JDialog {
 
 	@UiAction
 	public void edit() {
-	    DefaultMutableTreeNode node = null;
-	    TreePath path = jTree.getSelectionPath();
+		DefaultMutableTreeNode node = null;
 
-	    if (path == null) {
-	    } else {
-	        node = (DefaultMutableTreeNode)
-	                     (path.getLastPathComponent());
-	    }
+		TreePath path = jTree.getSelectionPath();
+		if (path != null) {
+			node = (DefaultMutableTreeNode) (path.getLastPathComponent());
+		}
 
-	    new OntologyClassDialog(this, node).setVisible(true); 
+		new OntologyClassDialog(this, node).setVisible(true);
 
 	}
 
@@ -126,11 +134,10 @@ public class ClassesCRUDDialog extends JDialog {
 	public void save() {
 
 	}
-	
 
 	public void setTreeModel(DefaultTreeModel treeModel) {
 		this.treeModel = treeModel;
-		//treeModel.rel
+		// treeModel.rel
 	}
 
 	DefaultTreeCellRenderer treeCellRender = new DefaultTreeCellRenderer() {
@@ -156,41 +163,45 @@ public class ClassesCRUDDialog extends JDialog {
 
 		@Override
 		public void valueChanged(TreeSelectionEvent e) {
-//			// TODO Auto-generated method stub
-//			DefaultMutableTreeNode selectedTreeNode = (DefaultMutableTreeNode) ((JTree) e
-//					.getSource()).getLastSelectedPathComponent();
-//			GraphNode selectedGraphNode = (GraphNode) selectedTreeNode
-//					.getUserObject();
-//			OntologyClass ontologyClass = (OntologyClass) selectedGraphNode
-//					.getUserObject();
-//			
-//			//ontologyClass.setName("hehe");
+			// // TODO Auto-generated method stub
+			// DefaultMutableTreeNode selectedTreeNode =
+			// (DefaultMutableTreeNode) ((JTree) e
+			// .getSource()).getLastSelectedPathComponent();
+			// GraphNode selectedGraphNode = (GraphNode) selectedTreeNode
+			// .getUserObject();
+			// OntologyClass ontologyClass = (OntologyClass) selectedGraphNode
+			// .getUserObject();
+			//
+			// //ontologyClass.setName("hehe");
 
 		}
 
 	};
-	
-	TreeModelListener treeModelListener = new TreeModelListener () {
-	    public void treeNodesChanged(TreeModelEvent e) {
-	        DefaultMutableTreeNode node;
-	        node = (DefaultMutableTreeNode)
-	                 (e.getTreePath().getLastPathComponent());
-	         
-	        try {
-	            int index = e.getChildIndices()[0];
-	            node = (DefaultMutableTreeNode)
-	                   (node.getChildAt(index));
-	        } catch (NullPointerException exc) {}
-	        
-	        System.out.println("The user has finished editing the node.");
-	        System.out.println("New value: " + node.getUserObject());
-	    }
-	    public void treeNodesInserted(TreeModelEvent e) {
-	    }
-	    public void treeNodesRemoved(TreeModelEvent e) {
-	    }
-	    public void treeStructureChanged(TreeModelEvent e) {
-	    }
+
+	TreeModelListener treeModelListener = new TreeModelListener() {
+		public void treeNodesChanged(TreeModelEvent e) {
+			DefaultMutableTreeNode node;
+			node = (DefaultMutableTreeNode) (e.getTreePath()
+					.getLastPathComponent());
+
+			try {
+				int index = e.getChildIndices()[0];
+				node = (DefaultMutableTreeNode) (node.getChildAt(index));
+			} catch (NullPointerException exc) {
+			}
+
+			System.out.println("The user has finished editing the node.");
+			System.out.println("New value: " + node.getUserObject());
+		}
+
+		public void treeNodesInserted(TreeModelEvent e) {
+		}
+
+		public void treeNodesRemoved(TreeModelEvent e) {
+		}
+
+		public void treeStructureChanged(TreeModelEvent e) {
+		}
 	};
 
 	public static void main(String args[]) {
@@ -198,35 +209,32 @@ public class ClassesCRUDDialog extends JDialog {
 		entryPoint.start();
 		new ClassesCRUDDialog(EntryPoint.getOntologyTreeRoot());
 	}
-	
-	
+
 	public DefaultMutableTreeNode addObject(Object child) {
-	    DefaultMutableTreeNode parentNode = null;
-	    TreePath parentPath = jTree.getSelectionPath();
+		DefaultMutableTreeNode parentNode = null;
+		TreePath parentPath = jTree.getSelectionPath();
 
-	    if (parentPath == null) {
-	        //There is no selection. Default to the root node.
-	        parentNode = root;
-	    } else {
-	        parentNode = (DefaultMutableTreeNode)
-	                     (parentPath.getLastPathComponent());
-	    }
+		if (parentPath == null) {
+			// There is no selection. Default to the root node.
+			parentNode = root;
+		} else {
+			parentNode = (DefaultMutableTreeNode) (parentPath
+					.getLastPathComponent());
+		}
 
-	    return addObject(parentNode, child, true);
+		return addObject(parentNode, child, true);
 	}
-	public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
-	                                        Object child,
-	                                        boolean shouldBeVisible) {
-	    DefaultMutableTreeNode childNode =
-	            new DefaultMutableTreeNode(child);
-	    treeModel.insertNodeInto(childNode, parent,
-	                             parent.getChildCount());
 
-	    //Make sure the user can see the lovely new node.
-	    if (shouldBeVisible) {
-	        jTree.scrollPathToVisible(new TreePath(childNode.getPath()));
-	    }
-	    return childNode;
+	public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
+			Object child, boolean shouldBeVisible) {
+		DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(child);
+		treeModel.insertNodeInto(childNode, parent, parent.getChildCount());
+
+		// Make sure the user can see the lovely new node.
+		if (shouldBeVisible) {
+			jTree.scrollPathToVisible(new TreePath(childNode.getPath()));
+		}
+		return childNode;
 	}
 
 }
