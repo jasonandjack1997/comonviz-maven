@@ -41,9 +41,6 @@ public class OntologyClassDialog extends JDialog {
 					new OntologyClass()));
 
 			// generate an id
-			EntryPoint.getOntologyClassService().save(
-					(OntologyClass) ((DefaultGraphNode) defaultMutableTreeNode
-							.getUserObject()).getUserObject());
 			this.graphNode = (GraphNode) defaultMutableTreeNode.getUserObject();
 			this.classesCRUDDialog = classesCRUDDialog;
 			ontologyClass = (OntologyClass) graphNode.getUserObject();
@@ -81,11 +78,19 @@ public class OntologyClassDialog extends JDialog {
 
 	@UiAction
 	public void save() {
+		//update bean
 		ontologyClassSwingMetawidget.getWidgetProcessor(
 				BeansBindingProcessor.class).save(ontologyClassSwingMetawidget);
 		OntologyClass c = ontologyClassSwingMetawidget.getToInspect();
 		this.ontologyClass.update(c);
-		// defaultMutableTreeNode.setUserObject(c);
+		
+		// update database
+		EntryPoint.getOntologyClassService().save(
+				(OntologyClass) ((DefaultGraphNode) defaultMutableTreeNode
+						.getUserObject()).getUserObject());
+
+		
+		//update trees
 		this.classesCRUDDialog.getTreeModel().reload(
 				defaultMutableTreeNode.getParent());
 		this.classesCRUDDialog.getjTree().scrollPathToVisible(
@@ -95,8 +100,10 @@ public class OntologyClassDialog extends JDialog {
 				.reload(defaultMutableTreeNode.getParent());
 		EntryPoint.getTopView().getjTree().scrollPathToVisible(new TreePath(defaultMutableTreeNode.getPath()));
 
+		//update graph model
 		EntryPoint.getGraphModel().addNode(ontologyClass);
 
+		//update graph node
 		((DefaultGraphNode) this.graphNode).invalidatePaint();
 		((DefaultGraphNode) this.graphNode).repaint();
 		((DefaultGraphNode) this.graphNode).validateFullPaint();

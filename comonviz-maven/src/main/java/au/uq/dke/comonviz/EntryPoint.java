@@ -13,6 +13,8 @@ import java.util.Collection;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.apache.commons.io.FileUtils;
@@ -106,7 +108,20 @@ public class EntryPoint {
      */
 	@SuppressWarnings({ "unused", "static-access", "static-access" })
 	public void start() {
+		
+		//set look and feel
+		try {
+			for ( LookAndFeelInfo info : UIManager.getInstalledLookAndFeels() ) {
+				if ( "Nimbus".equals( info.getName() ) ) {
+					UIManager.setLookAndFeel( info.getClassName() );
+					break;
+				}
+			}
+		} catch ( Exception e ) {
+			// Okay to fail
+		}
 
+		
 		try {
 			initDataBase();
 		} catch (URISyntaxException e) {

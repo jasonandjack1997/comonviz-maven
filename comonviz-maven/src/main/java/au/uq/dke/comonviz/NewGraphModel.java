@@ -206,6 +206,7 @@ public class NewGraphModel extends DefaultGraphModel {
 	 */
 
 	// other methods
+	
 	public List<GraphNode> getChildren(GraphNode graphNode) {
 
 		List<GraphNode> childrenGraphNodeList = getGraphNodesFromClasses(this.ontologyRelationshipService

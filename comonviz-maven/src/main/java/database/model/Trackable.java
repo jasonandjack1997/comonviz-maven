@@ -14,7 +14,7 @@ import edu.umd.cs.piccolo.PNode;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Trackable {
+public class Trackable{
 	
 
 	@Id
@@ -65,4 +65,5 @@ public class Trackable {
 	private Long modificationUserId;
 
 	private Long databaseVersionId;
+
 }

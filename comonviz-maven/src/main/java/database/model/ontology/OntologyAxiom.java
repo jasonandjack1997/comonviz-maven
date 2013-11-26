@@ -9,14 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
 import database.model.Trackable;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "ID")
-public class OntologyAxiom extends Trackable {
+public class OntologyAxiom extends Trackable implements Comparable<OntologyAxiom>{
 	@Column(columnDefinition = "TEXT")
-	private String discription;
+	private String discription = "hehe";
 
 	@Column(columnDefinition = "TEXT")
 	private String iri;
@@ -39,5 +38,11 @@ public class OntologyAxiom extends Trackable {
 
 	public String toString(){
 		return super.toString() + ", iri: " + iri;
+	}
+
+	@Override
+	public int compareTo(OntologyAxiom o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
