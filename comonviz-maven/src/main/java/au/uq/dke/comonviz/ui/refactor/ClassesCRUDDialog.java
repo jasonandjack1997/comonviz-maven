@@ -104,7 +104,7 @@ public class ClassesCRUDDialog extends JDialog {
 			DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) (path.getLastPathComponent());
 			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
 			parentNode.add(newNode);
-			new OntologyClassDialog(this, newNode).setVisible(true);
+			new ClassBeanDialog(this, newNode).setVisible(true);
 		}
 
 	}
@@ -126,7 +126,7 @@ public class ClassesCRUDDialog extends JDialog {
 			node = (DefaultMutableTreeNode) (path.getLastPathComponent());
 		}
 
-		new OntologyClassDialog(this, node).setVisible(true);
+		new ClassBeanDialog(this, node).setVisible(true);
 
 	}
 

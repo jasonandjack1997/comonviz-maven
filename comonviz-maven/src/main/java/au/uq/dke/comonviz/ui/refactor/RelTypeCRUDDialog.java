@@ -56,29 +56,33 @@ public class RelTypeCRUDDialog extends JDialog{
 		this.setVisible(true);
 	}
 	
+	public void updateList(){
+		this.relTypesListTableModel.importCollection(EntryPoint.getOntologyAxiomService().findAll());
+	}
+	
 	
 	@UiAction
 	public  void add(){
 		OntologyAxiom newOntologyRelType = new OntologyAxiom();
-		EntryPoint.getOntologyAxiomService().save(newOntologyRelType);
-		relTypesListTableModel.importCollection(EntryPoint.getOntologyAxiomService().findAll());
+		new RelTypeBeanDialog(this, newOntologyRelType).setVisible(true);
 	}
 	
-	@UiAction
-	public void save(){
-		OntologyAxiom ontologyAxiom = (OntologyAxiom) this.relTypesListTableModel.getValueAt(relTypesTable.getSelectedRow());
-		EntryPoint.getOntologyAxiomService().save(ontologyAxiom);
-	
-		
-	}
 	
 	@UiAction
 	public void edit(){
 		
+		OntologyAxiom ontologyAxiom = (OntologyAxiom) this.relTypesListTableModel.getValueAt(relTypesTable.getSelectedRow());
+		new RelTypeBeanDialog(this, ontologyAxiom).setVisible(true);
 	}
 	
 	@UiAction
 	public void delete(){
+		OntologyAxiom ontologyAxiom = (OntologyAxiom) this.relTypesListTableModel.getValueAt(relTypesTable.getSelectedRow());
+		EntryPoint.getOntologyAxiomService().delete(ontologyAxiom);
+
+		// update list
+		this.updateList();
+		
 		
 	}
 	

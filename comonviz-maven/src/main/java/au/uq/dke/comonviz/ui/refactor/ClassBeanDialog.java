@@ -18,7 +18,7 @@ import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import database.model.ontology.OntologyClass;
 
-public class OntologyClassDialog extends JDialog {
+public class ClassBeanDialog extends JDialog {
 
 	private ClassesCRUDDialog classesCRUDDialog;
 	private SwingMetawidget ontologyClassSwingMetawidget;
@@ -27,7 +27,7 @@ public class OntologyClassDialog extends JDialog {
 	private GraphNode graphNode;
 	private DefaultMutableTreeNode defaultMutableTreeNode;
 
-	public OntologyClassDialog(ClassesCRUDDialog classesCRUDDialog,
+	public ClassBeanDialog(ClassesCRUDDialog classesCRUDDialog,
 			DefaultMutableTreeNode defaultMutableTreeNode) {
 		this.defaultMutableTreeNode = defaultMutableTreeNode;
 
