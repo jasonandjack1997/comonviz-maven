@@ -4,12 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import au.uq.dke.comonviz.EntryPoint;
 import database.model.Trackable;
 
 
 @Entity
 @PrimaryKeyJoinColumn(name="ID")
-public class OntologyRelationship extends Trackable {
+public class OntologyRelationship extends Trackable implements Comparable<OntologyRelationship> {
 	
 	@Column(columnDefinition = "TEXT")
 	private String key;
@@ -46,5 +47,33 @@ public class OntologyRelationship extends Trackable {
 	}
 	public void setBidirection(boolean isBidirection) {
 		this.isBidirection = isBidirection;
+	}
+	
+	public String getSourceName(){
+		if(this.srcClassId == null){
+			return "";
+		}
+		
+		if(EntryPoint.getOntologyClassService().findById(this.srcClassId) == null){
+			return "";
+		}
+		return EntryPoint.getOntologyClassService().findById(this.srcClassId).getName();
+	}
+	
+	public String getDestinationName(){
+		if(this.dstClassId == null){
+			return "";
+		}
+		if(EntryPoint.getOntologyClassService().findById(this.dstClassId) == null){
+			return "";
+		}
+
+		return EntryPoint.getOntologyClassService().findById(this.dstClassId).getName();
+	}
+	
+	@Override
+	public int compareTo(OntologyRelationship o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

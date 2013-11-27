@@ -30,7 +30,7 @@ import au.uq.dke.comonviz.EntryPoint;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import database.model.ontology.OntologyClass;
 
-public class ClassesCRUDDialog extends JDialog {
+public class ClassesListDialog extends JDialog {
 
 	private SwingMetawidget ontologyClassSwingMetawidget;
 	private JTree jTree;
@@ -42,7 +42,7 @@ public class ClassesCRUDDialog extends JDialog {
 		return treeModel;
 	}
 
-	public ClassesCRUDDialog(DefaultMutableTreeNode root) {
+	public ClassesListDialog(DefaultMutableTreeNode root) {
 		this.root = root;
 
 		ontologyClassSwingMetawidget = new SwingMetawidget();
@@ -62,10 +62,10 @@ public class ClassesCRUDDialog extends JDialog {
 		jTree.setCellRenderer(treeCellRender);
 		jTree.addTreeSelectionListener(treeSelectionListener);
 		treeModel.addTreeModelListener(treeModelListener);
-		jTree.setPreferredSize(new Dimension(400, 200));
-		jTree.setEditable(true);
+		//jTree.setPreferredSize(new Dimension(400, 200));
+		//jTree.setEditable(true);
 		JScrollPane jScrollPane = new JScrollPane(jTree);
-		jScrollPane.setPreferredSize(new Dimension(300, 300));
+		jScrollPane.setPreferredSize(new Dimension(300, 500));
 		Dimension d = jTree.getPreferredScrollableViewportSize();
 		this.add(jScrollPane, BorderLayout.NORTH);
 		this.add(ontologyClassSwingMetawidget, BorderLayout.SOUTH);
@@ -207,7 +207,7 @@ public class ClassesCRUDDialog extends JDialog {
 	public static void main(String args[]) {
 		EntryPoint entryPoint = new EntryPoint();
 		entryPoint.start();
-		new ClassesCRUDDialog(EntryPoint.getOntologyTreeRoot());
+		new ClassesListDialog(EntryPoint.getOntologyTreeRoot());
 	}
 
 	public DefaultMutableTreeNode addObject(Object child) {

@@ -79,6 +79,16 @@ public class ListTableModel<T extends Comparable<T>>
 	//
 	// Public methods
 	//
+	
+	public int findRowNumber(T t){
+		for(int i = 0; i < mList.size(); i++){
+			if(mList.get(i).equals(t)){
+				return i;
+			}
+		}
+		
+		return -1;
+	}
 
 	public void importCollection( Collection<T> collection ) {
 

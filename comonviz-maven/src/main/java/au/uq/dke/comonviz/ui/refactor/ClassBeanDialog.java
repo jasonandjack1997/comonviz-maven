@@ -20,14 +20,14 @@ import database.model.ontology.OntologyClass;
 
 public class ClassBeanDialog extends JDialog {
 
-	private ClassesCRUDDialog classesCRUDDialog;
-	private SwingMetawidget ontologyClassSwingMetawidget;
-	private SwingMetawidget ontologyClassDialogMetawidget;
+	private ClassesListDialog classesCRUDDialog;
+	private SwingMetawidget beanMetawidget;
+	private SwingMetawidget editMetawidget;
 	private OntologyClass ontologyClass;
 	private GraphNode graphNode;
 	private DefaultMutableTreeNode defaultMutableTreeNode;
 
-	public ClassBeanDialog(ClassesCRUDDialog classesCRUDDialog,
+	public ClassBeanDialog(ClassesListDialog classesCRUDDialog,
 			DefaultMutableTreeNode defaultMutableTreeNode) {
 		this.defaultMutableTreeNode = defaultMutableTreeNode;
 
@@ -51,26 +51,26 @@ public class ClassBeanDialog extends JDialog {
 			this.classesCRUDDialog = classesCRUDDialog;
 			ontologyClass = (OntologyClass) graphNode.getUserObject();
 		}
-		ontologyClassSwingMetawidget = new SwingMetawidget();
-		ontologyClassSwingMetawidget
+		beanMetawidget = new SwingMetawidget();
+		beanMetawidget
 				.addWidgetProcessor(new BeansBindingProcessor(
 						new BeansBindingProcessorConfig()));
-		ontologyClassSwingMetawidget
+		beanMetawidget
 				.addWidgetProcessor(new ReflectionBindingProcessor());
-		ontologyClassSwingMetawidget.setToInspect(ontologyClass);
-		ontologyClassSwingMetawidget.setPreferredSize(new Dimension(400, 400));
+		beanMetawidget.setToInspect(ontologyClass);
+		beanMetawidget.setPreferredSize(new Dimension(400, 400));
 
-		ontologyClassDialogMetawidget = new SwingMetawidget();
-		ontologyClassDialogMetawidget
+		editMetawidget = new SwingMetawidget();
+		editMetawidget
 				.addWidgetProcessor(new BeansBindingProcessor(
 						new BeansBindingProcessorConfig()));
-		ontologyClassDialogMetawidget
+		editMetawidget
 				.addWidgetProcessor(new ReflectionBindingProcessor());
-		ontologyClassDialogMetawidget.setToInspect(this);
-		ontologyClassDialogMetawidget.setPreferredSize(new Dimension(400, 400));
+		editMetawidget.setToInspect(this);
+		editMetawidget.setPreferredSize(new Dimension(400, 400));
 
-		this.add(ontologyClassSwingMetawidget, BorderLayout.NORTH);
-		this.add(ontologyClassDialogMetawidget, BorderLayout.SOUTH);
+		this.add(beanMetawidget, BorderLayout.NORTH);
+		this.add(editMetawidget, BorderLayout.SOUTH);
 		this.pack();
 		this.setVisible(true);
 
@@ -79,9 +79,9 @@ public class ClassBeanDialog extends JDialog {
 	@UiAction
 	public void save() {
 		//update bean
-		ontologyClassSwingMetawidget.getWidgetProcessor(
-				BeansBindingProcessor.class).save(ontologyClassSwingMetawidget);
-		OntologyClass c = ontologyClassSwingMetawidget.getToInspect();
+		beanMetawidget.getWidgetProcessor(
+				BeansBindingProcessor.class).save(beanMetawidget);
+		OntologyClass c = beanMetawidget.getToInspect();
 		this.ontologyClass.update(c);
 		
 		// update database

@@ -20,13 +20,13 @@ import database.model.ontology.OntologyClass;
 
 public class RelTypeBeanDialog extends JDialog {
 
-	private RelTypeCRUDDialog relTypeCRUDDialog;
+	private RelTypeListDialog relTypeCRUDDialog;
 	private SwingMetawidget beanSwingMetawidget;
 	private SwingMetawidget editSwingMetawidget;
 	private OntologyAxiom ontologyAxiom;
 	private DefaultMutableTreeNode defaultMutableTreeNode;
 
-	public RelTypeBeanDialog(RelTypeCRUDDialog relTypeCRUDDialog,
+	public RelTypeBeanDialog(RelTypeListDialog relTypeCRUDDialog,
 			OntologyAxiom ontologyAxiom) {
 		this.relTypeCRUDDialog = relTypeCRUDDialog;
 		this.ontologyAxiom = ontologyAxiom;

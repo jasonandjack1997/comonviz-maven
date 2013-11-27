@@ -10,6 +10,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Collection;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -37,6 +38,7 @@ import au.uq.dke.comonviz.ui.StyleManager;
 import ca.uvic.cs.chisel.cajun.constants.LayoutConstants;
 import ca.uvic.cs.chisel.cajun.graph.AbstractGraph;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;
+import database.model.ontology.OntologyRelationship;
 import database.service.OntologyAxiomService;
 import database.service.OntologyClassService;
 import database.service.OntologyRelationshipService;
@@ -178,6 +180,8 @@ public class EntryPoint {
 		jFrame.setVisible(true);
 
 		this.flatGraph.performLayout();
+		
+		addAxiomId();
 		// radicalLayoutAction.doAction();
 		// LayoutAction layoutAction = ((AbstractGraph)
 		// graphController.getGraph())
@@ -309,6 +313,16 @@ public class EntryPoint {
 
 		entryPoint.start();
 
+	}
+	
+	public void addAxiomId(){
+		List<OntologyRelationship> relationshipList = EntryPoint.getOntologyRelationshipService().findAll();
+		for(OntologyRelationship relationship : relationshipList){
+			String name = relationship.getName();
+			Long id = EntryPoint.getOntologyAxiomService().findByName(name).getId();
+			relationship.setAxiomId(id);
+			EntryPoint.getOntologyRelationshipService().save(relationship);
+		}
 	}
 
 	private void initDataBase() throws URISyntaxException, IOException {

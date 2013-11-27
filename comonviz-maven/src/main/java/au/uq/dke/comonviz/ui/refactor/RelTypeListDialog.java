@@ -26,7 +26,7 @@ import org.metawidget.util.CollectionUtils;
 import au.uq.dke.comonviz.EntryPoint;
 import database.model.ontology.OntologyAxiom;
 
-public class RelTypeCRUDDialog extends JDialog{
+public class RelTypeListDialog extends JDialog{
 
 	private SwingMetawidget ontologyRelTypesMetawidget;
 	private ListTableModel relTypesListTableModel;
@@ -34,7 +34,7 @@ public class RelTypeCRUDDialog extends JDialog{
 	private JScrollPane relTypeScrollPane;
 	
 	
-	public RelTypeCRUDDialog(){
+	public RelTypeListDialog(){
 		ontologyRelTypesMetawidget = new SwingMetawidget();
 		ontologyRelTypesMetawidget
 				.addWidgetProcessor(new BeansBindingProcessor(
@@ -121,7 +121,7 @@ public class RelTypeCRUDDialog extends JDialog{
 				// ...fetch the Contact...
 
 				@SuppressWarnings( "unchecked" )
-				OntologyAxiom ontologyAxiom = (OntologyAxiom) RelTypeCRUDDialog.this.relTypesListTableModel.getValueAt(relTypesTable.getSelectedRow());
+				OntologyAxiom ontologyAxiom = (OntologyAxiom) RelTypeListDialog.this.relTypesListTableModel.getValueAt(relTypesTable.getSelectedRow());
 
 				//createContactDialog( ontologyAxiom ).setVisible( true );
 			}
@@ -133,7 +133,7 @@ public class RelTypeCRUDDialog extends JDialog{
 	public static void main(String args[]){
 		EntryPoint entryPoint = new EntryPoint();
 		entryPoint.start();
-		new RelTypeCRUDDialog();
+		new RelTypeListDialog();
 	}
 	
 }
