@@ -27,6 +27,8 @@ import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBinding
 import org.metawidget.util.CollectionUtils;
 
 import au.uq.dke.comonviz.EntryPoint;
+import au.uq.dke.comonviz.graph.arc.DefaultGraphArc;
+import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import au.uq.dke.comonviz.treeUtils.MutableTreeNodeUtil;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import database.model.ontology.OntologyAxiom;
@@ -39,74 +41,90 @@ public class RelationshipBeanDialog extends JDialog {
 	private SwingMetawidget editSwingMetawidget;
 	private OntologyRelationship ontologyRelationship;
 	private DefaultMutableTreeNode root;
-	
+
 	private OntologyClass srcClass;
 	private OntologyClass dstClass;
-	
+
 	private GraphNode srcGraphNode;
 	private GraphNode dstGraphNode;
-	
+
 	private OntologyAxiom relType;
-	
+
 	private JTree srcJTree;
 	private TreeModel srcTreeModel;
-	
+
 	private JTree dstJTree;
 	private TreeModel dstTreeModel;
+
+	private DefaultMutableTreeNode srcTreeNode;
+	private DefaultMutableTreeNode dstTreeNode;
 
 	private ListTableModel relTypesListTableModel;
 	private JTable relTypesTable;
 	private JScrollPane relTypeScrollPane;
 
-	public RelationshipBeanDialog(RelationshipListDialog relationshipCRUDDialog,
-			OntologyRelationship ontologyRelationship, DefaultMutableTreeNode root) {
-		
+	private boolean isCreateNew;
+
+	public RelationshipBeanDialog(
+			RelationshipListDialog relationshipCRUDDialog,
+			OntologyRelationship ontologyRelationship,
+			DefaultMutableTreeNode root, boolean isCreateNew) {
+
+		this.isCreateNew = isCreateNew;
 		this.relationshipCRUDDialog = relationshipCRUDDialog;
 		this.ontologyRelationship = ontologyRelationship;
 
 		this.root = root;
-		this.srcClass = EntryPoint.getOntologyClassService().findById(ontologyRelationship.getSrcClassId());
-		this.dstClass = EntryPoint.getOntologyClassService().findById(ontologyRelationship.getDstClassId());
-		
-		this.srcGraphNode = EntryPoint.getGraphModel().findGraphNode(srcClass);
-		this.dstGraphNode = EntryPoint.getGraphModel().findGraphNode(dstClass);
-		
-		DefaultMutableTreeNode srcTreeNode = MutableTreeNodeUtil.findTreeNode(root, srcGraphNode);
-		DefaultMutableTreeNode dstTreeNode = MutableTreeNodeUtil.findTreeNode(root, dstGraphNode);
 
-		
+		if (!isCreateNew) {
+			this.srcClass = EntryPoint.getOntologyClassService().findById(
+					ontologyRelationship.getSrcClassId());
+			this.dstClass = EntryPoint.getOntologyClassService().findById(
+					ontologyRelationship.getDstClassId());
+
+			this.srcGraphNode = EntryPoint.getGraphModel().findGraphNode(
+					srcClass);
+			this.dstGraphNode = EntryPoint.getGraphModel().findGraphNode(
+					dstClass);
+
+			srcTreeNode = MutableTreeNodeUtil.findTreeNode(root, srcGraphNode);
+			dstTreeNode = MutableTreeNodeUtil.findTreeNode(root, dstGraphNode);
+		}
+
 		srcTreeModel = new DefaultTreeModel(root);
 		srcJTree = new JTree(srcTreeModel);
 		srcJTree.setSelectionRow(0);
 		srcJTree.setCellRenderer(treeCellRender);
 		JScrollPane srcJScrollPane = new JScrollPane(srcJTree);
 		srcJScrollPane.setPreferredSize(new Dimension(200, 400));
-		srcJTree.setSelectionPath(new TreePath(srcTreeNode.getPath()));
-		
-		
-		
+
 		dstTreeModel = new DefaultTreeModel(root);
 		dstJTree = new JTree(dstTreeModel);
 		dstJTree.setSelectionRow(0);
 		dstJTree.setCellRenderer(treeCellRender);
 		JScrollPane dstJScrollPane = new JScrollPane(dstJTree);
 		dstJScrollPane.setPreferredSize(new Dimension(200, 400));
-		dstJTree.scrollPathToVisible(new TreePath(dstTreeNode.getPath()));
-		dstJTree.setSelectionPath(new TreePath(dstTreeNode.getPath()));
-		
-		
-		relType = EntryPoint.getOntologyAxiomService().findById(this.ontologyRelationship.getAxiomId());
-		
-		
-		relTypesListTableModel = new ListTableModel<OntologyAxiom>(OntologyAxiom.class, EntryPoint.getOntologyAxiomService().findAll(), "name");
+
+		relTypesListTableModel = new ListTableModel<OntologyAxiom>(
+				OntologyAxiom.class, EntryPoint.getOntologyAxiomService()
+						.findAll(), "name");
+
 		relTypeScrollPane = (JScrollPane) this.createResultsSection();
-		int rowNumber = relTypesListTableModel.findRowNumber(relType);
-		this.relTypesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.relTypesTable.setRowSelectionInterval(rowNumber, rowNumber);
-		
-		
-		this.setLayout(new GridLayout(1,4));
-		
+		this.relTypesTable
+				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		if (!isCreateNew) {
+
+			srcJTree.setSelectionPath(new TreePath(srcTreeNode.getPath()));
+			dstJTree.setSelectionPath(new TreePath(dstTreeNode.getPath()));
+			relType = EntryPoint.getOntologyAxiomService().findById(
+					this.ontologyRelationship.getAxiomId());
+			int rowNumber = relTypesListTableModel.findRowNumber(relType);
+			this.relTypesTable.setRowSelectionInterval(rowNumber, rowNumber);
+		}
+
+		this.setLayout(new GridLayout(1, 4));
+
 		this.add(srcJScrollPane);
 		this.add(relTypeScrollPane);
 		this.add(dstJScrollPane);
@@ -114,7 +132,6 @@ public class RelationshipBeanDialog extends JDialog {
 		this.pack();
 		this.setVisible(true);
 
-		
 		editSwingMetawidget = new SwingMetawidget();
 		editSwingMetawidget.addWidgetProcessor(new BeansBindingProcessor(
 				new BeansBindingProcessorConfig()));
@@ -132,12 +149,51 @@ public class RelationshipBeanDialog extends JDialog {
 	@UiAction
 	public void save() {
 
-		
-		// update database
-		EntryPoint.getOntologyRelationshipService().save(ontologyRelationship);
+		// delete old relationship in model
+		// if(!this.isCreateNew){
+		{
+			EntryPoint.getGraphModel().removeArc(ontologyRelationship);
+		}
+		// update relationship
+		OntologyAxiom relType = (OntologyAxiom) this.relTypesListTableModel
+				.getValueAt(this.relTypesTable.getSelectedRow());
+
+		DefaultMutableTreeNode node = null;
+
+		TreePath path = srcJTree.getSelectionPath();
+		if (path != null) {
+			node = (DefaultMutableTreeNode) (path.getLastPathComponent());
+		}
+		OntologyClass srcClass = (OntologyClass) ((DefaultGraphNode) node
+				.getUserObject()).getUserObject();
+
+		path = dstJTree.getSelectionPath();
+		if (path != null) {
+			node = (DefaultMutableTreeNode) (path.getLastPathComponent());
+		}
+
+		dstClass = (OntologyClass) ((DefaultGraphNode) node.getUserObject())
+				.getUserObject();
+
+		this.ontologyRelationship.setAxiomId(relType.getId());
+		this.ontologyRelationship.setName(relType.getName());
+		this.ontologyRelationship.setSrcClassId(srcClass.getId());
+		this.ontologyRelationship.setDstClassId(dstClass.getId());
 
 		// update list
 		this.relationshipCRUDDialog.updateList();
+
+		// update model
+		//if (this.isCreateNew) {
+		{
+
+			DefaultGraphArc newGraphArc = (DefaultGraphArc) EntryPoint
+					.getGraphModel().createArc(ontologyRelationship);
+			EntryPoint.getFlatGraph().performLayout();
+		}
+
+		// update database
+		EntryPoint.getOntologyRelationshipService().save(ontologyRelationship);
 
 		return;
 	}
@@ -146,7 +202,7 @@ public class RelationshipBeanDialog extends JDialog {
 	public void cancel() {
 
 	}
-	
+
 	DefaultTreeCellRenderer treeCellRender = new DefaultTreeCellRenderer() {
 		/**
 		 * 
@@ -166,28 +222,29 @@ public class RelationshipBeanDialog extends JDialog {
 		}
 	};
 
-	@SuppressWarnings( "serial" )
+	@SuppressWarnings("serial")
 	private JComponent createResultsSection() {
 
 		relTypesListTableModel.setEditable(true);
-		relTypesTable = new JTable( relTypesListTableModel );
-		relTypesTable.setAutoCreateColumnsFromModel( true );
+		relTypesTable = new JTable(relTypesListTableModel);
+		relTypesTable.setAutoCreateColumnsFromModel(true);
 
-		relTypesTable.setDefaultRenderer( Set.class, new DefaultTableCellRenderer() {
+		relTypesTable.setDefaultRenderer(Set.class,
+				new DefaultTableCellRenderer() {
 
-			@Override
-			public void setValue( Object value ) {
+					@Override
+					public void setValue(Object value) {
 
-				setText( CollectionUtils.toString( (Set<?>) value ) );
-			}
-		} );
+						setText(CollectionUtils.toString((Set<?>) value));
+					}
+				});
 
-		relTypesTable.setRowHeight( 25 );
-		relTypesTable.setShowVerticalLines( true );
-		relTypesTable.setCellSelectionEnabled( false );
-		relTypesTable.setRowSelectionAllowed( true );
+		relTypesTable.setRowHeight(25);
+		relTypesTable.setShowVerticalLines(true);
+		relTypesTable.setCellSelectionEnabled(false);
+		relTypesTable.setRowSelectionAllowed(true);
 
-		return new JScrollPane( relTypesTable );
+		return new JScrollPane(relTypesTable);
 	}
 
 }

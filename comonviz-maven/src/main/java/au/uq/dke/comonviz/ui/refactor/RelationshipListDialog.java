@@ -59,7 +59,7 @@ public class RelationshipListDialog extends JDialog{
 	@UiAction
 	public  void add(){
 		OntologyRelationship newOntologyRelationship = new OntologyRelationship();
-		new RelationshipBeanDialog(this, newOntologyRelationship, EntryPoint.getOntologyTreeRoot()).setVisible(true);
+		new RelationshipBeanDialog(this, newOntologyRelationship, EntryPoint.getOntologyTreeRoot(), true).setVisible(true);
 	}
 	
 	
@@ -67,7 +67,7 @@ public class RelationshipListDialog extends JDialog{
 	public void edit(){
 		
 		OntologyRelationship ontologyRelationship = (OntologyRelationship) this.relationshipListTableModel.getValueAt(relationshipTable.getSelectedRow());
-		new RelationshipBeanDialog(this, ontologyRelationship, EntryPoint.getOntologyTreeRoot()).setVisible(true);
+		new RelationshipBeanDialog(this, ontologyRelationship, EntryPoint.getOntologyTreeRoot(), false).setVisible(true);
 	}
 	
 	@UiAction

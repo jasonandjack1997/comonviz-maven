@@ -180,19 +180,19 @@ public class NewGraphModel extends DefaultGraphModel {
 
 	}
 
-	private void createArc(OntologyRelationship ontologyRelationship) {
+	public GraphArc createArc(OntologyRelationship ontologyRelationship) {
 		OntologyClass sourceOntologyClass = this.ontologyRelationshipService
 				.findSourceOntologyClass(ontologyRelationship);
 		OntologyClass destinationOntologyClass = this.ontologyRelationshipService
 				.findDestinationOntologyClass(ontologyRelationship);
 		GraphNode sourceNode = findGraphNode(sourceOntologyClass);
 		GraphNode destinationNode = findGraphNode(destinationOntologyClass);
-		super.addArc(ontologyRelationship, sourceNode, destinationNode,
+		return super.addArc(ontologyRelationship, sourceNode, destinationNode,
 				ontologyRelationship.getName());
 
 	}
 
-	private void removeArc(OntologyRelationship ontologyRelationship) {
+	public void removeArc(OntologyRelationship ontologyRelationship) {
 		GraphArc arc = this.findGraphArc(ontologyRelationship);
 		if (arc != null) {
 			super.removeArc(arc.getUserObject());
