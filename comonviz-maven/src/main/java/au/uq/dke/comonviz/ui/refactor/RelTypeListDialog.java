@@ -35,6 +35,7 @@ public class RelTypeListDialog extends JDialog{
 	
 	
 	public RelTypeListDialog(){
+		this.setModalityType(ModalityType.APPLICATION_MODAL);
 		ontologyRelTypesMetawidget = new SwingMetawidget();
 		ontologyRelTypesMetawidget
 				.addWidgetProcessor(new BeansBindingProcessor(
@@ -45,7 +46,7 @@ public class RelTypeListDialog extends JDialog{
 
 		
 		
-		relTypesListTableModel = new ListTableModel<OntologyAxiom>(OntologyAxiom.class, EntryPoint.getOntologyAxiomService().findAll(), "name", "discription");
+		relTypesListTableModel = new ListTableModel<OntologyAxiom>(OntologyAxiom.class, EntryPoint.getOntologyAxiomService().findAll(), "name");
 		
 		relTypeScrollPane = (JScrollPane) this.createResultsSection();
 		this.add(relTypeScrollPane, BorderLayout.CENTER);

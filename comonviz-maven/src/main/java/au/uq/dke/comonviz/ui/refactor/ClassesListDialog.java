@@ -43,6 +43,9 @@ public class ClassesListDialog extends JDialog {
 	}
 
 	public ClassesListDialog(DefaultMutableTreeNode root) {
+		
+		this.setModalityType(ModalityType.APPLICATION_MODAL);
+
 		this.root = root;
 
 		ontologyClassSwingMetawidget = new SwingMetawidget();

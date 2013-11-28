@@ -181,7 +181,7 @@ public class EntryPoint {
 
 		this.flatGraph.performLayout();
 		
-		addAxiomId();
+		//addAxiomId();
 		// radicalLayoutAction.doAction();
 		// LayoutAction layoutAction = ((AbstractGraph)
 		// graphController.getGraph())

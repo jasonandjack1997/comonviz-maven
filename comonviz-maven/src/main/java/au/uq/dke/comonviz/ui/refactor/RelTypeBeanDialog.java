@@ -73,6 +73,7 @@ public class RelTypeBeanDialog extends JDialog {
 
 	@UiAction
 	public void cancel() {
+		this.dispose();
 
 	}
 }

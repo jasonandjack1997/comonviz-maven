@@ -69,7 +69,9 @@ public class RelationshipBeanDialog extends JDialog {
 			RelationshipListDialog relationshipCRUDDialog,
 			OntologyRelationship ontologyRelationship,
 			DefaultMutableTreeNode root, boolean isCreateNew) {
-
+		
+		super(relationshipCRUDDialog, false);
+		
 		this.isCreateNew = isCreateNew;
 		this.relationshipCRUDDialog = relationshipCRUDDialog;
 		this.ontologyRelationship = ontologyRelationship;
@@ -180,8 +182,6 @@ public class RelationshipBeanDialog extends JDialog {
 		this.ontologyRelationship.setSrcClassId(srcClass.getId());
 		this.ontologyRelationship.setDstClassId(dstClass.getId());
 
-		// update list
-		this.relationshipCRUDDialog.updateList();
 
 		// update model
 		//if (this.isCreateNew) {
@@ -195,11 +195,15 @@ public class RelationshipBeanDialog extends JDialog {
 		// update database
 		EntryPoint.getOntologyRelationshipService().save(ontologyRelationship);
 
+		// update list
+		this.relationshipCRUDDialog.updateList();
 		return;
 	}
 
 	@UiAction
 	public void cancel() {
+		this.dispose();
+		//this.setVisible(false);
 
 	}
 

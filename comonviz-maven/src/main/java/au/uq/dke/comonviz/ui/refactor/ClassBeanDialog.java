@@ -2,6 +2,7 @@ package au.uq.dke.comonviz.ui.refactor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Dialog.ModalityType;
 
 import javax.swing.JDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -29,6 +30,9 @@ public class ClassBeanDialog extends JDialog {
 
 	public ClassBeanDialog(ClassesListDialog classesCRUDDialog,
 			DefaultMutableTreeNode defaultMutableTreeNode) {
+		
+		//this.setModalityType(ModalityType.APPLICATION_MODAL);
+
 		this.defaultMutableTreeNode = defaultMutableTreeNode;
 
 		//create a new node, we should generate some information: id, branchId, level
@@ -115,7 +119,7 @@ public class ClassBeanDialog extends JDialog {
 	public void cancel() {
 		DefaultMutableTreeNode parentTreeNode = (DefaultMutableTreeNode) this.defaultMutableTreeNode.getParent();
 		parentTreeNode.remove(this.defaultMutableTreeNode);
-		
+		this.dispose();
 
 	}
 }

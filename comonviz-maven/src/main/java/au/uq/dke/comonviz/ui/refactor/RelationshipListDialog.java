@@ -30,6 +30,7 @@ public class RelationshipListDialog extends JDialog{
 	
 	
 	public RelationshipListDialog(){
+		this.setModalityType(ModalityType.APPLICATION_MODAL);
 		relationshipMetawidget = new SwingMetawidget();
 		relationshipMetawidget
 				.addWidgetProcessor(new BeansBindingProcessor(
