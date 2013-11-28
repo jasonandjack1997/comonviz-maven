@@ -4,15 +4,22 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Set;
 
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
@@ -29,6 +36,7 @@ import org.metawidget.util.CollectionUtils;
 import au.uq.dke.comonviz.EntryPoint;
 import au.uq.dke.comonviz.graph.arc.DefaultGraphArc;
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
+import au.uq.dke.comonviz.treeUtils.JTreeUtil;
 import au.uq.dke.comonviz.treeUtils.MutableTreeNodeUtil;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import database.model.ontology.OntologyAxiom;
@@ -126,10 +134,87 @@ public class RelationshipBeanDialog extends JDialog {
 		}
 
 		this.setLayout(new GridLayout(1, 4));
+		
+		final JTextField srcFilterText = new JTextField();
+		srcFilterText.addKeyListener(new KeyListener(){
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				JTreeUtil.filterNode(srcJTree, srcFilterText.getText());
+			}
+			
+		});
+		JPanel srcPanel = new JPanel();
+		srcPanel.setLayout(new BorderLayout());
+		srcPanel.add(srcFilterText, BorderLayout.NORTH);
+		srcPanel.add(srcJScrollPane, BorderLayout.CENTER);
+		
+		
+		final JTextField dstFilterText = new JTextField();
+		dstFilterText.addKeyListener(new KeyListener(){
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				JTreeUtil.filterNode(dstJTree, dstFilterText.getText());
+			}
+			
+		});
+		JPanel dstPanel = new JPanel();
+		dstPanel.setLayout(new BorderLayout());
+		dstPanel.add(dstFilterText, BorderLayout.NORTH);
+		dstPanel.add(dstJScrollPane, BorderLayout.CENTER);
+		
+		final JTextField relTypeFilterText = new JTextField();
+		relTypeFilterText.addKeyListener(new KeyListener(){
 
-		this.add(srcJScrollPane);
-		this.add(relTypeScrollPane);
-		this.add(dstJScrollPane);
+				@Override
+				public void keyTyped(KeyEvent e) {
+				}
+
+				@Override
+				public void keyPressed(KeyEvent e) {
+				}
+
+				@Override
+				public void keyReleased(KeyEvent e) {
+			        String text = relTypeFilterText.getText();
+			        if (text.length() == 0) {
+			        } else {
+			        	((TableRowSorter)relTypesTable.getRowSorter()).setRowFilter(RowFilter.regexFilter(text));
+			        	if(relTypesTable.getRowCount() != 0){
+			        		relTypesTable.setRowSelectionInterval(0, 0);
+			        	}
+			        }
+				}
+		    	
+		    });
+
+		JPanel relTypePanel = new JPanel();
+		relTypePanel.setLayout(new BorderLayout());
+		relTypePanel.add(relTypeFilterText, BorderLayout.NORTH);
+		relTypePanel.add(relTypeScrollPane, BorderLayout.CENTER);
+		
+		
+
+		this.add(srcPanel);
+		this.add(relTypePanel);
+		this.add(dstPanel);
 
 		this.pack();
 		this.setVisible(true);
@@ -182,9 +267,8 @@ public class RelationshipBeanDialog extends JDialog {
 		this.ontologyRelationship.setSrcClassId(srcClass.getId());
 		this.ontologyRelationship.setDstClassId(dstClass.getId());
 
-
-		// update model
-		//if (this.isCreateNew) {
+		// update graph model
+		// if (this.isCreateNew) {
 		{
 
 			DefaultGraphArc newGraphArc = (DefaultGraphArc) EntryPoint
@@ -196,14 +280,17 @@ public class RelationshipBeanDialog extends JDialog {
 		EntryPoint.getOntologyRelationshipService().save(ontologyRelationship);
 
 		// update list
-		this.relationshipCRUDDialog.updateList();
+		this.relationshipCRUDDialog.updateList(ontologyRelationship);
+		
+		// close dialog
+		this.dispose();
 		return;
 	}
 
 	@UiAction
 	public void cancel() {
 		this.dispose();
-		//this.setVisible(false);
+		// this.setVisible(false);
 
 	}
 
@@ -231,6 +318,7 @@ public class RelationshipBeanDialog extends JDialog {
 
 		relTypesListTableModel.setEditable(true);
 		relTypesTable = new JTable(relTypesListTableModel);
+
 		relTypesTable.setAutoCreateColumnsFromModel(true);
 
 		relTypesTable.setDefaultRenderer(Set.class,
@@ -247,6 +335,10 @@ public class RelationshipBeanDialog extends JDialog {
 		relTypesTable.setShowVerticalLines(true);
 		relTypesTable.setCellSelectionEnabled(false);
 		relTypesTable.setRowSelectionAllowed(true);
+
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(
+				relTypesListTableModel);
+		relTypesTable.setRowSorter(sorter);
 
 		return new JScrollPane(relTypesTable);
 	}

@@ -5,9 +5,12 @@ import static org.metawidget.inspector.InspectionResultConstants.HIDDEN;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
@@ -27,8 +30,8 @@ import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingPro
 import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBindingProcessor;
 
 import au.uq.dke.comonviz.EntryPoint;
+import au.uq.dke.comonviz.treeUtils.JTreeUtil;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
-import database.model.ontology.OntologyClass;
 
 public class ClassesListDialog extends JDialog {
 
@@ -37,6 +40,8 @@ public class ClassesListDialog extends JDialog {
 	private DefaultTreeModel treeModel;
 	private boolean isEditing = false;
 	DefaultMutableTreeNode root;
+	
+	private JTextField searchText;
 
 	public DefaultTreeModel getTreeModel() {
 		return treeModel;
@@ -70,7 +75,28 @@ public class ClassesListDialog extends JDialog {
 		JScrollPane jScrollPane = new JScrollPane(jTree);
 		jScrollPane.setPreferredSize(new Dimension(300, 500));
 		Dimension d = jTree.getPreferredScrollableViewportSize();
-		this.add(jScrollPane, BorderLayout.NORTH);
+		
+		searchText = new JTextField();
+		searchText.addKeyListener(new KeyListener(){
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				JTreeUtil.filterNode(jTree, ClassesListDialog.this.searchText.getText());
+			}
+			
+		});
+		
+		
+		this.add(searchText, BorderLayout.NORTH);
+		this.add(jScrollPane, BorderLayout.CENTER);
 		this.add(ontologyClassSwingMetawidget, BorderLayout.SOUTH);
 		this.pack();
 		this.setVisible(true);

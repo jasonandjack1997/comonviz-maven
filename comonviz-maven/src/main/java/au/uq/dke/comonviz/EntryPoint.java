@@ -334,11 +334,6 @@ public class EntryPoint {
 		FileUtils.forceMkdir(new File(outerDatabaseDirectory));
 		if (outerDatabaseFile.exists()) {
 			FileUtils.copyInputStreamToFile(innerSourceFileStream, outerDatabaseFile);
-//			if (FileUtils.isFileNewer(innerDatabaseResourceFile,
-//					outerDatabaseFile)) {
-//				FileUtils
-//						.copyFile(innerDatabaseResourceFile, outerDatabaseFile);
-//			}
 		} else {
 			FileUtils.copyInputStreamToFile(innerSourceFileStream, outerDatabaseFile);
 			//FileUtils.copyFile(innerDatabaseResourceFile, outerDatabaseFile);

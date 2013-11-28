@@ -1,6 +1,7 @@
 package au.uq.dke.comonviz.ui.refactor;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Set;
@@ -46,9 +47,8 @@ public class RelationshipListDialog extends JDialog{
 		relTypeScrollPane = (JScrollPane) this.createResultsSection();
 		this.add(relTypeScrollPane, BorderLayout.CENTER);
 		this.add(relationshipMetawidget, BorderLayout.SOUTH);
-		//this.setPreferredSize(new Dimension(400, 400));
+		this.setPreferredSize(new Dimension(800, 800));
 		this.pack();
-		//this.setSize(400, 400);
 		this.setVisible(true);
 	}
 	
@@ -56,6 +56,14 @@ public class RelationshipListDialog extends JDialog{
 		this.relationshipListTableModel.importCollection(EntryPoint.getOntologyRelationshipService().findAll());
 	}
 	
+	public void updateList(OntologyRelationship ontologyRelationship){
+		updateList();
+		int rowNumber = this.relationshipListTableModel.findRowNumber(ontologyRelationship);
+		if(rowNumber == -1){
+			return;
+		}
+		this.relationshipTable.setRowSelectionInterval(rowNumber, rowNumber);
+	}
 	
 	@UiAction
 	public  void add(){

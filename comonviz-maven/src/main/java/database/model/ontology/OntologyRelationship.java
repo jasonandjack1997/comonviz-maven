@@ -76,4 +76,10 @@ public class OntologyRelationship extends Trackable implements Comparable<Ontolo
 		// TODO Auto-generated method stub
 		return this.getSourceName().compareToIgnoreCase(o.getSourceName());
 	}
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return this.getId() == ((OntologyRelationship)obj).getId();
+	}
+	
 }
