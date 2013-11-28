@@ -21,6 +21,7 @@ import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.JTree;
+import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -237,7 +238,13 @@ public class TopView extends JPanel {
 
 	public void setSplitPaneDividers() {
 
-		leftVerticalSplitPane.setDividerLocation(0.7f);
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				leftVerticalSplitPane.setDividerLocation(0.7f);
+			}
+		});
 	}
 
 	public FilterPanel getArcTypeFilterPanel() {
@@ -267,7 +274,8 @@ public class TopView extends JPanel {
 				PNode node = e.getPickedNode();
 				if (node instanceof GraphNode) {
 					node.moveToFront();
-					nodePressed(e, (GraphNode) node);
+					//don't reflect to the tree, it will calls a cycle in reaction!
+					//nodePressed(e, (GraphNode) node);
 				}
 				if (e.isLeftMouseButton()) {
 					if (e.getClickCount() == 2) {

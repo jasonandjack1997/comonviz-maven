@@ -76,7 +76,7 @@ public class EntryPoint {
 
 	/** the model representation of the graph, nodes and edges */
 	private static NewGraphModel graphModel;
-	
+
 	private static DefaultMutableTreeNode ontologyTreeRoot;
 
 	private static TopView topView;
@@ -111,20 +111,19 @@ public class EntryPoint {
      */
 	@SuppressWarnings({ "unused", "static-access", "static-access" })
 	public void start() {
-		
-		//set look and feel
+
+		// set look and feel
 		try {
-			for ( LookAndFeelInfo info : UIManager.getInstalledLookAndFeels() ) {
-				if ( "Nimbus".equals( info.getName() ) ) {
-					UIManager.setLookAndFeel( info.getClassName() );
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
 					break;
 				}
 			}
-		} catch ( Exception e ) {
+		} catch (Exception e) {
 			// Okay to fail
 		}
 
-		
 		try {
 			initDataBase();
 		} catch (URISyntaxException e) {
@@ -154,8 +153,7 @@ public class EntryPoint {
 				null, new RadialLayoutAlgorithm(1), EntryPoint.getFlatGraph());
 
 		graphModel.init();
-		ontologyTreeRoot = graphModel
-				.generateMutableTree();
+		ontologyTreeRoot = graphModel.generateMutableTree();
 
 		topView.initialize(ontologyTreeRoot);
 
@@ -179,21 +177,9 @@ public class EntryPoint {
 				| JFrame.MAXIMIZED_BOTH);
 		jFrame.setVisible(true);
 
-		
-		
 		EntryPoint.getTopView().setSplitPaneDividers();
-		SwingUtilities.invokeLater(new Runnable() {
+		EntryPoint.getTopView().hideSubclassArcType();
 
-			@Override
-			public void run() {
-				//EntryPoint.getRadicalLayoutAction().runLayout();
-				EntryPoint.getTopView().setSplitPaneDividers();
-				EntryPoint.getTopView().hideSubclassArcType();
-				//EntryPoint.getFlatGraph().performLayout();
-			}
-		});
-
-		EntryPoint.getTopView().setSplitPaneDividers();
 	}
 
 	public static DefaultMutableTreeNode getOntologyTreeRoot() {
@@ -274,7 +260,6 @@ public class EntryPoint {
 		TopView topView = graphController.getView();
 		topView.getTreeModel().setRoot(root);
 
-		
 		return;
 	}
 
@@ -285,29 +270,33 @@ public class EntryPoint {
 		entryPoint.start();
 
 	}
-	
-	public void addAxiomId(){
-		List<OntologyRelationship> relationshipList = EntryPoint.getOntologyRelationshipService().findAll();
-		for(OntologyRelationship relationship : relationshipList){
+
+	public void addAxiomId() {
+		List<OntologyRelationship> relationshipList = EntryPoint
+				.getOntologyRelationshipService().findAll();
+		for (OntologyRelationship relationship : relationshipList) {
 			String name = relationship.getName();
-			Long id = EntryPoint.getOntologyAxiomService().findByName(name).getId();
+			Long id = EntryPoint.getOntologyAxiomService().findByName(name)
+					.getId();
 			relationship.setAxiomId(id);
 			EntryPoint.getOntologyRelationshipService().save(relationship);
 		}
 	}
 
 	private void initDataBase() throws URISyntaxException, IOException {
-//		File innerDatabaseResourceFile = new File(this.getClass()
-//				.getResource("/database/" + dataBaseFileName).toURI());
-		
+		// File innerDatabaseResourceFile = new File(this.getClass()
+		// .getResource("/database/" + dataBaseFileName).toURI());
+
 		InputStream innerSourceFileStream = this.getClass()
 				.getResourceAsStream("/database/" + dataBaseFileName);
 		FileUtils.forceMkdir(new File(outerDatabaseDirectory));
 		if (outerDatabaseFile.exists()) {
-			FileUtils.copyInputStreamToFile(innerSourceFileStream, outerDatabaseFile);
+			FileUtils.copyInputStreamToFile(innerSourceFileStream,
+					outerDatabaseFile);
 		} else {
-			FileUtils.copyInputStreamToFile(innerSourceFileStream, outerDatabaseFile);
-			//FileUtils.copyFile(innerDatabaseResourceFile, outerDatabaseFile);
+			FileUtils.copyInputStreamToFile(innerSourceFileStream,
+					outerDatabaseFile);
+			// FileUtils.copyFile(innerDatabaseResourceFile, outerDatabaseFile);
 		}
 	}
 }
