@@ -26,15 +26,14 @@ import org.metawidget.util.CollectionUtils;
 import au.uq.dke.comonviz.EntryPoint;
 import database.model.ontology.OntologyAxiom;
 
-public class RelTypeListDialog extends JDialog{
+public class RelTypeListDialog extends JDialog {
 
 	private SwingMetawidget ontologyRelTypesMetawidget;
 	private ListTableModel relTypesListTableModel;
 	private JTable relTypesTable;
 	private JScrollPane relTypeScrollPane;
-	
-	
-	public RelTypeListDialog(){
+
+	public RelTypeListDialog() {
 		this.setModalityType(ModalityType.APPLICATION_MODAL);
 		ontologyRelTypesMetawidget = new SwingMetawidget();
 		ontologyRelTypesMetawidget
@@ -44,97 +43,99 @@ public class RelTypeListDialog extends JDialog{
 				.addWidgetProcessor(new ReflectionBindingProcessor());
 		ontologyRelTypesMetawidget.setToInspect(this);
 
-		
-		
-		relTypesListTableModel = new ListTableModel<OntologyAxiom>(OntologyAxiom.class, EntryPoint.getOntologyAxiomService().findAll(), "name");
-		
+		relTypesListTableModel = new ListTableModel<OntologyAxiom>(
+				OntologyAxiom.class, EntryPoint.getOntologyAxiomService()
+						.findAll(), "name");
+
 		relTypeScrollPane = (JScrollPane) this.createResultsSection();
 		this.add(relTypeScrollPane, BorderLayout.CENTER);
 		this.add(ontologyRelTypesMetawidget, BorderLayout.SOUTH);
-		//this.setPreferredSize(new Dimension(400, 400));
+		// this.setPreferredSize(new Dimension(400, 400));
 		this.pack();
-		//this.setSize(400, 400);
+		// this.setSize(400, 400);
 		this.setVisible(true);
 	}
-	
-	public void updateList(){
-		this.relTypesListTableModel.importCollection(EntryPoint.getOntologyAxiomService().findAll());
+
+	public void updateList() {
+		this.relTypesListTableModel.importCollection(EntryPoint
+				.getOntologyAxiomService().findAll());
 	}
-	
-	
+
 	@UiAction
-	public  void add(){
+	public void add() {
 		OntologyAxiom newOntologyRelType = new OntologyAxiom();
 		new RelTypeBeanDialog(this, newOntologyRelType).setVisible(true);
 	}
-	
-	
+
 	@UiAction
-	public void edit(){
-		
-		OntologyAxiom ontologyAxiom = (OntologyAxiom) this.relTypesListTableModel.getValueAt(relTypesTable.getSelectedRow());
+	public void edit() {
+
+		OntologyAxiom ontologyAxiom = (OntologyAxiom) this.relTypesListTableModel
+				.getValueAt(relTypesTable.getSelectedRow());
 		new RelTypeBeanDialog(this, ontologyAxiom).setVisible(true);
 	}
-	
+
 	@UiAction
-	public void delete(){
-		OntologyAxiom ontologyAxiom = (OntologyAxiom) this.relTypesListTableModel.getValueAt(relTypesTable.getSelectedRow());
+	public void delete() {
+		OntologyAxiom ontologyAxiom = (OntologyAxiom) this.relTypesListTableModel
+				.getValueAt(relTypesTable.getSelectedRow());
 		EntryPoint.getOntologyAxiomService().delete(ontologyAxiom);
 
 		// update list
 		this.updateList();
-		
-		
+
 	}
-	
-	@SuppressWarnings( "serial" )
+
+	@SuppressWarnings("serial")
 	private JComponent createResultsSection() {
 
 		relTypesListTableModel.setEditable(true);
-		relTypesTable = new JTable( relTypesListTableModel );
-		relTypesTable.setAutoCreateColumnsFromModel( true );
+		relTypesTable = new JTable(relTypesListTableModel);
+		relTypesTable.setAutoCreateColumnsFromModel(true);
 
-		relTypesTable.setDefaultRenderer( Set.class, new DefaultTableCellRenderer() {
+		relTypesTable.setDefaultRenderer(Set.class,
+				new DefaultTableCellRenderer() {
+
+					@Override
+					public void setValue(Object value) {
+
+						setText(CollectionUtils.toString((Set<?>) value));
+					}
+				});
+
+		relTypesTable.setRowHeight(25);
+		relTypesTable.setShowVerticalLines(true);
+		relTypesTable.setCellSelectionEnabled(false);
+		relTypesTable.setRowSelectionAllowed(true);
+
+		relTypesTable.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void setValue( Object value ) {
-
-				setText( CollectionUtils.toString( (Set<?>) value ) );
-			}
-		} );
-
-		relTypesTable.setRowHeight( 25 );
-		relTypesTable.setShowVerticalLines( true );
-		relTypesTable.setCellSelectionEnabled( false );
-		relTypesTable.setRowSelectionAllowed( true );
-
-		relTypesTable.addMouseListener( new MouseAdapter() {
-
-			@Override
-			public void mouseClicked( MouseEvent event ) {
+			public void mouseClicked(MouseEvent event) {
 
 				// When table is double clicked...
 
-				if ( event.getClickCount() != 2 ) {
+				if (event.getClickCount() != 2) {
 					return;
 				}
 
 				// ...fetch the Contact...
 
-				@SuppressWarnings( "unchecked" )
-				OntologyAxiom ontologyAxiom = (OntologyAxiom) RelTypeListDialog.this.relTypesListTableModel.getValueAt(relTypesTable.getSelectedRow());
+				@SuppressWarnings("unchecked")
+				OntologyAxiom ontologyAxiom = (OntologyAxiom) RelTypeListDialog.this.relTypesListTableModel
+						.getValueAt(relTypesTable.getSelectedRow());
 
-				//createContactDialog( ontologyAxiom ).setVisible( true );
+				// createContactDialog( ontologyAxiom ).setVisible( true );
 			}
-		} );
+		});
 
-		return new JScrollPane( relTypesTable );
+		return new JScrollPane(relTypesTable);
 	}
 
-	public static void main(String args[]){
+	public static void main(String args[]) {
 		EntryPoint entryPoint = new EntryPoint();
 		entryPoint.start();
 		new RelTypeListDialog();
 	}
-	
+
 }

@@ -31,7 +31,7 @@ public class ClassBeanDialog extends JDialog {
 	public ClassBeanDialog(ClassesListDialog classesCRUDDialog,
 			DefaultMutableTreeNode defaultMutableTreeNode) {
 		
-		//this.setModalityType(ModalityType.APPLICATION_MODAL);
+		this.setModalityType(ModalityType.APPLICATION_MODAL);
 
 		this.defaultMutableTreeNode = defaultMutableTreeNode;
 
@@ -118,7 +118,10 @@ public class ClassBeanDialog extends JDialog {
 	@UiAction
 	public void cancel() {
 		DefaultMutableTreeNode parentTreeNode = (DefaultMutableTreeNode) this.defaultMutableTreeNode.getParent();
-		parentTreeNode.remove(this.defaultMutableTreeNode);
+		if(parentTreeNode != null){
+			
+			parentTreeNode.remove(this.defaultMutableTreeNode);
+		}
 		this.dispose();
 
 	}

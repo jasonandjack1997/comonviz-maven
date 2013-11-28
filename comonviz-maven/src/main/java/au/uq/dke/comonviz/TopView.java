@@ -47,6 +47,9 @@ import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import au.uq.dke.comonviz.ui.ArcTypeFilterPanel;
 import au.uq.dke.comonviz.ui.FilterPanel;
 import au.uq.dke.comonviz.ui.NodeLevelFilterPanel;
+import au.uq.dke.comonviz.ui.OpenEditConceptsDialogAction;
+import au.uq.dke.comonviz.ui.OpenEditRelTypesDialogAction;
+import au.uq.dke.comonviz.ui.OpenEditRelationshipsDialogAction;
 import au.uq.dke.comonviz.ui.OpenOntologyFileAction;
 import au.uq.dke.comonviz.ui.StatusProgressBar;
 import ca.uvic.cs.chisel.cajun.graph.AbstractGraph;
@@ -361,6 +364,11 @@ public class TopView extends JPanel {
 	private void initializeToolBar() {
 
 		addToolBarAction(new OpenOntologyFileAction());
+		addToolBarAction(new OpenEditConceptsDialogAction());
+		addToolBarAction(new OpenEditRelTypesDialogAction());
+		addToolBarAction(new OpenEditRelationshipsDialogAction());
+		
+		
 		// addToolBarAction(new ClearOrphansAction(graph.getModel(), graph));
 		// zoom
 //		addToolBarAction(new ZoomInAction(graph.getCamera()));
@@ -466,8 +474,13 @@ public class TopView extends JPanel {
 		return nodeFilterPanel;
 	}
 
+	/**add a btn to a toolbar, and the btn is linked with an action
+	 * @param action
+	 * @return
+	 */
 	public JButton addToolBarAction(Action action) {
 		JButton btn = getToolBar().add(action);
+		btn.setText((String) action.getValue(Action.NAME));
 		btn.setToolTipText((String) action.getValue(Action.NAME));
 		return btn;
 	}

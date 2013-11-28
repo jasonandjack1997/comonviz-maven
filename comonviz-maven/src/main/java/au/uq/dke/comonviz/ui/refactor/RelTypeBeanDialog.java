@@ -28,6 +28,8 @@ public class RelTypeBeanDialog extends JDialog {
 
 	public RelTypeBeanDialog(RelTypeListDialog relTypeCRUDDialog,
 			OntologyAxiom ontologyAxiom) {
+		this.setModalityType(ModalityType.APPLICATION_MODAL);
+		
 		this.relTypeCRUDDialog = relTypeCRUDDialog;
 		this.ontologyAxiom = ontologyAxiom;
 
