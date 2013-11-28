@@ -6,20 +6,13 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Collection;
 import java.util.Enumeration;
-import java.util.Map;
 
 import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -35,15 +28,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import org.semanticweb.owlapi.model.OWLAnnotation;
-import org.semanticweb.owlapi.model.OWLClass;
-
-import au.uq.dke.comonviz.actions.CajunAction;
-import au.uq.dke.comonviz.actions.NoZoomAction;
-import au.uq.dke.comonviz.actions.ZoomInAction;
-import au.uq.dke.comonviz.actions.ZoomOutAction;
-import au.uq.dke.comonviz.filter.FilterManager;
-import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import au.uq.dke.comonviz.ui.ArcTypeFilterPanel;
 import au.uq.dke.comonviz.ui.FilterPanel;
 import au.uq.dke.comonviz.ui.NodeLevelFilterPanel;
@@ -52,7 +36,6 @@ import au.uq.dke.comonviz.ui.OpenEditRelTypesDialogAction;
 import au.uq.dke.comonviz.ui.OpenEditRelationshipsDialogAction;
 import au.uq.dke.comonviz.ui.OpenOntologyFileAction;
 import au.uq.dke.comonviz.ui.StatusProgressBar;
-import ca.uvic.cs.chisel.cajun.graph.AbstractGraph;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;
 import ca.uvic.cs.chisel.cajun.graph.Graph;
 import ca.uvic.cs.chisel.cajun.graph.GraphModelAdapter;
@@ -60,7 +43,6 @@ import ca.uvic.cs.chisel.cajun.graph.GraphModelListener;
 import ca.uvic.cs.chisel.cajun.graph.arc.GraphArc;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import ca.uvic.cs.chisel.cajun.graph.node.NodeCollection;
-import ca.uvic.cs.chisel.cajun.resources.ResourceHandler;
 import database.model.ontology.OntologyClass;
 import edu.umd.cs.piccolo.PNode;
 import edu.umd.cs.piccolo.event.PBasicInputEventHandler;
@@ -75,6 +57,11 @@ public class TopView extends JPanel {
 
 	private JToolBar toolbar;
 	private JPanel centerGraphPanel;
+
+	public JPanel getCenterGraphPanel() {
+		return centerGraphPanel;
+	}
+
 	private StatusProgressBar status;
 
 	private JSplitPane rightFilterSplitPane;
@@ -110,7 +97,7 @@ public class TopView extends JPanel {
 			OntologyClass ontologyClass = (OntologyClass) selectedGraphNode
 					.getUserObject();
 			String annotation = ontologyClass.getDiscription();
-			//annotation = annotation.substring(1, annotation.length() - 1);
+			// annotation = annotation.substring(1, annotation.length() - 1);
 			annotation = EntryPoint.getAnnotationManager()
 					.getStylizedAnnotation(annotation);
 			TopView.this.getjTextArea().setText(annotation);
@@ -189,74 +176,68 @@ public class TopView extends JPanel {
 		// this.ontologyTree = ontologyTree;
 
 		EntryPoint.getjFrame().add(this);
-		this.add(getToolBar(), BorderLayout.NORTH);
 
-
+		// left
 		treeModel = new DefaultTreeModel(root);
-
 		jTextArea = new JTextPane();
 		jTextArea.setContentType("text/html");
 		jTextArea.setMinimumSize(new Dimension(200, 100));
-		// jTextArea.setText("hehe");
 		jTextArea.setEditable(true);
 		jTextArea.setMargin(new Insets(10, 10, 10, 10));
 		jTree = new JTree(treeModel);
-		//jTree.scrollPathToVisible(path);
 		jTree.setSelectionRow(0);
 		jTree.setCellRenderer(treeCellRender);
 		jTree.addTreeSelectionListener(textFieldtreeSelectionListener);
-		JScrollPane leftTopJScrollPane = new JScrollPane(jTree);
 
+		JScrollPane leftTopJScrollPane = new JScrollPane(jTree);
 		leftTopJScrollPane.setMinimumSize(new Dimension(200, 200));
+
 		JScrollPane leftBottomJScrollPane = new JScrollPane(jTextArea);
 		leftBottomJScrollPane.setMinimumSize(new Dimension(100, 200));
+
 		leftVerticalSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-		leftVerticalSplitPane.setMinimumSize(new Dimension(200, 200));
+		// leftVerticalSplitPane.setMinimumSize(new Dimension(200, 200));
 		leftVerticalSplitPane.add(leftTopJScrollPane);
 		leftVerticalSplitPane.add(leftBottomJScrollPane);
 		leftVerticalSplitPane.setOneTouchExpandable(true);
-		leftVerticalSplitPane.setDividerLocation(0.7f);
 
-		centerAndRightHorizontalSplitPane = new JSplitPane(
-				JSplitPane.HORIZONTAL_SPLIT);
-		centerAndRightHorizontalSplitPane
-				.setMinimumSize(new Dimension(500, 500));
+		// center & right
+		centerGraphPanel = new JPanel(new BorderLayout());
+		centerGraphPanel.add(new PScrollPane(graph.getCanvas()),
+				BorderLayout.CENTER);
 
-		topHorizontalSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-		topHorizontalSplitPane.add(leftVerticalSplitPane);
-		topHorizontalSplitPane.add(centerAndRightHorizontalSplitPane);
-		topHorizontalSplitPane.setOneTouchExpandable(true);
-		topHorizontalSplitPane.setDividerLocation(400);
-
-		this.add(topHorizontalSplitPane, BorderLayout.CENTER);
-		initializeToolBar();
-
-		// arcFilterPanel
 		arcTypeFilterPanel = new ArcTypeFilterPanel("Arc Types", null,
 				graph.getGraphArcStyle());
 		nodeLevelFilterPanel = new NodeLevelFilterPanel("Node Levels", null,
 				graph.getGraphArcStyle());
 
-		// right panel
-		centerGraphPanel = new JPanel(new BorderLayout());
-		centerGraphPanel.add(new PScrollPane(graph.getCanvas()),
-				BorderLayout.CENTER);
-		centerGraphPanel.setMinimumSize(new Dimension(800, 600));
-
 		rightFilterSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // new
-		// rightFilterSplitPane.setBorder(BorderFactory.createEmptyBorder(1, 1,
-		// 1, 1));
 		rightFilterSplitPane.setVisible(true);
 		rightFilterSplitPane.add(arcTypeFilterPanel);
 		rightFilterSplitPane.add(nodeLevelFilterPanel);
 		rightFilterSplitPane.setDividerLocation(0.5f);
-		//rightFilterSplitPane.setMaximumSize(new Dimension(400,1000));
+
+		centerAndRightHorizontalSplitPane = new JSplitPane(
+				JSplitPane.HORIZONTAL_SPLIT);
+
 		centerAndRightHorizontalSplitPane.add(centerGraphPanel);
-		centerAndRightHorizontalSplitPane.add(rightFilterSplitPane);
+		//centerAndRightHorizontalSplitPane.add(rightFilterSplitPane);
 		centerAndRightHorizontalSplitPane.setVisible(true);
 		centerAndRightHorizontalSplitPane.setOneTouchExpandable(true);
-		centerAndRightHorizontalSplitPane.setDividerLocation(100000);
 
+		topHorizontalSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		topHorizontalSplitPane.add(leftVerticalSplitPane);
+		topHorizontalSplitPane.add(centerAndRightHorizontalSplitPane);
+		topHorizontalSplitPane.setOneTouchExpandable(true);
+
+		this.add(getToolBar(), BorderLayout.NORTH);
+		this.add(topHorizontalSplitPane, BorderLayout.CENTER);
+		initializeToolBar();
+	}
+
+	public void setSplitPaneDividers() {
+
+		leftVerticalSplitPane.setDividerLocation(0.7f);
 	}
 
 	public FilterPanel getArcTypeFilterPanel() {
@@ -340,21 +321,6 @@ public class TopView extends JPanel {
 			}
 		});
 
-		rightFilterSplitPane.addContainerListener(new ContainerListener() {
-			public void componentAdded(ContainerEvent e) {
-				refeshRightPanel();
-			}
-
-			public void componentRemoved(ContainerEvent e) {
-				refeshRightPanel();
-			}
-		});
-
-	}
-
-	public void changeDividerLocation() {
-		topHorizontalSplitPane.setDividerLocation(300);
-
 	}
 
 	public DefaultTreeModel getTreeModel() {
@@ -362,41 +328,30 @@ public class TopView extends JPanel {
 	}
 
 	private void initializeToolBar() {
+		JToggleButton showFilter = new JToggleButton("show filter");
+		showFilter.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(centerAndRightHorizontalSplitPane.getComponentCount() ==  2){
+					
+					TopView.this.centerAndRightHorizontalSplitPane
+					.setDividerLocation(centerAndRightHorizontalSplitPane
+							.getWidth() - 300);
+					TopView.this.centerAndRightHorizontalSplitPane.add(rightFilterSplitPane);
+				}else{
+					centerAndRightHorizontalSplitPane.remove(rightFilterSplitPane);
+				}
+			}
+
+		});
+		this.getToolBar().add(showFilter);
 
 		addToolBarAction(new OpenOntologyFileAction());
 		addToolBarAction(new OpenEditConceptsDialogAction());
 		addToolBarAction(new OpenEditRelTypesDialogAction());
 		addToolBarAction(new OpenEditRelationshipsDialogAction());
-		
-		
-		// addToolBarAction(new ClearOrphansAction(graph.getModel(), graph));
-		// zoom
-//		addToolBarAction(new ZoomInAction(graph.getCamera()));
-//		addToolBarAction(new NoZoomAction(graph.getCamera()));
-//		addToolBarAction(new ZoomOutAction(graph.getCamera()));
 
-		// getToolBar().addSeparator();
-
-		// node and arc filter actions
-		// final JToggleButton nodesToggle = addToolBarToggleAction(new
-		// ShowFilterPanelAction(getNodeFilterPanel()));
-		// final JToggleButton arcsToggle = addToolBarToggleAction(new
-		// ShowFilterPanelAction(
-		// getArcFilterPanel()));
-
-		// arcsToggle.setVisible(true);
-		// listen for panel close events - keep the toggle buttons in sync
-		/*
-		 * getNodeFilterPanel().getCloseButton().addActionListener(new
-		 * ActionListener() { public void actionPerformed(ActionEvent e) {
-		 * nodesToggle.setSelected(false); } });
-		 */
-		// getArcFilterPanel().getCloseButton().addActionListener(
-		// new ActionListener() {
-		// public void actionPerformed(ActionEvent e) {
-		// arcsToggle.setSelected(false);
-		// }
-		// });
 	}
 
 	public JToolBar getToolBar() {
@@ -418,63 +373,10 @@ public class TopView extends JPanel {
 	/**
 	 * Repaints the this panel so that the right panel will properly resize.
 	 */
-	private void refeshRightPanel() {
-		this.invalidate();
-		this.validate();
-		this.revalidate();
-		this.repaint();
 
-		if (rightFilterSplitPane.getTopComponent() == null
-				&& rightFilterSplitPane.getBottomComponent() == null) {
-			centerAndRightHorizontalSplitPane.setDividerLocation(1.0);
-		}
-
-		if (rightFilterSplitPane.getTopComponent() == null
-				|| rightFilterSplitPane.getBottomComponent() == null) {
-			rightFilterSplitPane.setDividerSize(0);
-		} else {
-			rightFilterSplitPane.setDividerSize(2);
-			rightFilterSplitPane.setDividerLocation(0.5);
-		}
-	}
-
-	private FilterPanel getNodeFilterPanel() {
-		if (nodeFilterPanel == null) {
-			Icon icon = ResourceHandler.getIcon("icon_node_filter.gif");
-			final FilterManager filterManager = graph.getFilterManager();
-			nodeFilterPanel = new FilterPanel("Node Types", icon,
-					graph.getGraphNodeStyle()) {
-				private static final long serialVersionUID = -2445793622682539920L;
-
-				public void setTypeVisibility(Object nodeType, boolean visible) {
-					filterManager.setNodeTypeVisible(nodeType, visible);
-				}
-
-				public Map<Object, Boolean> getTypes() {
-					return filterManager.getNodeTypesMap();
-				}
-			};
-			graph.addPropertyChangeListener(new PropertyChangeListener() {
-				public void propertyChange(PropertyChangeEvent evt) {
-					if (Graph.GRAPH_NODE_STYLE_PROPERTY.equals(evt
-							.getPropertyName())) {
-						nodeFilterPanel.setStyle(graph.getGraphNodeStyle());
-					}
-				}
-			});
-			filterManager.addFilterChangedListener(nodeFilterPanel);
-			// TODO this doesn't handle when the graph model changes!
-			graph.getModel().addGraphModelListener(new GraphModelAdapter() {
-				@Override
-				public void graphNodeTypeAdded(Object nodeType) {
-					nodeFilterPanel.reload();
-				}
-			});
-		}
-		return nodeFilterPanel;
-	}
-
-	/**add a btn to a toolbar, and the btn is linked with an action
+	/**
+	 * add a btn to a toolbar, and the btn is linked with an action
+	 * 
 	 * @param action
 	 * @return
 	 */

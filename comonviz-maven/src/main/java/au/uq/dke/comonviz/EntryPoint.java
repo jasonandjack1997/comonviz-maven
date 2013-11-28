@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -167,7 +168,6 @@ public class EntryPoint {
 		flatGraph.addListeners();
 
 		this.filterManager.getNodeLevelFilter().updateNodeLevels();
-		this.topView.hideSubclassArcType();
 		this.topView.getArcTypeFilterPanel().reload();
 		this.topView.getNodeLevelFilterPanel().reload();
 
@@ -179,30 +179,21 @@ public class EntryPoint {
 				| JFrame.MAXIMIZED_BOTH);
 		jFrame.setVisible(true);
 
-		this.flatGraph.performLayout();
 		
-		//addAxiomId();
-		// radicalLayoutAction.doAction();
-		// LayoutAction layoutAction = ((AbstractGraph)
-		// graphController.getGraph())
-		// .getLayout(LayoutConstants.LAYOUT_RADIAL);
+		
+		EntryPoint.getTopView().setSplitPaneDividers();
+		SwingUtilities.invokeLater(new Runnable() {
 
-		// URL ontologyURL = null;
-		// try {
-		//
-		// ontologyURL = this.getClass().getResource(internalOWLFilePath);
-		// //ontologyURL = this.getClass().getResource("/annotationTest.owl");
-		// } catch (NullPointerException e3) {
-		// e3.printStackTrace();
-		// }
-		//
-		// try {
-		// loadOntologyFile(ontologyURL.toURI());
-		// } catch (URISyntaxException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+			@Override
+			public void run() {
+				//EntryPoint.getRadicalLayoutAction().runLayout();
+				EntryPoint.getTopView().setSplitPaneDividers();
+				EntryPoint.getTopView().hideSubclassArcType();
+				//EntryPoint.getFlatGraph().performLayout();
+			}
+		});
 
+		EntryPoint.getTopView().setSplitPaneDividers();
 	}
 
 	public static DefaultMutableTreeNode getOntologyTreeRoot() {
@@ -283,27 +274,7 @@ public class EntryPoint {
 		TopView topView = graphController.getView();
 		topView.getTreeModel().setRoot(root);
 
-		// StyleManager.initStyleManager(treeInfoManager.getBranchNodes(),
-		// graphController.getModel().getArcTypes());
-
-		// for (OWLClass cls : ontology.getClassesInSignature()) {
-		//
-		// if (treeInfoManager.getLevel(cls) >= 2) {
-		// graphController.getModel().removeNode(cls);
-		// } else {
-		// graphController.getModel().hideAllDesendants(
-		// graphController.getModel().getNode(cls));
-		// graphController.getModel().show(cls,
-		// EntryPoint.getFlatGraph().getFilterManager());
-		// }
-		// }
-
-		topView.changeDividerLocation();
-		layoutAction.doAction();
-
-		Collection arcs = EntryPoint.getGraphModel().getAllArcs();
-		Collection visableArcs = EntryPoint.getGraphModel().getVisibleArcs();
-		Collection arcTypes = EntryPoint.getGraphModel().getArcTypes();
+		
 		return;
 	}
 

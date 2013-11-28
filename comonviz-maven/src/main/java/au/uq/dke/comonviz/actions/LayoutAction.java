@@ -130,17 +130,17 @@ public class LayoutAction extends CajunAction {
 
 		double x = 0, y = 0;
 		// double w = Math.max(0, canvas.getWidth());
-		double w = EntryPoint.getjFrame().getWidth() - dividerLocation - 10;
-		double h = Math.max(0, canvas.getHeight());
+		double w = EntryPoint.getTopView().getCenterGraphPanel().getWidth();
+		double h = EntryPoint.getTopView().getCenterGraphPanel().getHeight();
 
-		// to allow extra room for wide nodes
-		if (w > 400) {
-			w -= 100;
-		}
-		// extra room for tall nodes (labels wrap)
-		if (h > 300) {
-			h -= 30;
-		}
+//		// to allow extra room for wide nodes
+//		if (w > 400) {
+//			w -= 100;
+//		}
+//		// extra room for tall nodes (labels wrap)
+//		if (h > 300) {
+//			h -= 30;
+//		}
 
 		try {
 			// define a local version of the layout in order to avoid threading
