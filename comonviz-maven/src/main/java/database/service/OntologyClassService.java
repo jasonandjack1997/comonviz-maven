@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import au.uq.dke.comonviz.model.DatabaseModelListener;
+import au.uq.dke.comonviz.model.OntologyModelListener;
 
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
@@ -31,26 +31,26 @@ import database.model.ontology.OntologyClass;
 public class OntologyClassService {
 
 	OntologyClassDAO dao;
-	List<DatabaseModelListener> listeners = new ArrayList<DatabaseModelListener>();
-	public List<DatabaseModelListener> getListeners() {
+	List<OntologyModelListener> listeners = new ArrayList<OntologyModelListener>();
+	public List<OntologyModelListener> getListeners() {
 		return listeners;
 	}
 
 	protected void fireClassAddedEvent(OntologyClass cls){
-		for(DatabaseModelListener listener: listeners){
+		for(OntologyModelListener listener: listeners){
 			listener.databaseClassAdded(cls);
 		}
 	}
 	
 	protected void fireClassUpdatdeEvent(OntologyClass cls){
-		for(DatabaseModelListener listener: listeners){
+		for(OntologyModelListener listener: listeners){
 			listener.databaseClassUpdated(cls);
 		}
 	}
 	
 
 	protected void fireClassRemovedEvent(OntologyClass cls){
-		for(DatabaseModelListener listener: listeners){
+		for(OntologyModelListener listener: listeners){
 			listener.databaseClassRemoved(cls);
 		}
 	}

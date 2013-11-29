@@ -3,7 +3,7 @@ package au.uq.dke.comonviz.model;
 import database.model.ontology.OntologyClass;
 import database.model.ontology.OntologyRelationship;
 
-public class DatabaseModelListener {
+public class OntologyModelListener {
 	
 	public void databaseCleared() {
 	}

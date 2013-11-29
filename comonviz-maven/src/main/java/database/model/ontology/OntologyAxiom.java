@@ -40,9 +40,9 @@ public class OntologyAxiom extends Trackable implements Comparable<OntologyAxiom
 		return super.toString() + ", iri: " + iri;
 	}
 
-	@Override
+
 	public int compareTo(OntologyAxiom o) {
 		// TODO Auto-generated method stub
-		return this.getName().compareToIgnoreCase(o.getName());
+		return super.compareTo(o);
 	}
 }

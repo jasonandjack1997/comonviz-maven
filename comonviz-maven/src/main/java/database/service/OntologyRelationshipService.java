@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import au.uq.dke.comonviz.model.DatabaseModelListener;
+import au.uq.dke.comonviz.model.OntologyModelListener;
 
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
@@ -32,24 +32,24 @@ import database.model.ontology.OntologyRelationship;
 @Transactional
 public class OntologyRelationshipService {
 
-	List<DatabaseModelListener> listeners = new ArrayList<DatabaseModelListener>();
+	List<OntologyModelListener> listeners = new ArrayList<OntologyModelListener>();
 
 	protected void fireRelationshipAddedEvent(OntologyRelationship relationship) {
-		for (DatabaseModelListener listener : listeners) {
+		for (OntologyModelListener listener : listeners) {
 			listener.databaseRelationshipAdded(relationship);
 		}
 	}
 
 	protected void fireRelationshipUpdatdeEvent(
 			OntologyRelationship relationship) {
-		for (DatabaseModelListener listener : listeners) {
+		for (OntologyModelListener listener : listeners) {
 			listener.databaseRelationshipUpdated(relationship);
 		}
 	}
 
 	protected void fireRelationshipRemovedEvent(
 			OntologyRelationship relationship) {
-		for (DatabaseModelListener listener : listeners) {
+		for (OntologyModelListener listener : listeners) {
 			listener.databaseRelationshipRemoved(relationship);
 		}
 	}
@@ -272,7 +272,7 @@ public class OntologyRelationshipService {
 		return dao.searchAndCount(search);
 	}
 	
-	public List<DatabaseModelListener> getListeners() {
+	public List<OntologyModelListener> getListeners() {
 		return listeners;
 	}
 

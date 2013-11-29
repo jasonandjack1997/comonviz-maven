@@ -81,7 +81,6 @@ public class EntryPoint {
 
 	private static TopView topView;
 
-	private static GraphController graphController;
 
 	private static JFrame jFrame;
 	private static FilterManager filterManager;
@@ -206,9 +205,6 @@ public class EntryPoint {
 		return topView;
 	}
 
-	public static GraphController getGraphController() {
-		return graphController;
-	}
 
 	public static JFrame getFrame() {
 		return jFrame;
@@ -218,50 +214,6 @@ public class EntryPoint {
 		return ontologyTree;
 	}
 
-	public static void loadOntologyFile(URI uri) {
-
-		OwlApi owlapi = new OwlApi();
-		try {
-			ontology = owlapi.openOntology(uri);
-
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "This is an invalid owl file!",
-					"Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		} catch (OWLOntologyCreationException | OWLOntologyStorageException
-				| IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		// Create and set up the window.
-		annotationManager = new AnnotationManager();
-		graphController.getModel().owlOntology = EntryPoint.ontology;
-		// LayoutAction layoutAction =
-		// ((AbstractGraph)gc.getGraph()).getLayout(LayoutConstants.LAYOUT_SPRING);
-		LayoutAction layoutAction = ((AbstractGraph) graphController.getGraph())
-				.getLayout(LayoutConstants.LAYOUT_RADIAL);
-
-		for (OWLClass cls : ontology.getClassesInSignature()) {
-			graphController.getModel().generateNodesAndArcs(
-					cls,
-					((AbstractGraph) graphController.getGraph())
-							.getFilterManager());
-		}
-
-		Collection nodes = null;
-		nodes = graphController.getModel().getAllNodes();
-		TreeInfoManager treeInfoManager = TreeInfoManager.getTreeManager();
-		treeInfoManager.generateTreeInfo(nodes);
-
-		ontologyTree = treeInfoManager.getTreeRoot();
-		DefaultMutableTreeNode root = null;
-		root = TreeInfoManager.convertFromManchesterToUITreeNode(ontologyTree);
-		TopView topView = graphController.getView();
-		topView.getTreeModel().setRoot(root);
-
-		return;
-	}
 
 	public static void main(String[] args) throws URISyntaxException,
 			IOException {

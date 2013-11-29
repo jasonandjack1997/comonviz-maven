@@ -10,6 +10,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
+import database.model.data.bussinessProcessManagement.ProcessActivity;
 import edu.umd.cs.piccolo.PNode;
 
 @Entity
@@ -65,5 +66,13 @@ public class Trackable{
 	private Long modificationUserId;
 
 	private Long databaseVersionId;
+
+	public int compareTo(Trackable o) {
+		return this.getName().compareToIgnoreCase(o.getName());
+	}
+	
+	public int compareById(Trackable o){
+		return (int)(this.getId() - o.getId());
+	}
 
 }

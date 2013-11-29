@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import au.uq.dke.comonviz.model.OntologyModelListener;
 
+import com.googlecode.genericdao.dao.hibernate.GenericDAO;
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.SearchResult;
 
-import database.dao.OntologyAxiomDAO;
 import database.model.ontology.OntologyAxiom;
 
 /**
@@ -25,11 +25,11 @@ import database.model.ontology.OntologyAxiom;
  * @author dwolverton
  * 
  */
-@Service
-@Transactional
-public class OntologyAxiomService {
+//@Service
+//@Transactional
+public class GenericServiceTest<M, D extends GenericDAO<OntologyAxiom, Long>> {
 
-	OntologyAxiomDAO dao;
+	D dao;
 
 	List<OntologyModelListener> listeners = new ArrayList<OntologyModelListener>();
 	protected void fireAxiomAddedEvent(OntologyAxiom axiom){
@@ -63,7 +63,7 @@ public class OntologyAxiomService {
 	}
 
 	@Autowired
-	public void setDao(OntologyAxiomDAO dao) {
+	public void setDao(D dao) {
 		this.dao = dao;
 	}
 
@@ -110,3 +110,4 @@ public class OntologyAxiomService {
 	}
 
 }
+

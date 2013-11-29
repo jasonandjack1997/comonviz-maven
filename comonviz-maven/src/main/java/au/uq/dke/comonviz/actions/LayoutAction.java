@@ -14,7 +14,6 @@ import org.eclipse.zest.layouts.progress.ProgressListener;
 import org.semanticweb.owlapi.model.OWLEntity;
 
 import au.uq.dke.comonviz.EntryPoint;
-import au.uq.dke.comonviz.ComonvizGraphModel;
 import au.uq.dke.comonviz.graph.arc.DefaultGraphArc;
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import au.uq.dke.comonviz.ui.Parameters;

@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
-import au.uq.dke.comonviz.model.DatabaseModelListener;
+import au.uq.dke.comonviz.model.OntologyModelListener;
 import ca.uvic.cs.chisel.cajun.graph.DefaultGraphModel;
 import ca.uvic.cs.chisel.cajun.graph.arc.GraphArc;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
@@ -19,7 +19,7 @@ import database.service.OntologyRelationshipService;
 
 public class NewGraphModel extends DefaultGraphModel {
 
-	DatabaseModelListener databaseModelListener = new DatabaseModelListener() {
+	OntologyModelListener databaseModelListener = new OntologyModelListener() {
 
 		@Override
 		public void databaseCleared() {

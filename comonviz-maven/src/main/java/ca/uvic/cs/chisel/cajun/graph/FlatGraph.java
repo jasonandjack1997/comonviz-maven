@@ -8,7 +8,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import au.uq.dke.comonviz.EntryPoint;
-import au.uq.dke.comonviz.GraphController;
 import au.uq.dke.comonviz.filter.FilterManager;
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import au.uq.dke.comonviz.handler.CameraDragPanHandler;

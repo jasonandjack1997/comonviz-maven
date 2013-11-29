@@ -35,7 +35,7 @@ public class OpenOntologyFileAction extends CajunAction {
 		int option = chooser.showOpenDialog(EntryPoint.getjFrame());
 		if (option == JFileChooser.APPROVE_OPTION) {
 			uri = chooser.getSelectedFile().toURI();
-			EntryPoint.loadOntologyFile(uri);
+			//EntryPoint.loadOntologyFile(uri);
 		} else {
 		}
 	}
