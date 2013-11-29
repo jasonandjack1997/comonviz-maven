@@ -27,6 +27,7 @@ import database.model.data.bussinesProcessManagement.ProcessActivity;
 import database.model.data.bussinesProcessManagement.ProcessRule;
 import database.service.GenericService;
 import database.service.ProcessActivityService;
+import database.service.ServiceManager;
 
 public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 
@@ -47,15 +48,8 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);
 		try {
-			service = (GenericService) ctx.getBean(clazz.newInstance().getServiceName());
+			service = ServiceManager.getService(clazz);
 		} catch (BeansException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -156,10 +150,11 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 		Class<ProcessRule> clazz = ProcessRule.class;
 		
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		GenericService service = (GenericService) ctx.getBean(clazz.newInstance().getServiceName());
+		GenericService service = ServiceManager.getService(clazz);
 		
+		service.deleteAll();
 		ProcessRule pr1 = new ProcessRule();
-		pr1.setName("process rule 1");
+		pr1.setName("process rule 2");
 		service.save(pr1);
 
 		new GenericDashboardDialog<ProcessRule>(ProcessRule.class);

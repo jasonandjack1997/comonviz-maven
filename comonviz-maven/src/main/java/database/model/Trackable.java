@@ -75,9 +75,4 @@ public class Trackable{
 		return (int)(this.getId() - o.getId());
 	}
 	
-	public String getServiceName(){
-		String serviceName = this.getClass().getSimpleName() + "Service";
-		serviceName = serviceName.substring(0,1).toLowerCase() + serviceName.substring(1);
-		return serviceName;
-	}
 }
