@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import au.uq.dke.comonviz.model.OntologyModelListener;
@@ -15,61 +14,61 @@ import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.SearchResult;
 
 //@Service
-//@Transactional
-public class GenericServiceTest<M, D extends GenericDAO<M, Long>> {
+@Transactional
+public class GenericService<Model, DAO extends GenericDAO<Model, Long>> {
 
-	D dao;
+	DAO dao;
 
 	List<OntologyModelListener> listeners = new ArrayList<OntologyModelListener>();
-	protected void fireAxiomAddedEvent(M axiom){
+	protected void fireAxiomAddedEvent(Model model){
 		for(OntologyModelListener listener: listeners){
-			listener.databaseAxiomAdded(axiom);
+			listener.databaseAxiomAdded(model);
 		}
 	}
 
-	protected void fireAxiomUpdatedEvent(M axiom){
+	protected void fireAxiomUpdatedEvent(Model model){
 		for(OntologyModelListener listener: listeners){
-			listener.databaseAxiomUpdated(axiom);
+			listener.databaseAxiomUpdated(model);
 		}
 	}
 
-	protected void fireAxiomRemovedEvent(M axiom){
+	protected void fireAxiomRemovedEvent(Model model){
 		for(OntologyModelListener listener: listeners){
-			listener.databaseAxiomRemoved(axiom);
+			listener.databaseAxiomRemoved(model);
 		}
 	}
 
 	public void deleteAll() {
-		List<M> axiomList = dao.findAll();
-		for(M axiom: axiomList){
-			dao.remove(axiom);
+		List<Model> modelList = dao.findAll();
+		for(Model model: modelList){
+			dao.remove(model);
 		}
 	}
 	
-	public void delete(M axiom){
-		dao.remove(axiom);
-		fireAxiomRemovedEvent(axiom);
+	public void delete(Model model){
+		dao.remove(model);
+		fireAxiomRemovedEvent(model);
 	}
 
 	@Autowired
-	public void setDao(D dao) {
+	public void setDao(DAO dao) {
 		this.dao = dao;
 	}
 
-	public void save(M ontologyAxiom) {
-		boolean isCreate = dao.save(ontologyAxiom);
+	public void save(Model model) {
+		boolean isCreate = dao.save(model);
 		if (isCreate) {
-			fireAxiomAddedEvent(ontologyAxiom);
+			fireAxiomAddedEvent(model);
 		} else {
-			fireAxiomUpdatedEvent(ontologyAxiom);
+			fireAxiomUpdatedEvent(model);
 		}
 	}
 
-	public List<M> findAll() {
+	public List<Model> findAll() {
 		return dao.findAll();
 	}
 
-	public M findByName(String name) {
+	public Model findByName(String name) {
 		if (name == null)
 			return null;
 		return dao.searchUnique(new Search().addFilterEqual("name", name));
@@ -79,11 +78,11 @@ public class GenericServiceTest<M, D extends GenericDAO<M, Long>> {
 		dao.flush();
 	}
 
-	public List<M> search(ISearch search) {
+	public List<Model> search(ISearch search) {
 		return dao.search(search);
 	}
 
-	public M findById(Long id) {
+	public Model findById(Long id) {
 		return dao.find(id);
 	}
 
@@ -91,7 +90,7 @@ public class GenericServiceTest<M, D extends GenericDAO<M, Long>> {
 		dao.removeById(id);
 	}
 
-	public SearchResult<M> searchAndCount(ISearch search) {
+	public SearchResult<Model> searchAndCount(ISearch search) {
 		return dao.searchAndCount(search);
 	}
 	public List<OntologyModelListener> getListeners() {
