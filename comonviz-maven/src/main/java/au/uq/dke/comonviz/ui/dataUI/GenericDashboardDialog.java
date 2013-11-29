@@ -5,13 +5,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Set;
 
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import org.metawidget.inspector.annotation.UiAction;
+import org.metawidget.inspector.annotation.UiHidden;
 import org.metawidget.swing.SwingMetawidget;
 import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessor;
 import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessorConfig;
@@ -23,10 +23,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import au.uq.dke.comonviz.ui.refactor.ListTableModel;
 import database.model.data.DataModel;
-import database.model.data.bussinesProcessManagement.ProcessActivity;
 import database.model.data.bussinesProcessManagement.ProcessRule;
 import database.service.GenericService;
-import database.service.ProcessActivityService;
 import database.service.ServiceManager;
 
 public class GenericDashboardDialog<R extends DataModel> extends JFrame {
@@ -39,8 +37,12 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 	private JTable mainListTable;
 	private JScrollPane mainScrollPane;
 
-	ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-	GenericService service;
+	private GenericService mainListService;
+
+	@UiHidden
+	public GenericService getMainListService() {
+		return mainListService;
+	}
 
 	public GenericDashboardDialog(Class<R> clazz) {
 
@@ -48,7 +50,7 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);
 		try {
-			service = ServiceManager.getService(clazz);
+			mainListService = ServiceManager.getService(clazz);
 		} catch (BeansException e) {
 			e.printStackTrace();
 		}
@@ -62,7 +64,7 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 		buttonsWidget.setToInspect(this);
 
 
-		mainListTableModel = new ListTableModel<R>(clazz, service.findAll() , "name");
+		mainListTableModel = new ListTableModel<R>(clazz, mainListService.findAll() , "name");
 
 		mainListTableModel.setEditable(true);
 		mainListTable = new JTable(mainListTableModel);
@@ -116,7 +118,7 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new GenericRecordDialog(this, model).setVisible(true);
+		new GenericRecordDialogDebug(this, model).setVisible(true);
 	}
 
 	@UiAction
@@ -134,14 +136,16 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 		R record = (R) this.mainListTableModel.getValueAt(mainListTable
 				.getSelectedRow());
 
-		// EntryPoint.getOntologyAxiomService().delete(ontologyAxiom);
-
+		//update database
+		this.mainListService.delete(record);
 		// update list
 		this.updateDashboard();
 
 	}
 
 	public void updateDashboard() {
+		//update the main list
+		this.mainListTableModel.importCollection(this.mainListService.findAll());
 
 	}
 
@@ -158,6 +162,7 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 		service.save(pr1);
 
 		new GenericDashboardDialog<ProcessRule>(ProcessRule.class);
+		ctx.close();
 		return;
 	}
 }

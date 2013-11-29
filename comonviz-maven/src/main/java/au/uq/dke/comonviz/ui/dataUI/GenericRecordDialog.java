@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JDialog;
+import javax.swing.SwingUtilities;
 
 import org.metawidget.inspector.annotation.UiAction;
 import org.metawidget.inspector.annotation.UiComesAfter;
@@ -18,7 +19,7 @@ import database.model.ontology.OntologyAxiom;
 
 public class GenericRecordDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
-	
+
 	private GenericDashboardDialog dashboard;
 	private DataModel dataModel;
 	private SwingMetawidget modelWidget;
@@ -26,8 +27,9 @@ public class GenericRecordDialog extends JDialog {
 
 	public GenericRecordDialog(GenericDashboardDialog dashboard,
 			DataModel dataModel) {
-
+		
 		this.setModalityType(ModalityType.APPLICATION_MODAL);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
 		this.dashboard = dashboard;
 		this.dataModel = dataModel;
@@ -37,14 +39,12 @@ public class GenericRecordDialog extends JDialog {
 				new BeansBindingProcessorConfig()));
 		modelWidget.addWidgetProcessor(new ReflectionBindingProcessor());
 		modelWidget.setToInspect(dataModel);
-		// modelWidget.setPreferredSize(new Dimension(400, 400));
 
 		buttonsWidget = new SwingMetawidget();
 		buttonsWidget.addWidgetProcessor(new BeansBindingProcessor(
 				new BeansBindingProcessorConfig()));
 		buttonsWidget.addWidgetProcessor(new ReflectionBindingProcessor());
 		buttonsWidget.setToInspect(this);
-		// buttonsWidget.setPreferredSize(new Dimension(400, 400));
 
 		this.add(modelWidget, BorderLayout.NORTH);
 		this.add(buttonsWidget, BorderLayout.SOUTH);
@@ -62,11 +62,18 @@ public class GenericRecordDialog extends JDialog {
 		this.dataModel.update(model);
 
 		// update database
-		// EntryPoint.getOntologyAxiomService().save(ontologyAxiom);
+		this.dashboard.getMainListService().save(model);
 
 		// update list
 		this.dashboard.updateDashboard();
 
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				dispose();
+			}
+		});
 		return;
 	}
 
@@ -78,8 +85,9 @@ public class GenericRecordDialog extends JDialog {
 	}
 
 	public static void main(String args[]) {
-		
-		new GenericRecordDialog(new GenericDashboardDialog<DataModel>(DataModel.class), new DataModel());
+
+		new GenericRecordDialog(new GenericDashboardDialog<DataModel>(
+				DataModel.class), new DataModel());
 		;
 		return;
 	}
