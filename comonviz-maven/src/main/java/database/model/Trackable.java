@@ -10,7 +10,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
-import database.model.data.bussinessProcessManagement.ProcessActivity;
+import database.model.data.bussinesProcessManagement.ProcessActivity;
 import edu.umd.cs.piccolo.PNode;
 
 @Entity
@@ -74,5 +74,10 @@ public class Trackable{
 	public int compareById(Trackable o){
 		return (int)(this.getId() - o.getId());
 	}
-
+	
+	public String getServiceName(){
+		String serviceName = this.getClass().getSimpleName() + "Service";
+		serviceName = serviceName.substring(0,1).toLowerCase() + serviceName.substring(1);
+		return serviceName;
+	}
 }

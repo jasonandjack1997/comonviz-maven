@@ -39,12 +39,12 @@ import au.uq.dke.comonviz.ui.StyleManager;
 import ca.uvic.cs.chisel.cajun.constants.LayoutConstants;
 import ca.uvic.cs.chisel.cajun.graph.AbstractGraph;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;
-import database.model.data.bussinessProcessManagement.ProcessActivity;
+import database.model.data.bussinesProcessManagement.ProcessActivity;
 import database.model.ontology.OntologyRelationship;
 import database.service.OntologyAxiomService;
 import database.service.OntologyClassService;
 import database.service.OntologyRelationshipService;
-import database.service.ProcessActivityServiceFromGeneric;
+import database.service.ProcessActivityService;
 import database.service.ProcessActivityService;
 
 public class EntryPoint {

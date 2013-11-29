@@ -1,16 +1,15 @@
-package database.model.data.bussinessProcessManagement;
+package database.model.data.bussinesProcessManagement;
 
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-import database.model.OntologyDataModel;
+import database.model.data.DataModel;
 
 
 @Entity
 @PrimaryKeyJoinColumn(name = "ID")
-public class ProcessObjective extends OntologyDataModel implements Comparable<ProcessActivity>{
+public class ProcessObjective extends DataModel{
 
-	@Override
 	public int compareTo(ProcessActivity o) {
 		return super.compareTo(o);
 	}
