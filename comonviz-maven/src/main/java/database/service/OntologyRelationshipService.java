@@ -19,15 +19,6 @@ import database.dao.OntologyRelationshipDAO;
 import database.model.ontology.OntologyClass;
 import database.model.ontology.OntologyRelationship;
 
-/**
- * This is the implementation for our OntologyRelationship Service. The @Service
- * annotation allows Spring to automatically detect this as a component rather
- * than having to comfigure it in XML. The @Autowired annotation tells Spring to
- * inject our OntologyRelationship DAO using the setDao() method.
- * 
- * @author dwolverton
- * 
- */
 @Service
 @Transactional
 public class OntologyRelationshipService {

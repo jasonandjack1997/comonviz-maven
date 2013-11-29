@@ -9,54 +9,56 @@ import org.springframework.transaction.annotation.Transactional;
 
 import au.uq.dke.comonviz.model.OntologyModelListener;
 
-import com.googlecode.genericdao.dao.hibernate.GenericDAO;
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.SearchResult;
 
-//@Service
-//@Transactional
-public class GenericServiceTest<M, D extends GenericDAO<M, Long>> {
+import database.dao.ProcessActivityDAO;
+import database.model.data.bussinessProcessManagement.ProcessActivity;
 
-	D dao;
+@Service
+@Transactional
+public class ProcessActivityService2 {
+
+	ProcessActivityDAO dao;
 
 	List<OntologyModelListener> listeners = new ArrayList<OntologyModelListener>();
-	protected void fireAxiomAddedEvent(M axiom){
+	protected void fireAxiomAddedEvent(ProcessActivity axiom){
 		for(OntologyModelListener listener: listeners){
 			listener.databaseAxiomAdded(axiom);
 		}
 	}
 
-	protected void fireAxiomUpdatedEvent(M axiom){
+	protected void fireAxiomUpdatedEvent(ProcessActivity axiom){
 		for(OntologyModelListener listener: listeners){
 			listener.databaseAxiomUpdated(axiom);
 		}
 	}
 
-	protected void fireAxiomRemovedEvent(M axiom){
+	protected void fireAxiomRemovedEvent(ProcessActivity axiom){
 		for(OntologyModelListener listener: listeners){
 			listener.databaseAxiomRemoved(axiom);
 		}
 	}
 
 	public void deleteAll() {
-		List<M> axiomList = dao.findAll();
-		for(M axiom: axiomList){
+		List<ProcessActivity> axiomList = dao.findAll();
+		for(ProcessActivity axiom: axiomList){
 			dao.remove(axiom);
 		}
 	}
 	
-	public void delete(M axiom){
+	public void delete(ProcessActivity axiom){
 		dao.remove(axiom);
 		fireAxiomRemovedEvent(axiom);
 	}
 
 	@Autowired
-	public void setDao(D dao) {
+	public void setDao(ProcessActivityDAO dao) {
 		this.dao = dao;
 	}
 
-	public void save(M ontologyAxiom) {
+	public void save(ProcessActivity ontologyAxiom) {
 		boolean isCreate = dao.save(ontologyAxiom);
 		if (isCreate) {
 			fireAxiomAddedEvent(ontologyAxiom);
@@ -65,11 +67,11 @@ public class GenericServiceTest<M, D extends GenericDAO<M, Long>> {
 		}
 	}
 
-	public List<M> findAll() {
+	public List<ProcessActivity> findAll() {
 		return dao.findAll();
 	}
 
-	public M findByName(String name) {
+	public ProcessActivity findByName(String name) {
 		if (name == null)
 			return null;
 		return dao.searchUnique(new Search().addFilterEqual("name", name));
@@ -79,11 +81,11 @@ public class GenericServiceTest<M, D extends GenericDAO<M, Long>> {
 		dao.flush();
 	}
 
-	public List<M> search(ISearch search) {
+	public List<ProcessActivity> search(ISearch search) {
 		return dao.search(search);
 	}
 
-	public M findById(Long id) {
+	public ProcessActivity findById(Long id) {
 		return dao.find(id);
 	}
 
@@ -91,7 +93,7 @@ public class GenericServiceTest<M, D extends GenericDAO<M, Long>> {
 		dao.removeById(id);
 	}
 
-	public SearchResult<M> searchAndCount(ISearch search) {
+	public SearchResult<ProcessActivity> searchAndCount(ISearch search) {
 		return dao.searchAndCount(search);
 	}
 	public List<OntologyModelListener> getListeners() {
@@ -99,4 +101,3 @@ public class GenericServiceTest<M, D extends GenericDAO<M, Long>> {
 	}
 
 }
-

@@ -16,15 +16,6 @@ import com.googlecode.genericdao.search.SearchResult;
 import database.dao.OntologyAxiomDAO;
 import database.model.ontology.OntologyAxiom;
 
-/**
- * This is the implementation for our OntologyAxiom Service. The @Service
- * annotation allows Spring to automatically detect this as a component rather
- * than having to comfigure it in XML. The @Autowired annotation tells Spring to
- * inject our OntologyAxiom DAO using the setDao() method.
- * 
- * @author dwolverton
- * 
- */
 @Service
 @Transactional
 public class OntologyAxiomService {

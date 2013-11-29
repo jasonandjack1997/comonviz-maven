@@ -39,10 +39,13 @@ import au.uq.dke.comonviz.ui.StyleManager;
 import ca.uvic.cs.chisel.cajun.constants.LayoutConstants;
 import ca.uvic.cs.chisel.cajun.graph.AbstractGraph;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;
+import database.model.data.bussinessProcessManagement.ProcessActivity;
 import database.model.ontology.OntologyRelationship;
 import database.service.OntologyAxiomService;
 import database.service.OntologyClassService;
 import database.service.OntologyRelationshipService;
+import database.service.ProcessActivityService;
+import database.service.ProcessActivityService2;
 
 public class EntryPoint {
 	private final String dataBaseFileName = "database.h2.db";
@@ -139,6 +142,14 @@ public class EntryPoint {
 				.getBean("ontologyClassService");
 		ontologyRelationshipService = (OntologyRelationshipService) ctx
 				.getBean("ontologyRelationshipService");
+
+		ProcessActivityService2 processActivityService = (ProcessActivityService2) ctx.getBean("processActivityService2");
+		
+		ProcessActivity pa1 = new ProcessActivity();
+		pa1.setName("pa1");
+		processActivityService.save(pa1);
+		
+		List paList = processActivityService.findAll();
 
 		filterManager = new FilterManager();
 		jFrame = new JFrame("CoMOnViz");
