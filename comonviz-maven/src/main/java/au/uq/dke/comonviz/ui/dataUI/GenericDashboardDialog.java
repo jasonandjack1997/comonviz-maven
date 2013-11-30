@@ -1,10 +1,12 @@
 package au.uq.dke.comonviz.ui.dataUI;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Set;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -118,7 +120,11 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new GenericRecordDialogDebug(this, model).setVisible(true);
+		JDialog dlg = new GenericRecordDialog(this, model);
+	
+//		JDialog dlg = new JDialog();
+//		dlg.setModalityType(ModalityType.APPLICATION_MODAL);
+//		dlg.setVisible(true);
 	}
 
 	@UiAction

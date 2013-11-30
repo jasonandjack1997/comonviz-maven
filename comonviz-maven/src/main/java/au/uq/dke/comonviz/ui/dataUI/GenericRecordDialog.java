@@ -19,7 +19,6 @@ import database.model.ontology.OntologyAxiom;
 
 public class GenericRecordDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
-
 	private GenericDashboardDialog dashboard;
 	private DataModel dataModel;
 	private SwingMetawidget modelWidget;
@@ -30,6 +29,7 @@ public class GenericRecordDialog extends JDialog {
 		
 		this.setModalityType(ModalityType.APPLICATION_MODAL);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setTitle(this.getClass().getSimpleName());
 
 		this.dashboard = dashboard;
 		this.dataModel = dataModel;
@@ -48,6 +48,7 @@ public class GenericRecordDialog extends JDialog {
 
 		this.add(modelWidget, BorderLayout.NORTH);
 		this.add(buttonsWidget, BorderLayout.SOUTH);
+
 		this.pack();
 		this.setVisible(true);
 
@@ -84,11 +85,9 @@ public class GenericRecordDialog extends JDialog {
 
 	}
 
-	public static void main(String args[]) {
-
-		new GenericRecordDialog(new GenericDashboardDialog<DataModel>(
-				DataModel.class), new DataModel());
-		;
-		return;
-	}
+//	public static void main(String args[]) {
+//
+//		new GenericRecordDialogDebug(null, null);
+//		return;
+//	}
 }
