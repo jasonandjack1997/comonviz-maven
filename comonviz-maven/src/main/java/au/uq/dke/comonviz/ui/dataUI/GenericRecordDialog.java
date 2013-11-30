@@ -19,19 +19,19 @@ import database.model.ontology.OntologyAxiom;
 
 public class GenericRecordDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
-	private GenericDashboardDialog dashboard;
+	private GenericTableUnit tableUnit;
 	private DataModel dataModel;
 	private SwingMetawidget modelWidget;
 	private SwingMetawidget buttonsWidget;
 
-	public GenericRecordDialog(GenericDashboardDialog dashboard,
+	public GenericRecordDialog(GenericTableUnit genericTableUnit,
 			DataModel dataModel) {
 		
 		this.setModalityType(ModalityType.APPLICATION_MODAL);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setTitle(this.getClass().getSimpleName());
 
-		this.dashboard = dashboard;
+		this.tableUnit = genericTableUnit;
 		this.dataModel = dataModel;
 
 		modelWidget = new SwingMetawidget();
@@ -63,10 +63,10 @@ public class GenericRecordDialog extends JDialog {
 		this.dataModel.update(model);
 
 		// update database
-		this.dashboard.getMainListService().save(model);
+		this.tableUnit.getMainListService().save(model);
 
 		// update list
-		this.dashboard.updateDashboard();
+		this.tableUnit.updateDashboard();
 
 		SwingUtilities.invokeLater(new Runnable() {
 
