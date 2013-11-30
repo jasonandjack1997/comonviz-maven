@@ -11,7 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import database.model.Trackable;
 
-@Entity
+//@Entity
 @PrimaryKeyJoinColumn(name = "ID")
 public class OntologyAxiom extends Trackable implements Comparable<OntologyAxiom>{
 	@Column(columnDefinition = "TEXT")

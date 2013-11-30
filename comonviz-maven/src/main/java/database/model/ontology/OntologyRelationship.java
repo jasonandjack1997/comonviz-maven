@@ -8,7 +8,7 @@ import au.uq.dke.comonviz.EntryPoint;
 import database.model.Trackable;
 
 
-@Entity
+//@Entity
 @PrimaryKeyJoinColumn(name="ID")
 public class OntologyRelationship extends Trackable implements Comparable<OntologyRelationship> {
 	

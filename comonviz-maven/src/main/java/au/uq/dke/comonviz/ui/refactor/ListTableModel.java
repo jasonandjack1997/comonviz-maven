@@ -29,14 +29,17 @@
 
 package au.uq.dke.comonviz.ui.refactor;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import org.metawidget.util.ClassUtils;
 import org.metawidget.util.CollectionUtils;
+
+import database.model.data.DataModel;
 
 /**
  * TableModel for Lists of Objects.
@@ -55,6 +58,8 @@ public class ListTableModel<T>
 	//
 
 	private Class<T>			mClass;
+	
+	private List<Class<?>>				mFKClassList;
 
 	private List<T>				mList;
 
@@ -71,6 +76,14 @@ public class ListTableModel<T>
 	public ListTableModel( Class<T> clazz, Collection<T> collection, String... columns ) {
 
 		mClass = clazz;
+		mFKClassList  = new ArrayList();
+		//mClass.getDeclaredFields();
+		
+		for(Field field:clazz.getDeclaredFields()){
+			if(DataModel.class.isAssignableFrom(field.getDeclaringClass())){
+				mFKClassList.add(field.getClass());
+			}
+		}
 		mColumns = columns;
 
 		importCollection( collection );
