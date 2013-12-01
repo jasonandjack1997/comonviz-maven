@@ -1,5 +1,7 @@
 package database.dao;
 
+import genericdaoModify.MyGenericDAOImpl;
+
 import java.io.Serializable;
 
 import org.hibernate.SessionFactory;
@@ -19,7 +21,7 @@ import com.googlecode.genericdao.dao.hibernate.GenericDAOImpl;
  * 
  * @author dwolverton
  */
-public class BaseDAO<T, ID extends Serializable> extends GenericDAOImpl<T, ID> {
+public class BaseDAO<T, ID extends Serializable> extends MyGenericDAOImpl<T, ID> {
 
 	@Autowired
 	@Override

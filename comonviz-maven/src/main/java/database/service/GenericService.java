@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import sample.googlecode.genericdao.model.Town;
 import au.uq.dke.comonviz.model.OntologyModelListener;
 
 import com.googlecode.genericdao.dao.hibernate.GenericDAO;
@@ -19,6 +20,9 @@ public class GenericService<Model, DAO extends GenericDAO<Model, Long>> {
 
 	DAO dao;
 
+	public DAO getDao() {
+		return dao;
+	}
 	List<OntologyModelListener> listeners = new ArrayList<OntologyModelListener>();
 	protected void fireAxiomAddedEvent(Model model){
 		for(OntologyModelListener listener: listeners){
@@ -37,7 +41,7 @@ public class GenericService<Model, DAO extends GenericDAO<Model, Long>> {
 			listener.databaseAxiomRemoved(model);
 		}
 	}
-
+	
 	public void deleteAll() {
 		List<Model> modelList = dao.findAll();
 		for(Model model: modelList){

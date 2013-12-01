@@ -1,4 +1,4 @@
-package database.model.data.bussinesProcessManagement;
+package database.model;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -33,12 +33,12 @@ public class StockDailyRecord implements java.io.Serializable {
 	public StockDailyRecord() {
 	}
  
-	public StockDailyRecord(Date date) {
+	public StockDailyRecord(Stock stock, Date date) {
 	//	this.stock = stock;
 		this.date = date;
 	}
  
-	public StockDailyRecord(Float priceOpen, Float priceClose,
+	public StockDailyRecord(Stock stock, Float priceOpen, Float priceClose,
 			Float priceChange, Long volume, Date date) {
 	//	this.stock = stock;
 		this.priceOpen = priceOpen;

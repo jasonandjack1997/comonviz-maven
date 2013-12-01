@@ -1,6 +1,7 @@
 package au.uq.dke.comonviz.ui.dataUI;
 
 import java.awt.BorderLayout;
+import java.util.Set;
 
 import javax.swing.JFrame;
 
@@ -10,6 +11,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import database.model.data.DataModel;
+import database.model.data.bussinesProcessManagement.ProcessActivity;
+import database.model.data.bussinesProcessManagement.ProcessObjective;
 import database.model.data.bussinesProcessManagement.ProcessRule;
 import database.service.GenericService;
 import database.service.ServiceManager;
@@ -45,15 +48,26 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 
 	public static void main(String args[]) throws BeansException, InstantiationException, IllegalAccessException{
 		
-		Class<ProcessRule> clazz = ProcessRule.class;
+		Class<ProcessActivity> clazz = ProcessActivity.class;
 		
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		GenericService service = ServiceManager.getService(clazz);
+		GenericService service = ServiceManager.getGenericService(clazz);
+		GenericService objectiveService = ServiceManager.getGenericService(ProcessObjective.class);
 		
-		service.deleteAll();
-		ProcessRule pr1 = new ProcessRule();
-		pr1.setName("process rule 2");
-		service.save(pr1);
+		
+		//service.deleteAll();
+		ProcessActivity p = (ProcessActivity) service.findAll().get(0);
+		
+		
+		ProcessActivity pa1 = new ProcessActivity();
+		Set<?> set = pa1.getProcessObjectives();
+		pa1.setName("process activity 2");
+		
+		ProcessObjective o1 = new ProcessObjective();
+		objectiveService.save(o1);
+		
+		pa1.getProcessObjectives().add(o1);
+		service.save(pa1);
 
 		new GenericDashboardDialog<ProcessRule>(ProcessRule.class);
 		ctx.close();

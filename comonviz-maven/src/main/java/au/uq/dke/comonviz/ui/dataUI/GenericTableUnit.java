@@ -52,7 +52,7 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);
 		try {
-			mainListService = ServiceManager.getService(clazz);
+			mainListService = ServiceManager.getGenericService(clazz);
 		} catch (BeansException e) {
 			e.printStackTrace();
 		}
@@ -155,7 +155,7 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"applicationContext.xml");
-		GenericService service = ServiceManager.getService(clazz);
+		GenericService service = ServiceManager.getGenericService(clazz);
 
 		service.deleteAll();
 		ProcessRule pr1 = new ProcessRule();

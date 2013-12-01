@@ -1,4 +1,4 @@
-package database.model.data.bussinesProcessManagement;
+package database.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
 @Entity
 @Table(name = "stock", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "STOCK_NAME"),
