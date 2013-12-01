@@ -15,6 +15,7 @@ public class Town {
 	Long id;
 	String name;
 	int population;
+//	@OneToMany
 	@OneToMany(mappedBy = "town")
 	Set<Citizen> citizens;
 

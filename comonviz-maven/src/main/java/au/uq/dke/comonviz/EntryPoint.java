@@ -39,7 +39,7 @@ import au.uq.dke.comonviz.ui.StyleManager;
 import ca.uvic.cs.chisel.cajun.constants.LayoutConstants;
 import ca.uvic.cs.chisel.cajun.graph.AbstractGraph;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;
-import database.model.data.bussinesProcessManagement.ProcessActivity;
+import database.model.data.bussinesProcessManagement.Activity;
 import database.model.ontology.OntologyRelationship;
 import database.service.OntologyAxiomService;
 import database.service.OntologyClassService;

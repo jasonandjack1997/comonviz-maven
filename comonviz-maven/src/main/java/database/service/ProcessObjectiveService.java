@@ -1,11 +1,13 @@
 package database.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import database.dao.ProcessObjectiveDAO;
-import database.model.data.bussinesProcessManagement.ProcessObjective;
+import database.model.data.bussinesProcessManagement.Objective;
 
 @Service
-public class ProcessObjectiveService extends GenericService<ProcessObjective, ProcessObjectiveDAO>{
+@Transactional
+public class ProcessObjectiveService extends GenericService<Objective, ProcessObjectiveDAO>{
 
 }

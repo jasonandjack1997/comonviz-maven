@@ -5,27 +5,49 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import database.model.data.DataModel;
 
 @Entity
-public class ProcessActivity extends DataModel {
+public class Activity{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	Long id;
+	
+	String name;
+//	public class ProcessActivity extends DataModel {
 
-	private Set<ProcessObjective> processObjectives = new HashSet<ProcessObjective>(
+	@OneToMany(mappedBy="activity")
+	private Set<Objective> objectives = new HashSet<Objective>(
 			0);
 
-	@OneToMany(fetch = FetchType.LAZY)
-	public Set<ProcessObjective> getProcessObjectives() {
-		return processObjectives;
+	public Long getId() {
+		return id;
 	}
 
-	public void setProcessObjectives(Set<ProcessObjective> processObjective) {
-		this.processObjectives = processObjective;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public int compareTo(ProcessActivity o) {
-		return super.compareTo(o);
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<Objective> getObjectives() {
+		return objectives;
+	}
+
+	public void setObjectives(Set<Objective> processObjective) {
+		this.objectives = processObjective;
 	}
 
 

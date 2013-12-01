@@ -11,8 +11,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import database.model.data.DataModel;
-import database.model.data.bussinesProcessManagement.ProcessActivity;
-import database.model.data.bussinesProcessManagement.ProcessObjective;
+import database.model.data.bussinesProcessManagement.Activity;
+import database.model.data.bussinesProcessManagement.Objective;
 import database.model.data.bussinesProcessManagement.ProcessRule;
 import database.service.GenericService;
 import database.service.ServiceManager;
@@ -48,25 +48,25 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 
 	public static void main(String args[]) throws BeansException, InstantiationException, IllegalAccessException{
 		
-		Class<ProcessActivity> clazz = ProcessActivity.class;
+		Class<Activity> clazz = Activity.class;
 		
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		GenericService service = ServiceManager.getGenericService(clazz);
-		GenericService objectiveService = ServiceManager.getGenericService(ProcessObjective.class);
+		GenericService objectiveService = ServiceManager.getGenericService(Objective.class);
 		
 		
 		//service.deleteAll();
-		ProcessActivity p = (ProcessActivity) service.findAll().get(0);
+		Activity p = (Activity) service.findAll().get(0);
 		
 		
-		ProcessActivity pa1 = new ProcessActivity();
-		Set<?> set = pa1.getProcessObjectives();
+		Activity pa1 = new Activity();
+		Set<?> set = pa1.getObjectives();
 		pa1.setName("process activity 2");
 		
-		ProcessObjective o1 = new ProcessObjective();
+		Objective o1 = new Objective();
 		objectiveService.save(o1);
 		
-		pa1.getProcessObjectives().add(o1);
+		pa1.getObjectives().add(o1);
 		service.save(pa1);
 
 		new GenericDashboardDialog<ProcessRule>(ProcessRule.class);

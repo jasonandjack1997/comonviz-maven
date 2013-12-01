@@ -80,7 +80,7 @@ public class GenericService<Model, DAO extends GenericDAO<Model, Long>> {
 		return dao.findAll();
 	}
 
-	public Model findByName(String name) {
+	public Model findByName(String name, Class<?> clazz) {
 
 		if (name == null)
 			return null;
@@ -88,7 +88,7 @@ public class GenericService<Model, DAO extends GenericDAO<Model, Long>> {
 		Search search = new Search();
 		search.addFilterEqual("name", name);
 
-		for (Field field : this.clazz.getDeclaredFields()) {
+		for (Field field : clazz.getDeclaredFields()) {
 			if (Set.class.isAssignableFrom(field.getType())) {
 				search.addFetch(field.getName());
 			}

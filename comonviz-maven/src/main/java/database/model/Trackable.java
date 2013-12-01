@@ -13,7 +13,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
-import database.model.data.bussinesProcessManagement.ProcessActivity;
+import database.model.data.bussinesProcessManagement.Activity;
 import edu.umd.cs.piccolo.PNode;
 
 @Entity
@@ -21,11 +21,10 @@ import edu.umd.cs.piccolo.PNode;
 public class Trackable{
 	
 
-	private Long id;
-
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	//@Column(name = "STOCK_ID", unique = true, nullable = false)
+	private Long id;
+
 	public Long getId() {
 		return id;
 	}
