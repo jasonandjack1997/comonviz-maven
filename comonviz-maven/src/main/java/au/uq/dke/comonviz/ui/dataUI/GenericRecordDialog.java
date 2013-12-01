@@ -63,7 +63,7 @@ public class GenericRecordDialog extends JDialog {
 		this.dataModel.update(model);
 
 		// update database
-		this.tableUnit.getMainListService().save(model);
+		this.tableUnit.getListService().save(model);
 
 		// update list
 		this.tableUnit.updateDashboard();

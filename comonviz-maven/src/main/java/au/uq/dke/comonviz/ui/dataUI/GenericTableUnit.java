@@ -3,10 +3,11 @@ package au.uq.dke.comonviz.ui.dataUI;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,7 +24,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import au.uq.dke.comonviz.ui.refactor.ListTableModel;
+import au.uq.dke.comonviz.ui.refactor.ListTableModelX;
+import au.uq.dke.comonviz.utils.ReflectionUtil;
 import database.model.data.DataModel;
 import database.model.data.bussinesProcessManagement.ProcessRule;
 import database.service.GenericService;
@@ -35,15 +37,15 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 	private Class<R> clazz;
 	private SwingMetawidget buttonsWidget;
 
-	private ListTableModel<?> mainListTableModel;
+	private ListTableModelX<?> listTableModel;
 	private JTable mainListTable;
 	private JScrollPane mainScrollPane;
-	private GenericService mainListService;
+	private GenericService listService;
 	private JPanel mainListPane;
 
 	@UiHidden
-	public GenericService getMainListService() {
-		return mainListService;
+	public GenericService getListService() {
+		return listService;
 	}
 
 	public GenericTableUnit(Class<R> clazz) {
@@ -52,7 +54,7 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);
 		try {
-			mainListService = ServiceManager.getGenericService(clazz);
+			listService = ServiceManager.getGenericService(clazz);
 		} catch (BeansException e) {
 			e.printStackTrace();
 		}
@@ -63,11 +65,28 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 		buttonsWidget.addWidgetProcessor(new ReflectionBindingProcessor());
 		buttonsWidget.setToInspect(this);
 
-		mainListTableModel = new ListTableModel<R>(clazz,
-				mainListService.findAll(), "name");
+		
+		// before cast to array we should fetch the set members!
 
-		mainListTableModel.setEditable(true);
-		mainListTable = new JTable(mainListTableModel);
+		List<R> results = listService.findAll();
+		
+		List<R> resultsWithSetsObjects = new ArrayList<R>();
+		for(R r : results){
+			DataModel record = r;
+			r = (R) listService.findByName(record.getName(), clazz);
+			resultsWithSetsObjects.add(r);
+		}
+				
+//				for (T t : collection) {
+//			ReflectionUtil.getSetObjectList(mainObject);
+//		}
+
+		
+		listTableModel = new ListTableModelX<R>(clazz,resultsWithSetsObjects
+				);
+
+		listTableModel.setEditable(true);
+		mainListTable = new JTable(listTableModel);
 		mainListTable.setAutoCreateColumnsFromModel(true);
 
 		mainListTable.setDefaultRenderer(Set.class,
@@ -123,7 +142,7 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 	public void edit() {
 
 		@SuppressWarnings("unchecked")
-		R record = (R) this.mainListTableModel.getValueAt(mainListTable
+		R record = (R) this.listTableModel.getValueAt(mainListTable
 				.getSelectedRow());
 		new GenericRecordDialog(this, record).setVisible(true);
 	}
@@ -131,11 +150,11 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 	@SuppressWarnings("unchecked")
 	@UiAction
 	public void delete() {
-		R record = (R) this.mainListTableModel.getValueAt(mainListTable
+		R record = (R) this.listTableModel.getValueAt(mainListTable
 				.getSelectedRow());
 
 		// update database
-		this.mainListService.delete(record);
+		this.listService.delete(record);
 		// update list
 		this.updateDashboard();
 
@@ -143,8 +162,8 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 
 	public void updateDashboard() {
 		// update the main list
-		this.mainListTableModel
-				.importCollection(this.mainListService.findAll());
+		this.listTableModel
+				.importCollection(this.listService.findAll());
 
 	}
 

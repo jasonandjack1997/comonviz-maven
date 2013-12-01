@@ -29,7 +29,7 @@ import database.model.ontology.OntologyAxiom;
 public class RelTypeListDialog extends JDialog {
 
 	private SwingMetawidget ontologyRelTypesMetawidget;
-	private ListTableModel relTypesListTableModel;
+	private ListTableModelX relTypesListTableModel;
 	private JTable relTypesTable;
 	private JScrollPane relTypeScrollPane;
 
@@ -43,7 +43,7 @@ public class RelTypeListDialog extends JDialog {
 				.addWidgetProcessor(new ReflectionBindingProcessor());
 		ontologyRelTypesMetawidget.setToInspect(this);
 
-		relTypesListTableModel = new ListTableModel<OntologyAxiom>(
+		relTypesListTableModel = new ListTableModelX<OntologyAxiom>(
 				OntologyAxiom.class, EntryPoint.getOntologyAxiomService()
 						.findAll(), "name");
 

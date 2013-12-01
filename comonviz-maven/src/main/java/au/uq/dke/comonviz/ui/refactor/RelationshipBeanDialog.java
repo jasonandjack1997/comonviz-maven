@@ -67,7 +67,7 @@ public class RelationshipBeanDialog extends JDialog {
 	private DefaultMutableTreeNode srcTreeNode;
 	private DefaultMutableTreeNode dstTreeNode;
 
-	private ListTableModel relTypesListTableModel;
+	private ListTableModelX relTypesListTableModel;
 	private JTable relTypesTable;
 	private JScrollPane relTypeScrollPane;
 
@@ -115,7 +115,7 @@ public class RelationshipBeanDialog extends JDialog {
 		JScrollPane dstJScrollPane = new JScrollPane(dstJTree);
 		dstJScrollPane.setPreferredSize(new Dimension(200, 400));
 
-		relTypesListTableModel = new ListTableModel<OntologyAxiom>(
+		relTypesListTableModel = new ListTableModelX<OntologyAxiom>(
 				OntologyAxiom.class, EntryPoint.getOntologyAxiomService()
 						.findAll(), "name");
 

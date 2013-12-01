@@ -25,7 +25,7 @@ import database.model.ontology.OntologyRelationship;
 public class RelationshipListDialog extends JDialog{
 
 	private SwingMetawidget relationshipMetawidget;
-	private ListTableModel relationshipListTableModel;
+	private ListTableModelX relationshipListTableModel;
 	private JTable relationshipTable;
 	private JScrollPane relTypeScrollPane;
 	
@@ -42,7 +42,7 @@ public class RelationshipListDialog extends JDialog{
 
 		
 		
-		relationshipListTableModel = new ListTableModel<OntologyRelationship>(OntologyRelationship.class, EntryPoint.getOntologyRelationshipService().findAll(), "sourceName", "name","destinationName");
+		relationshipListTableModel = new ListTableModelX<OntologyRelationship>(OntologyRelationship.class, EntryPoint.getOntologyRelationshipService().findAll(), "sourceName", "name","destinationName");
 		
 		relTypeScrollPane = (JScrollPane) this.createResultsSection();
 		this.add(relTypeScrollPane, BorderLayout.CENTER);

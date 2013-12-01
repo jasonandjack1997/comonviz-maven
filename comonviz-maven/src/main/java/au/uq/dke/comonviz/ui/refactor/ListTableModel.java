@@ -29,9 +29,8 @@
 
 package au.uq.dke.comonviz.ui.refactor;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -39,18 +38,8 @@ import javax.swing.table.AbstractTableModel;
 import org.metawidget.util.ClassUtils;
 import org.metawidget.util.CollectionUtils;
 
-import database.model.data.DataModel;
 
-/**
- * TableModel for Lists of Objects.
- * <p>
- * As well as wrapping Lists of Objects, <code>ListTableModel</code> supports dynamically adding a
- * blank row to the model to accomodate entering new Objects.
- *
- * @author Richard Kennard
- */
-
-public class ListTableModel<T>
+public class ListTableModel<T extends Comparable<T>>
 	extends AbstractTableModel {
 
 	//
@@ -58,8 +47,6 @@ public class ListTableModel<T>
 	//
 
 	private Class<T>			mClass;
-	
-	private List<Class<?>>				mFKClassList;
 
 	private List<T>				mList;
 
@@ -76,14 +63,6 @@ public class ListTableModel<T>
 	public ListTableModel( Class<T> clazz, Collection<T> collection, String... columns ) {
 
 		mClass = clazz;
-		mFKClassList  = new ArrayList();
-		//mClass.getDeclaredFields();
-		
-		for(Field field:clazz.getDeclaredFields()){
-			if(DataModel.class.isAssignableFrom(field.getDeclaringClass())){
-				mFKClassList.add(field.getClass());
-			}
-		}
 		mColumns = columns;
 
 		importCollection( collection );
@@ -109,15 +88,9 @@ public class ListTableModel<T>
 			mList = CollectionUtils.newArrayList();
 		} else {
 			mList = CollectionUtils.newArrayList( collection );
-			//Collections.sort(mList );
+			Collections.sort( mList );
 		}
 
-		fireTableDataChanged();
-	}
-	
-	public void addRecord(T record){
-		mList.add(record);
-		
 		fireTableDataChanged();
 	}
 
