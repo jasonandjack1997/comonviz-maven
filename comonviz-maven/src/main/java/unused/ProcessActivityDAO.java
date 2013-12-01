@@ -1,8 +1,8 @@
-package database.dao;
+package unused;
 
 import org.springframework.stereotype.Repository;
 
-import database.model.data.bussinesProcessManagement.Activity;
+import database.dao.BaseDAO;
 
 @Repository
 public class ProcessActivityDAO extends BaseDAO<Activity, Long>{

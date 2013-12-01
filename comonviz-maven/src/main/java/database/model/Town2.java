@@ -9,31 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import database.model.data.DataModel;
+
 @Entity
-public class Town {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id;
-	String name;
+public class Town2 extends DataModel {
 	int population;
 	@OneToMany(mappedBy = "town")
-	Set<Citizen> citizens = new HashSet<Citizen>();
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	Set<Citizen2> citizens = new HashSet<Citizen2>();
 
 	public int getPopulation() {
 		return population;
@@ -43,18 +25,21 @@ public class Town {
 		this.population = population;
 	}
 
-	public Set<Citizen> getCitizens() {
+	public Set<Citizen2> getCitizens() {
 		return citizens;
 	}
 
-	public void setCitizens(Set<Citizen> citizens) {
+	public void setCitizens(Set<Citizen2> citizens) {
 		this.citizens = citizens;
 	}
-	
-	public Town() {}
-	
-	public Town(String name, Integer population) {
-		this.name = name;
+
+	public Town2() {
+		int a = 1;
+
+	}
+
+	public Town2(String name, Integer population) {
+		this.setName(name);
 		this.population = population;
 	}
 }

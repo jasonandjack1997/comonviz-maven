@@ -29,6 +29,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import uk.ac.manchester.cs.bhig.util.MutableTree;
+import unused.Activity;
+import unused.ProcessActivityService;
 import au.uq.dke.comonviz.actions.LayoutAction;
 import au.uq.dke.comonviz.filter.FilterManager;
 import au.uq.dke.comonviz.handler.NodeExpandCollapseListener;
@@ -39,13 +41,10 @@ import au.uq.dke.comonviz.ui.StyleManager;
 import ca.uvic.cs.chisel.cajun.constants.LayoutConstants;
 import ca.uvic.cs.chisel.cajun.graph.AbstractGraph;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;
-import database.model.data.bussinesProcessManagement.Activity;
 import database.model.ontology.OntologyRelationship;
 import database.service.OntologyAxiomService;
 import database.service.OntologyClassService;
 import database.service.OntologyRelationshipService;
-import database.service.ProcessActivityService;
-import database.service.ProcessActivityService;
 
 public class EntryPoint {
 	private final String dataBaseFileName = "database.h2.db";

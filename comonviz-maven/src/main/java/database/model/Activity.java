@@ -1,6 +1,5 @@
 package database.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -9,15 +8,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+
 @Entity
-public class Town {
+public class Activity {
+	public Activity() {
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
+	
 	String name;
-	int population;
-	@OneToMany(mappedBy = "town")
-	Set<Citizen> citizens = new HashSet<Citizen>();
+	
+	@OneToMany (mappedBy = "activity")
+	Set<Objective> objectives;
 
 	public Long getId() {
 		return id;
@@ -35,26 +39,13 @@ public class Town {
 		this.name = name;
 	}
 
-	public int getPopulation() {
-		return population;
+	public Set<Objective> getObjectives() {
+		return objectives;
 	}
 
-	public void setPopulation(int population) {
-		this.population = population;
-	}
-
-	public Set<Citizen> getCitizens() {
-		return citizens;
-	}
-
-	public void setCitizens(Set<Citizen> citizens) {
-		this.citizens = citizens;
+	public void setObjectives(Set<Objective> objectives) {
+		this.objectives = objectives;
 	}
 	
-	public Town() {}
-	
-	public Town(String name, Integer population) {
-		this.name = name;
-		this.population = population;
-	}
+
 }

@@ -1,13 +1,10 @@
-package database.model.data.bussinesProcessManagement;
+package unused;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-
-import database.model.data.DataModel;
 
 
 @Entity
@@ -19,7 +16,16 @@ public class Objective{
 	Long id;
 
 	@ManyToOne
+	//Town town;
 	Activity activity;
+
+//	public Town getTown() {
+//		return town;
+//	}
+//
+//	public void setTown(Town town) {
+//		this.town = town;
+//	}
 
 	public Long getId() {
 		return id;

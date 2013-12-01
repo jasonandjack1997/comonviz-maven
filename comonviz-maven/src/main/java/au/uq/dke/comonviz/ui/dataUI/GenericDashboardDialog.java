@@ -10,9 +10,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import unused.Activity;
+import unused.Objective;
 import database.model.data.DataModel;
-import database.model.data.bussinesProcessManagement.Activity;
-import database.model.data.bussinesProcessManagement.Objective;
 import database.model.data.bussinesProcessManagement.ProcessRule;
 import database.service.GenericService;
 import database.service.ServiceManager;

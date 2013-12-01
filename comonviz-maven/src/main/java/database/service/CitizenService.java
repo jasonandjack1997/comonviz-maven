@@ -1,17 +1,11 @@
 package database.service;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+import database.dao.CitizenDAO;
 import database.model.Citizen;
 
+@Service
+public class CitizenService extends GenericService<Citizen, CitizenDAO>{
 
-public interface CitizenService {
-
-	public void save(Citizen citizen);
-
-	public List<Citizen> findAll();
-
-	public Citizen findByName(String name);
-
-	public void flush();
 }

@@ -1,10 +1,9 @@
-package database.service;
+package unused;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import database.dao.ProcessObjectiveDAO;
-import database.model.data.bussinesProcessManagement.Objective;
+import database.service.GenericService;
 
 @Service
 @Transactional
