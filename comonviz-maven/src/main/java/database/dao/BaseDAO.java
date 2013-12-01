@@ -21,7 +21,7 @@ import com.googlecode.genericdao.dao.hibernate.GenericDAOImpl;
  * 
  * @author dwolverton
  */
-public class BaseDAO<T, ID extends Serializable> extends MyGenericDAOImpl<T, ID> {
+public class BaseDAO<T, ID extends Serializable> extends GenericDAOImpl<T, ID> {
 
 	@Autowired
 	@Override
