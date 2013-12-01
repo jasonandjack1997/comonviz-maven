@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import database.model.Activity;
-import database.model.Objective;
+import database.model.data.bussinesProcessManagement.ProcessActivity;
+import database.model.data.bussinesProcessManagement.ProcessObjective;
 
 public class TestOneToManyMappingUsingGenericService {
 
@@ -22,12 +22,12 @@ public class TestOneToManyMappingUsingGenericService {
 		activityService = (ActivityService) ctx.getBean("activityService");
 		objectiveService = (ObjectiveService) ctx.getBean("objectiveService");
 
-		Activity activity1 = new Activity();
+		ProcessActivity activity1 = new ProcessActivity();
 		activity1.setName("activity 1");
-		activity1.setObjectives(new HashSet<Objective>());
+		activity1.setObjectives(new HashSet<ProcessObjective>());
 		activityService.save(activity1);
 
-		Objective objective1 = new Objective();
+		ProcessObjective objective1 = new ProcessObjective();
 		objective1.setName("objective 1");
 		objective1.setActivity(activity1);
 		activity1.getObjectives().add(objective1);
@@ -35,13 +35,13 @@ public class TestOneToManyMappingUsingGenericService {
 
 		objectiveService.save(objective1);
 
-		for (Activity activity : activityService.findAll()) {
+		for (ProcessActivity activity : activityService.findAll()) {
 			activity = activityService.findByName(activity.getName(),
 					activity.getClass());
 			int a = 1;
 		}
 
-		List<Objective> objectives = objectiveService.findAll();
+		List<ProcessObjective> objectives = objectiveService.findAll();
 
 		return;
 

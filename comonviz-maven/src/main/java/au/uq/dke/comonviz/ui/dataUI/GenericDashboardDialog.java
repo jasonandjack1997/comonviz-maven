@@ -48,22 +48,22 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 
 	public static void main(String args[]) throws BeansException, InstantiationException, IllegalAccessException{
 		
-		Class<Activity> clazz = Activity.class;
+		Class<ProcessActivity> clazz = ProcessActivity.class;
 		
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		GenericService service = ServiceManager.getGenericService(clazz);
-		GenericService objectiveService = ServiceManager.getGenericService(Objective.class);
+		GenericService objectiveService = ServiceManager.getGenericService(ProcessObjective.class);
 		
 		
 		//service.deleteAll();
-		Activity p = (Activity) service.findAll().get(0);
+		ProcessActivity p = (ProcessActivity) service.findAll().get(0);
 		
 		
-		Activity pa1 = new Activity();
+		ProcessActivity pa1 = new ProcessActivity();
 		Set<?> set = pa1.getObjectives();
 		pa1.setName("process activity 2");
 		
-		Objective o1 = new Objective();
+		ProcessObjective o1 = new ProcessObjective();
 		objectiveService.save(o1);
 		
 		pa1.getObjectives().add(o1);
