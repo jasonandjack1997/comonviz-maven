@@ -52,7 +52,7 @@ import au.uq.dke.comonviz.utils.ReflectionUtil;
  * @author Richard Kennard
  */
 
-public class ListTableModelX<T> extends AbstractTableModel {
+public class MainListTableMode<T> extends AbstractTableModel {
 
 	//
 	// Private members
@@ -74,7 +74,7 @@ public class ListTableModelX<T> extends AbstractTableModel {
 	// Constructor
 	//
 
-	public ListTableModelX(Class<T> clazz, Collection<T> collection) {
+	public MainListTableMode(Class<T> clazz, Collection<T> collection) {
 
 		mClass = clazz;
 		mFKClassList = new ArrayList();
@@ -253,7 +253,11 @@ public class ListTableModelX<T> extends AbstractTableModel {
 			// then just return the name of the element. so easy
 
 			List<Set<?>> setObjectList = ReflectionUtil.getSetObjectList(t);
-			return setObjectList.get(columnIndex - 2).toArray()[0];
+			Set<?> set = setObjectList.get(columnIndex - 2);
+			if(set == null || set.size() == 0){
+				return null;
+			}
+			return set.toArray()[0];
 
 		}
 

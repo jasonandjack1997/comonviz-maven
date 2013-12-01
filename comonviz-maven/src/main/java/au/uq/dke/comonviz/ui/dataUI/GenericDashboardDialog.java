@@ -32,8 +32,8 @@ public class GenericDashboardDialog<R extends DataModel> extends JFrame {
 
 		//this.setModalityType(ModalityType.APPLICATION_MODAL);
 
-		GenericTableUnit tableUnit = new GenericTableUnit(clazz);
-		GenericTableUnit tableUnit2 = new GenericTableUnit(clazz);
+		BasicTableUnit tableUnit = new BasicTableUnit(clazz);
+		BasicTableUnit tableUnit2 = new BasicTableUnit(clazz);
 		this.add(tableUnit, BorderLayout.CENTER);
 		this.add(tableUnit2, BorderLayout.SOUTH);
 		this.pack();

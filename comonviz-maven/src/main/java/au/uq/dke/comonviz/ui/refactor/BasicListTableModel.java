@@ -39,7 +39,7 @@ import org.metawidget.util.ClassUtils;
 import org.metawidget.util.CollectionUtils;
 
 
-public class ListTableModel<T extends Comparable<T>>
+public class BasicListTableModel<T extends Comparable<T>>
 	extends AbstractTableModel {
 
 	//
@@ -60,7 +60,7 @@ public class ListTableModel<T extends Comparable<T>>
 	// Constructor
 	//
 
-	public ListTableModel( Class<T> clazz, Collection<T> collection, String... columns ) {
+	public BasicListTableModel( Class<T> clazz, Collection<T> collection, String... columns ) {
 
 		mClass = clazz;
 		mColumns = columns;

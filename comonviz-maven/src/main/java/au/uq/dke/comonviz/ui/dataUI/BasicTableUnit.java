@@ -24,20 +24,21 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import au.uq.dke.comonviz.ui.refactor.ListTableModelX;
+import au.uq.dke.comonviz.ui.refactor.MainListTableMode;
 import au.uq.dke.comonviz.utils.ReflectionUtil;
 import database.model.data.DataModel;
+import database.model.data.bussinesProcessManagement.ProcessObjective;
 import database.model.data.bussinesProcessManagement.ProcessRule;
 import database.service.GenericService;
 import database.service.ServiceManager;
 
-public class GenericTableUnit<R extends DataModel> extends JPanel {
+public class BasicTableUnit<R extends DataModel> extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private Class<R> clazz;
 	private SwingMetawidget buttonsWidget;
 
-	private ListTableModelX<?> listTableModel;
+	private MainListTableMode<?> listTableModel;
 	private JTable mainListTable;
 	private JScrollPane mainScrollPane;
 	private GenericService listService;
@@ -48,7 +49,7 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 		return listService;
 	}
 
-	public GenericTableUnit(Class<R> clazz) {
+	public BasicTableUnit(Class<R> clazz) {
 
 		this.clazz = clazz;
 		this.setLayout(new BorderLayout());
@@ -82,7 +83,7 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 //		}
 
 		
-		listTableModel = new ListTableModelX<R>(clazz,resultsWithSetsObjects
+		listTableModel = new MainListTableMode<R>(clazz,resultsWithSetsObjects
 				);
 
 		listTableModel.setEditable(true);
@@ -156,11 +157,13 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 		// update database
 		this.listService.delete(record);
 		// update list
-		this.updateDashboard();
+		this.updateTable();
+		List a = ServiceManager.getGenericService(ProcessObjective.class).findAll();
+		return;
 
 	}
 
-	public void updateDashboard() {
+	public void updateTable() {
 		// update the main list
 		this.listTableModel
 				.importCollection(this.listService.findAll());
@@ -182,7 +185,7 @@ public class GenericTableUnit<R extends DataModel> extends JPanel {
 		service.save(pr1);
 
 		JDialog dlg = new JDialog();
-		dlg.add(new GenericTableUnit<ProcessRule>(ProcessRule.class));
+		dlg.add(new BasicTableUnit<ProcessRule>(ProcessRule.class));
 		dlg.pack();
 		dlg.setVisible(true);
 		ctx.close();

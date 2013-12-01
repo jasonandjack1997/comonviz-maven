@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 import javax.swing.JFrame;
 
-import au.uq.dke.comonviz.ui.dataUI.GenericTableUnit;
+import au.uq.dke.comonviz.ui.dataUI.BasicTableUnit;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 import database.model.data.bussinesProcessManagement.ProcessObjective;
 import database.service.ProcessActivityService;
@@ -32,7 +32,7 @@ public class ListTableWithFKEntitySupportTest {
 
 		objectiveService.save(objective1);
 		
-		GenericTableUnit tableUnit1 = new GenericTableUnit(activity1.getClass());
+		BasicTableUnit tableUnit1 = new BasicTableUnit(activity1.getClass());
 		
 		JFrame jFrame = new JFrame();
 		jFrame.add(tableUnit1);

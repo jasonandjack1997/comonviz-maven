@@ -5,6 +5,9 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import database.model.data.DataModel;
 
 
@@ -14,6 +17,7 @@ public class ProcessActivity extends DataModel {
 	}
 
 	@OneToMany (mappedBy = "activity")
+	@OnDelete(action=OnDeleteAction.CASCADE)
 	Set<ProcessObjective> objectives;
 
 
