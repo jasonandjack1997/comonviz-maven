@@ -11,16 +11,19 @@ import database.model.data.bussinesProcessManagement.ProcessObjective;
 
 public class TestOneToManyMappingUsingGenericService {
 
-	private static ActivityService activityService;
-	private static ObjectiveService objectiveService;
+	private static ProcessActivityService activityService;
+	private static ProcessObjectiveService objectiveService;
 
 	public static void main(String args[]) {
 
-		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"applicationContext.xml");
+//		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
+//				"applicationContext.xml");
+//
+//		activityService = (ProcessActivityService) ctx.getBean("activityService");
+//		objectiveService = (ProcessObjectiveService) ctx.getBean("objectiveService");
 
-		activityService = (ActivityService) ctx.getBean("activityService");
-		objectiveService = (ObjectiveService) ctx.getBean("objectiveService");
+		activityService = (ProcessActivityService) ServiceManager.getService(ProcessActivity.class);
+		objectiveService = (ProcessObjectiveService) ServiceManager.getService(ProcessObjective.class);
 
 		ProcessActivity activity1 = new ProcessActivity();
 		activity1.setName("activity 1");

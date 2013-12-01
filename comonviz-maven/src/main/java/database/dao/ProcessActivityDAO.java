@@ -6,6 +6,6 @@ import database.dao.BaseDAO;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 
 @Repository
-public class ActivityDAO extends BaseDAO<ProcessActivity, Long>{
+public class ProcessActivityDAO extends BaseDAO<ProcessActivity, Long>{
 
 }
