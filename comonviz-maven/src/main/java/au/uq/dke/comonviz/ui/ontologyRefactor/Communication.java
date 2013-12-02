@@ -27,7 +27,7 @@
 // OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package au.uq.dke.comonviz.ui.refactor;
+package au.uq.dke.comonviz.ui.ontologyRefactor;
 
 import java.io.Serializable;
 

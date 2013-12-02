@@ -6,10 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import database.model.data.DataModel;
+import database.model.data.BasicRecord;
 
 @Entity
-public class ProcessObjective extends DataModel {
+public class ProcessObjective extends BasicRecord {
 
 	@ManyToOne
 	ProcessActivity activity;

@@ -1,4 +1,4 @@
-package au.uq.dke.comonviz.ui.refactor;
+package au.uq.dke.comonviz.ui.ontologyRefactor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -24,12 +24,13 @@ import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBinding
 import org.metawidget.util.CollectionUtils;
 
 import au.uq.dke.comonviz.EntryPoint;
+import au.uq.dke.comonviz.ui.data.tableModel.PKRecordListTableMode;
 import database.model.ontology.OntologyAxiom;
 
 public class RelTypeListDialog extends JDialog {
 
 	private SwingMetawidget ontologyRelTypesMetawidget;
-	private MainListTableMode relTypesListTableModel;
+	private PKRecordListTableMode relTypesListTableModel;
 	private JTable relTypesTable;
 	private JScrollPane relTypeScrollPane;
 
@@ -43,7 +44,7 @@ public class RelTypeListDialog extends JDialog {
 				.addWidgetProcessor(new ReflectionBindingProcessor());
 		ontologyRelTypesMetawidget.setToInspect(this);
 
-		relTypesListTableModel = new MainListTableMode<OntologyAxiom>(
+		relTypesListTableModel = new PKRecordListTableMode<OntologyAxiom>(
 				OntologyAxiom.class, EntryPoint.getOntologyAxiomService()
 						.findAll(), "name");
 

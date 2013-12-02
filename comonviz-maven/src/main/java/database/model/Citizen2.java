@@ -6,11 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import database.model.data.DataModel;
+import database.model.data.BasicRecord;
 
 
 @Entity
-public class Citizen2 extends DataModel {
+public class Citizen2 extends BasicRecord {
 	String job;
 	@ManyToOne
 	Town2 town;

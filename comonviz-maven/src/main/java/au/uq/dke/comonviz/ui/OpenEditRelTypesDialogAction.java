@@ -10,8 +10,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import au.uq.dke.comonviz.EntryPoint;
 import au.uq.dke.comonviz.actions.CajunAction;
-import au.uq.dke.comonviz.ui.refactor.ClassesListDialog;
-import au.uq.dke.comonviz.ui.refactor.RelTypeListDialog;
+import au.uq.dke.comonviz.ui.ontologyRefactor.ClassesListDialog;
+import au.uq.dke.comonviz.ui.ontologyRefactor.RelTypeListDialog;
 import ca.uvic.cs.chisel.cajun.resources.ResourceHandler;
 
 public class OpenEditRelTypesDialogAction extends CajunAction {

@@ -1,9 +1,12 @@
-package au.uq.dke.comonviz.ui.dataUI;
+package au.uq.dke.comonviz.ui.data.recordDialog;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import org.metawidget.inspector.annotation.UiAction;
@@ -12,27 +15,34 @@ import org.metawidget.swing.SwingMetawidget;
 import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessor;
 import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessorConfig;
 import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBindingProcessor;
+import org.springframework.ui.Model;
 
-import au.uq.dke.comonviz.EntryPoint;
-import database.model.data.DataModel;
-import database.model.ontology.OntologyAxiom;
+import au.uq.dke.comonviz.ui.data.panel.BasicTablePanel;
+import au.uq.dke.comonviz.ui.data.tableModel.BasicListTableModel;
+import au.uq.dke.comonviz.utils.ReflectionUtil;
+import database.model.data.BasicRecord;
 
-public class GenericRecordDialogDebug extends JDialog {
+public class BasicBeanDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
-	private GenericDashboardDialog dashboard;
-	private DataModel dataModel;
+	private BasicTablePanel tablePanel;
+	private BasicRecord dataModel;
 	private SwingMetawidget modelWidget;
 	private SwingMetawidget buttonsWidget;
+	
+	/**
+	 * use by save, if isUpdate, call model#updateRecord(), else call @model#save()
+	 */
+	private boolean isUpdate;
 
-	public GenericRecordDialogDebug(GenericDashboardDialog dashboard,
-			DataModel dataModel) {
-		
+	public BasicBeanDialog(BasicTablePanel basicTablePanel, BasicRecord dataModel, boolean isUpdate) {
+
 		this.setModalityType(ModalityType.APPLICATION_MODAL);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setTitle(this.getClass().getSimpleName());
 
-		this.dashboard = dashboard;
+		this.tablePanel = basicTablePanel;
 		this.dataModel = dataModel;
+		this.isUpdate = isUpdate;
 
 		modelWidget = new SwingMetawidget();
 		modelWidget.addWidgetProcessor(new BeansBindingProcessor(
@@ -59,15 +69,17 @@ public class GenericRecordDialogDebug extends JDialog {
 		// update bean
 		modelWidget.getWidgetProcessor(BeansBindingProcessor.class).save(
 				modelWidget);
-		DataModel model = modelWidget.getToInspect();
+		BasicRecord model = modelWidget.getToInspect();
 		this.dataModel.update(model);
 
-		// update database
-		this.dashboard.getListService().save(model);
-
-		// update list
-		this.dashboard.updateDashboard();
-
+		if(this.isUpdate){
+			// update old record
+			((BasicListTableModel)this.tablePanel.getTable().getModel()).updateRecord(dataModel);
+		} else{
+			// add new record
+			((BasicListTableModel)this.tablePanel.getTable().getModel()).add(dataModel);
+		}
+		
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
@@ -84,10 +96,10 @@ public class GenericRecordDialogDebug extends JDialog {
 		this.dispose();
 
 	}
+	
+	public SwingMetawidget getModelWidget() {
+		return modelWidget;
+	}
 
-//	public static void main(String args[]) {
-//
-//		new GenericRecordDialogDebug(null, null);
-//		return;
-//	}
+
 }

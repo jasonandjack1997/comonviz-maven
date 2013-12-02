@@ -1,4 +1,4 @@
-package au.uq.dke.comonviz.ui.refactor;
+package au.uq.dke.comonviz.ui.ontologyRefactor;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -38,6 +38,7 @@ import au.uq.dke.comonviz.graph.arc.DefaultGraphArc;
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import au.uq.dke.comonviz.treeUtils.JTreeUtil;
 import au.uq.dke.comonviz.treeUtils.MutableTreeNodeUtil;
+import au.uq.dke.comonviz.ui.data.tableModel.PKRecordListTableMode;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import database.model.ontology.OntologyAxiom;
 import database.model.ontology.OntologyClass;
@@ -67,7 +68,7 @@ public class RelationshipBeanDialog extends JDialog {
 	private DefaultMutableTreeNode srcTreeNode;
 	private DefaultMutableTreeNode dstTreeNode;
 
-	private MainListTableMode relTypesListTableModel;
+	private PKRecordListTableMode relTypesListTableModel;
 	private JTable relTypesTable;
 	private JScrollPane relTypeScrollPane;
 
@@ -115,7 +116,7 @@ public class RelationshipBeanDialog extends JDialog {
 		JScrollPane dstJScrollPane = new JScrollPane(dstJTree);
 		dstJScrollPane.setPreferredSize(new Dimension(200, 400));
 
-		relTypesListTableModel = new MainListTableMode<OntologyAxiom>(
+		relTypesListTableModel = new PKRecordListTableMode<OntologyAxiom>(
 				OntologyAxiom.class, EntryPoint.getOntologyAxiomService()
 						.findAll(), "name");
 

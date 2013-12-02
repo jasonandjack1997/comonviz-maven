@@ -3,11 +3,11 @@ package database.model.data.bussinesProcessManagement;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-import database.model.data.DataModel;
+import database.model.data.BasicRecord;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "ID")
-public class ProcessRule extends DataModel {
+public class ProcessRule extends BasicRecord {
 	
 	private int level;
 

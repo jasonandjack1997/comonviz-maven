@@ -9,10 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import database.model.data.DataModel;
+import database.model.data.BasicRecord;
 
 @Entity
-public class Town2 extends DataModel {
+public class Town2 extends BasicRecord {
 	int population;
 	@OneToMany(mappedBy = "town")
 	Set<Citizen2> citizens = new HashSet<Citizen2>();

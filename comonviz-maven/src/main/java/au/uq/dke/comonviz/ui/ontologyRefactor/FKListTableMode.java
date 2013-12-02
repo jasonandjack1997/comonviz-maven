@@ -27,7 +27,7 @@
 // OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package au.uq.dke.comonviz.ui.refactor;
+package au.uq.dke.comonviz.ui.ontologyRefactor;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -42,17 +42,7 @@ import org.metawidget.util.CollectionUtils;
 
 import au.uq.dke.comonviz.utils.ReflectionUtil;
 
-/**
- * TableModel for Lists of Objects.
- * <p>
- * As well as wrapping Lists of Objects, <code>ListTableModel</code> supports
- * dynamically adding a blank row to the model to accomodate entering new
- * Objects.
- * 
- * @author Richard Kennard
- */
-
-public class MainListTableMode<T> extends AbstractTableModel {
+public class FKListTableMode<T> extends AbstractTableModel {
 
 	//
 	// Private members
@@ -74,7 +64,7 @@ public class MainListTableMode<T> extends AbstractTableModel {
 	// Constructor
 	//
 
-	public MainListTableMode(Class<T> clazz, Collection<T> collection) {
+	public FKListTableMode(Class<T> clazz, Collection<T> collection) {
 
 		mClass = clazz;
 		mFKClassList = new ArrayList();
@@ -253,11 +243,7 @@ public class MainListTableMode<T> extends AbstractTableModel {
 			// then just return the name of the element. so easy
 
 			List<Set<?>> setObjectList = ReflectionUtil.getSetObjectList(t);
-			Set<?> set = setObjectList.get(columnIndex - 2);
-			if(set == null || set.size() == 0){
-				return null;
-			}
-			return set.toArray()[0];
+			return setObjectList.get(columnIndex - 2).toArray()[0];
 
 		}
 

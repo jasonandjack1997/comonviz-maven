@@ -8,11 +8,11 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import database.model.data.DataModel;
+import database.model.data.BasicRecord;
 
 
 @Entity
-public class ProcessActivity extends DataModel {
+public class ProcessActivity extends BasicRecord {
 	public ProcessActivity() {
 	}
 

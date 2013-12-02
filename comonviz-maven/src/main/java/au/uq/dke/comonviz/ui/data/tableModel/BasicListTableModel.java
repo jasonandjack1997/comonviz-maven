@@ -27,26 +27,43 @@
 // OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package au.uq.dke.comonviz.ui.refactor;
+package au.uq.dke.comonviz.ui.data.tableModel;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.JDialog;
 import javax.swing.table.AbstractTableModel;
 
 import org.metawidget.util.ClassUtils;
 import org.metawidget.util.CollectionUtils;
 
+import database.model.data.BasicRecord;
+import database.model.data.bussinesProcessManagement.ProcessObjective;
+import database.service.GenericService;
+import database.service.ServiceManager;
 
-public class BasicListTableModel<T extends Comparable<T>>
+
+public class BasicListTableModel<T extends BasicRecord>
 	extends AbstractTableModel {
 
 	//
 	// Private members
 	//
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Class<T>			mClass;
+	
+	private GenericService service;
+
+	public Class<T> getmClass() {
+		return mClass;
+	}
 
 	private List<T>				mList;
 
@@ -60,11 +77,17 @@ public class BasicListTableModel<T extends Comparable<T>>
 	// Constructor
 	//
 
-	public BasicListTableModel( Class<T> clazz, Collection<T> collection, String... columns ) {
-
+	public BasicListTableModel(){
+		
+	}
+	public BasicListTableModel( Class<T> clazz) {
 		mClass = clazz;
-		mColumns = columns;
-
+		service = ServiceManager.getGenericService(mClass);
+	}
+	
+	public void init(String... columns ){
+		setmColumns(columns);
+		Collection collection = service.findAll();
 		importCollection( collection );
 	}
 
@@ -81,6 +104,34 @@ public class BasicListTableModel<T extends Comparable<T>>
 		
 		return -1;
 	}
+	
+	public void add(T record) {
+		mList.add(record);
+		//database save
+		service.save(record);
+	}
+		
+
+	public void updateRecord(T newRecord){
+		//search for the old record using id;
+		for(T record : this.mList){
+			if(record.getId().equals(newRecord.getId())){
+				//update the record(assigne all the fields)
+				record.update(newRecord);
+				//database save
+				service.save(record);
+			}
+		}
+		
+	}
+	public void delete(T record) {
+
+		mList.remove(record);
+		//database remove
+		service.delete(record);
+	}
+	
+
 
 	public void importCollection( Collection<T> collection ) {
 
@@ -119,7 +170,7 @@ public class BasicListTableModel<T extends Comparable<T>>
 
 		// (mColumns can never be null)
 
-		return mColumns.length;
+		return getmColumns().length;
 	}
 
 	@Override
@@ -129,7 +180,7 @@ public class BasicListTableModel<T extends Comparable<T>>
 			return null;
 		}
 
-		return mColumns[columnIndex];
+		return getmColumns()[columnIndex];
 	}
 
 	public int getRowCount() {
@@ -225,4 +276,15 @@ public class BasicListTableModel<T extends Comparable<T>>
 
 		ClassUtils.setProperty( t, getColumnName( columnIndex ), value );
 	}
+	
+	public GenericService getService() {
+		return service;
+	}
+	public String[] getmColumns() {
+		return mColumns;
+	}
+	public void setmColumns(String[] mColumns) {
+		this.mColumns = mColumns;
+	}
+
 }

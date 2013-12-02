@@ -9,7 +9,7 @@ import database.model.Trackable;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class DataModel extends Trackable implements Comparable<DataModel>{
+public class BasicRecord extends Trackable implements Comparable<BasicRecord>{
 
 	@Column(columnDefinition = "TEXT")
 	private String discription = "";
@@ -23,7 +23,7 @@ public class DataModel extends Trackable implements Comparable<DataModel>{
 	}
 
 	@Override
-	public int compareTo(DataModel o) {
+	public int compareTo(BasicRecord o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

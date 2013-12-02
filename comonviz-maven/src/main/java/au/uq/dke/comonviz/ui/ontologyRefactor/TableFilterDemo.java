@@ -1,4 +1,4 @@
-package au.uq.dke.comonviz.ui.refactor;
+package au.uq.dke.comonviz.ui.ontologyRefactor;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
