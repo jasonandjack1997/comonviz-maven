@@ -36,6 +36,7 @@ public class BasicTablePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 
+	@UiHidden
 	public JTable getTable() {
 		return table;
 	}
@@ -45,9 +46,9 @@ public class BasicTablePanel extends JPanel {
 	/**a panel with a scrollable table
 	 * @param mainListTable
 	 */
-	public BasicTablePanel(JTable jTable) {
+	public BasicTablePanel(JTable table) {
 		this.setVisible(true);
-		this.table = jTable;
+		this.table = table;
 		mainScrollPane = new JScrollPane(this.table);
 		this.add(mainScrollPane, BorderLayout.CENTER);
 	}

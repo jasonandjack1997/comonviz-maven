@@ -53,12 +53,12 @@ import database.service.ServiceManager;
  * @author Richard Kennard
  */
 
-public class PKRecordListTableMode<T> extends BasicListTableModel {
+public class PKRecordListTableModel<T> extends BasicListTableModel {
 
 
 	private List<Class<?>> mFKClassList;
 
-	public PKRecordListTableMode(Class<T> clazz) {
+	public PKRecordListTableModel(Class<T> clazz) {
 		super(clazz);
 
 		List<String> columnList = new ArrayList<String>();

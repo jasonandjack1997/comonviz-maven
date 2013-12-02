@@ -11,6 +11,9 @@ public class ProcessRule extends BasicRecord {
 	
 	private int level;
 
+	public ProcessRule(){
+		
+	}
 	public int getLevel() {
 		return level;
 	}

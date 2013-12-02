@@ -24,6 +24,12 @@ public class Trackable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	public Trackable(){
+		
+	}
+	public Trackable(String name){
+		this.setName(name);
+	}
 	public Long getId() {
 		return id;
 	}

@@ -12,9 +12,14 @@ import database.model.data.BasicRecord;
 public class ProcessObjective extends BasicRecord {
 
 	@ManyToOne
-	ProcessActivity activity;
+	public ProcessActivity activity;
+	
+	public ProcessObjective(){
+		
+	}
 
-	public ProcessObjective() {
+	public ProcessObjective(String name){
+		super(name);
 	}
 
 	public ProcessActivity getActivity() {

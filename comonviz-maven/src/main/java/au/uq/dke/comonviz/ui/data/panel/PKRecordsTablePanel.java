@@ -1,5 +1,6 @@
 package au.uq.dke.comonviz.ui.data.panel;
 
+import javax.swing.JFrame;
 import javax.swing.JTable;
 
 import org.metawidget.inspector.annotation.UiAction;
@@ -9,21 +10,19 @@ import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingPro
 import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBindingProcessor;
 
 import au.uq.dke.comonviz.ui.data.recordDialog.PKRecordBeanDialog;
+import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.BasicListTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PKRecordListTableModel;
 import database.model.data.BasicRecord;
+import database.model.data.bussinesProcessManagement.ProcessActivity;
 
-public class EditableTablePanel extends BasicTablePanel {
+public class PKRecordsTablePanel extends ButtonedTablePanel {
 
 	private static final long serialVersionUID = 1L;
-	private SwingMetawidget buttonsWidget;
 
-	public EditableTablePanel(JTable table) {
+	public PKRecordsTablePanel(JTable table) {
 		super(table);
-		buttonsWidget = new SwingMetawidget();
-		buttonsWidget.addWidgetProcessor(new BeansBindingProcessor(
-				new BeansBindingProcessorConfig()));
-		buttonsWidget.addWidgetProcessor(new ReflectionBindingProcessor());
-		buttonsWidget.setToInspect(this);
+		//getButtonsWidget().setToInspect(this);
 	}
 
 	@UiAction
@@ -42,7 +41,6 @@ public class EditableTablePanel extends BasicTablePanel {
 	@UiAction
 	public void edit() {
 
-		@SuppressWarnings("unchecked")
 		BasicRecord record = (BasicRecord) ((BasicListTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
 		new PKRecordBeanDialog(this, record, true);
@@ -56,6 +54,15 @@ public class EditableTablePanel extends BasicTablePanel {
 		((BasicListTableModel<BasicRecord>)this.getTable().getModel()).delete(record);
 		return;
 
+	}
+	
+	public static void main(String args[]) {
+		JFrame frame = new JFrame();
+		JTable table = new BasicTable(new PKRecordListTableModel(ProcessActivity.class));
+		frame.add(new PKRecordsTablePanel(table));
+		frame.pack();
+		frame.setVisible(true);
+		return;
 	}
 
 }

@@ -77,9 +77,6 @@ public class BasicListTableModel<T extends BasicRecord>
 	// Constructor
 	//
 
-	public BasicListTableModel(){
-		
-	}
 	public BasicListTableModel( Class<T> clazz) {
 		mClass = clazz;
 		service = ServiceManager.getGenericService(mClass);

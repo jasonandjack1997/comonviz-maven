@@ -13,6 +13,13 @@ public class BasicRecord extends Trackable implements Comparable<BasicRecord>{
 
 	@Column(columnDefinition = "TEXT")
 	private String discription = "";
+	
+	public BasicRecord(){
+		
+	}
+	public BasicRecord(String name){
+		super(name);
+	}
 
 	public String getDiscription() {
 		return discription;

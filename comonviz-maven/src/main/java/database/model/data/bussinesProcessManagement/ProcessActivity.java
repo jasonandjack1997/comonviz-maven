@@ -1,5 +1,6 @@
 package database.model.data.bussinesProcessManagement;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -15,10 +16,14 @@ import database.model.data.BasicRecord;
 public class ProcessActivity extends BasicRecord {
 	public ProcessActivity() {
 	}
+	
+	public ProcessActivity(String name){
+		super(name);
+	}
 
 	@OneToMany (mappedBy = "activity")
 	@OnDelete(action=OnDeleteAction.CASCADE)
-	Set<ProcessObjective> objectives;
+	public Set<ProcessObjective> objectives =  new HashSet<ProcessObjective>();
 
 
 	public Set<ProcessObjective> getObjectives() {

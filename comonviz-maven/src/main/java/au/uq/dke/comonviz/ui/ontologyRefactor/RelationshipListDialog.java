@@ -20,13 +20,13 @@ import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBinding
 import org.metawidget.util.CollectionUtils;
 
 import au.uq.dke.comonviz.EntryPoint;
-import au.uq.dke.comonviz.ui.data.tableModel.PKRecordListTableMode;
+import au.uq.dke.comonviz.ui.data.tableModel.PKRecordListTableModel;
 import database.model.ontology.OntologyRelationship;
 
 public class RelationshipListDialog extends JDialog{
 
 	private SwingMetawidget relationshipMetawidget;
-	private PKRecordListTableMode relationshipListTableModel;
+	private PKRecordListTableModel relationshipListTableModel;
 	private JTable relationshipTable;
 	private JScrollPane relTypeScrollPane;
 	
@@ -43,7 +43,7 @@ public class RelationshipListDialog extends JDialog{
 
 		
 		
-		relationshipListTableModel = new PKRecordListTableMode<OntologyRelationship>(OntologyRelationship.class, EntryPoint.getOntologyRelationshipService().findAll(), "sourceName", "name","destinationName");
+		relationshipListTableModel = new PKRecordListTableModel<OntologyRelationship>(OntologyRelationship.class, EntryPoint.getOntologyRelationshipService().findAll(), "sourceName", "name","destinationName");
 		
 		relTypeScrollPane = (JScrollPane) this.createResultsSection();
 		this.add(relTypeScrollPane, BorderLayout.CENTER);
