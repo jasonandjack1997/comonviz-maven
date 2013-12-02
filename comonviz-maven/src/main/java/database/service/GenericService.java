@@ -15,9 +15,11 @@ import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.SearchResult;
 
+import database.model.data.BasicRecord;
+
 //@Service
 @Transactional
-public class GenericService<Model, DAO extends GenericDAO<Model, Long>> {
+public class GenericService<Model extends BasicRecord, DAO extends GenericDAO<Model, Long>> {
 
 	DAO dao;
 	Class<?> clazz;
@@ -104,6 +106,9 @@ public class GenericService<Model, DAO extends GenericDAO<Model, Long>> {
 		return dao.search(search);
 	}
 
+	public Model find(Model model){
+		return dao.find(model.getId());
+	}
 	public Model findById(Long id) {
 		return dao.find(id);
 	}

@@ -11,8 +11,8 @@ import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBinding
 
 import au.uq.dke.comonviz.ui.data.recordDialog.PKRecordBeanDialog;
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
-import au.uq.dke.comonviz.ui.data.tableModel.BasicListTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.PKRecordListTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PKRecordsTableModel;
 import database.model.data.BasicRecord;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 
@@ -29,7 +29,7 @@ public class PKRecordsTablePanel extends ButtonedTablePanel {
 	public void add() {
 		BasicRecord newRecord = null;
 		try {
-			newRecord = (BasicRecord) ((BasicListTableModel<?>)this.getTable().getModel()).getmClass().newInstance();
+			newRecord = (BasicRecord) ((BasicTableModel<?>)this.getTable().getModel()).getmClass().newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class PKRecordsTablePanel extends ButtonedTablePanel {
 	@UiAction
 	public void edit() {
 
-		BasicRecord record = (BasicRecord) ((BasicListTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
+		BasicRecord record = (BasicRecord) ((BasicTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
 		new PKRecordBeanDialog(this, record, true);
 	}
@@ -49,16 +49,16 @@ public class PKRecordsTablePanel extends ButtonedTablePanel {
 	@SuppressWarnings("unchecked")
 	@UiAction
 	public void delete() {
-		BasicRecord record = (BasicRecord) ((BasicListTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
+		BasicRecord record = (BasicRecord) ((BasicTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
-		((BasicListTableModel<BasicRecord>)this.getTable().getModel()).delete(record);
+		((BasicTableModel<BasicRecord>)this.getTable().getModel()).delete(record);
 		return;
 
 	}
 	
 	public static void main(String args[]) {
 		JFrame frame = new JFrame();
-		JTable table = new BasicTable(new PKRecordListTableModel(ProcessActivity.class));
+		JTable table = new BasicTable(new PKRecordsTableModel(ProcessActivity.class));
 		frame.add(new PKRecordsTablePanel(table));
 		frame.pack();
 		frame.setVisible(true);

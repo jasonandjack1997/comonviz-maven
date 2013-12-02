@@ -45,7 +45,7 @@ import database.service.GenericService;
 import database.service.ServiceManager;
 
 
-public class BasicListTableModel<T extends BasicRecord>
+public class BasicTableModel<T extends BasicRecord>
 	extends AbstractTableModel {
 
 	//
@@ -77,7 +77,11 @@ public class BasicListTableModel<T extends BasicRecord>
 	// Constructor
 	//
 
-	public BasicListTableModel( Class<T> clazz) {
+	/**only set the clazz and service
+	 * <P>data population is done in {@link #init(String...)}
+	 * @param clazz
+	 */
+	public BasicTableModel( Class<T> clazz) {
 		mClass = clazz;
 		service = ServiceManager.getGenericService(mClass);
 	}

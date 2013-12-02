@@ -32,6 +32,7 @@ public class AssociatedRecordsPanel extends ButtonedTablePanel{
 	@UiAction
 	public void addAssociation(){
 		
+		
 	}
 	
 	@UiAction

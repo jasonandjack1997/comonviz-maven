@@ -6,7 +6,7 @@ import javax.swing.JTable;
 import org.junit.Before;
 import org.junit.Test;
 
-import au.uq.dke.comonviz.ui.data.tableModel.PKRecordListTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PKRecordsTableModel;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 import database.model.data.bussinesProcessManagement.ProcessObjective;
 import database.service.GenericService;
@@ -26,7 +26,7 @@ public class AssociationsChoosePanelTest {
 		objectiveService.save(objective1);
 		objectiveService.save(objective2);
 		
-		JTable table = new JTable(new PKRecordListTableModel(ProcessObjective.class));
+		JTable table = new JTable(new PKRecordsTableModel(ProcessObjective.class));
 		table.setRowSelectionInterval(0, 0);
 		ProcessActivity activity = new ProcessActivity();
 		activity.setName("activity 1");

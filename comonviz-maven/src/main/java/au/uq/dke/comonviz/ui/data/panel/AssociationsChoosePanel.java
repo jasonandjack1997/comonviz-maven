@@ -10,7 +10,7 @@ import javax.swing.JTable;
 import org.metawidget.inspector.annotation.UiAction;
 import org.metawidget.util.ClassUtils;
 
-import au.uq.dke.comonviz.ui.data.tableModel.BasicListTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
 import au.uq.dke.comonviz.utils.ReflectionUtil;
 import database.model.data.BasicRecord;
 
@@ -32,7 +32,7 @@ public class AssociationsChoosePanel extends ButtonedTablePanel{
 		int[] selectedRows = this.getTable().getSelectedRows();
 		List<BasicRecord> selectedRecords = new ArrayList<BasicRecord>();
 		for(int i = 0; i < selectedRows.length; i++){
-			BasicRecord record = ((BasicListTableModel)this.getTable().getModel()).getValueAt(i);
+			BasicRecord record = ((BasicTableModel)this.getTable().getModel()).getValueAt(i);
 			
 			//main record should add selected record to it's set
 			Set<BasicRecord> associatedSet = ReflectionUtil.getSpecificSet(mainRecord, (Class<BasicRecord>)record.getClass());
