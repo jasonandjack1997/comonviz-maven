@@ -2,7 +2,7 @@ package au.uq.dke.comonviz.ui.data.tableModel;
 
 import database.model.data.BasicRecord;
 
-public class UnAssociatedRecordsTableModel extends BasicTableModel{
+public class UnAssociatedRecordsTableModel extends ServiceTableModel{
 
 	/**
 	 * this model is to display the unAssociated fk records

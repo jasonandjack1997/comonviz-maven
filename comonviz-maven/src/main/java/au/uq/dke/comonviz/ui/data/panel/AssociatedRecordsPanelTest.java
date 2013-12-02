@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import au.uq.dke.comonviz.ui.data.tableModel.AssociatedRecordsTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.PKRecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PrimeryRecordsTableModel;
 import database.model.data.BasicRecord;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 import database.model.data.bussinesProcessManagement.ProcessObjective;
@@ -35,19 +35,18 @@ public class AssociatedRecordsPanelTest {
 		ProcessActivity activity = new ProcessActivity("activity 1");
 
 		activity.getObjectives().add(objective2);
-		// objective1.setActivity(activity);
+		objective1.setActivity(activity);
 		objective2.setActivity(activity);
-		// activity.getObjectives().add(objective1);
+		activity.getObjectives().add(objective1);
 
-		TableModel tableModel = new AssociatedRecordsTableModel(
-				activity,
-				activity.getObjectives());
+		TableModel tableModel = new AssociatedRecordsTableModel(activity,
+				activity.getObjectives(), ProcessObjective.class);
 
 		JTable table = new JTable(tableModel);
 		table.setRowSelectionInterval(0, 0);
 
 		JFrame frame = new JFrame();
-		frame.add(new AssociatedRecordsPanel(table, null));
+		frame.add(new AssociatedRecordsPanel(table));
 		frame.pack();
 		frame.setVisible(true);
 

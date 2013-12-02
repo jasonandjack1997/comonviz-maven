@@ -53,12 +53,12 @@ import database.service.ServiceManager;
  * @author Richard Kennard
  */
 
-public class PKRecordsTableModel<T> extends BasicTableModel {
+public class PrimeryRecordsTableModel<T> extends ServiceTableModel {
 
 
 	private List<Class<?>> mFKClassList;
 
-	public PKRecordsTableModel(Class<T> clazz) {
+	public PrimeryRecordsTableModel(Class<T> clazz) {
 		super(clazz);
 
 		List<String> columnList = new ArrayList<String>();
@@ -87,7 +87,11 @@ public class PKRecordsTableModel<T> extends BasicTableModel {
 		for (int i = 0; i < columnList.size(); i++) {
 			columns[i] = columnList.get(i).toString();
 		}
-		this.init(columns);
+		super.init(columns);
+		
+		super.importCollection(this.getService().findAll());
+		
+		return;
 	}
 
 

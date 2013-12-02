@@ -1,4 +1,4 @@
-package au.uq.dke.comonviz.ui.data.recordDialog;
+package au.uq.dke.comonviz.ui.data.dialog;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBinding
 import org.springframework.ui.Model;
 
 import au.uq.dke.comonviz.ui.data.panel.BasicTablePanel;
-import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
 import au.uq.dke.comonviz.utils.ReflectionUtil;
 import database.model.data.BasicRecord;
 
@@ -74,10 +74,10 @@ public class BasicBeanDialog extends JDialog {
 
 		if(this.isUpdate){
 			// update old record
-			((BasicTableModel)this.tablePanel.getTable().getModel()).updateRecord(dataModel);
+			((ServiceTableModel)this.tablePanel.getTable().getModel()).updateRecord(dataModel);
 		} else{
 			// add new record
-			((BasicTableModel)this.tablePanel.getTable().getModel()).add(dataModel);
+			((ServiceTableModel)this.tablePanel.getTable().getModel()).add(dataModel);
 		}
 		
 		SwingUtilities.invokeLater(new Runnable() {

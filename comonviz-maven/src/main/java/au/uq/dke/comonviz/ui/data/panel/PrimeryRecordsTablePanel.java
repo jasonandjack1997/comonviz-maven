@@ -9,18 +9,18 @@ import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingPro
 import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessorConfig;
 import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBindingProcessor;
 
-import au.uq.dke.comonviz.ui.data.recordDialog.PKRecordBeanDialog;
+import au.uq.dke.comonviz.ui.data.dialog.PrimeryRecordBeanDialog;
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
-import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.PKRecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PrimeryRecordsTableModel;
 import database.model.data.BasicRecord;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 
-public class PKRecordsTablePanel extends ButtonedTablePanel {
+public class PrimeryRecordsTablePanel extends ButtonedTablePanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public PKRecordsTablePanel(JTable table) {
+	public PrimeryRecordsTablePanel(JTable table) {
 		super(table);
 		//getButtonsWidget().setToInspect(this);
 	}
@@ -29,37 +29,37 @@ public class PKRecordsTablePanel extends ButtonedTablePanel {
 	public void add() {
 		BasicRecord newRecord = null;
 		try {
-			newRecord = (BasicRecord) ((BasicTableModel<?>)this.getTable().getModel()).getmClass().newInstance();
+			newRecord = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getmClass().newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new PKRecordBeanDialog(this, newRecord, true);
+		new PrimeryRecordBeanDialog(this, newRecord, true);
 
 	}
 
 	@UiAction
 	public void edit() {
 
-		BasicRecord record = (BasicRecord) ((BasicTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
+		BasicRecord record = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
-		new PKRecordBeanDialog(this, record, true);
+		new PrimeryRecordBeanDialog(this, record, true);
 	}
 
 	@SuppressWarnings("unchecked")
 	@UiAction
 	public void delete() {
-		BasicRecord record = (BasicRecord) ((BasicTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
+		BasicRecord record = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
-		((BasicTableModel<BasicRecord>)this.getTable().getModel()).delete(record);
+		((ServiceTableModel<BasicRecord>)this.getTable().getModel()).delete(record);
 		return;
 
 	}
 	
 	public static void main(String args[]) {
 		JFrame frame = new JFrame();
-		JTable table = new BasicTable(new PKRecordsTableModel(ProcessActivity.class));
-		frame.add(new PKRecordsTablePanel(table));
+		JTable table = new BasicTable(new PrimeryRecordsTableModel(ProcessActivity.class));
+		frame.add(new PrimeryRecordsTablePanel(table));
 		frame.pack();
 		frame.setVisible(true);
 		return;

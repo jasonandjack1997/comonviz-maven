@@ -44,9 +44,8 @@ import database.model.data.bussinesProcessManagement.ProcessObjective;
 import database.service.GenericService;
 import database.service.ServiceManager;
 
-
-public class BasicTableModel<T extends BasicRecord>
-	extends AbstractTableModel {
+public class BasicTableModel<T extends BasicRecord> extends
+		AbstractTableModel {
 
 	//
 	// Private members
@@ -57,90 +56,83 @@ public class BasicTableModel<T extends BasicRecord>
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Class<T>			mClass;
-	
-	private GenericService service;
+	private Class<T> mClass;
 
 	public Class<T> getmClass() {
 		return mClass;
 	}
 
-	private List<T>				mList;
+	private List<T> mList;
 
-	private String[]			mColumns;
+	private String[] mColumns;
 
-	private boolean				mEditable;
+	private boolean mEditable;
 
-	private boolean				mExtraBlankRow;
+	private boolean mExtraBlankRow;
 
 	//
 	// Constructor
 	//
 
-	/**only set the clazz and service
-	 * <P>data population is done in {@link #init(String...)}
+	/**
+	 * only set the clazz and service
+	 * <P>
+	 * data population is done in {@link #init(String...)}
+	 * 
 	 * @param clazz
 	 */
-	public BasicTableModel( Class<T> clazz) {
+	public BasicTableModel(Class<T> clazz) {
 		mClass = clazz;
-		service = ServiceManager.getGenericService(mClass);
 	}
-	
-	public void init(String... columns ){
-		setmColumns(columns);
-		Collection collection = service.findAll();
-		importCollection( collection );
+
+	public void initColumns(String... columns) {
+		mColumns = columns;
 	}
 
 	//
 	// Public methods
 	//
-	
-	public int findRowNumber(T t){
-		for(int i = 0; i < mList.size(); i++){
-			if(mList.get(i).equals(t)){
+
+	public int findRowNumber(T t) {
+		for (int i = 0; i < mList.size(); i++) {
+			if (mList.get(i).equals(t)) {
 				return i;
 			}
 		}
-		
+
 		return -1;
 	}
-	
+
 	public void add(T record) {
 		mList.add(record);
-		//database save
-		service.save(record);
+		fireTableDataChanged();
 	}
-		
 
-	public void updateRecord(T newRecord){
-		//search for the old record using id;
-		for(T record : this.mList){
-			if(record.getId().equals(newRecord.getId())){
-				//update the record(assigne all the fields)
+	public void updateRecord(T newRecord) {
+		// search for the old record using id;
+		for (T record : this.mList) {
+			if (record.getId().equals(newRecord.getId())) {
+				// update the record(assigne all the fields)
 				record.update(newRecord);
-				//database save
-				service.save(record);
 			}
 		}
-		
+		fireTableDataChanged();
+
 	}
+
 	public void delete(T record) {
 
 		mList.remove(record);
-		//database remove
-		service.delete(record);
+		fireTableDataChanged();
 	}
-	
 
+	public void importCollection(Collection<T> collection) {
 
-	public void importCollection( Collection<T> collection ) {
-
-		if ( collection == null ) {
+		if (collection == null) {
 			mList = CollectionUtils.newArrayList();
 		} else {
-			mList = CollectionUtils.newArrayList( collection );
-			Collections.sort( mList );
+			mList = CollectionUtils.newArrayList(collection);
+			Collections.sort(mList);
 		}
 
 		fireTableDataChanged();
@@ -148,21 +140,21 @@ public class BasicTableModel<T extends BasicRecord>
 
 	public List<T> exportList() {
 
-		return CollectionUtils.newArrayList( mList );
+		return CollectionUtils.newArrayList(mList);
 	}
 
-	public void setEditable( boolean editable ) {
+	public void setEditable(boolean editable) {
 
 		mEditable = editable;
 	}
 
-	public void setExtraBlankRow( boolean extraBlankRow ) {
+	public void setExtraBlankRow(boolean extraBlankRow) {
 
 		mExtraBlankRow = extraBlankRow;
 	}
 
 	@Override
-	public boolean isCellEditable( int rowIndex, int columnIndex ) {
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
 
 		return mEditable;
 	}
@@ -175,9 +167,9 @@ public class BasicTableModel<T extends BasicRecord>
 	}
 
 	@Override
-	public String getColumnName( int columnIndex ) {
+	public String getColumnName(int columnIndex) {
 
-		if ( columnIndex >= getColumnCount() ) {
+		if (columnIndex >= getColumnCount()) {
 			return null;
 		}
 
@@ -190,7 +182,7 @@ public class BasicTableModel<T extends BasicRecord>
 
 		int rows = mList.size();
 
-		if ( mExtraBlankRow ) {
+		if (mExtraBlankRow) {
 			rows++;
 		}
 
@@ -198,92 +190,90 @@ public class BasicTableModel<T extends BasicRecord>
 	}
 
 	@Override
-	public Class<?> getColumnClass( int columnIndex ) {
+	public Class<?> getColumnClass(int columnIndex) {
 
-		String column = getColumnName( columnIndex );
+		String column = getColumnName(columnIndex);
 
-		if ( column == null ) {
+		if (column == null) {
 			return null;
 		}
 
-		return ClassUtils.getReadMethod( mClass, column ).getReturnType();
+		return ClassUtils.getReadMethod(mClass, column).getReturnType();
 	}
 
-	public T getValueAt( int rowIndex ) {
+	public T getValueAt(int rowIndex) {
 
 		// Sanity check
 
-		if ( rowIndex >= mList.size() ) {
+		if (rowIndex >= mList.size()) {
 			return null;
 		}
 
-		return mList.get( rowIndex );
+		return mList.get(rowIndex);
 	}
 
-	public Object getValueAt( int rowIndex, int columnIndex ) {
+	public Object getValueAt(int rowIndex, int columnIndex) {
 
 		// Sanity check
 
-		if ( columnIndex >= getColumnCount() ) {
+		if (columnIndex >= getColumnCount()) {
 			return null;
 		}
 
 		// Fetch the object
 
-		T t = getValueAt( rowIndex );
+		T t = getValueAt(rowIndex);
 
-		if ( t == null ) {
+		if (t == null) {
 			return null;
 		}
 
 		// Inspect it
 
-		return ClassUtils.getProperty( t, getColumnName( columnIndex ) );
+		return ClassUtils.getProperty(t, getColumnName(columnIndex));
 	}
 
 	@Override
-	public void setValueAt( Object value, int rowIndex, int columnIndex ) {
+	public void setValueAt(Object value, int rowIndex, int columnIndex) {
 
 		// Sanity check
 
-		if ( columnIndex >= getColumnCount() ) {
+		if (columnIndex >= getColumnCount()) {
 			return;
 		}
 
 		// Just-in-time creation
 
-		if ( rowIndex == ( getRowCount() - 1 ) && mExtraBlankRow ) {
-			if ( value == null || "".equals( value ) ) {
+		if (rowIndex == (getRowCount() - 1) && mExtraBlankRow) {
+			if (value == null || "".equals(value)) {
 				return;
 			}
 
 			try {
-				mList.add( mClass.newInstance() );
-				fireTableRowsInserted( rowIndex, rowIndex );
-			} catch ( Exception e ) {
-				throw new RuntimeException( e );
+				mList.add(mClass.newInstance());
+				fireTableRowsInserted(rowIndex, rowIndex);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
 			}
 		}
 
 		// Fetch the object
 
-		T t = getValueAt( rowIndex );
+		T t = getValueAt(rowIndex);
 
-		if ( t == null ) {
+		if (t == null) {
 			return;
 		}
 
 		// Update it
 
-		ClassUtils.setProperty( t, getColumnName( columnIndex ), value );
+		ClassUtils.setProperty(t, getColumnName(columnIndex), value);
 	}
-	
-	public GenericService getService() {
-		return service;
-	}
+
 	public String[] getmColumns() {
 		return mColumns;
 	}
+
 	public void setmColumns(String[] mColumns) {
 		this.mColumns = mColumns;
 	}

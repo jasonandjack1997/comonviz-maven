@@ -4,35 +4,43 @@ import java.util.Set;
 
 import database.model.data.BasicRecord;
 import database.service.GenericService;
+import database.service.ServiceManager;
 
 public class AssociatedRecordsTableModel extends BasicTableModel{
 	GenericService service;
 	Set<Object> set;
+	private BasicRecord primaryRecord;
 
 	/**
 	 * this panel is in the extends @BasicBeanDialog dialog as a field
 	 * <p>
 	 * it contains the records it associated with 
 	 * 
-	 * @param mainRecord
+	 * @param primeryRecord
 	 * @param set the associated records
 	 */
 	@SuppressWarnings("unchecked")
-	public AssociatedRecordsTableModel(BasicRecord mainRecord, Set<?> set) {
-		super(mainRecord.getClass());
+	public AssociatedRecordsTableModel(BasicRecord primeryRecord, Set<?> set, Class<?> clazz) {
+		super(clazz);
+		this.primaryRecord = primeryRecord;
 		this.set = (Set<Object>) set;
-		service = this.getService();
-		super.init("name", "discription");
+		service = ServiceManager.getGenericService(primeryRecord.getClass());
+		super.initColumns("name", "discription");
 		super.importCollection(set);
 	}
 
+	public BasicRecord getPrimaryRecord() {
+		return primaryRecord;
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public void add(BasicRecord record) {
 		set.add(record);
 		//the other side 
 		
 		//update list
-		super.importCollection(set);
+		super.add(record);
 	}
 
 	@Override
@@ -41,7 +49,7 @@ public class AssociatedRecordsTableModel extends BasicTableModel{
 		//the other side
 		
 		//update list
-		super.importCollection(set);
+		super.delete(record);
 	}
 
 }

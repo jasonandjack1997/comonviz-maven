@@ -6,13 +6,13 @@ import javax.swing.JTable;
 import org.junit.Before;
 import org.junit.Test;
 
-import au.uq.dke.comonviz.ui.data.tableModel.PKRecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PrimeryRecordsTableModel;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 import database.model.data.bussinesProcessManagement.ProcessObjective;
 import database.service.GenericService;
 import database.service.ServiceManager;
 
-public class AssociationsChoosePanelTest {
+public class ForeignRecordsChoosePanelTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -26,12 +26,12 @@ public class AssociationsChoosePanelTest {
 		objectiveService.save(objective1);
 		objectiveService.save(objective2);
 		
-		JTable table = new JTable(new PKRecordsTableModel(ProcessObjective.class));
+		JTable table = new JTable(new PrimeryRecordsTableModel(ProcessObjective.class));
 		table.setRowSelectionInterval(0, 0);
 		ProcessActivity activity = new ProcessActivity();
 		activity.setName("activity 1");
 		JFrame frame = new JFrame();
-		frame.add(new AssociationsChoosePanel(table, activity));
+		frame.add(new ForeignRecordsChoosePanel(table, activity));
 		frame.pack();
 		frame.setVisible(true);
 		
@@ -39,7 +39,7 @@ public class AssociationsChoosePanelTest {
 	}
 	
 	public static void main(String args[]){
-		new AssociationsChoosePanelTest().test();
+		new ForeignRecordsChoosePanelTest().test();
 	}
 
 }
