@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import org.metawidget.inspector.annotation.UiHidden;
+
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import edu.umd.cs.piccolo.PNode;
 
@@ -30,6 +32,7 @@ public class Trackable{
 	public Trackable(String name){
 		this.setName(name);
 	}
+	@UiHidden
 	public Long getId() {
 		return id;
 	}

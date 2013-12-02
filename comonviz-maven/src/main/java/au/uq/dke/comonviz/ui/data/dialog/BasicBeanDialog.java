@@ -35,29 +35,40 @@ public class BasicBeanDialog extends JDialog {
 	private boolean isUpdate;
 
 	public BasicBeanDialog(BasicTablePanel basicTablePanel, BasicRecord dataModel, boolean isUpdate) {
+		
+		this();
+		init(basicTablePanel, dataModel, isUpdate);
 
+	}
+	
+	public BasicBeanDialog(){
 		this.setModalityType(ModalityType.APPLICATION_MODAL);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setTitle(this.getClass().getSimpleName());
-
-		this.tablePanel = basicTablePanel;
-		this.dataModel = dataModel;
-		this.isUpdate = isUpdate;
 
 		modelWidget = new SwingMetawidget();
 		modelWidget.addWidgetProcessor(new BeansBindingProcessor(
 				new BeansBindingProcessorConfig()));
 		modelWidget.addWidgetProcessor(new ReflectionBindingProcessor());
-		modelWidget.setToInspect(dataModel);
 
 		buttonsWidget = new SwingMetawidget();
 		buttonsWidget.addWidgetProcessor(new BeansBindingProcessor(
 				new BeansBindingProcessorConfig()));
 		buttonsWidget.addWidgetProcessor(new ReflectionBindingProcessor());
 		buttonsWidget.setToInspect(this);
+		buttonsWidget.setMaximumInspectionDepth(0);
 
 		this.add(modelWidget, BorderLayout.NORTH);
 		this.add(buttonsWidget, BorderLayout.SOUTH);
+		
+	}
+	public void init(BasicTablePanel callerTablePanel, BasicRecord dataModel, boolean isUpdate){
+
+		this.tablePanel = callerTablePanel;
+		this.dataModel = dataModel;
+		this.isUpdate = isUpdate;
+
+		modelWidget.setToInspect(this.dataModel);
 
 		this.pack();
 		this.setVisible(true);

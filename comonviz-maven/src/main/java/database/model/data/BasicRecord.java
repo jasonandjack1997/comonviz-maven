@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import org.metawidget.inspector.annotation.UiComesAfter;
+import org.metawidget.inspector.annotation.UiLarge;
+
 import database.model.Trackable;
 
 @Entity
@@ -21,6 +24,8 @@ public class BasicRecord extends Trackable implements Comparable<BasicRecord>{
 		super(name);
 	}
 
+	@UiComesAfter ("name")
+	@UiLarge
 	public String getDiscription() {
 		return discription;
 	}
