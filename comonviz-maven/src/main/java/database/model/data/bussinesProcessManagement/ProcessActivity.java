@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import database.model.BasicRecordSet;
 import database.model.data.BasicRecord;
 
 
@@ -23,7 +24,7 @@ public class ProcessActivity extends BasicRecord {
 
 	@OneToMany (mappedBy = "activity")
 	@OnDelete(action=OnDeleteAction.CASCADE)
-	public Set<ProcessObjective> objectives =  new HashSet<ProcessObjective>();
+	public Set<ProcessObjective> objectives =  new BasicRecordSet<ProcessObjective>();
 
 
 	public Set<ProcessObjective> getObjectives() {
