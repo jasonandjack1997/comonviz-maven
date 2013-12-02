@@ -13,7 +13,7 @@ import au.uq.dke.comonviz.ui.data.panel.AssociatedRecordsPanel;
 import au.uq.dke.comonviz.ui.data.panel.BasicTablePanel;
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.AssociatedRecordsTableModel;
-import au.uq.dke.comonviz.utils.ReflectionUtil;
+import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 
 public class PrimeryRecordBeanDialog extends BasicBeanDialog {
@@ -21,23 +21,23 @@ public class PrimeryRecordBeanDialog extends BasicBeanDialog {
 
 	/**
 	 * @param basicTablePanel
-	 * @param dataModel
+	 * @param primaryRecord
 	 * @param isUpdate
 	 */
 	public PrimeryRecordBeanDialog(BasicTablePanel basicTablePanel,
-			BasicRecord dataModel, boolean isUpdate) {
-		super(basicTablePanel, dataModel, isUpdate);
+			BasicRecord primaryRecord, boolean isUpdate) {
+		super(basicTablePanel, primaryRecord, isUpdate);
 
 		// add associated record
-		List<Set<?>> setList = ReflectionUtil.getSetObjectList(dataModel);
+		List<Set<?>> setList = ReflectionUtils.getSetObjectList(primaryRecord);
 		List<Object> fkRecordList = new ArrayList<Object>();// they are fk
 															// records
 		
-		JPanel associationPanel = new AssociatedRecordsPanel(null);
+		JPanel associationPanel = null;
 
 		if (setList != null) {
 			for (Set<?> set : setList) {
-				TableModel associatedRecordsTableModel = new AssociatedRecordsTableModel(dataModel, set, null);
+				TableModel associatedRecordsTableModel = new AssociatedRecordsTableModel(primaryRecord, set, null);
 				JTable associatedRecordsTable = new BasicTable(associatedRecordsTableModel);
 				JPanel associatedRecordsPanel = new AssociatedRecordsPanel(associatedRecordsTable);
 

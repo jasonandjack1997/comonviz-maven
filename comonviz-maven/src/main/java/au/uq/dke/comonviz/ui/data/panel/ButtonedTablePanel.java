@@ -9,19 +9,39 @@ import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingPro
 import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessorConfig;
 import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBindingProcessor;
 
-public class ButtonedTablePanel extends BasicTablePanel{
+import au.uq.dke.comonviz.misc.CustomRuntimeException;
+
+public class ButtonedTablePanel extends BasicTablePanel {
 
 	private SwingMetawidget buttonsWidget;
+
+	/**the caller can call either {@link #ButtonedTablePanel(JTable)}, 
+	 * <p>
+	 * or call {@link #ButtonedTablePanel()} then call init
+	 * @param table
+	 */
 	public ButtonedTablePanel(JTable table) {
-		super(table);
-		buttonsWidget = new SwingMetawidget();
-		buttonsWidget.addWidgetProcessor(new BeansBindingProcessor(
-				new BeansBindingProcessorConfig()));
-		buttonsWidget.addWidgetProcessor(new ReflectionBindingProcessor());
-		buttonsWidget.setToInspect(this);
-		buttonsWidget.setMaximumInspectionDepth(1);
-		
-		this.add(buttonsWidget);
+		init(table);
+	}
+
+	public ButtonedTablePanel() {
+		// empty
+	}
+
+	public void init(JTable table) {
+		if (super.getTable() == null) {
+			super.init(table);
+			buttonsWidget = new SwingMetawidget();
+			buttonsWidget.addWidgetProcessor(new BeansBindingProcessor(
+					new BeansBindingProcessorConfig()));
+			buttonsWidget.addWidgetProcessor(new ReflectionBindingProcessor());
+			buttonsWidget.setToInspect(this);
+			buttonsWidget.setMaximumInspectionDepth(1);
+
+			this.add(buttonsWidget);
+		}else {
+			throw new CustomRuntimeException("table has already been initialized!");
+		}
 	}
 
 }

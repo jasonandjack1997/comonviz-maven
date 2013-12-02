@@ -38,7 +38,7 @@ import java.util.Set;
 import org.metawidget.util.ClassUtils;
 import org.metawidget.util.CollectionUtils;
 
-import au.uq.dke.comonviz.utils.ReflectionUtil;
+import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 import database.service.GenericService;
 import database.service.ServiceManager;
@@ -77,7 +77,7 @@ public class PrimeryRecordsTableModel<T> extends ServiceTableModel {
 		}
 
 		
-		List setFieldList = ReflectionUtil.getSetCollectionFieldList(clazz);
+		List setFieldList = ReflectionUtils.getSetFieldList(clazz);
 		for (int i = 0; i < setFieldList.size(); i++) {
 			columnList.add("FK " + i);
 		}
@@ -125,11 +125,11 @@ public class PrimeryRecordsTableModel<T> extends ServiceTableModel {
 			// each of it.
 			// then just return the name of the element. so easy
 
-			List<Field> setFieldList = ReflectionUtil
-					.getSetCollectionFieldList(getmClass());
+			List<Field> setFieldList = ReflectionUtils
+					.getSetFieldList(getmClass());
 			Field field = setFieldList.get(columnIndex - 2);
-			Class elementType = ReflectionUtil
-					.getSetCollectionElementType(field);
+			Class elementType = ReflectionUtils
+					.getSetElementType(field);
 
 			// acturally, just return string
 			return String.class;
@@ -166,7 +166,7 @@ public class PrimeryRecordsTableModel<T> extends ServiceTableModel {
 			// each of it.
 			// then just return the name of the element. so easy
 
-			List<Set<?>> setObjectList = ReflectionUtil.getSetObjectList(r);
+			List<Set<?>> setObjectList = ReflectionUtils.getSetObjectList(r);
 			Set<?> set = setObjectList.get(columnIndex - 2);
 			if(set == null || set.size() == 0){
 				return null;

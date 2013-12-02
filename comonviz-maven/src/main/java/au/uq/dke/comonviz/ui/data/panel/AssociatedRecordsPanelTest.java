@@ -39,14 +39,9 @@ public class AssociatedRecordsPanelTest {
 		objective2.setActivity(activity);
 		activity.getObjectives().add(objective1);
 
-		TableModel tableModel = new AssociatedRecordsTableModel(activity,
-				activity.getObjectives(), ProcessObjective.class);
-
-		JTable table = new JTable(tableModel);
-		table.setRowSelectionInterval(0, 0);
 
 		JFrame frame = new JFrame();
-		frame.add(new AssociatedRecordsPanel(table));
+		frame.add(new AssociatedRecordsPanel(activity, activity.getObjectives(), ProcessObjective.class));
 		frame.pack();
 		frame.setVisible(true);
 

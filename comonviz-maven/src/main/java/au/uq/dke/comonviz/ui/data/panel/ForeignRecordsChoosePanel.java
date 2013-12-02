@@ -12,21 +12,27 @@ import javax.swing.JTable;
 import org.metawidget.inspector.annotation.UiAction;
 import org.metawidget.util.ClassUtils;
 
+import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PrimeryRecordsTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
-import au.uq.dke.comonviz.utils.ReflectionUtil;
+import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 
 public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 
 	private BasicRecord mainRecord;
-	private BasicTableModel callerTableModel;
+	private BasicTablePanel callerTablePanel;
 
-	public ForeignRecordsChoosePanel(JTable table, BasicRecord mainRecord,
-			BasicTableModel callerTableModel) {
-		super(table);
-		this.callerTableModel = callerTableModel;
-		this.mainRecord = mainRecord;
+	public ForeignRecordsChoosePanel(BasicRecord primaryRecord, Class<?> foreignClass, BasicTablePanel
+			 callerTablePanel) {
+		super();
+		PrimeryRecordsTableModel foreignTableModel = new PrimeryRecordsTableModel(
+				foreignClass);
+		JTable table = new BasicTable(foreignTableModel);
+		super.init(table);
+		this.callerTablePanel = callerTablePanel;
+		this.mainRecord = primaryRecord;
 	}
 
 	/**
@@ -37,22 +43,26 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 	public void OK() {
 		int[] selectedRows = this.getTable().getSelectedRows();
 		for (int i = 0; i < selectedRows.length; i++) {
-			BasicRecord record = ((BasicTableModel) this.getTable()
-					.getModel()).getValueAt(selectedRows[i]);
+			BasicRecord record = ((BasicTableModel) this.getTable().getModel())
+					.getValueAt(selectedRows[i]);
 
 			// main record should add selected record to it's set
-			Set<BasicRecord> associatedSet = ReflectionUtil.getSpecificSet(
-					mainRecord, (Class<BasicRecord>) record.getClass());
-			associatedSet.add(record);
+			Set<BasicRecord> associatedSet = ReflectionUtils
+					.getSpecificSetByElementType(mainRecord,
+							(Class<BasicRecord>) record.getClass());
+			boolean added = associatedSet.add(record);
 
-			// the selected record should set the main record as the association
-			String property = ReflectionUtil.getFieldName(
-					(Class<BasicRecord>) record.getClass(),
-					this.mainRecord.getClass());
-			ClassUtils.setProperty(record, property, mainRecord);
+			if (added) {
+				// the selected record should set the main record as the
+				// association
+				String property = ReflectionUtils.getFieldNameByType(
+						(Class<BasicRecord>) record.getClass(),
+						this.mainRecord.getClass());
+				ClassUtils.setProperty(record, property, mainRecord);
 
-			// update callerTableModel
-			this.callerTableModel.add(record);
+				// update callerTableModel
+				this.callerTablePanel.getTableModel().add(record);
+			}
 		}
 
 		Container parent = this.getRootPane();

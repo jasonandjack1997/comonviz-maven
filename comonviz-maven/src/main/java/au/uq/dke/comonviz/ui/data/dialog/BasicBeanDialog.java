@@ -19,7 +19,7 @@ import org.springframework.ui.Model;
 
 import au.uq.dke.comonviz.ui.data.panel.BasicTablePanel;
 import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
-import au.uq.dke.comonviz.utils.ReflectionUtil;
+import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 
 public class BasicBeanDialog extends JDialog {

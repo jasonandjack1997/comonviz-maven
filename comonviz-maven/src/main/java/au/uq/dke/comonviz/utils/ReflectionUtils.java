@@ -12,9 +12,10 @@ import java.util.Set;
 
 import org.metawidget.util.ClassUtils;
 
+import au.uq.dke.comonviz.misc.CustomRuntimeException;
 import database.model.data.BasicRecord;
 
-public class ReflectionUtil {
+public class ReflectionUtils{
 	
 	Set<String> testSet = new HashSet<String>();
 
@@ -25,8 +26,10 @@ public class ReflectionUtil {
 	public void setTestSet(Set<String> testSet) {
 		this.testSet = testSet;
 	}
+	
+	
 
-	public static Class getSetCollectionElementType(Field setField) {
+	public static Class getSetElementType(Field setField) {
 		Field field = setField;
 
 		Type genericFieldType = field.getGenericType();
@@ -51,12 +54,12 @@ public class ReflectionUtil {
 	 * @param elementType
 	 * @return
 	 */
-	public static Set<BasicRecord> getSpecificSet(BasicRecord mainRecord, Class<BasicRecord> elementType){
+	public static Set<BasicRecord> getSpecificSetByElementType(BasicRecord mainRecord, Class<BasicRecord> elementType){
 		//get all set fields
 		//find element type, get the set field, then get the set it self!
-		List<Field> setFields = getSetCollectionFieldList(mainRecord.getClass());
+		List<Field> setFields = getSetFieldList(mainRecord.getClass());
 		for(Field setField : setFields){
-			Class type = getSetCollectionElementType(setField);
+			Class type = getSetElementType(setField);
 			if(type == elementType){
 				String property = setField.getName();
 				Set<BasicRecord> set = ClassUtils.getProperty(mainRecord, property);
@@ -68,7 +71,7 @@ public class ReflectionUtil {
 			}
 		}
 		
-		throw new RuntimeException("error");
+		throw new CustomRuntimeException("error");
 	}
 	
 	/**
@@ -95,9 +98,10 @@ public class ReflectionUtil {
 		return null;
 	}
 	
-	public static String getFieldName(Class<BasicRecord> recordClass, Class<?> associatedRecordType){
+	public static String getFieldNameByType(Class<BasicRecord> recordClass, Class<?> associatedRecordType){
 		//first get all BasicRecord field
 		//then match type, then get the object
+		//only get the first field name, so a BasicRecord should only have one field of the type
 		Field[] fields = recordClass.getDeclaredFields();
 		for(Field field : fields){
 			if(field.getType() == associatedRecordType){
@@ -124,7 +128,7 @@ public class ReflectionUtil {
 	
 	public static void setFieldValue(BasicRecord mainRecord,  Class<?> fieldType, BasicRecord fieldValue){
 		//get spefic field name
-		String fieldName = getFieldName((Class<BasicRecord>)mainRecord.getClass(), fieldType);
+		String fieldName = getFieldNameByType((Class<BasicRecord>)mainRecord.getClass(), fieldType);
 		
 		//get the set method
 		Method setMethod = getSetMethod((Class<BasicRecord>)mainRecord.getClass(), fieldName, fieldType);
@@ -158,7 +162,7 @@ public class ReflectionUtil {
 		return null;
 	}
 
-	public static List<Field> getSetCollectionFieldList(Class clazz){
+	public static List<Field> getSetFieldList(Class clazz){
 		
 		List<Field> setFieldList = new ArrayList<Field>();
 		for(Field field : clazz.getDeclaredFields()){
@@ -205,22 +209,22 @@ public class ReflectionUtil {
 		
 		testField();
 		
-		ReflectionUtil ru = new ReflectionUtil();
+		ReflectionUtils ru = new ReflectionUtils();
 		ru.getTestSet().add("hehe");
 		
-		List<Set<?>> setList = ReflectionUtil.getSetObjectList(ru);
+		List<Set<?>> setList = ReflectionUtils.getSetObjectList(ru);
 		
 		
-		List<Field> setFieldList = getSetCollectionFieldList(ru.getClass());
+		List<Field> setFieldList = getSetFieldList(ru.getClass());
 		return;
 		
 	}
 	
 	public static void testField(){
-		ReflectionUtil r = new ReflectionUtil();
+		ReflectionUtils r = new ReflectionUtils();
 		Field field = null;
 		try {
-			field = ReflectionUtil.class.getDeclaredField("testSet");
+			field = ReflectionUtils.class.getDeclaredField("testSet");
 		} catch (NoSuchFieldException | SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

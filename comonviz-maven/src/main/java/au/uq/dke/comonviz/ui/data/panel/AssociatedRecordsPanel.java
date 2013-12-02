@@ -3,6 +3,7 @@ package au.uq.dke.comonviz.ui.data.panel;
 import java.util.Set;
 
 import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
 import org.metawidget.inspector.annotation.UiAction;
 
@@ -12,6 +13,7 @@ import au.uq.dke.comonviz.ui.data.tableModel.AssociatedRecordsTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.PrimeryRecordsTableModel;
 import database.model.data.BasicRecord;
+import database.model.data.bussinesProcessManagement.ProcessObjective;
 
 /**
  * this panel is in the record dialog this shows a list of associated records in
@@ -23,8 +25,15 @@ import database.model.data.BasicRecord;
  */
 public class AssociatedRecordsPanel extends ButtonedTablePanel {
 
-	public AssociatedRecordsPanel(JTable table) {
-		super(table);
+	public AssociatedRecordsPanel(BasicRecord primaryRecord, Set<?> set, Class<?> elementType) {
+		super();//no effect
+		
+		//init
+		TableModel tableModel = new AssociatedRecordsTableModel(primaryRecord,
+				set, elementType);
+		JTable table = new JTable(tableModel);
+		super.init(table);
+		
 	}
 
 	/**
@@ -47,11 +56,8 @@ public class AssociatedRecordsPanel extends ButtonedTablePanel {
 		Class foreignClass = associatedTableModel.getmClass();
 
 		// class is the foreign record class
-		PrimeryRecordsTableModel foreignTableModel = new PrimeryRecordsTableModel(
-				foreignClass);
-		JTable table = new BasicTable(foreignTableModel);
-		ForeignRecordsChoosePanel panel = new ForeignRecordsChoosePanel(table,
-				primaryRecord, associatedTableModel);
+		ForeignRecordsChoosePanel panel = new ForeignRecordsChoosePanel(primaryRecord,
+				foreignClass, this);
 		new ForeignRecordsChooseDialog(panel);
 
 	}
