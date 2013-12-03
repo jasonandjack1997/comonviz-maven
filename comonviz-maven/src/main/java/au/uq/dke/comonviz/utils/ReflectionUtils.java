@@ -71,7 +71,7 @@ public class ReflectionUtils{
 			}
 		}
 		
-		throw new CustomRuntimeException("error");
+		throw new CustomRuntimeException("getSpecificSetByElementType error");
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class ReflectionUtils{
 				}
 			}
 		}
-		return null;
+		throw new CustomRuntimeException("found no record");
 	}
 	
 	public static String getFieldNameByType(Class<BasicRecord> recordClass, Class<?> associatedRecordType){
@@ -108,7 +108,8 @@ public class ReflectionUtils{
 				return field.getName();
 			}
 		}
-		return null;
+		
+		throw new CustomRuntimeException("found no field");
 	}
 	
 	public static Method getSetMethod(Class<BasicRecord> recordClass, String fieldName, Class<?>... parameterTypes){
