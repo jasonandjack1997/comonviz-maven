@@ -7,7 +7,7 @@ import java.awt.geom.Ellipse2D;
 import java.util.List;
 
 import au.uq.dke.comonviz.EntryPoint;
-import au.uq.dke.comonviz.ui.StyleManager;
+import au.uq.dke.comonviz.ui.ontology.StyleManager;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import edu.umd.cs.piccolo.nodes.PText;
 import edu.umd.cs.piccolo.util.PPaintContext;

@@ -8,12 +8,12 @@ import javax.swing.table.TableModel;
 import org.metawidget.inspector.annotation.UiAction;
 
 import au.uq.dke.comonviz.ui.data.dialog.ForeignRecordsChooseDialog;
-import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.AssociatedRecordsTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
+import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
-import database.model.data.bussinesProcessManagement.ProcessObjective;
+import database.service.ServiceManager;
 
 /**
  * this panel is in the record dialog this shows a list of associated records in
@@ -24,13 +24,20 @@ import database.model.data.bussinesProcessManagement.ProcessObjective;
  * 
  */
 public class AssociatedRecordsPanel extends ButtonedTablePanel {
+	private BasicRecord primaryRecord;
+	private Set<?> set;
+	private Class<?> setElementType;
 
-	public AssociatedRecordsPanel(BasicRecord primaryRecord, Set<?> set, Class<?> elementType) {
+	public AssociatedRecordsPanel(BasicRecord primaryRecord, Set<?> set, Class<?> setElementType) {
 		super();//no effect
+		this.primaryRecord = primaryRecord;
+		this.set = set;
+		this.setElementType = setElementType;
+		
 		
 		//init
 		TableModel tableModel = new AssociatedRecordsTableModel(primaryRecord,
-				set, elementType);
+				set, setElementType);
 		JTable table = new JTable(tableModel);
 		super.init(table);
 		
@@ -68,8 +75,17 @@ public class AssociatedRecordsPanel extends ButtonedTablePanel {
 		BasicRecord record = (BasicRecord) ((BasicTableModel<?>) this
 				.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
+
+		//unlink the relation
+		this.set.remove(record);
+		ReflectionUtils.setFieldValue(record, this.primaryRecord.getClass(), null);
+
+		ServiceManager.getGenericService(record.getClass()).save(record);
+		ServiceManager.getGenericService(primaryRecord.getClass()).save(primaryRecord);
+		//update the table
 		((BasicTableModel<BasicRecord>) this.getTable().getModel())
 				.delete(record);
+		
 		return;
 
 	}

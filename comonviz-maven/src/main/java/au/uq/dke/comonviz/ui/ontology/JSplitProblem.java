@@ -1,4 +1,4 @@
-package au.uq.dke.comonviz.ui;
+package au.uq.dke.comonviz.ui.ontology;
 
 import java.awt.*;
 import javax.swing.*;

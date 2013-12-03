@@ -37,7 +37,7 @@ import au.uq.dke.comonviz.handler.NodeExpandCollapseListener;
 import au.uq.dke.comonviz.misc.OwlApi;
 import au.uq.dke.comonviz.model.AnnotationManager;
 import au.uq.dke.comonviz.treeUtils.TreeInfoManager;
-import au.uq.dke.comonviz.ui.StyleManager;
+import au.uq.dke.comonviz.ui.ontology.StyleManager;
 import ca.uvic.cs.chisel.cajun.constants.LayoutConstants;
 import ca.uvic.cs.chisel.cajun.graph.AbstractGraph;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;

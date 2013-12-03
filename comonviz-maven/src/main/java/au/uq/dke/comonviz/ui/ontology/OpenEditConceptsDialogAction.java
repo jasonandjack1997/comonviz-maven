@@ -1,4 +1,4 @@
-package au.uq.dke.comonviz.ui;
+package au.uq.dke.comonviz.ui.ontology;
 
 import java.net.URI;
 
@@ -10,7 +10,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import au.uq.dke.comonviz.EntryPoint;
 import au.uq.dke.comonviz.actions.CajunAction;
-import au.uq.dke.comonviz.ui.ontologyRefactor.ClassesListDialog;
+import au.uq.dke.comonviz.ui.ontology.refact.ClassesListDialog;
 import ca.uvic.cs.chisel.cajun.resources.ResourceHandler;
 
 public class OpenEditConceptsDialogAction extends CajunAction {

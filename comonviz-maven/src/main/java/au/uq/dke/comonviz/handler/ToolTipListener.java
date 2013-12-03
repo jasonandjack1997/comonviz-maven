@@ -4,7 +4,7 @@ import org.semanticweb.owlapi.model.OWLEntity;
 
 import au.uq.dke.comonviz.ComonvizGraphModel;
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
-import au.uq.dke.comonviz.ui.FrameTooltipNode;
+import au.uq.dke.comonviz.ui.ontology.FrameTooltipNode;
 import ca.uvic.cs.chisel.cajun.graph.AbstractGraph;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import edu.umd.cs.piccolo.PCamera;

@@ -16,6 +16,7 @@ import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
 import database.model.data.BasicRecord;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
+import database.service.ServiceManager;
 
 public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 
@@ -50,6 +51,7 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 
 		BasicRecord record = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
+		record = ((ServiceTableModel)this.getTableModel()).getService().findByName(record.getName(), record.getClass());
 		new PrimaryRecordBeanDialog(record, true, this);
 	}
 
@@ -58,6 +60,12 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 	public void delete() {
 		BasicRecord record = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
+		//update relation
+
+		//update database
+		ServiceManager.getGenericService(record.getClass()).delete(record);
+
+		//update table
 		((ServiceTableModel<BasicRecord>)this.getTable().getModel()).delete(record);
 		return;
 

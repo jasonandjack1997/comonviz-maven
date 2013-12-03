@@ -1,4 +1,4 @@
-package au.uq.dke.comonviz.ui.ontologyRefactor;
+package au.uq.dke.comonviz.ui.ontology.refact;
 
 import static org.metawidget.inspector.InspectionResultConstants.HIDDEN;
 

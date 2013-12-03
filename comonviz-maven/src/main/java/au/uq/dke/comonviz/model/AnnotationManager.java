@@ -19,7 +19,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import database.model.ontology.OntologyAxiom;
 import database.model.ontology.OntologyClass;
 import au.uq.dke.comonviz.EntryPoint;
-import au.uq.dke.comonviz.ui.StyleManager;
+import au.uq.dke.comonviz.ui.ontology.StyleManager;
 
 public class AnnotationManager {
 

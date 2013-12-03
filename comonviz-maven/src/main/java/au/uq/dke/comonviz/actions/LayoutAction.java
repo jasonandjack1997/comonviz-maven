@@ -16,7 +16,7 @@ import org.semanticweb.owlapi.model.OWLEntity;
 import au.uq.dke.comonviz.EntryPoint;
 import au.uq.dke.comonviz.graph.arc.DefaultGraphArc;
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
-import au.uq.dke.comonviz.ui.Parameters;
+import au.uq.dke.comonviz.ui.ontology.Parameters;
 import ca.uvic.cs.chisel.cajun.graph.AbstractGraph;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;
 import ca.uvic.cs.chisel.cajun.graph.Graph;

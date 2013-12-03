@@ -21,7 +21,7 @@ import javax.swing.filechooser.FileFilter;
 
 import au.uq.dke.comonviz.actions.CajunAction;
 import au.uq.dke.comonviz.common.util.IconConstants;
-import au.uq.dke.comonviz.ui.OntoGrafFileFilter;
+import au.uq.dke.comonviz.ui.ontology.OntoGrafFileFilter;
 import edu.umd.cs.piccolo.PCanvas;
 
 public class ExportImageAction extends CajunAction {

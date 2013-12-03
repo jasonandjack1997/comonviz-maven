@@ -6,7 +6,7 @@ import javax.swing.Action;
 
 import au.uq.dke.comonviz.actions.CajunAction;
 import au.uq.dke.comonviz.common.util.IconConstants;
-import au.uq.dke.comonviz.ui.TooltipConfigurationDialog;
+import au.uq.dke.comonviz.ui.ontology.TooltipConfigurationDialog;
 import edu.umd.cs.piccolo.PCanvas;
 
 public class ConfigTooltipsAction extends CajunAction {

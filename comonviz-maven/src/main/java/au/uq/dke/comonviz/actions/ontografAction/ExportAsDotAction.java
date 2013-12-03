@@ -13,7 +13,7 @@ import au.uq.dke.comonviz.GraphController;
 import au.uq.dke.comonviz.actions.CajunAction;
 import au.uq.dke.comonviz.common.util.IconConstants;
 import au.uq.dke.comonviz.graph.arc.DefaultGraphArc;
-import au.uq.dke.comonviz.ui.OntoGrafFileFilter;
+import au.uq.dke.comonviz.ui.ontology.OntoGrafFileFilter;
 import ca.uvic.cs.chisel.cajun.graph.GraphModel;
 import ca.uvic.cs.chisel.cajun.graph.arc.GraphArc;
 

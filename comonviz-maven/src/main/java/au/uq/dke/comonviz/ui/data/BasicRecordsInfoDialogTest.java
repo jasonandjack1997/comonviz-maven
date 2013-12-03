@@ -11,7 +11,7 @@ import database.model.data.bussinesProcessManagement.ProcessObjective;
 import database.service.GenericService;
 import database.service.ServiceManager;
 
-public class RecordsDialogTest {
+public class BasicRecordsInfoDialogTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -40,12 +40,12 @@ public class RecordsDialogTest {
 		objectiveService.save(objective1);
 		objectiveService.save(objective2);
 		
-		new RecordsDialog(ProcessActivity.class);
+		new BasicRecordsInfoDialog(ProcessActivity.class);
 		
 	}
 	
 	public static void main(String[] args) {
-		new RecordsDialogTest().test();
+		new BasicRecordsInfoDialogTest().test();
 	}
 
 }
