@@ -50,12 +50,12 @@ import database.model.data.BasicRecord;
  * @author Richard Kennard
  */
 
-public class PrimaryRecordsTableModel<T> extends ServiceTableModel {
+public class RecordsTableModel<T> extends ServiceTableModel {
 
 
 	private List<Class<?>> mFKClassList;
 
-	public PrimaryRecordsTableModel(Class<T> clazz) {
+	public RecordsTableModel(Class<T> clazz) {
 		super(clazz);
 
 		List<String> columnList = new ArrayList<String>();

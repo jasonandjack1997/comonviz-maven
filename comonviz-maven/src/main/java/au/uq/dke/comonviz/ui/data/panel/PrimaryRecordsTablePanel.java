@@ -2,6 +2,7 @@ package au.uq.dke.comonviz.ui.data.panel;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.table.TableRowSorter;
 
 import org.metawidget.inspector.annotation.UiAction;
 import org.metawidget.swing.SwingMetawidget;
@@ -12,7 +13,7 @@ import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBinding
 import au.uq.dke.comonviz.ui.data.dialog.PrimaryRecordBeanDialog;
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.PrimaryRecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
 import database.model.data.BasicRecord;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 
@@ -22,9 +23,12 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 
 	public PrimaryRecordsTablePanel(Class<?> clazz) {
 		super();
-		PrimaryRecordsTableModel foreignTableModel = new PrimaryRecordsTableModel(
+		RecordsTableModel foreignTableModel = new RecordsTableModel(
 				clazz);
 		JTable table = new BasicTable(foreignTableModel);
+		
+
+		
 		super.init(table);
 	}
 

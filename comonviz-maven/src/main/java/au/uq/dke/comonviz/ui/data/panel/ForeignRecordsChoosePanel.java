@@ -12,7 +12,7 @@ import org.metawidget.util.ClassUtils;
 
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.PrimaryRecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 
@@ -24,7 +24,7 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 	public ForeignRecordsChoosePanel(BasicRecord primaryRecord, Class<?> foreignClass, BasicTablePanel
 			 callerTablePanel) {
 		super();
-		PrimaryRecordsTableModel foreignTableModel = new PrimaryRecordsTableModel(
+		RecordsTableModel foreignTableModel = new RecordsTableModel(
 				foreignClass);
 		JTable table = new BasicTable(foreignTableModel);
 		super.init(table);

@@ -79,7 +79,11 @@ public class GenericService<Model extends BasicRecord, DAO extends GenericDAO<Mo
 	}
 
 	public List<Model> findAll() {
-		return dao.findAll();
+		List<Model> results = dao.findAll();
+		for(Model model : results){
+			model = this.findByName(model.getName(), model.getClass());
+		}
+		return results;
 	}
 
 	public Model findByName(String name, Class<?> clazz) {

@@ -38,7 +38,7 @@ import au.uq.dke.comonviz.graph.arc.DefaultGraphArc;
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import au.uq.dke.comonviz.treeUtils.JTreeUtil;
 import au.uq.dke.comonviz.treeUtils.MutableTreeNodeUtil;
-import au.uq.dke.comonviz.ui.data.tableModel.PrimaryRecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import database.model.ontology.OntologyAxiom;
 import database.model.ontology.OntologyClass;

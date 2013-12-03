@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import au.uq.dke.comonviz.ui.data.tableModel.AssociatedRecordsTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.PrimaryRecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
 import database.model.data.BasicRecord;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 import database.model.data.bussinesProcessManagement.ProcessObjective;
