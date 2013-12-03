@@ -1,5 +1,6 @@
 package au.uq.dke.comonviz.ui.data.tableModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +38,12 @@ public class ServiceTableModel<T extends BasicRecord> extends
 
 	public void init(String... columns) {
 		super.initColumns(columns);
-		Collection collection = service.findAll();
+		Collection<T> collection = service.findAll();
+//		Collection<T> completedRecords = new ArrayList<T>();
+//		for(T record : collection){
+//			record = (T) service.find(record);
+//			completedRecords.add(record);
+//		}
 		super.importCollection(collection);
 	}
 

@@ -24,7 +24,7 @@ import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBinding
 import org.metawidget.util.CollectionUtils;
 
 import au.uq.dke.comonviz.EntryPoint;
-import au.uq.dke.comonviz.ui.data.tableModel.PrimeryRecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PrimaryRecordsTableModel;
 import database.model.ontology.OntologyAxiom;
 
 public class RelTypeListDialog extends JDialog {

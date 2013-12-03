@@ -1,21 +1,18 @@
 package au.uq.dke.comonviz.ui.data.panel;
 
 import java.awt.Container;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JTable;
 
 import org.metawidget.inspector.annotation.UiAction;
+import org.metawidget.inspector.annotation.UiComesAfter;
 import org.metawidget.util.ClassUtils;
 
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.PrimeryRecordsTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PrimaryRecordsTableModel;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 
@@ -27,7 +24,7 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 	public ForeignRecordsChoosePanel(BasicRecord primaryRecord, Class<?> foreignClass, BasicTablePanel
 			 callerTablePanel) {
 		super();
-		PrimeryRecordsTableModel foreignTableModel = new PrimeryRecordsTableModel(
+		PrimaryRecordsTableModel foreignTableModel = new PrimaryRecordsTableModel(
 				foreignClass);
 		JTable table = new BasicTable(foreignTableModel);
 		super.init(table);
@@ -35,6 +32,11 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 		this.mainRecord = primaryRecord;
 	}
 
+	@UiAction
+	@UiComesAfter("OK")
+	public void cancel(){
+		
+	}
 	/**
 	 * add the selected record(s) as the associated records to the pk record
 	 */

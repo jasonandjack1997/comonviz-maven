@@ -6,7 +6,7 @@ import javax.swing.JTable;
 import org.junit.Before;
 import org.junit.Test;
 
-import au.uq.dke.comonviz.ui.data.tableModel.PrimeryRecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PrimaryRecordsTableModel;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 import database.model.data.bussinesProcessManagement.ProcessObjective;
 import database.service.GenericService;
@@ -25,13 +25,10 @@ public class ForeignRecordsChoosePanelTest {
 		GenericService objectiveService = ServiceManager.getGenericService(ProcessObjective.class);
 		objectiveService.save(objective1);
 		objectiveService.save(objective2);
+		ProcessActivity activity = new ProcessActivity("activity 1");
 		
-		JTable table = new JTable(new PrimeryRecordsTableModel(ProcessObjective.class));
-		table.setRowSelectionInterval(0, 0);
-		ProcessActivity activity = new ProcessActivity();
-		activity.setName("activity 1");
 		JFrame frame = new JFrame();
-		frame.add(new ForeignRecordsChoosePanel(table, activity));
+		frame.add(new ForeignRecordsChoosePanel(activity, ProcessObjective.class, null));
 		frame.pack();
 		frame.setVisible(true);
 		

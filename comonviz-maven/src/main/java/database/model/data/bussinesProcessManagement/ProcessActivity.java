@@ -24,7 +24,7 @@ public class ProcessActivity extends BasicRecord {
 
 	@OneToMany (mappedBy = "activity")
 	@OnDelete(action=OnDeleteAction.CASCADE)
-	public Set<ProcessObjective> objectives =  new BasicRecordSet<ProcessObjective>();
+	private Set<ProcessObjective> objectives =  new BasicRecordSet<ProcessObjective>();
 
 
 	public Set<ProcessObjective> getObjectives() {

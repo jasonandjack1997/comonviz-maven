@@ -9,20 +9,23 @@ import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingPro
 import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessorConfig;
 import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBindingProcessor;
 
-import au.uq.dke.comonviz.ui.data.dialog.PrimeryRecordBeanDialog;
+import au.uq.dke.comonviz.ui.data.dialog.PrimaryRecordBeanDialog;
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.PrimeryRecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.PrimaryRecordsTableModel;
 import database.model.data.BasicRecord;
 import database.model.data.bussinesProcessManagement.ProcessActivity;
 
-public class PrimeryRecordsTablePanel extends ButtonedTablePanel {
+public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public PrimeryRecordsTablePanel(JTable table) {
-		super(table);
-		//getButtonsWidget().setToInspect(this);
+	public PrimaryRecordsTablePanel(Class<?> clazz) {
+		super();
+		PrimaryRecordsTableModel foreignTableModel = new PrimaryRecordsTableModel(
+				clazz);
+		JTable table = new BasicTable(foreignTableModel);
+		super.init(table);
 	}
 
 	@UiAction
@@ -34,7 +37,7 @@ public class PrimeryRecordsTablePanel extends ButtonedTablePanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new PrimeryRecordBeanDialog(this, newRecord, true);
+		new PrimaryRecordBeanDialog(newRecord, false, this);
 
 	}
 
@@ -43,7 +46,7 @@ public class PrimeryRecordsTablePanel extends ButtonedTablePanel {
 
 		BasicRecord record = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
-		new PrimeryRecordBeanDialog(this, record, true);
+		new PrimaryRecordBeanDialog(record, true, this);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -56,13 +59,4 @@ public class PrimeryRecordsTablePanel extends ButtonedTablePanel {
 
 	}
 	
-	public static void main(String args[]) {
-		JFrame frame = new JFrame();
-		JTable table = new BasicTable(new PrimeryRecordsTableModel(ProcessActivity.class));
-		frame.add(new PrimeryRecordsTablePanel(table));
-		frame.pack();
-		frame.setVisible(true);
-		return;
-	}
-
 }

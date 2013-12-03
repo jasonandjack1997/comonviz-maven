@@ -13,16 +13,16 @@ import au.uq.dke.comonviz.ui.data.panel.BasicTablePanel;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 
-public class PrimeryRecordBeanDialog extends BasicBeanDialog {
+public class PrimaryRecordBeanDialog extends BasicBeanDialog {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @param basicTablePanel
+	 * @param callerTablePanel
 	 * @param primaryRecord
 	 * @param isUpdate
 	 */
-	public PrimeryRecordBeanDialog(BasicRecord primaryRecord, boolean isUpdate,
-			BasicTablePanel basicTablePanel) {
+	public PrimaryRecordBeanDialog(BasicRecord primaryRecord, boolean isUpdate,
+			BasicTablePanel callerTablePanel) {
 		super();
 
 		// add associated record
@@ -45,7 +45,7 @@ public class PrimeryRecordBeanDialog extends BasicBeanDialog {
 			this.getModelWidget().add(associatedRecordsPanel);
 		}
 
-		super.init(basicTablePanel, primaryRecord, isUpdate);
+		super.init(callerTablePanel, primaryRecord, isUpdate);
 	}
 
 }

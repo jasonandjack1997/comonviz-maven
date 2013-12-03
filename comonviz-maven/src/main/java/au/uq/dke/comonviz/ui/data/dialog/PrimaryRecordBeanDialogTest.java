@@ -11,7 +11,7 @@ import database.model.data.bussinesProcessManagement.ProcessObjective;
 import database.service.GenericService;
 import database.service.ServiceManager;
 
-public class PrimeryRecordBeanDialogTest {
+public class PrimaryRecordBeanDialogTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -34,13 +34,13 @@ public class PrimeryRecordBeanDialogTest {
 		activity.getObjectives().add(objective1);
 
 		BasicTablePanel caller = new BasicTablePanel();
-		JDialog dialog = new PrimeryRecordBeanDialog(activity, false, caller);
+		JDialog dialog = new PrimaryRecordBeanDialog(activity, false, caller);
 		
 		return;
 	}
 	
 	public static void main(String args[]){
-		new PrimeryRecordBeanDialogTest().test();
+		new PrimaryRecordBeanDialogTest().test();
 	}
 	
 

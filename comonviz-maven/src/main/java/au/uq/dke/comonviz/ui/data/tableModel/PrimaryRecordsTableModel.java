@@ -31,17 +31,14 @@ package au.uq.dke.comonviz.ui.data.tableModel;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.collection.internal.PersistentSet;
 import org.metawidget.util.ClassUtils;
-import org.metawidget.util.CollectionUtils;
 
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
-import database.service.GenericService;
-import database.service.ServiceManager;
 
 /**
  * TableModel for Lists of Objects.
@@ -53,12 +50,12 @@ import database.service.ServiceManager;
  * @author Richard Kennard
  */
 
-public class PrimeryRecordsTableModel<T> extends ServiceTableModel {
+public class PrimaryRecordsTableModel<T> extends ServiceTableModel {
 
 
 	private List<Class<?>> mFKClassList;
 
-	public PrimeryRecordsTableModel(Class<T> clazz) {
+	public PrimaryRecordsTableModel(Class<T> clazz) {
 		super(clazz);
 
 		List<String> columnList = new ArrayList<String>();
@@ -89,7 +86,7 @@ public class PrimeryRecordsTableModel<T> extends ServiceTableModel {
 		}
 		super.init(columns);
 		
-		super.importCollection(this.getService().findAll());
+		super.importCollection(resultsWithSetsObjects);
 		
 		return;
 	}
@@ -157,6 +154,7 @@ public class PrimeryRecordsTableModel<T> extends ServiceTableModel {
 		if (columnIndex < 2) {// 0 is name; 1 is discription
 
 			// Inspect it
+			
 			return ClassUtils.getProperty(r, getColumnName(columnIndex));
 
 		} else {
@@ -168,10 +166,11 @@ public class PrimeryRecordsTableModel<T> extends ServiceTableModel {
 
 			List<Set<?>> setObjectList = ReflectionUtils.getSetObjectList(r);
 			Set<?> set = setObjectList.get(columnIndex - 2);
-			if(set == null || set.size() == 0){
+			if(set == null ||((PersistentSet)set).empty()||set.size() == 0){
 				return null;
 			}
-			return set.toArray()[0];
+			
+			return ((BasicRecord)set.toArray()[0]).getName();
 
 		}
 

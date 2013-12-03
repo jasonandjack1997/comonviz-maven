@@ -24,7 +24,7 @@ import database.model.data.BasicRecord;
 
 public class BasicBeanDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
-	private BasicTablePanel tablePanel;
+	private BasicTablePanel callerTablePanel;
 	private BasicRecord dataModel;
 	private SwingMetawidget modelWidget;
 	private SwingMetawidget buttonsWidget;
@@ -62,10 +62,10 @@ public class BasicBeanDialog extends JDialog {
 		this.add(buttonsWidget, BorderLayout.SOUTH);
 		
 	}
-	public void init(BasicTablePanel callerTablePanel, BasicRecord dataModel, boolean isUpdate){
+	public void init(BasicTablePanel callerTablePanel, BasicRecord record, boolean isUpdate){
 
-		this.tablePanel = callerTablePanel;
-		this.dataModel = dataModel;
+		this.callerTablePanel = callerTablePanel;
+		this.dataModel = record;
 		this.isUpdate = isUpdate;
 
 		modelWidget.setToInspect(this.dataModel);
@@ -85,10 +85,10 @@ public class BasicBeanDialog extends JDialog {
 
 		if(this.isUpdate){
 			// update old record
-			((ServiceTableModel)this.tablePanel.getTable().getModel()).updateRecord(dataModel);
+			((ServiceTableModel)this.callerTablePanel.getTable().getModel()).updateRecord(dataModel);
 		} else{
 			// add new record
-			((ServiceTableModel)this.tablePanel.getTable().getModel()).add(dataModel);
+			((ServiceTableModel)this.callerTablePanel.getTable().getModel()).add(dataModel);
 		}
 		
 		SwingUtilities.invokeLater(new Runnable() {
