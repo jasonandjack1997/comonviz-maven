@@ -8,11 +8,12 @@ import javax.persistence.Table;
 import org.metawidget.inspector.annotation.UiHidden;
 
 import database.model.Trackable;
+import database.model.Trackable2;
 
 @Entity
-@Table (name = "newOntologyClass")
 @PrimaryKeyJoinColumn(name = "ID")
-public class OntologyClass extends Trackable{
+@Table (name = "ontologyClass")
+public class OntologyClass2 extends Trackable2{
 	private Long branchId;
 	@Column(columnDefinition = "TEXT")
 	private String discription;
@@ -67,7 +68,7 @@ public class OntologyClass extends Trackable{
 		return super.toString() + ", iri: " + iri;
 	}
 	
-	public void update(OntologyClass c){
+	public void update(OntologyClass2 c){
 		this.setBranchId(c.getBranchId());
 		this.setDiscription(c.getDiscription());
 		this.setIri(c.getIri());
