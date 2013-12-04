@@ -13,7 +13,7 @@ import database.model.data.BasicRecord;
 import database.model.data.BasicRecordSet;
 
 
-//@Entity
+@Entity
 public class ProcessMonitoring extends BasicRecord {
 	public ProcessMonitoring() {
 	}
@@ -22,16 +22,16 @@ public class ProcessMonitoring extends BasicRecord {
 		super(name);
 	}
 
-	@OneToMany (mappedBy = "processActivity")
-	private Set<ProcessObjective> processObjectives =  new BasicRecordSet<ProcessObjective>();
+	@OneToMany (mappedBy = "processMonitoring")
+	private Set<ProcessActivity> processActivities =  new BasicRecordSet<ProcessActivity>();
 
 
-	public Set<ProcessObjective> getProcessObjectives() {
-		return processObjectives;
+	public Set<ProcessActivity> getProcessActivities() {
+		return processActivities;
 	}
 
-	public void setProcessObjectives(Set<ProcessObjective> objectives) {
-		this.processObjectives = objectives;
+	public void setProcessActivities(Set<ProcessActivity> objectives) {
+		this.processActivities = objectives;
 	}
 	
 

@@ -73,4 +73,9 @@ public class BasicRecord extends Trackable implements Comparable<BasicRecord>{
 		}
 		
 	}
+	
+	public String getfieldNameByClass(){
+		return ReflectionUtils.getfieldNameByClass(this.getClass());
+	}
+
 }

@@ -14,15 +14,15 @@ import database.model.data.BasicRecordSet;
 
 
 @Entity
-public class ProcessRule extends BasicRecord {
-	public ProcessRule() {
+public class ProcessImprovement extends BasicRecord {
+	public ProcessImprovement() {
 	}
 	
-	public ProcessRule(String name){
+	public ProcessImprovement(String name){
 		super(name);
 	}
 
-	@OneToMany (mappedBy = "processRule")
+	@OneToMany (mappedBy = "processImprovement")
 	private Set<ProcessActivity> processActivities =  new BasicRecordSet<ProcessActivity>();
 
 

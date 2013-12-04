@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 
 @Entity
@@ -14,8 +15,7 @@ public class ProcessObjective extends BasicRecord {
 	@ManyToOne
 	public ProcessActivity processActivity;
 	
-	@ManyToOne
-	public ProcessActivity processRule;
+	
 
 	public ProcessObjective(){
 		
@@ -33,12 +33,5 @@ public class ProcessObjective extends BasicRecord {
 		this.processActivity = activity;
 	}
 
-	public ProcessActivity getProcessRule() {
-		return processRule;
-	}
-
-	public void setProcessRule(ProcessActivity rule) {
-		this.processRule = rule;
-	}
 
 }
