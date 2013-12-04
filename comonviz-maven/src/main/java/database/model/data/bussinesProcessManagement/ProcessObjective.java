@@ -12,8 +12,11 @@ import database.model.data.BasicRecord;
 public class ProcessObjective extends BasicRecord {
 
 	@ManyToOne
-	public ProcessActivity activity;
+	public ProcessActivity processActivity;
 	
+	@ManyToOne
+	public ProcessActivity processRule;
+
 	public ProcessObjective(){
 		
 	}
@@ -22,12 +25,20 @@ public class ProcessObjective extends BasicRecord {
 		super(name);
 	}
 
-	public ProcessActivity getActivity() {
-		return activity;
+	public ProcessActivity getProcessActivity() {
+		return processActivity;
 	}
 
-	public void setActivity(ProcessActivity activity) {
-		this.activity = activity;
+	public void setProcessActivity(ProcessActivity activity) {
+		this.processActivity = activity;
+	}
+
+	public ProcessActivity getProcessRule() {
+		return processRule;
+	}
+
+	public void setProcessRule(ProcessActivity rule) {
+		this.processRule = rule;
 	}
 
 }

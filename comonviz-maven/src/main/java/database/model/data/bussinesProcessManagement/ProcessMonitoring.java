@@ -13,16 +13,16 @@ import database.model.data.BasicRecord;
 import database.model.data.BasicRecordSet;
 
 
-@Entity
-public class ProcessRule extends BasicRecord {
-	public ProcessRule() {
+//@Entity
+public class ProcessMonitoring extends BasicRecord {
+	public ProcessMonitoring() {
 	}
 	
-	public ProcessRule(String name){
+	public ProcessMonitoring(String name){
 		super(name);
 	}
 
-	@OneToMany (mappedBy = "processRule")
+	@OneToMany (mappedBy = "processActivity")
 	private Set<ProcessObjective> processObjectives =  new BasicRecordSet<ProcessObjective>();
 
 

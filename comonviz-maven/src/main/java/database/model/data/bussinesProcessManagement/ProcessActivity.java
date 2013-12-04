@@ -1,16 +1,13 @@
 package database.model.data.bussinesProcessManagement;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import database.model.BasicRecordSet;
 import database.model.data.BasicRecord;
+import database.model.data.BasicRecordSet;
 
 
 @Entity
@@ -22,17 +19,18 @@ public class ProcessActivity extends BasicRecord {
 		super(name);
 	}
 
-	@OneToMany (mappedBy = "activity")
-	//@OnDelete(action=OnDeleteAction.CASCADE)
-	private Set<ProcessObjective> objectives =  new BasicRecordSet<ProcessObjective>();
+	@OneToMany (mappedBy = "processActivity")
+	private Set<ProcessObjective> processObjectives =  new BasicRecordSet<ProcessObjective>();
 
+//	@ManyToOne
+//	private ProcessMonitoring processMonitoring;
 
-	public Set<ProcessObjective> getObjectives() {
-		return objectives;
+	public Set<ProcessObjective> getProcessObjectives() {
+		return processObjectives;
 	}
 
-	public void setObjectives(Set<ProcessObjective> objectives) {
-		this.objectives = objectives;
+	public void setProcessObjectives(Set<ProcessObjective> objectives) {
+		this.processObjectives = objectives;
 	}
 	
 

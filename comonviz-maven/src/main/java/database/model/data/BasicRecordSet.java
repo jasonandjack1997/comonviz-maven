@@ -1,8 +1,6 @@
-package database.model;
+package database.model.data;
 
 import java.util.HashSet;
-
-import database.model.data.BasicRecord;
 
 public class BasicRecordSet<T extends BasicRecord> extends HashSet<T>{
 

@@ -30,8 +30,8 @@ public class UnassociatedRecordsPanelTest {
 		ProcessObjective objective1 = new ProcessObjective("objective 1");
 		ProcessObjective objective2 = new ProcessObjective("objective 2");
 
-		activity.getObjectives().add(objective1);
-		objective1.setActivity(activity);
+		activity.getProcessObjectives().add(objective1);
+		objective1.setProcessActivity(activity);
 	
 		//activity.getObjectives().add(objective2);
 		//objective2.setActivity(activity);
