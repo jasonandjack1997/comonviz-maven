@@ -58,12 +58,4 @@ public class Trackable2{
 		return false;
 	}
 
-	private Timestamp creationDateTime;
-	private Timestamp modificationDateTime;
-
-	private Long creationUserId;
-	private Long modificationUserId;
-
-	private Long databaseVersionId;
-
 }
