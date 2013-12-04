@@ -10,7 +10,6 @@ import org.metawidget.inspector.annotation.UiHidden;
 import database.model.Trackable;
 
 @Entity
-@Table (name = "newOntologyClass")
 @PrimaryKeyJoinColumn(name = "ID")
 public class OntologyClass extends Trackable{
 	private Long branchId;
