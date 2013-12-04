@@ -38,6 +38,8 @@ import database.model.ontology.OntologyClass;
 import edu.umd.cs.piccolo.PCamera;
 import edu.umd.cs.piccolo.PLayer;
 import edu.umd.cs.piccolo.PNode;
+import edu.umd.cs.piccolo.event.PInputEvent;
+import edu.umd.cs.piccolo.event.PInputEventListener;
 import edu.umd.cs.piccolo.nodes.PImage;
 import edu.umd.cs.piccolo.nodes.PText;
 import edu.umd.cs.piccolo.util.PBounds;
@@ -57,9 +59,21 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 	public boolean equals(Object obj) {
 		OntologyClass thisCls = (OntologyClass) this.getUserObject();
 		OntologyClass tgtCls = (OntologyClass) ((DefaultGraphNode)obj).getUserObject();
+		
+		this.addInputEventListener(new PInputEventListener(){
+
+			@Override
+			public void processEvent(PInputEvent arg0, int arg1) {
+				
+				int a  = 1;
+				
+			}
+			
+		});
+		
 		return thisCls.equals(tgtCls);
 		
-		// TODO Auto-generated method stub
+		
 	}
 
 	private static final long serialVersionUID = 3223950711940456476L;

@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
 
+import database.model.Trackable;
 import database.model.ontology.OntologyAxiom;
 import database.model.ontology.OntologyClass;
 import au.uq.dke.comonviz.EntryPoint;
@@ -60,6 +61,10 @@ public class AnnotationManager {
 			ontologyClasses.add(cls.getName());
 		}
 
+//		for (OntologyClass cls : EntryPoint.getOntologyClassService().findAll()) {
+//			ontologyClasses.add(cls.getName());
+//		}
+//		
 		//sort, longer term first to fully match classes
 		Collections.sort(ontologyClasses, Collections.reverseOrder());
 		

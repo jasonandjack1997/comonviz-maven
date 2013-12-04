@@ -29,8 +29,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import uk.ac.manchester.cs.bhig.util.MutableTree;
-import unused.Activity;
-import unused.ProcessActivityService;
 import au.uq.dke.comonviz.actions.LayoutAction;
 import au.uq.dke.comonviz.filter.FilterManager;
 import au.uq.dke.comonviz.handler.NodeExpandCollapseListener;
