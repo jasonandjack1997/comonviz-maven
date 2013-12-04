@@ -58,22 +58,11 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 	@Override
 	public boolean equals(Object obj) {
 		OntologyClass thisCls = (OntologyClass) this.getUserObject();
-		OntologyClass tgtCls = (OntologyClass) ((DefaultGraphNode)obj).getUserObject();
-		
-		this.addInputEventListener(new PInputEventListener(){
+		OntologyClass tgtCls = (OntologyClass) ((DefaultGraphNode) obj)
+				.getUserObject();
 
-			@Override
-			public void processEvent(PInputEvent arg0, int arg1) {
-				
-				int a  = 1;
-				
-			}
-			
-		});
-		
 		return thisCls.equals(tgtCls);
-		
-		
+
 	}
 
 	private static final long serialVersionUID = 3223950711940456476L;
@@ -125,8 +114,6 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 	private HiddenChildrenCountIcon childrenCountIcon;
 
 	private final static int MAX_TOOLTIP_LINES = 20;
-	
-	
 
 	// This nodes uses an internal Ellipse2D to define its shape.
 	public Ellipse2D getEllipse() {
@@ -391,7 +378,7 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 
 	@Override
 	public String toString() {
-		return ((OntologyClass)this.getUserObject()).getName();
+		return ((OntologyClass) this.getUserObject()).getName();
 
 	}
 
@@ -404,13 +391,11 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 						.getValue().toString();
 				annotation = annotation.substring(1, annotation.length() - 1);
 
-
 				annotation = this.splitTextIntoLines(annotation,
 						MAX_TOOLTIP_LINES, MAX_TOOLTIP_CHARS_IN_A_LINE);
 
-//				annotation = EntryPoint.getAnnotationManager()
-//						.getStylizedAnnotation(annotation);
-				
+				// annotation = EntryPoint.getAnnotationManager()
+				// .getStylizedAnnotation(annotation);
 
 				return annotation;
 
@@ -741,7 +726,7 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 
 	@Override
 	protected void paint(PPaintContext paintContext) {
-		this.setText(((OntologyClass)this.getUserObject()).getName());
+		this.setText(((OntologyClass) this.getUserObject()).getName());
 		Graphics2D g2 = paintContext.getGraphics();
 
 		// this.setB
@@ -755,10 +740,9 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 		Paint borderPaint = style.getBorderPaint(this);
 		Stroke borderStroke = style.getBorderStroke(this);
 
-//		Paint bg = Color.red;
-//		Paint borderPaint = Color.red;
-//		Stroke borderStroke = new PFixedWidthStroke(3f);
-
+		// Paint bg = Color.red;
+		// Paint borderPaint = Color.red;
+		// Stroke borderStroke = new PFixedWidthStroke(3f);
 
 		Shape drawShape = getEllipse();
 
