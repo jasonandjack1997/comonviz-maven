@@ -1,21 +1,21 @@
 package au.uq.dke.comonviz.ui.data.panel;
 
-import javax.swing.JFrame;
+import java.lang.reflect.Field;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import javax.swing.JTable;
-import javax.swing.table.TableRowSorter;
 
 import org.metawidget.inspector.annotation.UiAction;
-import org.metawidget.swing.SwingMetawidget;
-import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessor;
-import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessorConfig;
-import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBindingProcessor;
 
 import au.uq.dke.comonviz.ui.data.dialog.PrimaryRecordBeanDialog;
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
-import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
+import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
-import database.model.data.bussinesProcessManagement.ProcessActivity;
+import database.model.data.bussinesProcessManagement.ProcessObjective;
 import database.service.ServiceManager;
 
 public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
@@ -62,8 +62,27 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 				.getSelectedRow());
 		//update relation
 
+		
+		//reset all the record sets
+		for(Field setField: ReflectionUtils.getSetFieldList(record.getClass())){
+			Class<?> elementType = ReflectionUtils.getSetElementType(setField);
+			Set<BasicRecord> set = ReflectionUtils.getSpecificSetByElementType(record, elementType);
+			for(Iterator<BasicRecord> it = set.iterator(); it.hasNext(); ){
+				BasicRecord foreignRecord = it.next();
+				//f unassociate p
+				ReflectionUtils.foreignRnassociatedPrimaryRecord(record, foreignRecord);
+				//update in the database
+				ServiceManager.getGenericService(foreignRecord.getClass()).save(foreignRecord);
+			}
+			set.clear();
+		}
+		
+		List objectives = ServiceManager.getGenericService(ProcessObjective.class).findAll();
+
 		//update database
 		ServiceManager.getGenericService(record.getClass()).delete(record);
+		
+		objectives = ServiceManager.getGenericService(ProcessObjective.class).findAll();
 
 		//update table
 		((ServiceTableModel<BasicRecord>)this.getTable().getModel()).delete(record);

@@ -23,7 +23,7 @@ public class ProcessActivity extends BasicRecord {
 	}
 
 	@OneToMany (mappedBy = "activity")
-	@OnDelete(action=OnDeleteAction.CASCADE)
+	//@OnDelete(action=OnDeleteAction.CASCADE)
 	private Set<ProcessObjective> objectives =  new BasicRecordSet<ProcessObjective>();
 
 

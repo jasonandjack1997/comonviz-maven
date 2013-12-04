@@ -24,14 +24,16 @@ import au.uq.dke.comonviz.utils.ReflectionUtils;
 public class BasicRecordsInfoDialog extends JDialog{
 	
 	private Class<?> recordType;
-	private List<BasicTablePanel> unassociatedForeignRecordsTablePanelList = new ArrayList<BasicTablePanel>();
 	private BasicTablePanel primaryRecordsTablePanel;
+	private List<BasicTablePanel> unassociatedForeignRecordsTablePanelList = new ArrayList<BasicTablePanel>();
 	
 	public BasicRecordsInfoDialog(Class<?> recordType){
 		this.setModalityType(ModalityType.APPLICATION_MODAL);
 		this.recordType = recordType;
 		this.setTitle(recordType.getSimpleName());
 		primaryRecordsTablePanel = new PrimaryRecordsTablePanel(recordType);
+		primaryRecordsTablePanel.getTable().setRowSelectionInterval(0, 0);
+		
 		this.add(primaryRecordsTablePanel, BorderLayout.CENTER);
 		List<Field> setFields = ReflectionUtils.getSetFieldList(recordType);
 		for(Field field : setFields){

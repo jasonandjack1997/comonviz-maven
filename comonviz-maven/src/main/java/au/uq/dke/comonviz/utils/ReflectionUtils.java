@@ -7,8 +7,11 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+
 
 import org.metawidget.util.ClassUtils;
 
@@ -25,6 +28,50 @@ public class ReflectionUtils{
 
 	public void setTestSet(Set<String> testSet) {
 		this.testSet = testSet;
+	}
+	
+	
+	public static void associatedRecords(BasicRecord primaryRecord, BasicRecord foreignRecord){
+		// associate the one side(primary)
+
+		Set<BasicRecord> set = ReflectionUtils.getSpecificSetByElementType(primaryRecord, foreignRecord.getClass());
+		for(BasicRecord record : set){
+			if(record.getId() == foreignRecord.getId()){
+				record.update(foreignRecord);
+			}
+		}
+		// associated the many side(foreign)
+		ReflectionUtils.setFieldValue(foreignRecord, primaryRecord.getClass(), primaryRecord);
+		
+	}
+	
+	
+	public static void foreignRnassociatedPrimaryRecord(BasicRecord primaryRecord, BasicRecord foreignRecord){
+		
+		// associated the many side(foreign)
+		ReflectionUtils.setFieldValue(foreignRecord, primaryRecord.getClass(), null);
+		
+	}
+
+	
+	
+	/**will cause expection in set cause the iterator is used in in and in the caller
+	 * @param primaryRecord
+	 * @param foreignRecord
+	 */
+	@Deprecated
+	public static void unassociatedRecords(BasicRecord primaryRecord, BasicRecord foreignRecord){
+		
+		Set<BasicRecord> set = ReflectionUtils.getSpecificSetByElementType(primaryRecord, foreignRecord.getClass());
+
+		for(Iterator<BasicRecord> it = set.iterator(); it.hasNext(); ){
+			if(it.next().getId() == foreignRecord.getId()){
+				it.remove();
+			}
+		}
+		// associated the many side(foreign)
+		ReflectionUtils.setFieldValue(foreignRecord, primaryRecord.getClass(), null);
+		
 	}
 	
 	
@@ -50,21 +97,21 @@ public class ReflectionUtils{
 	
 	
 	/**get a specifi set of whith the element type is @elementType
-	 * @param mainRecord
+	 * @param primaryRecord
 	 * @param elementType
 	 * @return
 	 */
-	public static Set<BasicRecord> getSpecificSetByElementType(BasicRecord mainRecord, Class<BasicRecord> elementType){
+	public static Set<BasicRecord> getSpecificSetByElementType(BasicRecord primaryRecord, Class<?> elementType){
 		//get all set fields
 		//find element type, get the set field, then get the set it self!
-		List<Field> setFields = getSetFieldList(mainRecord.getClass());
+		List<Field> setFields = getSetFieldList(primaryRecord.getClass());
 		for(Field setField : setFields){
 			Class type = getSetElementType(setField);
 			if(type == elementType){
 				String property = setField.getName();
-				Set<BasicRecord> set = ClassUtils.getProperty(mainRecord, property);
+				Set<BasicRecord> set = ClassUtils.getProperty(primaryRecord, property);
 				if(set == null){
-					ClassUtils.setProperty(mainRecord, property, new HashSet<BasicRecord>());
+					ClassUtils.setProperty(primaryRecord, property, new HashSet<BasicRecord>());
 				}
 				
 				return set;
