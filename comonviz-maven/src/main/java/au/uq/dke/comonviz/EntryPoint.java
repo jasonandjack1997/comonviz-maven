@@ -81,7 +81,6 @@ public class EntryPoint {
 
 	private static TopView topView;
 
-
 	private static JFrame jFrame;
 	private static FilterManager filterManager;
 
@@ -139,6 +138,8 @@ public class EntryPoint {
 				.getBean("ontologyClassService");
 		ontologyRelationshipService = (OntologyRelationshipService) ctx
 				.getBean("ontologyRelationshipService");
+
+		List objects = EntryPoint.getOntologyClassService().findAll();
 
 		filterManager = new FilterManager();
 		jFrame = new JFrame("CoMOnViz");
@@ -205,7 +206,6 @@ public class EntryPoint {
 		return topView;
 	}
 
-
 	public static JFrame getFrame() {
 		return jFrame;
 	}
@@ -213,7 +213,6 @@ public class EntryPoint {
 	public static MutableTree getOntologyTree() {
 		return ontologyTree;
 	}
-
 
 	public static void main(String[] args) throws URISyntaxException,
 			IOException {
