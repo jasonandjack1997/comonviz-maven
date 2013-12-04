@@ -51,7 +51,8 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 
 		BasicRecord record = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
-		record = ((ServiceTableModel)this.getTableModel()).getService().findByName(record.getName(), record.getClass());
+		//record = ((ServiceTableModel)this.getTableModel()).getService().findByName(record.getName(), record.getClass());
+		record.getFullObject();
 		new PrimaryRecordBeanDialog(record, true, this);
 	}
 

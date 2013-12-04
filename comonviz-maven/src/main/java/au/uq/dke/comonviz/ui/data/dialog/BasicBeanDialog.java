@@ -69,6 +69,7 @@ public class BasicBeanDialog extends JDialog {
 		this.isUpdate = isUpdate;
 
 		modelWidget.setToInspect(this.dataModel);
+		modelWidget.setMaximumInspectionDepth(0);
 
 		this.pack();
 		this.setVisible(true);
@@ -82,7 +83,12 @@ public class BasicBeanDialog extends JDialog {
 				modelWidget);
 		BasicRecord model = modelWidget.getToInspect();
 		this.dataModel.update(model);
+		
+		// persistent database
 
+		dataModel.persistForeignRecordsInSetList();
+		
+		//update table
 		if(this.isUpdate){
 			// update old record
 			((ServiceTableModel)this.callerTablePanel.getTable().getModel()).updateRecord(dataModel);

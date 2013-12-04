@@ -79,9 +79,9 @@ public class AssociatedRecordsPanel extends ButtonedTablePanel {
 		//unlink the relation
 		this.set.remove(record);
 		ReflectionUtils.setFieldValue(record, this.primaryRecord.getClass(), null);
-
-		ServiceManager.getGenericService(record.getClass()).save(record);
+		//update database
 		ServiceManager.getGenericService(primaryRecord.getClass()).save(primaryRecord);
+		ServiceManager.getGenericService(record.getClass()).save(record);
 		//update the table
 		((BasicTableModel<BasicRecord>) this.getTable().getModel())
 				.delete(record);

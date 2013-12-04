@@ -21,8 +21,8 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 	private BasicRecord mainRecord;
 	private BasicTablePanel callerTablePanel;
 
-	public ForeignRecordsChoosePanel(BasicRecord primaryRecord, Class<?> foreignClass, BasicTablePanel
-			 callerTablePanel) {
+	public ForeignRecordsChoosePanel(BasicRecord primaryRecord,
+			Class<?> foreignClass, BasicTablePanel callerTablePanel) {
 		super();
 		RecordsTableModel foreignTableModel = new RecordsTableModel(
 				foreignClass);
@@ -32,11 +32,6 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 		this.mainRecord = primaryRecord;
 	}
 
-	@UiAction
-	@UiComesAfter("OK")
-	public void cancel(){
-		
-	}
 	/**
 	 * add the selected record(s) as the associated records to the pk record
 	 */
@@ -74,6 +69,12 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 		((JDialog) parent).dispose();
 
 		return;
+
+	}
+
+	@UiAction
+	@UiComesAfter("OK")
+	public void cancel() {
 
 	}
 
