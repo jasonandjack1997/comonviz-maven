@@ -58,4 +58,51 @@ public class Trackable2{
 		return false;
 	}
 
+	private Timestamp creationDateTime;
+	private Timestamp modificationDateTime;
+
+	private Long creationUserId;
+	public Timestamp getCreationDateTime() {
+		return creationDateTime;
+	}
+
+	public void setCreationDateTime(Timestamp creationDateTime) {
+		this.creationDateTime = creationDateTime;
+	}
+
+	public Timestamp getModificationDateTime() {
+		return modificationDateTime;
+	}
+
+	public void setModificationDateTime(Timestamp modificationDateTime) {
+		this.modificationDateTime = modificationDateTime;
+	}
+
+	public Long getCreationUserId() {
+		return creationUserId;
+	}
+
+	public void setCreationUserId(Long creationUserId) {
+		this.creationUserId = creationUserId;
+	}
+
+	public Long getModificationUserId() {
+		return modificationUserId;
+	}
+
+	public void setModificationUserId(Long modificationUserId) {
+		this.modificationUserId = modificationUserId;
+	}
+
+	public Long getDatabaseVersionId() {
+		return databaseVersionId;
+	}
+
+	public void setDatabaseVersionId(Long databaseVersionId) {
+		this.databaseVersionId = databaseVersionId;
+	}
+	private Long modificationUserId;
+
+	private Long databaseVersionId;
+
 }

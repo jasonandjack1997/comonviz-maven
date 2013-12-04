@@ -25,7 +25,8 @@ public class DatabaseUtils {
 
 		List classes = session.createCriteria(OntologyClass2.class).list();
 
-		Query query = session.createSQLQuery("select * from ontologyClass").addEntity(OntologyClass2.class);
+		Query query = session.createSQLQuery("select ontologyClass.id as id, trackable.name, level, iri, discription, branchid from ontologyClass inner join trackable on ontologyClass.id=trackable.id");
+//		Query query = session.createSQLQuery("select * from ontologyClass inner join trackable where ontologyClass.id = trackable.id").addEntity(OntologyClass2.class);
 
 		List result = query.list();
 		return;
