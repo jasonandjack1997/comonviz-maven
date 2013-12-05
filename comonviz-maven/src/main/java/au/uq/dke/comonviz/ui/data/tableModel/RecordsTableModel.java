@@ -37,6 +37,7 @@ import java.util.Set;
 import org.hibernate.collection.internal.PersistentSet;
 import org.metawidget.util.ClassUtils;
 
+import au.uq.dke.comonviz.utils.DatabaseUtils;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 
@@ -64,14 +65,8 @@ public class RecordsTableModel<T> extends ServiceTableModel {
 
 		// before cast to array we should fetch the set members!
 
-		List<BasicRecord> results = this.getService().findAll();
+		List<BasicRecord> results = DatabaseUtils.findAll(clazz);
 		
-		List<BasicRecord> resultsWithSetsObjects = new ArrayList<BasicRecord>();
-		for(BasicRecord r : results){
-			BasicRecord record = r;
-			r = (BasicRecord) this.getService().findByName(record.getName(), clazz);
-			resultsWithSetsObjects.add(r);
-		}
 
 		
 		List setFieldList = ReflectionUtils.getSetFieldList(clazz);
@@ -86,7 +81,7 @@ public class RecordsTableModel<T> extends ServiceTableModel {
 		}
 		super.init(columns);
 		
-		super.importCollection(resultsWithSetsObjects);
+		super.importCollection(results);
 		
 		return;
 	}
@@ -166,8 +161,12 @@ public class RecordsTableModel<T> extends ServiceTableModel {
 
 			List<Set<?>> setObjectList = ReflectionUtils.getSetObjectList(r);
 			Set<?> set = setObjectList.get(columnIndex - 2);
-			if(set == null ||((PersistentSet)set).empty()||set.size() == 0){
+			try{
+			if(set == null || set.size() == 0){
 				return null;
+			}
+			}catch(NullPointerException e){
+				int a  = 1;
 			}
 			
 			return ((BasicRecord)set.toArray()[0]).getName();

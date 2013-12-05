@@ -29,8 +29,6 @@ public class PrimaryRecordBeanDialogTest {
 		ProcessActivity activity = new ProcessActivity("activity 1");
 
 		activity.getProcessObjectives().add(objective2);
-		objective1.setProcessActivity(activity);
-		objective2.setProcessActivity(activity);
 		activity.getProcessObjectives().add(objective1);
 
 		BasicTablePanel caller = new BasicTablePanel();

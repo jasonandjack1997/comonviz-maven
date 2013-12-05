@@ -12,19 +12,13 @@ import database.model.data.BasicRecord;
 @Entity
 public class ProcessObjective extends BusinessProcess {
 
-	@ManyToOne
-	public ProcessActivity processActivity;
 
+	public ProcessObjective(){
+		
+	}
 	public ProcessObjective(String name) {
 		super(name);
 	}
 
-	public ProcessActivity getProcessActivity() {
-		return processActivity;
-	}
-
-	public void setProcessActivity(ProcessActivity activity) {
-		this.processActivity = activity;
-	}
 
 }

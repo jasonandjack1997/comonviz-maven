@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
+import au.uq.dke.comonviz.utils.DatabaseUtils;
 import database.model.data.businessProcessManagement.ProcessActivity;
 import database.model.data.businessProcessManagement.ProcessObjective;
 import database.service.GenericService;
@@ -29,25 +30,19 @@ public class PrimaryRecordsTablePanelTest {
 	}
 
 	public static void main(String[] args) {
-		GenericService activityService = ServiceManager
-				.getGenericService(ProcessActivity.class);
-		GenericService objectiveService = ServiceManager
-				.getGenericService(ProcessObjective.class);
 
 		ProcessActivity activity = new ProcessActivity("activity 1");
-		activityService.save(activity);
+		DatabaseUtils.getSession().save(activity);
 
 		
 		ProcessObjective objective1 = new ProcessObjective("objective 1");
 		ProcessObjective objective2 = new ProcessObjective("objective 2");
 
 		activity.getProcessObjectives().add(objective2);
-		objective1.setProcessActivity(activity);
-		objective2.setProcessActivity(activity);
 		activity.getProcessObjectives().add(objective1);
 
-		objectiveService.save(objective1);
-		objectiveService.save(objective2);
+		DatabaseUtils.getSession().save(objective1);
+		DatabaseUtils.getSession().save(objective2);
 
 		new PrimaryRecordsTablePanelTest().test();
 

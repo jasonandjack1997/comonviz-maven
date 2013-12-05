@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import au.uq.dke.comonviz.ui.data.tableModel.AssociatedRecordsTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
+import au.uq.dke.comonviz.utils.DatabaseUtils;
 import database.model.data.BasicRecord;
 import database.model.data.businessProcessManagement.ProcessActivity;
 import database.model.data.businessProcessManagement.ProcessObjective;
@@ -27,16 +28,13 @@ public class AssociatedRecordsPanelTest {
 	public void test() {
 		ProcessObjective objective1 = new ProcessObjective("objective 1");
 		ProcessObjective objective2 = new ProcessObjective("objective 2");
-		GenericService objectiveService = ServiceManager
-				.getGenericService(ProcessObjective.class);
-		objectiveService.save(objective1);
-		objectiveService.save(objective2);
+		
+		DatabaseUtils.getSession().save(objective1);
+		DatabaseUtils.getSession().save(objective2);
 
 		ProcessActivity activity = new ProcessActivity("activity 1");
 
 		activity.getProcessObjectives().add(objective2);
-		objective1.setProcessActivity(activity);
-		objective2.setProcessActivity(activity);
 		activity.getProcessObjectives().add(objective1);
 
 

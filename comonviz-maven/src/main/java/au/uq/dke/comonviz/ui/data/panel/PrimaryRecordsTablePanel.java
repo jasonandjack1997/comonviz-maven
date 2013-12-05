@@ -13,6 +13,7 @@ import au.uq.dke.comonviz.ui.data.dialog.PrimaryRecordBeanDialog;
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
+import au.uq.dke.comonviz.utils.DatabaseUtils;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 import database.model.data.businessProcessManagement.ProcessObjective;
@@ -48,11 +49,14 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 
 	@UiAction
 	public void edit() {
+		int selectedRow = this.getTable()
+				.getSelectedRow();
+		if(selectedRow < 0){
+			return;
+		}
 
-		BasicRecord record = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
-				.getSelectedRow());
+		BasicRecord record = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getValueAt(selectedRow);
 		//record = ((ServiceTableModel)this.getTableModel()).getService().findByName(record.getName(), record.getClass());
-		record.getFullObject();
 		new PrimaryRecordBeanDialog(record, true, this);
 	}
 
@@ -68,22 +72,13 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 		for(Field setField: ReflectionUtils.getSetFieldList(record.getClass())){
 			Class<?> elementType = ReflectionUtils.getSetElementType(setField);
 			Set<BasicRecord> set = ReflectionUtils.getSpecificSetByElementType(record, elementType);
-			for(Iterator<BasicRecord> it = set.iterator(); it.hasNext(); ){
-				BasicRecord foreignRecord = it.next();
-				//f unassociate p
-				ReflectionUtils.foreignRnassociatedPrimaryRecord(record, foreignRecord);
-				//update in the database
-				ServiceManager.getGenericService(foreignRecord.getClass()).save(foreignRecord);
-			}
 			set.clear();
 		}
 		
-		List objectives = ServiceManager.getGenericService(ProcessObjective.class).findAll();
 
 		//update database
-		ServiceManager.getGenericService(record.getClass()).delete(record);
+		DatabaseUtils.getSession().delete(record);
 		
-		objectives = ServiceManager.getGenericService(ProcessObjective.class).findAll();
 
 		//update table
 		((ServiceTableModel<BasicRecord>)this.getTable().getModel()).delete(record);

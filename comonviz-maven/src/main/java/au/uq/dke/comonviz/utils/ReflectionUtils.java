@@ -36,7 +36,8 @@ public class ReflectionUtils {
 		return fieldName;
 	}
 
-	public static void associatedRecords(BasicRecord primaryRecord,
+	@Deprecated
+	public static void associateRecords(BasicRecord primaryRecord,
 			BasicRecord foreignRecord) {
 		// associate the one side(primary)
 
@@ -53,7 +54,7 @@ public class ReflectionUtils {
 
 	}
 
-	public static void foreignRnassociatedPrimaryRecord(
+	public static void foreignUnassociatedPrimaryRecord(
 			BasicRecord primaryRecord, BasicRecord foreignRecord) {
 
 		// associated the many side(foreign)
@@ -161,13 +162,13 @@ public class ReflectionUtils {
 		throw new CustomRuntimeException("found no record");
 	}
 
-	public static String getFieldNameByType(Class<BasicRecord> recordClass,
+	public static String getFieldNameByType(Class<BasicRecord> masterRecordClass,
 			Class<?> associatedRecordType) {
 		// first get all BasicRecord field
 		// then match type, then get the object
 		// only get the first field name, so a BasicRecord should only have one
 		// field of the type
-		Field[] fields = recordClass.getDeclaredFields();
+		Field[] fields = masterRecordClass.getDeclaredFields();
 		for (Field field : fields) {
 			if (field.getType() == associatedRecordType) {
 				return field.getName();

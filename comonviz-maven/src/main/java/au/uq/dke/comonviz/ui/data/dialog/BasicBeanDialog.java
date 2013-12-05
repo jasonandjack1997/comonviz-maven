@@ -86,7 +86,6 @@ public class BasicBeanDialog extends JDialog {
 		
 		// persistent database
 
-		dataModel.persistForeignRecordsInSetList();
 		
 		//update table
 		if(this.isUpdate){

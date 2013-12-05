@@ -11,6 +11,7 @@ import au.uq.dke.comonviz.ui.data.dialog.ForeignRecordsChooseDialog;
 import au.uq.dke.comonviz.ui.data.tableModel.AssociatedRecordsTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
+import au.uq.dke.comonviz.utils.DatabaseUtils;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 import database.service.ServiceManager;
@@ -78,10 +79,9 @@ public class AssociatedRecordsPanel extends ButtonedTablePanel {
 
 		//unlink the relation
 		this.set.remove(record);
-		ReflectionUtils.setFieldValue(record, this.primaryRecord.getClass(), null);
 		//update database
-		ServiceManager.getGenericService(primaryRecord.getClass()).save(primaryRecord);
-		ServiceManager.getGenericService(record.getClass()).save(record);
+		DatabaseUtils.getSession().save(primaryRecord);
+		DatabaseUtils.getSession().save(record);
 		//update the table
 		((BasicTableModel<BasicRecord>) this.getTable().getModel())
 				.delete(record);

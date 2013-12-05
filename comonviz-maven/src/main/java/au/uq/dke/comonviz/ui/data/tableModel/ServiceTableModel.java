@@ -8,9 +8,11 @@ import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.table.AbstractTableModel;
 
+import org.hibernate.Session;
 import org.metawidget.util.ClassUtils;
 import org.metawidget.util.CollectionUtils;
 
+import au.uq.dke.comonviz.utils.DatabaseUtils;
 import database.model.data.BasicRecord;
 import database.model.data.businessProcessManagement.ProcessObjective;
 import database.service.GenericService;
@@ -20,8 +22,9 @@ public class ServiceTableModel<T extends BasicRecord> extends
 		BasicTableModel<T> {
 
 	private static final long serialVersionUID = 1L;
+	
+	private Session session = DatabaseUtils.getSession();
 
-	private GenericService service;
 
 
 	/**
@@ -33,12 +36,11 @@ public class ServiceTableModel<T extends BasicRecord> extends
 	 */
 	public ServiceTableModel(Class<T> clazz) {
 		super(clazz);
-		service = ServiceManager.getGenericService(clazz);
 	}
 
 	public void init(String... columns) {
 		super.initColumns(columns);
-		Collection<T> collection = service.findAll();
+		Collection<T> collection = DatabaseUtils.findAll(this.getmClass());
 //		Collection<T> completedRecords = new ArrayList<T>();
 //		for(T record : collection){
 //			record = (T) service.find(record);
@@ -53,22 +55,19 @@ public class ServiceTableModel<T extends BasicRecord> extends
 
 	public void add(T record) {
 		super.add(record);
-		service.save(record);
+		session.save(record);
 	}
 
 	public void updateRecord(T newRecord) {
 		super.updateRecord(newRecord);
-		service.save(newRecord);
+		session.save(newRecord);
 
 	}
 
 	public void delete(T record) {
 		super.delete(record);
-		service.delete(record);
+		session.delete(record);
 	}
 
-	public GenericService getService() {
-		return service;
-	}
 
 }

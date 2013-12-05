@@ -55,7 +55,7 @@ public class EntryPointTest {
 		ProcessRule rule1 = new ProcessRule("rule 1");
 		rule1.persist();
 		
-		ReflectionUtils.associatedRecords(rule1, activity1);
+		ReflectionUtils.associateRecords(rule1, activity1);
 		
 
 	}

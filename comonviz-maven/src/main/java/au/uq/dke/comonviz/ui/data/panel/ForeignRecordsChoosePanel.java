@@ -50,12 +50,12 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 			boolean added = associatedSet.add(record);
 
 			if (added) {
-				// the selected record should set the main record as the
-				// association
-				String property = ReflectionUtils.getFieldNameByType(
-						(Class<BasicRecord>) record.getClass(),
-						this.mainRecord.getClass());
-				ClassUtils.setProperty(record, property, mainRecord);
+//				// the selected record should set the main record as the
+//				// association
+//				String property = ReflectionUtils.getFieldNameByType(
+//						(Class<BasicRecord>) record.getClass(),
+//						this.mainRecord.getClass());
+//				ClassUtils.setProperty(record, property, mainRecord);
 
 				// update callerTableModel
 				this.callerTablePanel.getTableModel().add(record);
@@ -63,7 +63,7 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 		}
 
 		Container parent = this.getRootPane();
-		while (!(parent instanceof JDialog)) {
+		while (!(parent instanceof JDialog) && parent !=null) {
 			parent = parent.getParent();
 		}
 		((JDialog) parent).dispose();

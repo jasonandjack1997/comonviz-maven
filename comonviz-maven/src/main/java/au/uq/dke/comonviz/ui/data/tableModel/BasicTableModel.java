@@ -202,6 +202,9 @@ public class BasicTableModel<T extends BasicRecord> extends
 	}
 
 	public T getValueAt(int rowIndex) {
+		if(rowIndex < 0){
+			return null;
+		}
 
 		// Sanity check
 

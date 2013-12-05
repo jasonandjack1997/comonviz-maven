@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import org.junit.Before;
 import org.junit.Test;
 
+import au.uq.dke.comonviz.utils.DatabaseUtils;
 import database.model.data.businessProcessManagement.ProcessActivity;
 import database.model.data.businessProcessManagement.ProcessObjective;
 import database.service.GenericService;
@@ -18,26 +19,21 @@ public class UnassociatedRecordsPanelTest {
 
 	@Test
 	public void test() {
-		GenericService activityService = ServiceManager
-				.getGenericService(ProcessActivity.class);
-		GenericService objectiveService = ServiceManager
-				.getGenericService(ProcessObjective.class);
 
 		ProcessActivity activity = new ProcessActivity("activity 1");
-		activityService.save(activity);
+		DatabaseUtils.getSession().save(activity);
 
 		
 		ProcessObjective objective1 = new ProcessObjective("objective 1");
 		ProcessObjective objective2 = new ProcessObjective("objective 2");
 
 		activity.getProcessObjectives().add(objective1);
-		objective1.setProcessActivity(activity);
 	
 		//activity.getObjectives().add(objective2);
 		//objective2.setActivity(activity);
 
-		objectiveService.save(objective1);
-		objectiveService.save(objective2);
+		DatabaseUtils.getSession().save(objective1);
+		DatabaseUtils.getSession().save(objective2);
 		
 		JFrame frame = new JFrame();
 		frame.add(new UnassociatedRecordsPanel(ProcessObjective.class, ProcessActivity.class));

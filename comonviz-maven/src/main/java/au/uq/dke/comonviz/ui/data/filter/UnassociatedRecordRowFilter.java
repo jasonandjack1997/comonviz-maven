@@ -22,12 +22,15 @@ public class UnassociatedRecordRowFilter extends RowFilter<RecordsTableModel, In
 		
 		RecordsTableModel model = entry.getModel();
 		BasicRecord record = model.getValueAt(entry.getIdentifier());
-		String fieldName = ReflectionUtils.getFieldNameByType((Class<BasicRecord>) record.getClass(), this.fieldType);
-		BasicRecord associatedRecord = ClassUtils.getProperty(record, fieldName);
-		if(associatedRecord == null){
-			return true;
-		}
-		return false;
+//		String fieldName = ReflectionUtils.getFieldNameByType((Class<BasicRecord>) record.getClass(), this.fieldType);
+//		BasicRecord associatedRecord = ClassUtils.getProperty(record, fieldName);
+//
+//		if(associatedRecord == null){
+//			return true;
+//		}
+//		return false;
+
+		return true;
 	}
 	
 	

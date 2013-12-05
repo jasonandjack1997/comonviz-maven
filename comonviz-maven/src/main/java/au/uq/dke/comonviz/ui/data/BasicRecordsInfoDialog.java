@@ -14,6 +14,7 @@ import au.uq.dke.comonviz.ui.data.panel.BasicTablePanel;
 import au.uq.dke.comonviz.ui.data.panel.PrimaryRecordsTablePanel;
 import au.uq.dke.comonviz.ui.data.panel.UnassociatedRecordsPanel;
 import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
+import au.uq.dke.comonviz.utils.DatabaseUtils;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 
 /**
@@ -62,7 +63,7 @@ public class BasicRecordsInfoDialog extends JDialog{
 	public void updateForeignTables(){
 		for(BasicTablePanel foreignRecordsTablePanel : this.unassociatedForeignRecordsTablePanelList){
 			
-			Collection records = ((RecordsTableModel)foreignRecordsTablePanel.getTableModel()).getService().findAll();
+			Collection records = DatabaseUtils.findAll(foreignRecordsTablePanel.getTableModel().getmClass());
 			foreignRecordsTablePanel.getTableModel().importCollection(records);
 		}
 		

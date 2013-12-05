@@ -10,6 +10,10 @@ import database.model.data.BasicRecord;
 @Inheritance(strategy=InheritanceType.JOINED)
 public class BusinessProcess extends BusinessProcessManagement	{
 	
+	public BusinessProcess(){
+		
+	}
+	
 	public BusinessProcess(String name){
 		super(name);
 	}
