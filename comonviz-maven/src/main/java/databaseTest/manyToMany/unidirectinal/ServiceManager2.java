@@ -1,22 +1,18 @@
-package database.service;
+package databaseTest.manyToMany.unidirectinal;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ServiceManager {
+public class ServiceManager2 {
 	
-	static ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+	static ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContextTest.xml");
 
 	@SuppressWarnings({ "rawtypes", "unused" })
-	
-	public static GenericService getGenericService(Class<?> modelClass){
-		return (GenericService) ctx.getBean(getServiceName(modelClass));
-	}
 	
 	public static GenericService2 getGenericService2(Class<?> modelClass){
 		return (GenericService2) ctx.getBean(getServiceName(modelClass));
 	}
-
+	
 	public static Object getService(Class<?> modelClass){
 		return ctx.getBean(getServiceName(modelClass));
 	}
