@@ -38,13 +38,10 @@ import database.model.ontology.OntologyClass;
 import edu.umd.cs.piccolo.PCamera;
 import edu.umd.cs.piccolo.PLayer;
 import edu.umd.cs.piccolo.PNode;
-import edu.umd.cs.piccolo.event.PInputEvent;
-import edu.umd.cs.piccolo.event.PInputEventListener;
 import edu.umd.cs.piccolo.nodes.PImage;
 import edu.umd.cs.piccolo.nodes.PText;
 import edu.umd.cs.piccolo.util.PBounds;
 import edu.umd.cs.piccolo.util.PPaintContext;
-import edu.umd.cs.piccolox.util.PFixedWidthStroke;
 
 /**
  * Default graph node implementation. Displays some text and possible an
@@ -70,6 +67,8 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 	protected static final int MAX_TEXT_CHARS = 10;
 	protected static final int MAX_TOOLTIP_CHARS_IN_A_LINE = 50;
 	protected static final int MAX_LINES = 5;
+
+	private BasicNodeIcon tableIcon;
 
 	private Object userObject;
 	private String fullText;
@@ -142,7 +141,7 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 
 		this.changeListeners = new ArrayList<ChangeListener>();
 
-		// this.style = new DefaultGraphNodeStyle();
+
 		this.style = new CustomGraphNodeStyle1();
 		this.selected = false;
 		this.highlighted = false;
@@ -151,7 +150,7 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 		this.arcs = new ArrayList<GraphArc>();
 
 		this.setPickable(true);
-		this.setChildrenPickable(false);
+		this.setChildrenPickable(true);
 
 		textNode = new GraphTextNode();
 		textNode.setHorizontalAlignment(Component.CENTER_ALIGNMENT);
@@ -172,7 +171,13 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 
 		setText(text);
 		setType(type);
-		updateBounds();
+
+		if (this.getRecordType() != null) {
+			tableIcon = new RecordsTableIcon();
+			this.addChild(tableIcon);
+		}
+
+		initBounds();
 
 	}
 
@@ -420,7 +425,7 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 			pImage = new PImage(((ImageIcon) icon).getImage());
 			pImage.setPickable(false);
 			addChild(pImage);
-			updateBounds();
+			initBounds();
 		}
 	}
 
@@ -532,9 +537,10 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 	 * Sets the bounds of this node based on the icon and text size. Takes into
 	 * consideration the maximum node width too.
 	 */
-	private void updateBounds() {
-		PBounds textBounds = textNode.getBounds();
 
+	private void initBounds() {
+
+		PBounds textBounds = textNode.getBounds();
 		double tw = textBounds.getWidth();
 		double th = textBounds.getHeight();
 
@@ -576,36 +582,15 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 			textNode.setBounds(centerX - textNode.getWidth() / 2, centerY
 					- textNode.getHeight() / 2, textNode.getWidth(),
 					textNode.getHeight());
+			
+			if(this.tableIcon != null){
+				
+				this.tableIcon.setBounds(centerX - 50, centerY - 50, 30, 30);
+			}
 
 			getEllipse().setFrame(centerX - getEllipse().getWidth() / 2,
 					centerY - getEllipse().getHeight() / 2,
 					getEllipse().getWidth(), getEllipse().getHeight());
-
-			// this.setBounds(x - getWidth()/2, y - getHeight()/2, getWidth(),
-			// getHeight());
-
-			// if (tw > th) {
-			// getEllipse().setFrameFromCenter(textBounds.getCenterX(),
-			// textBounds.getCenterY(), textBounds.getX() - 5,
-			// textBounds.getY() - (tw - th) / 2 - 5);
-			//
-			// } else {
-			// getEllipse().setFrameFromCenter(textBounds.getCenterX(),
-			// textBounds.getCenterY(),
-			// textBounds.getX() - (th - tw) / 2 - 5,
-			// textBounds.getY() - 5);
-			//
-			// }
-			//
-			// double ew = getEllipse().getWidth();
-			// double eh = getEllipse().getHeight();
-			//
-			// double w = ew * BOUNDS_ELLIPSE_FACTOR;
-			// double h = eh * BOUNDS_ELLIPSE_FACTOR;
-			//
-			// textNode.setBounds(getX() + (BOUNDS_ELLIPSE_FACTOR / 2 - 0.5) *
-			// tw,
-			// getY() + (BOUNDS_ELLIPSE_FACTOR / 2 - 0.5) * th, tw, th);
 
 			double cw = childrenCountIcon.getWidth();
 			double ch = childrenCountIcon.getHeight();
@@ -876,4 +861,36 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 	public void setFixedLocation(boolean fixedLocation) {
 		this.fixedLocation = fixedLocation;
 	}
+
+	public String getTableNameByNodeName() {
+		String nodeName = this.getText();
+		String tableName = nodeName.replace(" ", "").replace("&", "");
+		return tableName;
+	}
+
+	public Class getRecordType() {
+		String tableName = this.getTableNameByNodeName();
+
+		if(tableName.equalsIgnoreCase("ProcessActivity")){
+			int a = 1;
+		}
+		
+		String fullClassName = classFullNamePrefix + tableName;
+		Class recordType = null;
+		try {
+			recordType = Class.forName(fullClassName);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			int a = 1;
+		}
+		if(recordType != null){
+			int a = 1;
+		}
+		return recordType;
+
+	}
+	
+	public static final String classFullNamePrefix = "database.model.data.businessProcessManagement.";
+	
 }

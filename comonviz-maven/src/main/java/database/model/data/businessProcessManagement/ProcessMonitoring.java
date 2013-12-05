@@ -1,4 +1,4 @@
-package database.model.data.bussinesProcessManagement;
+package database.model.data.businessProcessManagement;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,15 +14,15 @@ import database.model.data.BasicRecordSet;
 
 
 @Entity
-public class ProcessRule extends BasicRecord {
-	public ProcessRule() {
+public class ProcessMonitoring extends BasicRecord {
+	public ProcessMonitoring() {
 	}
 	
-	public ProcessRule(String name){
+	public ProcessMonitoring(String name){
 		super(name);
 	}
 
-	@OneToMany (mappedBy = "processRule")
+	@OneToMany (mappedBy = "processMonitoring")
 	private Set<ProcessActivity> processActivities =  new BasicRecordSet<ProcessActivity>();
 
 

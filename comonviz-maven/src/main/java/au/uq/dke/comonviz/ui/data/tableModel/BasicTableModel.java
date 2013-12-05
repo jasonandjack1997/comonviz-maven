@@ -40,7 +40,7 @@ import org.metawidget.util.ClassUtils;
 import org.metawidget.util.CollectionUtils;
 
 import database.model.data.BasicRecord;
-import database.model.data.bussinesProcessManagement.ProcessObjective;
+import database.model.data.businessProcessManagement.ProcessObjective;
 import database.service.GenericService;
 import database.service.ServiceManager;
 

@@ -7,9 +7,9 @@ import org.junit.Test;
 
 import au.uq.dke.comonviz.ui.data.panel.UnassociatedRecordsPanel;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
-import database.model.data.bussinesProcessManagement.ProcessActivity;
-import database.model.data.bussinesProcessManagement.ProcessObjective;
-import database.model.data.bussinesProcessManagement.ProcessRule;
+import database.model.data.businessProcessManagement.ProcessActivity;
+import database.model.data.businessProcessManagement.ProcessObjective;
+import database.model.data.businessProcessManagement.ProcessRule;
 import database.service.GenericService;
 import database.service.ServiceManager;
 

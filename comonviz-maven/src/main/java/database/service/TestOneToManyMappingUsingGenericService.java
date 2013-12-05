@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import database.model.data.bussinesProcessManagement.ProcessActivity;
-import database.model.data.bussinesProcessManagement.ProcessObjective;
+import database.model.data.businessProcessManagement.ProcessActivity;
+import database.model.data.businessProcessManagement.ProcessObjective;
 
 public class TestOneToManyMappingUsingGenericService {
 

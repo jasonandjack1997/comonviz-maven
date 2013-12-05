@@ -1,4 +1,4 @@
-package database.model.data.bussinesProcessManagement;
+package database.model.data.businessProcessManagement;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

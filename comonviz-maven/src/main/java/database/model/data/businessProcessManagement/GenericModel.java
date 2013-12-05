@@ -1,4 +1,4 @@
-package database.model.data.bussinesProcessManagement;
+package database.model.data.businessProcessManagement;
 
 import java.util.HashSet;
 import java.util.Set;

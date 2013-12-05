@@ -12,8 +12,8 @@ import org.junit.Test;
 import au.uq.dke.comonviz.ui.data.tableModel.AssociatedRecordsTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
 import database.model.data.BasicRecord;
-import database.model.data.bussinesProcessManagement.ProcessActivity;
-import database.model.data.bussinesProcessManagement.ProcessObjective;
+import database.model.data.businessProcessManagement.ProcessActivity;
+import database.model.data.businessProcessManagement.ProcessObjective;
 import database.service.GenericService;
 import database.service.ServiceManager;
 

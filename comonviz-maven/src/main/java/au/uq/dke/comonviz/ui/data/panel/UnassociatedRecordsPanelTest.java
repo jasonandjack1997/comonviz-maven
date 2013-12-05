@@ -5,8 +5,8 @@ import javax.swing.JFrame;
 import org.junit.Before;
 import org.junit.Test;
 
-import database.model.data.bussinesProcessManagement.ProcessActivity;
-import database.model.data.bussinesProcessManagement.ProcessObjective;
+import database.model.data.businessProcessManagement.ProcessActivity;
+import database.model.data.businessProcessManagement.ProcessObjective;
 import database.service.GenericService;
 import database.service.ServiceManager;
 

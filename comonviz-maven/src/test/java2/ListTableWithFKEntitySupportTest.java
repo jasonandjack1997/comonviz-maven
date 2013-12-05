@@ -5,8 +5,8 @@ import java.util.HashSet;
 import javax.swing.JFrame;
 
 import au.uq.dke.comonviz.ui.data.panel.BasicTablePanel;
-import database.model.data.bussinesProcessManagement.ProcessActivity;
-import database.model.data.bussinesProcessManagement.ProcessObjective;
+import database.model.data.businessProcessManagement.ProcessActivity;
+import database.model.data.businessProcessManagement.ProcessObjective;
 import database.service.ProcessActivityService;
 import database.service.ProcessObjectiveService;
 import database.service.ServiceManager;
