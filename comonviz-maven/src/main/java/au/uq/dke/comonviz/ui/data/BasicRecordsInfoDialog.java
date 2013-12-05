@@ -32,7 +32,10 @@ public class BasicRecordsInfoDialog extends JDialog{
 		this.recordType = recordType;
 		this.setTitle(recordType.getSimpleName());
 		primaryRecordsTablePanel = new PrimaryRecordsTablePanel(recordType);
-		primaryRecordsTablePanel.getTable().setRowSelectionInterval(0, 0);
+		if(primaryRecordsTablePanel.getTable().getRowCount()>0){
+			
+			primaryRecordsTablePanel.getTable().setRowSelectionInterval(0, 0);
+		}
 		
 		this.add(primaryRecordsTablePanel, BorderLayout.CENTER);
 		List<Field> setFields = ReflectionUtils.getSetFieldList(recordType);

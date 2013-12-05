@@ -16,7 +16,7 @@ import database.model.ontology.OntologyClass;
 public class NodeLevelFilter implements GraphFilter {
 
 	private Map<Object, Boolean> nodeLevelsVisibilityMap = new HashMap<Object, Boolean>();
-	private int initialMaxVisibleLevel = 2;
+	private int initialMaxVisibleLevel = 3;
 
 	public int getInitialMaxVisibleLevel() {
 		return initialMaxVisibleLevel;
