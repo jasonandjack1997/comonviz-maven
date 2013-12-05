@@ -14,9 +14,7 @@ import database.model.data.BasicRecordSet;
 
 
 @Entity
-public class ProcessImprovement extends BasicRecord {
-	public ProcessImprovement() {
-	}
+public class ProcessImprovement extends BusinessProcessManagement {
 	
 	public ProcessImprovement(String name){
 		super(name);

@@ -14,10 +14,7 @@ import database.model.data.BasicRecordSet;
 
 
 @Entity
-public class ProcessRule extends BasicRecord {
-	public ProcessRule() {
-	}
-	
+public class ProcessRule extends BusinessProcess {
 	public ProcessRule(String name){
 		super(name);
 	}

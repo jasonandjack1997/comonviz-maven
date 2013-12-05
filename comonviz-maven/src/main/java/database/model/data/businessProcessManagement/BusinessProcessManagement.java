@@ -1,4 +1,4 @@
-package database.model.data.obligation;
+package database.model.data.businessProcessManagement;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -8,8 +8,9 @@ import database.model.data.BasicRecord;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Obligation extends BasicRecord	{
-	public Obligation(String name){
+public class BusinessProcessManagement extends BasicRecord	{
+	
+	public BusinessProcessManagement(String name){
 		super(name);
 	}
 

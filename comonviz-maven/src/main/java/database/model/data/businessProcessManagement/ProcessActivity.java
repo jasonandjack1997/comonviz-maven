@@ -11,9 +11,7 @@ import database.model.data.BasicRecordSet;
 
 
 @Entity
-public class ProcessActivity extends BasicRecord {
-	public ProcessActivity() {
-	}
+public class ProcessActivity extends BusinessProcess {
 	
 	public ProcessActivity(String name){
 		super(name);

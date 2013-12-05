@@ -14,9 +14,7 @@ import database.model.data.BasicRecordSet;
 
 
 @Entity
-public class ProcessMonitoring extends BasicRecord {
-	public ProcessMonitoring() {
-	}
+public class ProcessMonitoring extends BusinessProcessManagement {
 	
 	public ProcessMonitoring(String name){
 		super(name);
