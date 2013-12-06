@@ -13,5 +13,9 @@ public class ResistanceMangementCost extends NonMonetaryResource	{
 	public ResistanceMangementCost(String name){
 		super(name);
 	}
+	public ResistanceMangementCost() {
+
+	}
+	
 
 }

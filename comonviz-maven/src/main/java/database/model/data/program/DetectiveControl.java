@@ -14,4 +14,8 @@ public class DetectiveControl extends ControlIdentificationAndDefination	{
 		super(name);
 	}
 
+	public DetectiveControl() {
+
+	}
+	
 }

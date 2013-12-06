@@ -13,5 +13,8 @@ public class Regulator extends BasicRecord	{
 	public Regulator(String name){
 		super(name);
 	}
+	public Regulator() {
 
+	}
+	
 }

@@ -13,10 +13,17 @@ public class ChangeManagement extends ComplianceDriver {
 	private String timeLine;
 	private String targetGroup;
 
+	public void setTargetGroup(String targetGroup) {
+		this.targetGroup = targetGroup;
+	}
+
 	public ChangeManagement(String name) {
 		super(name);
 	}
 
+	public ChangeManagement(){
+		
+	}
 	public String getTimeLine() {
 		return timeLine;
 	}
@@ -28,5 +35,7 @@ public class ChangeManagement extends ComplianceDriver {
 	public String getTargetGroup() {
 		return targetGroup;
 	}
+	
+	
 
 }

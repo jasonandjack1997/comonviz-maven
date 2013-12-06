@@ -21,11 +21,39 @@ public class Review extends Program {
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<Role> affectedRoles = new BasicRecordSet<Role>();
 	
+	public String getChanges() {
+		return changes;
+	}
+	public void setChanges(String changes) {
+		this.changes = changes;
+	}
+	public Timestamp getDate() {
+		return date;
+	}
+	public void setDate(Timestamp date) {
+		this.date = date;
+	}
+	public Set<Role> getAffectedRoles() {
+		return affectedRoles;
+	}
+	public void setAffectedRoles(Set<Role> affectedRoles) {
+		this.affectedRoles = affectedRoles;
+	}
+	public Committee getCommittee() {
+		return committee;
+	}
+	public void setCommittee(Committee committee) {
+		this.committee = committee;
+	}
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	private Committee committee;
 
 	public Review(String name) {
 		super(name);
 	}
+	public Review() {
+
+	}
+	
 
 }

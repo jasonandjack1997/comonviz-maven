@@ -48,5 +48,9 @@ public class Regulation extends MandatoryObligation	{
 	public void setRegulator(Regulator regulator) {
 		this.regulator = regulator;
 	}
+	public Regulation() {
+
+	}
+	
 
 }

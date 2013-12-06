@@ -13,5 +13,8 @@ public class Beneficiary extends BasicRecord	{
 	public Beneficiary(String name){
 		super(name);
 	}
+	public Beneficiary() {
 
+	}
+	
 }

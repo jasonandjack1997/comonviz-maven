@@ -26,6 +26,10 @@ public class ComplianceAwareness extends OrganizationalCommitment {
 	public ComplianceAwareness(String name) {
 		super(name);
 	}
+	
+	public ComplianceAwareness(){
+		
+	}
 
 	public Set<BusinessProcess> getBusinessProcesses() {
 		return businessProcesses;

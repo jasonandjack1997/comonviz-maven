@@ -41,4 +41,8 @@ public class CompetencyAndTraining extends Program	{
 		this.fuction = fuction;
 	}
 
+	public CompetencyAndTraining() {
+
+	}
+	
 }

@@ -11,5 +11,8 @@ public class MandatoryObligation extends Obligation	{
 	public MandatoryObligation(String name){
 		super(name);
 	}
+	public MandatoryObligation() {
 
+	}
+	
 }

@@ -12,5 +12,8 @@ public class CultureMeasurement extends CultureMangement	{
 	public CultureMeasurement(String name){
 		super(name);
 	}
+	public CultureMeasurement() {
 
+	}
+	
 }

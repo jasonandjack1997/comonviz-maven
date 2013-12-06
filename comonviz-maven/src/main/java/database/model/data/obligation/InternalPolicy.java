@@ -11,5 +11,8 @@ public class InternalPolicy extends Policy	{
 	public InternalPolicy(String name){
 		super(name);
 	}
+	public InternalPolicy() {
 
+	}
+	
 }

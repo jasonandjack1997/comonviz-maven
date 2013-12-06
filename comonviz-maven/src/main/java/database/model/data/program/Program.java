@@ -13,4 +13,8 @@ public class Program extends BasicRecord {
 		super(name);
 	}
 
+	public Program() {
+
+	}
+	
 }

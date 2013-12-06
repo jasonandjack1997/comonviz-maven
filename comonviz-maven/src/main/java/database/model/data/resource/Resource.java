@@ -13,5 +13,9 @@ public class Resource extends BasicRecord	{
 	public Resource(String name){
 		super(name);
 	}
+	public Resource() {
+
+	}
+	
 
 }

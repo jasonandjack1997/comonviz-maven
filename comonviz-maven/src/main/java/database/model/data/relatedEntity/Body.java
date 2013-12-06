@@ -13,5 +13,8 @@ public class Body extends BasicRecord	{
 	public Body(String name){
 		super(name);
 	}
+	public Body() {
 
+	}
+	
 }

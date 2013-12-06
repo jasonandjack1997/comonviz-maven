@@ -14,5 +14,8 @@ public class ExternalParameter extends Parameter	{
 		super(name);
 	}
 	
+	public ExternalParameter() {
 
+	}
+	
 }

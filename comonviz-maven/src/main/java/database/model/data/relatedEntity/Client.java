@@ -13,5 +13,8 @@ public class Client extends BasicRecord	{
 	public Client(String name){
 		super(name);
 	}
+	public Client() {
 
+	}
+	
 }

@@ -13,5 +13,8 @@ public class IndustrySector extends BasicRecord	{
 	public IndustrySector(String name){
 		super(name);
 	}
+	public IndustrySector() {
 
+	}
+	
 }

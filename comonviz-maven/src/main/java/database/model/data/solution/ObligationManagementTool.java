@@ -13,5 +13,10 @@ public class ObligationManagementTool extends Tool	{
 	public ObligationManagementTool(String name){
 		super(name);
 	}
+	
+	public ObligationManagementTool() {
+
+	}
+	
 
 }

@@ -20,6 +20,10 @@ public class PreventativeControl extends ControlIdentificationAndDefination	{
 	public PreventativeControl(String name){
 		super(name);
 	}
+	public PreventativeControl() {
+
+	}
+	
 	
 }
 

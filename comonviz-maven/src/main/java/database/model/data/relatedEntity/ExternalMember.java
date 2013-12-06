@@ -13,5 +13,8 @@ public class ExternalMember extends Member	{
 	public ExternalMember(String name){
 		super(name);
 	}
+	public ExternalMember() {
 
+	}
+	
 }

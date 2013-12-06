@@ -29,5 +29,9 @@ public class Standard extends VoluntaryObligation	{
 	public void setIssuingBodies(Set<IssuingBody> issuingBodies) {
 		this.issuingBodies = issuingBodies;
 	}
+	public Standard() {
+
+	}
+	
 
 }

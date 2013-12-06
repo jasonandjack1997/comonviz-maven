@@ -40,5 +40,8 @@ public class Policy extends MandatoryObligation {
 	public void setGoverningBodies(Set<GoverningBody> governingBodies) {
 		this.governingBodies = governingBodies;
 	}
+	public Policy() {
 
+	}
+	
 }

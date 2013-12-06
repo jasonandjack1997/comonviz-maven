@@ -13,5 +13,10 @@ public class Planning extends Advisory	{
 	public Planning(String name){
 		super(name);
 	}
+	
+	public Planning() {
+
+	}
+	
 
 }

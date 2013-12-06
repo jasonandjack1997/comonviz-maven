@@ -30,6 +30,10 @@ public class CultureMangement extends BasicRecord	{
 	public void setObligations(Set<Obligation> obligations) {
 		this.obligations = obligations;
 	}
+	public CultureMangement() {
+
+	}
+	
 
 
 }

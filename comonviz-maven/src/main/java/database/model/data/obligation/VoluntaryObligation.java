@@ -12,4 +12,8 @@ public class VoluntaryObligation extends Obligation	{
 		super(name);
 	}
 
+	public VoluntaryObligation() {
+
+	}
+	
 }

@@ -13,5 +13,8 @@ public class Parameter extends BasicRecord	{
 	public Parameter(String name){
 		super(name);
 	}
+	public Parameter() {
+
+	}
 	
 }

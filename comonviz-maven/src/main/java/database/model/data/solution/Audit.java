@@ -15,6 +15,18 @@ import database.model.data.relatedEntity.Auditor;
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Audit extends Service	{
 	
+	public Auditor getAuditor() {
+		return auditor;
+	}
+	public void setAuditor(Auditor auditor) {
+		this.auditor = auditor;
+	}
+	public Serializable getDocumentID() {
+		return documentID;
+	}
+	public void setDocumentID(Serializable documentID) {
+		this.documentID = documentID;
+	}
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Auditor auditor;
 	
@@ -23,5 +35,8 @@ public class Audit extends Service	{
 	public Audit(String name){
 		super(name);
 	}
+	public Audit() {
 
+	}
+	
 }

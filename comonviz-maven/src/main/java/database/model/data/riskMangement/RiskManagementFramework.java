@@ -19,11 +19,34 @@ public class RiskManagementFramework extends RiskManagement {
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<BusinessProcess> associatedBusinessProcesses = new BasicRecordSet<BusinessProcess>();
 
+	public Set<BusinessProcess> getAssociatedBusinessProcesses() {
+		return associatedBusinessProcesses;
+	}
+
+	public void setAssociatedBusinessProcesses(
+			Set<BusinessProcess> associatedBusinessProcesses) {
+		this.associatedBusinessProcesses = associatedBusinessProcesses;
+	}
+
+	public Set<RiskManagementProcess> getAssociatedRiskManagementProcesses() {
+		return associatedRiskManagementProcesses;
+	}
+
+	public void setAssociatedRiskManagementProcesses(
+			Set<RiskManagementProcess> associatedRiskManagementProcesses) {
+		this.associatedRiskManagementProcesses = associatedRiskManagementProcesses;
+	}
+
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<RiskManagementProcess> associatedRiskManagementProcesses = new BasicRecordSet<RiskManagementProcess>();
 
 	public RiskManagementFramework(String name) {
 		super(name);
 	}
+	
+	public RiskManagementFramework() {
+
+	}
+	
 
 }

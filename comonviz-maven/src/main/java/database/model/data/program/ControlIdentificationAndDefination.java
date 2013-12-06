@@ -30,4 +30,8 @@ public class ControlIdentificationAndDefination extends ControlAndMonitoring	{
 		this.processRules = processRules;
 	}
 
+	public ControlIdentificationAndDefination() {
+
+	}
+	
 }

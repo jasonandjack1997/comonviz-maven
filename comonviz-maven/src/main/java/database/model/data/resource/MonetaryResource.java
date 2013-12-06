@@ -15,5 +15,15 @@ public class MonetaryResource extends Resource	{
 	public MonetaryResource(String name){
 		super(name);
 	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	public MonetaryResource() {
+
+	}
+	
 
 }

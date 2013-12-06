@@ -13,5 +13,8 @@ public class Member extends BasicRecord	{
 	public Member(String name){
 		super(name);
 	}
+	public Member() {
 
+	}
+	
 }

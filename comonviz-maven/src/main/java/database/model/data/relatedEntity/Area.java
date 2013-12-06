@@ -13,5 +13,8 @@ public class Area extends BasicRecord	{
 	public Area(String name){
 		super(name);
 	}
+	public Area() {
 
+	}
+	
 }

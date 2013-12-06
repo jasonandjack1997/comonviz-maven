@@ -13,11 +13,23 @@ import database.model.data.relatedEntity.AssuranceRequiredCondition;
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Assurance extends Service	{
 	
+	public AssuranceRequiredCondition getRequiredCondition() {
+		return requiredCondition;
+	}
+
+	public void setRequiredCondition(AssuranceRequiredCondition requiredCondition) {
+		this.requiredCondition = requiredCondition;
+	}
+
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private AssuranceRequiredCondition requiredCondition;
 	
 	public Assurance(String name){
 		super(name);
 	}
+
+	public Assurance() {
+	}
+	
 
 }

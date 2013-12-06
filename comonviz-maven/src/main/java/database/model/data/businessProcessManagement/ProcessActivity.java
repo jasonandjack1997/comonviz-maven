@@ -29,18 +29,6 @@ public class ProcessActivity extends BasicRecord {
 	private Set<ProcessObjective> processObjectives =  new BasicRecordSet<ProcessObjective>();
 
 
-
-	@ManyToOne
-	public ProcessRule processRule;
-
-
-	@ManyToOne
-	private ProcessMonitoring processMonitoring;
-
-	@ManyToOne
-	private ProcessMonitoring processImprovement;
-	
-	
 	public Set<ProcessObjective> getProcessObjectives() {
 		return processObjectives;
 	}
@@ -49,29 +37,5 @@ public class ProcessActivity extends BasicRecord {
 		this.processObjectives = objectives;
 	}
 
-	public ProcessMonitoring getProcessMonitoring() {
-		return processMonitoring;
-	}
-
-	public void setProcessMonitoring(ProcessMonitoring processMonitoring) {
-		this.processMonitoring = processMonitoring;
-	}
-	public ProcessRule getProcessRule() {
-		return processRule;
-	}
-
-	public void setProcessRule(ProcessRule rule) {
-		this.processRule = rule;
-	}
-
-	public ProcessMonitoring getProcessImprovement() {
-		return processImprovement;
-	}
-
-	public void setProcessImprovement(ProcessMonitoring processImprovement) {
-		this.processImprovement = processImprovement;
-	}
-	
-	
 
 }

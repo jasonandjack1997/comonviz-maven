@@ -14,4 +14,8 @@ public class Training extends Advisory	{
 		super(name);
 	}
 
+	public Training() {
+
+	}
+	
 }

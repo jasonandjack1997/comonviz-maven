@@ -12,5 +12,8 @@ public class FormalCulture extends ComplianceCulture	{
 	public FormalCulture(String name){
 		super(name);
 	}
+	public FormalCulture() {
 
+	}
+	
 }

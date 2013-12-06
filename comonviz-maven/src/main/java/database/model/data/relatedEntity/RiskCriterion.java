@@ -13,5 +13,8 @@ public class RiskCriterion extends BasicRecord	{
 	public RiskCriterion(String name){
 		super(name);
 	}
+	public RiskCriterion() {
 
+	}
+	
 }

@@ -13,5 +13,8 @@ public class TargetGroup extends BasicRecord	{
 	public TargetGroup(String name){
 		super(name);
 	}
+	public TargetGroup() {
 
+	}
+	
 }

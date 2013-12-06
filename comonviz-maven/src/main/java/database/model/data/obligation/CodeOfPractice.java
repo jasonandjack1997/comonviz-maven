@@ -55,5 +55,8 @@ public class CodeOfPractice extends VoluntaryObligation	{
 	public void setGoverningBodies(Set<GoverningBody> governingBodies) {
 		this.governingBodies = governingBodies;
 	}
+	public CodeOfPractice() {
 
+	}
+	
 }

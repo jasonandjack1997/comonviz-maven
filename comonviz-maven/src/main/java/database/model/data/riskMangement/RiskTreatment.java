@@ -10,5 +10,10 @@ public class RiskTreatment extends RiskManagementProcess {
 	public RiskTreatment(String name) {
 		super(name);
 	}
+	
+	public RiskTreatment() {
+
+	}
+	
 
 }

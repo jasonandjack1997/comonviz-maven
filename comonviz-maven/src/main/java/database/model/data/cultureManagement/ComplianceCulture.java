@@ -12,5 +12,12 @@ public class ComplianceCulture extends CultureMangement	{
 	public ComplianceCulture(String name){
 		super(name);
 	}
+	
+	public ComplianceCulture(){
+		
+	}
 
+
+	
+	
 }

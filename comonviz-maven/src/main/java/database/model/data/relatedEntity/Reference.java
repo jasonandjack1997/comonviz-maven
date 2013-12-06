@@ -13,5 +13,8 @@ public class Reference extends BasicRecord	{
 	public Reference(String name){
 		super(name);
 	}
+	public Reference() {
 
+	}
+	
 }

@@ -13,5 +13,9 @@ public class CompetencyAndTrainingTool extends Tool	{
 	public CompetencyAndTrainingTool(String name){
 		super(name);
 	}
+	public CompetencyAndTrainingTool() {
+
+	}
+	
 
 }

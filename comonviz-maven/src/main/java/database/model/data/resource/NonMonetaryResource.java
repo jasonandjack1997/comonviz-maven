@@ -23,6 +23,24 @@ public class NonMonetaryResource extends Resource	{
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<BusinessProcess> associatedProcess = new BasicRecordSet<BusinessProcess>();
 
+	public String getObligation() {
+		return obligation;
+	}
+	public void setObligation(String obligation) {
+		this.obligation = obligation;
+	}
+	public Set<BusinessProcess> getAssociatedProcess() {
+		return associatedProcess;
+	}
+	public void setAssociatedProcess(Set<BusinessProcess> associatedProcess) {
+		this.associatedProcess = associatedProcess;
+	}
+	public Set<Role> getAffectedRoles() {
+		return affectedRoles;
+	}
+	public void setAffectedRoles(Set<Role> affectedRoles) {
+		this.affectedRoles = affectedRoles;
+	}
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<Role> affectedRoles = new BasicRecordSet<Role>();
 
@@ -30,5 +48,9 @@ public class NonMonetaryResource extends Resource	{
 	public NonMonetaryResource(String name){
 		super(name);
 	}
+	public NonMonetaryResource() {
+
+	}
+	
 
 }

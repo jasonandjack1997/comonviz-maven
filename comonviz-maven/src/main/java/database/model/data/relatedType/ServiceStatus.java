@@ -1,4 +1,4 @@
-package database.model.data.relatedEntity;
+package database.model.data.relatedType;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -6,6 +6,11 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class CommunicationAndConsulationStatus extends Status{
-	
+public class ServiceStatus extends Status{
+	public ServiceStatus(String name) {
+		super(name);
+	}
+
+	public ServiceStatus() {
+	}
 }

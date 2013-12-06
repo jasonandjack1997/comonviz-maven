@@ -13,5 +13,8 @@ public class GoverningBody extends Body	{
 	public GoverningBody(String name){
 		super(name);
 	}
+	public GoverningBody() {
 
+	}
+	
 }

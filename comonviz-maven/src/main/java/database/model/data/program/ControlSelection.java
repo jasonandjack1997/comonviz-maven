@@ -6,8 +6,11 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+
+import database.model.data.relatedType.ControlRank;
 
 
 @Entity
@@ -18,19 +21,34 @@ public class ControlSelection extends ControlAndMonitoring	{
     @PrimaryKeyJoinColumn
 	private ControlIdentificationAndDefination control;
 	
-	@Enumerated(EnumType.ORDINAL) 
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	private ControlRank controlRank;
 	
 	
 	
+	public ControlIdentificationAndDefination getControl() {
+		return control;
+	}
+
+	public void setControl(ControlIdentificationAndDefination control) {
+		this.control = control;
+	}
+
+	public ControlRank getControlRank() {
+		return controlRank;
+	}
+
+	public void setControlRank(ControlRank controlRank) {
+		this.controlRank = controlRank;
+	}
+
 	public ControlSelection(String name){
 		super(name);
 	}
 	
-	private enum ControlRank{
-		High, 
-		Medium,
-		Low
+	public ControlSelection() {
+
 	}
+	
 
 }

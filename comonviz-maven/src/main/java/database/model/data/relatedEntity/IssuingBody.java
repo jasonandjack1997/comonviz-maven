@@ -12,5 +12,8 @@ public class IssuingBody extends Body {
 	public IssuingBody(String name) {
 		super(name);
 	}
+	public IssuingBody() {
 
+	}
+	
 }

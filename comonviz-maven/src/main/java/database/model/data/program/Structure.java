@@ -14,4 +14,8 @@ public class Structure extends Program	{
 		super(name);
 	}
 
+	public Structure() {
+
+	}
+	
 }

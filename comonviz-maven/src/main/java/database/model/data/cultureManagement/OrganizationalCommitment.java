@@ -12,5 +12,8 @@ public class OrganizationalCommitment extends BasicRecord	{
 	public OrganizationalCommitment(String name){
 		super(name);
 	}
+	public OrganizationalCommitment() {
 
+	}
+	
 }

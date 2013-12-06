@@ -13,5 +13,8 @@ public class AssuranceRequiredCondition extends Member	{
 	public AssuranceRequiredCondition(String name){
 		super(name);
 	}
+	public AssuranceRequiredCondition() {
 
+	}
+	
 }

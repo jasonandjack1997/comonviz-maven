@@ -23,6 +23,42 @@ public class MonitorAndReview extends RiskManagementProcess {
 	
 	
 	
+	public Timestamp getDateTime() {
+		return dateTime;
+	}
+	public void setDateTime(Timestamp dateTime) {
+		this.dateTime = dateTime;
+	}
+	public RiskAssessment getRisk() {
+		return risk;
+	}
+	public void setRisk(RiskAssessment risk) {
+		this.risk = risk;
+	}
+	public String getReviewDecision() {
+		return reviewDecision;
+	}
+	public void setReviewDecision(String reviewDecision) {
+		this.reviewDecision = reviewDecision;
+	}
+	public String getAction() {
+		return action;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}
+	public Set<BusinessProcess> getAffectedProcesses() {
+		return affectedProcesses;
+	}
+	public void setAffectedProcesses(Set<BusinessProcess> affectedProcesses) {
+		this.affectedProcesses = affectedProcesses;
+	}
+	public Set<Role> getAffectedRoles() {
+		return affectedRoles;
+	}
+	public void setAffectedRoles(Set<Role> affectedRoles) {
+		this.affectedRoles = affectedRoles;
+	}
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private RiskAssessment risk;
 	
@@ -38,5 +74,9 @@ public class MonitorAndReview extends RiskManagementProcess {
 	public MonitorAndReview(String name) {
 		super(name);
 	}
+	public MonitorAndReview() {
+
+	}
+	
 
 }

@@ -23,8 +23,29 @@ public class Tool extends Solution	{
 	private Set<ToolFeature> features = new BasicRecordSet<ToolFeature>();
 	
 	
+	public ComplianceTask getAssociatedComplianceTask() {
+		return associatedComplianceTask;
+	}
+
+	public void setAssociatedComplianceTask(ComplianceTask associatedComplianceTask) {
+		this.associatedComplianceTask = associatedComplianceTask;
+	}
+
+	public Set<ToolFeature> getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(Set<ToolFeature> features) {
+		this.features = features;
+	}
+
 	public Tool(String name){
 		super(name);
 	}
+	
+	public Tool() {
+
+	}
+	
 
 }

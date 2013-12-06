@@ -14,4 +14,8 @@ public class Administrator extends BasicRecord	{
 		super(name);
 	}
 
+	public Administrator() {
+
+	}
+	
 }

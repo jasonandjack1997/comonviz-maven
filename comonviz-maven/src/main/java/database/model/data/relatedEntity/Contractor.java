@@ -13,5 +13,8 @@ public class Contractor extends BasicRecord	{
 	public Contractor(String name){
 		super(name);
 	}
+	public Contractor() {
 
+	}
+	
 }

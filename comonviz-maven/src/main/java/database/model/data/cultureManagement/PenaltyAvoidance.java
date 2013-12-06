@@ -23,5 +23,6 @@ public class PenaltyAvoidance extends ComplianceDriver {
 	public void setPenalty(String penalty) {
 		this.penalty = penalty;
 	}
-
+public PenaltyAvoidance() {
+}
 }

@@ -1,4 +1,4 @@
-package database.model.data.relatedEntity;
+package database.model.data.relatedType;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -8,6 +8,11 @@ import database.model.data.BasicRecord;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class RiskPossibilityToControl extends BasicRecord{
+public class RiskType extends BasicRecord{
+	public RiskType(String name) {
+		super(name);
+	}
 
+	public RiskType() {
+	}
 }

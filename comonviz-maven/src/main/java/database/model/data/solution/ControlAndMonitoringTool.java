@@ -13,5 +13,10 @@ public class ControlAndMonitoringTool extends Tool	{
 	public ControlAndMonitoringTool(String name){
 		super(name);
 	}
+	
+	public ControlAndMonitoringTool() {
+
+	}
+	
 
 }

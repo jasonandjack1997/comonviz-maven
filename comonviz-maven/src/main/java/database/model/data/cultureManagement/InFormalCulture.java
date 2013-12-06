@@ -12,5 +12,8 @@ public class InFormalCulture extends ComplianceCulture	{
 	public InFormalCulture(String name){
 		super(name);
 	}
+	public InFormalCulture() {
 
+	}
+	
 }

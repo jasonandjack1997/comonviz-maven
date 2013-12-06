@@ -13,5 +13,10 @@ public class RecordKeepingAndReportingTool extends Tool	{
 	public RecordKeepingAndReportingTool(String name){
 		super(name);
 	}
+	
+	public RecordKeepingAndReportingTool() {
+
+	}
+	
 
 }

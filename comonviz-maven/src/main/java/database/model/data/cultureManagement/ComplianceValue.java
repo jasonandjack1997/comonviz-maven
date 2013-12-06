@@ -13,4 +13,6 @@ public class ComplianceValue extends ComplianceDriver	{
 		super(name);
 	}
 
+	public ComplianceValue() {
+	}
 }

@@ -13,5 +13,8 @@ public class Auditor extends BasicRecord	{
 	public Auditor(String name){
 		super(name);
 	}
+	public Auditor() {
 
+	}
+	
 }

@@ -12,5 +12,7 @@ public class Direction extends ComplianceDriver	{
 	public Direction(String name){
 		super(name);
 	}
+	public Direction() {
+	}
 
 }

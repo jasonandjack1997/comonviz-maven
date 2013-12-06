@@ -13,5 +13,9 @@ public class Solution extends BasicRecord	{
 	public Solution(String name){
 		super(name);
 	}
+	public Solution(){
+		
+	}
+	
 
 }

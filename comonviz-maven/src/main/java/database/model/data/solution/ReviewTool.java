@@ -13,5 +13,10 @@ public class ReviewTool extends Tool	{
 	public ReviewTool(String name){
 		super(name);
 	}
+	
+	public ReviewTool() {
+
+	}
+	
 
 }

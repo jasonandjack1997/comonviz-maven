@@ -13,5 +13,8 @@ public class Consultant extends BasicRecord	{
 	public Consultant(String name){
 		super(name);
 	}
+	public Consultant() {
 
+	}
+	
 }

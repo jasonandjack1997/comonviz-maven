@@ -1,4 +1,4 @@
-package database.model.data.relatedEntity;
+package database.model.data.relatedType;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -9,9 +9,13 @@ import database.model.data.BasicRecord;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Participants extends BasicRecord	{
-	public Participants(String name){
+public class ControlAssessmentType extends BasicRecord	{
+	public ControlAssessmentType(String name){
 		super(name);
 	}
+	public ControlAssessmentType() {
+
+	}
+	
 
 }

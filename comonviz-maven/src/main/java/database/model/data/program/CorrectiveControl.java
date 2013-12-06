@@ -14,4 +14,8 @@ public class CorrectiveControl extends ControlIdentificationAndDefination	{
 		super(name);
 	}
 
+	public CorrectiveControl() {
+
+	}
+	
 }

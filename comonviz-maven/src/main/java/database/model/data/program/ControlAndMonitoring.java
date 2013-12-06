@@ -14,4 +14,8 @@ public class ControlAndMonitoring extends Program	{
 		super(name);
 	}
 
+	public ControlAndMonitoring() {
+
+	}
+	
 }

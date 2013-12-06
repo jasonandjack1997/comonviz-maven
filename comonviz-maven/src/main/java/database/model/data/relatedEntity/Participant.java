@@ -13,5 +13,8 @@ public class Participant extends BasicRecord	{
 	public Participant(String name){
 		super(name);
 	}
+	public Participant() {
 
+	}
+	
 }

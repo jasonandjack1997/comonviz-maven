@@ -18,10 +18,26 @@ public class Role extends Structure	{
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<Program> associcatedActivities = new BasicRecordSet<Program>();
 	
+	public Set<Program> getAssocicatedActivities() {
+		return associcatedActivities;
+	}
+	public void setAssocicatedActivities(Set<Program> associcatedActivities) {
+		this.associcatedActivities = associcatedActivities;
+	}
+	public String getObligation() {
+		return obligation;
+	}
+	public void setObligation(String obligation) {
+		this.obligation = obligation;
+	}
 	private String obligation;
 	
 	public Role(String name){
 		super(name);
 	}
+	public Role() {
+
+	}
+	
 
 }

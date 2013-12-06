@@ -13,5 +13,8 @@ public class ToolFeature extends BasicRecord	{
 	public ToolFeature(String name){
 		super(name);
 	}
+	public ToolFeature() {
 
+	}
+	
 }

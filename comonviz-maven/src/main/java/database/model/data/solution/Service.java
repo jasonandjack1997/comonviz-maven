@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import database.model.data.BasicRecordSet;
 import database.model.data.obligation.Obligation;
 import database.model.data.program.Role;
-import database.model.data.relatedEntity.ServiceStatus;
+import database.model.data.relatedType.ServiceStatus;
 
 
 @Entity
@@ -25,11 +25,41 @@ public class Service extends Solution	{
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<Role> associatedRoles= new BasicRecordSet<Role>();
 	
+	public Set<Obligation> getAssociatedObligations() {
+		return associatedObligations;
+	}
+
+	public void setAssociatedObligations(Set<Obligation> associatedObligations) {
+		this.associatedObligations = associatedObligations;
+	}
+
+	public Set<Role> getAssociatedRoles() {
+		return associatedRoles;
+	}
+
+	public void setAssociatedRoles(Set<Role> associatedRoles) {
+		this.associatedRoles = associatedRoles;
+	}
+
+	public ServiceStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ServiceStatus status) {
+		this.status = status;
+	}
+
 	@ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private ServiceStatus status;
 	
 	public Service(String name){
 		super(name);
 	}
+	
+	public Service(){
+		
+	}
+	
+	
 
 }

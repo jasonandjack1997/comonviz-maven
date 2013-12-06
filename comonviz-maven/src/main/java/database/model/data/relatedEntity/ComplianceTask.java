@@ -13,5 +13,8 @@ public class ComplianceTask extends BasicRecord	{
 	public ComplianceTask(String name){
 		super(name);
 	}
+	public ComplianceTask() {
 
+	}
+	
 }

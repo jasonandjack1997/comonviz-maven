@@ -12,5 +12,8 @@ public class Obligation extends BasicRecord	{
 	public Obligation(String name){
 		super(name);
 	}
+	public Obligation() {
 
+	}
+	
 }

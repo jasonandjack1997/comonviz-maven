@@ -13,5 +13,8 @@ public class InternalMember extends Member	{
 	public InternalMember(String name){
 		super(name);
 	}
+	public InternalMember() {
 
+	}
+	
 }

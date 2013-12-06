@@ -24,6 +24,13 @@ public class Contract extends MandatoryObligation	{
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<Client> clients =  new BasicRecordSet<Client>();
 	
+	public Date getSigningDate() {
+		return signingDate;
+	}
+
+	public void setSigningDate(Date signingDate) {
+		this.signingDate = signingDate;
+	}
 	private Date signingDate;
 	
 	public Set<Client> getClients() {
@@ -45,5 +52,8 @@ public class Contract extends MandatoryObligation	{
 	public void setContractors(Set<Contractor> contractors) {
 		this.contractors = contractors;
 	}
+	public Contract() {
 
+	}
+	
 }

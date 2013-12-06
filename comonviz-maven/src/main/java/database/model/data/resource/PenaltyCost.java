@@ -22,5 +22,9 @@ public class PenaltyCost extends MonetaryResource	{
 	public PenaltyCost(String name){
 		super(name);
 	}
+	public PenaltyCost() {
+
+	}
+	
 
 }

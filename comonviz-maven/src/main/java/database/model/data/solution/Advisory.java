@@ -15,8 +15,18 @@ public class Advisory extends Service	{
 
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Consultant consultant;
+	public Consultant getConsultant() {
+		return consultant;
+	}
+	public void setConsultant(Consultant consultant) {
+		this.consultant = consultant;
+	}
 	public Advisory(String name){
 		super(name);
 	}
+	public Advisory() {
+
+	}
+	
 
 }

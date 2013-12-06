@@ -13,5 +13,9 @@ public class RiskManagement extends BasicRecord {
 	public RiskManagement(String name) {
 		super(name);
 	}
+	public RiskManagement() {
+
+	}
+	
 
 }
