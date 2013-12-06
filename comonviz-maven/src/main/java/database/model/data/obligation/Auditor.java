@@ -1,4 +1,4 @@
-package database.model.data.relatedEntity;
+package database.model.data.obligation;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -9,9 +9,9 @@ import database.model.data.BasicRecord;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Parameter extends BasicRecord	{
-	public Parameter(String name){
+public class Auditor extends BasicRecord	{
+	public Auditor(String name){
 		super(name);
 	}
-	
+
 }

@@ -8,5 +8,4 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy=InheritanceType.JOINED)
 public class CommunicationAndConsulationStatus extends Status{
 	
-	public static final String Ongoing = "On Going";
 }

@@ -6,12 +6,8 @@ import javax.persistence.InheritanceType;
 
 import database.model.data.BasicRecord;
 
-
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-public class Parameter extends BasicRecord	{
-	public Parameter(String name){
-		super(name);
-	}
-	
+@Inheritance(strategy = InheritanceType.JOINED)
+public class RiskPossibilityToControl extends BasicRecord{
+
 }

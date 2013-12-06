@@ -4,9 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import database.model.data.BasicRecord;
+
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Status{
-	public final static String OK = "OK";
-	public final static String Other = "Other";
+public class Status extends BasicRecord{
 }
