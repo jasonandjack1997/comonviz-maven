@@ -28,6 +28,10 @@ public class ReflectionUtils {
 		this.testSet = testSet;
 	}
 
+	public static String toFirstLetterLowerCase(String string){
+		return string.substring(0,1).toLowerCase() + string.substring(1, string.length());
+	}
+	
 	public static String getfieldNameByClass(Class<?> clazz) {
 		String simpleClassName = clazz.getSimpleName();
 		String fieldName = simpleClassName.substring(0, 1).toLowerCase()

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
+import au.uq.dke.comonviz.misc.CustomRuntimeException;
 import au.uq.dke.comonviz.model.OntologyModelListener;
 import ca.uvic.cs.chisel.cajun.graph.DefaultGraphModel;
 import ca.uvic.cs.chisel.cajun.graph.arc.GraphArc;
@@ -206,6 +207,7 @@ public class NewGraphModel extends DefaultGraphModel {
 	 */
 
 	// other methods
+	
 	
 	public List<GraphNode> getChildren(GraphNode graphNode) {
 

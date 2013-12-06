@@ -9,6 +9,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
+import au.uq.dke.comonviz.misc.CustomRuntimeException;
+import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import database.model.data.BasicRecord;
 import database.model.ontology.OntologyClass;
 import database.model.ontology.OntologyClass2;
@@ -29,7 +32,24 @@ public class DatabaseUtils {
 		return session.get(recordType, id);
 		
 	}
+	public static String getModelClassPrefix(DefaultGraphNode graphNode){
+		
+		for(Object record: findAll(OntologyClass.class)){
+			OntologyClass ontologyClass = (OntologyClass) record;
+			if(ontologyClass.getId() == graphNode.getBranchId()){
+				return ontologyClass.getName();
+			}
+		}
+		
+		throw new CustomRuntimeException("no branch name found");
+		
+	}
+	public static String getTableNameByNodeName(String nodeName) {
+		String tableName = nodeName.replace(" of ", "Of").replace(" ", "").replace("&", "And");
+		return tableName;
+	}
 
+	
 	public static List findAll(Class recordType){
 		return session.createCriteria(recordType).list();
 	}

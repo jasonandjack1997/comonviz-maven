@@ -31,6 +31,8 @@ import org.semanticweb.owlapi.model.OWLClass;
 
 import au.uq.dke.comonviz.EntryPoint;
 import au.uq.dke.comonviz.ui.ontology.StyleManager;
+import au.uq.dke.comonviz.utils.DatabaseUtils;
+import au.uq.dke.comonviz.utils.ReflectionUtils;
 import ca.uvic.cs.chisel.cajun.graph.arc.GraphArc;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNodeStyle;
@@ -140,7 +142,6 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 		this.userObject = userObject;
 
 		this.changeListeners = new ArrayList<ChangeListener>();
-
 
 		this.style = new CustomGraphNodeStyle1();
 		this.selected = false;
@@ -290,6 +291,15 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 
 	public String getText() {
 		return fullText;
+	}
+
+	public long getId() {
+
+		return ((OntologyClass) userObject).getId();
+	}
+
+	public long getBranchId() {
+		return ((OntologyClass) userObject).getBranchId();
 	}
 
 	public void setText(String s) {
@@ -582,9 +592,9 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 			textNode.setBounds(centerX - textNode.getWidth() / 2, centerY
 					- textNode.getHeight() / 2, textNode.getWidth(),
 					textNode.getHeight());
-			
-			if(this.tableIcon != null){
-				
+
+			if (this.tableIcon != null) {
+
 				this.tableIcon.setBounds(centerX - 50, centerY - 50, 30, 30);
 			}
 
@@ -862,35 +872,31 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 		this.fixedLocation = fixedLocation;
 	}
 
-	public String getTableNameByNodeName() {
-		String nodeName = this.getText();
-		String tableName = nodeName.replace(" ", "").replace("&", "");
-		return tableName;
-	}
-
 	public Class getRecordType() {
-		String tableName = this.getTableNameByNodeName();
 
-		if(tableName.equalsIgnoreCase("ProcessActivity")){
+		String ontologyName = DatabaseUtils.getModelClassPrefix(this);
+		String modelClassNamePrefix = "database.model.data."
+				+ ReflectionUtils.toFirstLetterLowerCase(ontologyName) + ".";
+
+		String tableName = DatabaseUtils.getTableNameByNodeName(this.getText());
+
+		if (tableName.equalsIgnoreCase("ProcessActivity")) {
 			int a = 1;
 		}
-		
-		String fullClassName = classFullNamePrefix + tableName;
+
+		String fullClassName = modelClassNamePrefix + tableName;
 		Class recordType = null;
 		try {
 			recordType = Class.forName(fullClassName);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
-			int a = 1;
+			 e.printStackTrace();
 		}
-		if(recordType != null){
+		if (recordType != null) {
 			int a = 1;
 		}
 		return recordType;
 
 	}
-	
-	public static final String classFullNamePrefix = "database.model.data.businessProcessManagement.";
-	
+
 }
