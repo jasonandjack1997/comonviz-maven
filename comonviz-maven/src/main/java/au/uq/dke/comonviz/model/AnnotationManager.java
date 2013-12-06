@@ -95,7 +95,10 @@ public class AnnotationManager {
 			sb.append(((ArrayList) ontologyClasses).get(i));
 			sb.append("|");
 		}
-		sb.append(((ArrayList) ontologyClasses).get(i));
+		if(i > 0){
+			
+			sb.append(((ArrayList) ontologyClasses).get(i));
+		}
 		sb.append(")([a-z]){0,2})");
 		owlClassPattern = Pattern.compile(sb.toString());
 	}

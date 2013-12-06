@@ -30,33 +30,23 @@ public class EntryPointTest {
 	}
 
 	public static void initData() {
-		GenericService activityService = ServiceManager
-				.getGenericService(ProcessActivity.class);
-		GenericService objectiveService = ServiceManager
-				.getGenericService(ProcessObjective.class);
-
 
 		ProcessActivity activity1 = new ProcessActivity("activity 1");
-		activityService.save(activity1);
+		activity1.persist();
 
 		
 		ProcessObjective objective1 = new ProcessObjective("objective 1");
 		ProcessObjective objective2 = new ProcessObjective("objective 2");
 
 		activity1.getProcessObjectives().add(objective1);
-		objective1.setProcessActivity(activity1);
-	
 		activity1.getProcessObjectives().add(objective2);
-		objective2.setProcessActivity(activity1);
-
-		objectiveService.save(objective1);
-		objectiveService.save(objective2);
+		
+		objective1.persist();
+		objective2.persist();
 		
 		ProcessRule rule1 = new ProcessRule("rule 1");
+		rule1.getProcessActivities().add(activity1);
 		rule1.persist();
-		
-		ReflectionUtils.associateRecords(rule1, activity1);
-		
 
 	}
 

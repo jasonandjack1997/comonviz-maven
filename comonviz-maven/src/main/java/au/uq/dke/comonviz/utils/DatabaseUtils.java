@@ -24,6 +24,11 @@ public class DatabaseUtils {
 	public static Session getSession() {
 		return session;
 	}
+	
+	public static Object findById(Class recordType, Serializable id){
+		return session.get(recordType, id);
+		
+	}
 
 	public static List findAll(Class recordType){
 		return session.createCriteria(recordType).list();
