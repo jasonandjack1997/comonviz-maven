@@ -1,4 +1,4 @@
-package database.model.data.resource;
+package database.model.data.relatedEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -9,11 +9,11 @@ import database.model.data.BasicRecord;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class MonetaryResource extends Resource	{
-	private double amount;
-	
-	public MonetaryResource(String name){
+public class Parameter extends BasicRecord	{
+	public Parameter(String name){
 		super(name);
 	}
+	
+	private String value;
 
 }
