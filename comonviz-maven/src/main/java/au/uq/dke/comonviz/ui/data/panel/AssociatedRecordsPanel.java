@@ -10,7 +10,7 @@ import org.metawidget.inspector.annotation.UiAction;
 import au.uq.dke.comonviz.ui.data.dialog.ForeignRecordsChooseDialog;
 import au.uq.dke.comonviz.ui.data.tableModel.AssociatedRecordsTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.DatabaseTableModel;
 import au.uq.dke.comonviz.utils.DatabaseUtils;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
@@ -37,7 +37,7 @@ public class AssociatedRecordsPanel extends ButtonedTablePanel {
 		
 		
 		//init
-		TableModel tableModel = new AssociatedRecordsTableModel(primaryRecord,
+		TableModel tableModel = new AssociatedRecordsTableModel(this.primaryRecord,
 				set, setElementType);
 		JTable table = new JTable(tableModel);
 		super.init(table);

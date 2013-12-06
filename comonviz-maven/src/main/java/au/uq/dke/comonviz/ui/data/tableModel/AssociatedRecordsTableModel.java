@@ -7,7 +7,6 @@ import database.service.GenericService;
 import database.service.ServiceManager;
 
 public class AssociatedRecordsTableModel extends BasicTableModel{
-	GenericService service;
 	Set<Object> set;
 	private BasicRecord primaryRecord;
 
@@ -16,15 +15,14 @@ public class AssociatedRecordsTableModel extends BasicTableModel{
 	 * <p>
 	 * it contains the records it associated with 
 	 * 
-	 * @param primeryRecord
+	 * @param primaryRecord
 	 * @param set the associated records
 	 */
 	@SuppressWarnings("unchecked")
-	public AssociatedRecordsTableModel(BasicRecord primeryRecord, Set<?> set, Class<?> clazz) {
+	public AssociatedRecordsTableModel(BasicRecord primaryRecord, Set<?> set, Class<?> clazz) {
 		super(clazz);
-		this.primaryRecord = primeryRecord;
+		this.primaryRecord = primaryRecord;
 		this.set = (Set<Object>) set;
-		service = ServiceManager.getGenericService(primeryRecord.getClass());
 		super.initColumns("name", "discription");
 		super.importCollection(set);
 	}

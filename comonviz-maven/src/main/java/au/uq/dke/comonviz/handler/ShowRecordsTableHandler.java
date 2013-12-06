@@ -3,7 +3,7 @@ package au.uq.dke.comonviz.handler;
 import au.uq.dke.comonviz.graph.node.BasicNodeIcon;
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import au.uq.dke.comonviz.graph.node.RecordsTableIcon;
-import au.uq.dke.comonviz.ui.data.BasicRecordsInfoDialog;
+import au.uq.dke.comonviz.ui.data.dialog.BasicRecordsInfoDialog;
 import edu.umd.cs.piccolo.PNode;
 import edu.umd.cs.piccolo.event.PBasicInputEventHandler;
 import edu.umd.cs.piccolo.event.PInputEvent;

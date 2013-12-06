@@ -51,7 +51,7 @@ import database.model.data.BasicRecord;
  * @author Richard Kennard
  */
 
-public class RecordsTableModel<T> extends ServiceTableModel {
+public class RecordsTableModel<T> extends DatabaseTableModel {
 
 
 	private List<Class<?>> mFKClassList;

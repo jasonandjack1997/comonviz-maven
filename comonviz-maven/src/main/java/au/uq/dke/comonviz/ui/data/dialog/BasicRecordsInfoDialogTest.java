@@ -1,4 +1,4 @@
-package au.uq.dke.comonviz.ui.data;
+package au.uq.dke.comonviz.ui.data.dialog;
 
 import javax.swing.JFrame;
 

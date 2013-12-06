@@ -12,7 +12,7 @@ import org.metawidget.inspector.annotation.UiAction;
 import au.uq.dke.comonviz.ui.data.dialog.PrimaryRecordBeanDialog;
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.DatabaseTableModel;
 import au.uq.dke.comonviz.utils.DatabaseUtils;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
@@ -38,7 +38,7 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 	public void add() {
 		BasicRecord newRecord = null;
 		try {
-			newRecord = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getmClass().newInstance();
+			newRecord = (BasicRecord) ((DatabaseTableModel<?>)this.getTable().getModel()).getmClass().newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 			return;
 		}
 
-		BasicRecord record = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getValueAt(selectedRow);
+		BasicRecord record = (BasicRecord) ((DatabaseTableModel<?>)this.getTable().getModel()).getValueAt(selectedRow);
 		//record = ((ServiceTableModel)this.getTableModel()).getService().findByName(record.getName(), record.getClass());
 		new PrimaryRecordBeanDialog(record, true, this);
 	}
@@ -63,7 +63,7 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 	@SuppressWarnings("unchecked")
 	@UiAction
 	public void delete() {
-		BasicRecord record = (BasicRecord) ((ServiceTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
+		BasicRecord record = (BasicRecord) ((DatabaseTableModel<?>)this.getTable().getModel()).getValueAt(this.getTable()
 				.getSelectedRow());
 		//update relation
 
@@ -81,7 +81,7 @@ public class PrimaryRecordsTablePanel extends ButtonedTablePanel {
 		
 
 		//update table
-		((ServiceTableModel<BasicRecord>)this.getTable().getModel()).delete(record);
+		((DatabaseTableModel<BasicRecord>)this.getTable().getModel()).delete(record);
 		return;
 
 	}

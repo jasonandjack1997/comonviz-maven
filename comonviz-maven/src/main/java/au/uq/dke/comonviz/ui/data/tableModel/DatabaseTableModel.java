@@ -18,7 +18,7 @@ import database.model.data.businessProcessManagement.ProcessObjective;
 import database.service.GenericService;
 import database.service.ServiceManager;
 
-public class ServiceTableModel<T extends BasicRecord> extends
+public class DatabaseTableModel<T extends BasicRecord> extends
 		BasicTableModel<T> {
 
 	private static final long serialVersionUID = 1L;
@@ -34,7 +34,7 @@ public class ServiceTableModel<T extends BasicRecord> extends
 	 * 
 	 * @param clazz
 	 */
-	public ServiceTableModel(Class<T> clazz) {
+	public DatabaseTableModel(Class<T> clazz) {
 		super(clazz);
 	}
 

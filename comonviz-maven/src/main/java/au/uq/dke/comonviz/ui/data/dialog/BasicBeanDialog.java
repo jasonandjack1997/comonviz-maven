@@ -18,7 +18,7 @@ import org.metawidget.swing.widgetprocessor.binding.reflection.ReflectionBinding
 import org.springframework.ui.Model;
 
 import au.uq.dke.comonviz.ui.data.panel.BasicTablePanel;
-import au.uq.dke.comonviz.ui.data.tableModel.ServiceTableModel;
+import au.uq.dke.comonviz.ui.data.tableModel.DatabaseTableModel;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
 
@@ -90,10 +90,10 @@ public class BasicBeanDialog extends JDialog {
 		//update table
 		if(this.isUpdate){
 			// update old record
-			((ServiceTableModel)this.callerTablePanel.getTable().getModel()).updateRecord(dataModel);
+			((DatabaseTableModel)this.callerTablePanel.getTable().getModel()).updateRecord(dataModel);
 		} else{
 			// add new record
-			((ServiceTableModel)this.callerTablePanel.getTable().getModel()).add(dataModel);
+			((DatabaseTableModel)this.callerTablePanel.getTable().getModel()).add(dataModel);
 		}
 		
 		SwingUtilities.invokeLater(new Runnable() {
