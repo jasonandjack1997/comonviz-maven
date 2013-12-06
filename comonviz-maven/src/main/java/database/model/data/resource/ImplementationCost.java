@@ -29,14 +29,14 @@ public class ImplementationCost extends MonetaryResource	{
 	public void setCostType(CostType costType) {
 		this.costType = costType;
 	}
-	public Set<Program> getAssociatedProgram() {
+	public Program getAssociatedProgram() {
 		return associatedProgram;
 	}
-	public void setAssociatedProgram(Set<Program> associatedProgram) {
+	public void setAssociatedProgram(Program associatedProgram) {
 		this.associatedProgram = associatedProgram;
 	}
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private Set<Program> associatedProgram = new BasicRecordSet<Program>();
+	private Program associatedProgram;
 	
 	public ImplementationCost(String name){
 		super(name);

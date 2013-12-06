@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import database.model.data.BasicRecordSet;
 import database.model.data.relatedEntity.ComplianceTask;
@@ -17,6 +18,7 @@ import database.model.data.relatedEntity.ToolFeature;
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Tool extends Solution	{
 	
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private ComplianceTask associatedComplianceTask;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)

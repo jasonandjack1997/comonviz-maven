@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import database.model.data.BasicRecordSet;
 import database.model.data.businessProcessManagement.BusinessProcess;
@@ -23,6 +24,7 @@ import database.model.data.relatedType.RiskType;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class RiskAssessment extends RiskManagementProcess {
 	
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private RiskType riskType;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
@@ -97,18 +99,22 @@ public class RiskAssessment extends RiskManagementProcess {
 	private Set<Obligation> associatedObligations= new BasicRecordSet<Obligation>();
 
 
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private RiskPossibilityOfOccurence possibilityOfOccurence;
 	
-	private String associatedDamage;
 	
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private RiskPossibilityToControl possibilityToControl;
 
+	private String associatedDamage;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<RiskCriterion> riskCriteria = new BasicRecordSet<RiskCriterion>();
 	
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Reference reference;
 	
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private RiskEvaluationStatus status;
 
 	
