@@ -1,4 +1,4 @@
-package database.model.data.program;
+package database.model.data.relatedEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -9,8 +9,8 @@ import database.model.data.BasicRecord;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class CompetencyTraining extends Program	{
-	public CompetencyTraining(String name){
+public class Client extends BasicRecord	{
+	public Client(String name){
 		super(name);
 	}
 

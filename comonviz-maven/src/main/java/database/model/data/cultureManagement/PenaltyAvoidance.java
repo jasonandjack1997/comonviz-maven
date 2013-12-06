@@ -7,10 +7,21 @@ import javax.persistence.InheritanceType;
 import database.model.data.BasicRecord;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-public class PenaltyAvoidance extends ComplianceDriver	{
-	public PenaltyAvoidance(String name){
+@Inheritance(strategy = InheritanceType.JOINED)
+public class PenaltyAvoidance extends ComplianceDriver {
+
+	private String penalty;
+
+	public PenaltyAvoidance(String name) {
 		super(name);
+	}
+
+	public String getPenalty() {
+		return penalty;
+	}
+
+	public void setPenalty(String penalty) {
+		this.penalty = penalty;
 	}
 
 }
