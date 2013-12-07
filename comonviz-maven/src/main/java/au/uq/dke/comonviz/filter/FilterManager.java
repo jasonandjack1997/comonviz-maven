@@ -28,6 +28,7 @@ public class FilterManager {
 	private NodeBranchFilter nodeBranchFilter = new NodeBranchFilter();
 	private InterBranchArcFilter interBranchArcFilter = new InterBranchArcFilter();
 	private IntraBranchNonTreeStyleArcFilter intraBranchNonTreeStyleArcFilter = new IntraBranchNonTreeStyleArcFilter();
+	private HierarchalArcFilter hierarchalArcFilter = new HierarchalArcFilter();
 	
 	
 	public NodeBranchFilter getNodeBranchFilter() {
@@ -79,8 +80,17 @@ public class FilterManager {
 		filters.add(nodeBranchFilter);
 		filters.add(interBranchArcFilter);
 		filters.add(intraBranchNonTreeStyleArcFilter);
+		filters.add(hierarchalArcFilter);
 		
 
+	}
+
+	public HierarchalArcFilter getHierarchalArcFilter() {
+		return hierarchalArcFilter;
+	}
+
+	public void setHierarchalArcFilter(HierarchalArcFilter hierarchalArcFilter) {
+		this.hierarchalArcFilter = hierarchalArcFilter;
 	}
 
 	public IntraBranchNonTreeStyleArcFilter getIntraBranchNonTreeStyleArcFilter() {

@@ -13,7 +13,7 @@ public class ArcTypeFilterPanel extends FilterPanel {
 	private static final long serialVersionUID = -1656466039034202473L;
 
 	public ArcTypeFilterPanel(String title, Icon icon, GraphItemStyle style) {
-		super(title, icon, style);
+		super(title, icon, style, true);
 		// TODO Auto-generated constructor stub
 	}
 

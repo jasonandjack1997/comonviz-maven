@@ -38,6 +38,7 @@ import au.uq.dke.comonviz.ui.ontology.OpenEditRelationshipsDialogAction;
 import au.uq.dke.comonviz.ui.ontology.OpenOntologyFileAction;
 import au.uq.dke.comonviz.ui.ontology.StatusProgressBar;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.ArcTypeFilterPanel;
+import au.uq.dke.comonviz.ui.ontology.filterPanel.HierarchalArcFilterPanel;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.InterBranchArcFilterPanel;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.IntraBranchNonTreeStyleArcFilterPanel;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.NodeBranchFilterPanel;
@@ -79,6 +80,7 @@ public class TopView extends JPanel {
 	private FilterPanel nodeBranchPanel;
 	private FilterPanel interBranchArcFilterPanel;
 	private FilterPanel intraBranchNonTreeStyleArcFilterPanel;
+	private FilterPanel hierarchalArcFilter;
 	
 
 	private JSplitPane centerAndRightHorizontalSplitPane;
@@ -230,6 +232,8 @@ public class TopView extends JPanel {
 				graph.getGraphArcStyle());
 		intraBranchNonTreeStyleArcFilterPanel = new IntraBranchNonTreeStyleArcFilterPanel("", null,
 				graph.getGraphArcStyle());
+		hierarchalArcFilter = new HierarchalArcFilterPanel("", null,
+				graph.getGraphArcStyle());
 
 		rightSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // new
 
@@ -247,6 +251,8 @@ public class TopView extends JPanel {
 		filtersPanel.add(interBranchArcFilterPanel, c);
 		c.gridy = 4;
 		filtersPanel.add(intraBranchNonTreeStyleArcFilterPanel, c);
+		c.gridy = 5;
+		filtersPanel.add(hierarchalArcFilter, c);
 
 		rightSplitPane.setVisible(true);
 

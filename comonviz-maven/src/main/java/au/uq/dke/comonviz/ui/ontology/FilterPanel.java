@@ -66,14 +66,14 @@ public abstract class FilterPanel extends JPanel implements FilterChangedListene
 	private Icon icon;
 	private GraphItemStyle style;
 
-	public FilterPanel(String title, Icon icon, GraphItemStyle style) {
+	public FilterPanel(String title, Icon icon, GraphItemStyle style, boolean showHeader) {
 		super(new BorderLayout());
 		this.title = title;
 		this.icon = icon;
 		this.style = style;
 		this.ignoreFilterChange = false;
 
-		initialize();
+		initialize(showHeader);
 
 		reload();
 	}
@@ -104,11 +104,13 @@ public abstract class FilterPanel extends JPanel implements FilterChangedListene
 		getHeaderLabel().setIcon(icon);
 	}
 
-	private void initialize() {
+	private void initialize(boolean showHeader) {
 		setOpaque(false);
 		setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-
-		add(getHeaderPanel(), BorderLayout.NORTH);
+		
+		if(showHeader){
+			add(getHeaderPanel(), BorderLayout.NORTH);
+		}
 
 
 		JPanel holder = new JPanel(new BorderLayout());

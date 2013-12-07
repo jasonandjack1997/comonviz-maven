@@ -13,7 +13,7 @@ public class NodeBranchFilterPanel extends FilterPanel {
 	private static final long serialVersionUID = -1656466039034202473L;
 
 	public NodeBranchFilterPanel(String title, Icon icon, GraphItemStyle style) {
-		super(title, icon, style);
+		super(title, icon, style, true);
 	}
 
 	public void setTypeVisibility(Object nodeBranch, boolean visible) {

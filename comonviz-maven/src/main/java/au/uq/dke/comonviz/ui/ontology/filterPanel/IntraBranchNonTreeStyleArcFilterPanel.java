@@ -14,7 +14,7 @@ public class IntraBranchNonTreeStyleArcFilterPanel extends FilterPanel {
 	private static final long serialVersionUID = -1656466039034202473L;
 
 	public IntraBranchNonTreeStyleArcFilterPanel(String title, Icon icon, GraphItemStyle style) {
-		super(title, icon, style);
+		super(title, icon, style, false);
 	}
 
 	public void setTypeVisibility(Object nodeBranch, boolean visible) {
