@@ -1,10 +1,11 @@
-package au.uq.dke.comonviz.ui.ontology;
+package au.uq.dke.comonviz.ui.ontology.filterPanel;
 
 import java.util.Map;
 
 import javax.swing.Icon;
 
 import au.uq.dke.comonviz.EntryPoint;
+import au.uq.dke.comonviz.ui.ontology.FilterPanel;
 import ca.uvic.cs.chisel.cajun.graph.GraphItemStyle;
 
 public class NodeLevelFilterPanel extends FilterPanel {

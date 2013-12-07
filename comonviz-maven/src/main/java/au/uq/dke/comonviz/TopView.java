@@ -29,14 +29,15 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import au.uq.dke.comonviz.ui.ontology.ArcTypeFilterPanel;
 import au.uq.dke.comonviz.ui.ontology.FilterPanel;
-import au.uq.dke.comonviz.ui.ontology.NodeLevelFilterPanel;
 import au.uq.dke.comonviz.ui.ontology.OpenEditConceptsDialogAction;
 import au.uq.dke.comonviz.ui.ontology.OpenEditRelTypesDialogAction;
 import au.uq.dke.comonviz.ui.ontology.OpenEditRelationshipsDialogAction;
 import au.uq.dke.comonviz.ui.ontology.OpenOntologyFileAction;
 import au.uq.dke.comonviz.ui.ontology.StatusProgressBar;
+import au.uq.dke.comonviz.ui.ontology.filterPanel.ArcTypeFilterPanel;
+import au.uq.dke.comonviz.ui.ontology.filterPanel.NodeBranchFilterPanel;
+import au.uq.dke.comonviz.ui.ontology.filterPanel.NodeLevelFilterPanel;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;
 import ca.uvic.cs.chisel.cajun.graph.Graph;
 import ca.uvic.cs.chisel.cajun.graph.GraphModelAdapter;
@@ -69,6 +70,7 @@ public class TopView extends JPanel {
 	private FilterPanel nodeFilterPanel;
 	private FilterPanel arcTypeFilterPanel;
 	private FilterPanel nodeLevelFilterPanel;
+	private FilterPanel nodeBranchPanel;
 
 	private JSplitPane centerAndRightHorizontalSplitPane;
 
@@ -211,11 +213,17 @@ public class TopView extends JPanel {
 				graph.getGraphArcStyle());
 		nodeLevelFilterPanel = new NodeLevelFilterPanel("Node Levels", null,
 				graph.getGraphArcStyle());
+		
+		nodeBranchPanel = new NodeBranchFilterPanel("Node Branches", null,
+				graph.getGraphArcStyle());
 
+		
 		rightFilterSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // new
 		rightFilterSplitPane.setVisible(true);
-		rightFilterSplitPane.add(arcTypeFilterPanel);
+		//rightFilterSplitPane.add(arcTypeFilterPanel);
 		rightFilterSplitPane.add(nodeLevelFilterPanel);
+		rightFilterSplitPane.add(nodeBranchPanel);
+
 		rightFilterSplitPane.setDividerLocation(0.5f);
 
 		centerAndRightHorizontalSplitPane = new JSplitPane(
@@ -234,6 +242,14 @@ public class TopView extends JPanel {
 		this.add(getToolBar(), BorderLayout.NORTH);
 		this.add(topHorizontalSplitPane, BorderLayout.CENTER);
 		initializeToolBar();
+	}
+
+	public FilterPanel getNodeBranchPanel() {
+		return nodeBranchPanel;
+	}
+
+	public void setNodeBranchPanel(FilterPanel nodeBranchPanel) {
+		this.nodeBranchPanel = nodeBranchPanel;
 	}
 
 	public void setSplitPaneDividers() {

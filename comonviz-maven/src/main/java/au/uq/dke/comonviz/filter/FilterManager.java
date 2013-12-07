@@ -25,6 +25,17 @@ public class FilterManager {
 	private List<GraphFilter> filters;
 
 	private NodeLevelFilter nodeLevelFilter = new NodeLevelFilter();
+	private NodeBranchFilter nodeBranchFilter = new NodeBranchFilter();
+	
+	
+	public NodeBranchFilter getNodeBranchFilter() {
+		return nodeBranchFilter;
+	}
+
+	public void setNodeBranchFilter(NodeBranchFilter nodeBranchFilter) {
+		this.nodeBranchFilter = nodeBranchFilter;
+	}
+
 	public NodeLevelFilter getNodeLevelFilter() {
 		return nodeLevelFilter;
 	}
@@ -63,6 +74,7 @@ public class FilterManager {
 		filters.add(new NodeTypeFilter());
 		filters.add(arcTypeFilter);
 		filters.add(nodeLevelFilter);
+		filters.add(nodeBranchFilter);
 		
 
 	}
@@ -255,11 +267,13 @@ public class FilterManager {
 		@Override
 		public void graphNodeAdded(GraphNode node) {
 			FilterManager.this.getNodeLevelFilter().addNodeLevel(node);
+			FilterManager.this.getNodeBranchFilter().addNodeBranch(node);
 		}
 
 		@Override
 		public void graphNodeRemoved(GraphNode node) {
 			FilterManager.this.getNodeLevelFilter().removeNodeLevel(node);
+			FilterManager.this.getNodeBranchFilter().removeNodeBranch(node);
 		}
 
 		@Override

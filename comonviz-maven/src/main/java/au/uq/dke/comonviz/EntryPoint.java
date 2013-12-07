@@ -166,8 +166,11 @@ public class EntryPoint {
 		flatGraph.addListeners();
 
 		this.filterManager.getNodeLevelFilter().updateNodeLevels();
+		this.filterManager.getNodeBranchFilter().init();
+		
 		this.topView.getArcTypeFilterPanel().reload();
 		this.topView.getNodeLevelFilterPanel().reload();
+		this.topView.getNodeBranchPanel().reload();
 
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Display the window.
