@@ -245,8 +245,8 @@ public class EntryPoint {
 				.getResourceAsStream("/database/" + dataBaseFileName);
 		FileUtils.forceMkdir(new File(outerDatabaseDirectory));
 		if (outerDatabaseFile.exists()) {
-			FileUtils.copyInputStreamToFile(innerSourceFileStream,
-					outerDatabaseFile);
+//			FileUtils.copyInputStreamToFile(innerSourceFileStream,
+//					outerDatabaseFile);
 		} else {
 			FileUtils.copyInputStreamToFile(innerSourceFileStream,
 					outerDatabaseFile);
