@@ -26,6 +26,7 @@ public class FilterManager {
 
 	private NodeLevelFilter nodeLevelFilter = new NodeLevelFilter();
 	private NodeBranchFilter nodeBranchFilter = new NodeBranchFilter();
+	private InterBranchArcFilter interBranchArcFilter = new InterBranchArcFilter();
 	
 	
 	public NodeBranchFilter getNodeBranchFilter() {
@@ -75,6 +76,7 @@ public class FilterManager {
 		filters.add(arcTypeFilter);
 		filters.add(nodeLevelFilter);
 		filters.add(nodeBranchFilter);
+		filters.add(interBranchArcFilter);
 		
 
 	}
@@ -296,6 +298,14 @@ public class FilterManager {
 		public boolean isVisible(GraphItem item) {
 			return isNodeTypeVisible(item.getType());
 		}
+	}
+
+	public InterBranchArcFilter getInterBranchArcFilter() {
+		return interBranchArcFilter;
+	}
+
+	public void setInterBranchArcFilter(InterBranchArcFilter interBranchArcFilter) {
+		this.interBranchArcFilter = interBranchArcFilter;
 	}
 
 }

@@ -36,6 +36,7 @@ import au.uq.dke.comonviz.ui.ontology.OpenEditRelationshipsDialogAction;
 import au.uq.dke.comonviz.ui.ontology.OpenOntologyFileAction;
 import au.uq.dke.comonviz.ui.ontology.StatusProgressBar;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.ArcTypeFilterPanel;
+import au.uq.dke.comonviz.ui.ontology.filterPanel.InterBranchArcFilterPanel;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.NodeBranchFilterPanel;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.NodeLevelFilterPanel;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;
@@ -71,6 +72,7 @@ public class TopView extends JPanel {
 	private FilterPanel arcTypeFilterPanel;
 	private FilterPanel nodeLevelFilterPanel;
 	private FilterPanel nodeBranchPanel;
+	private FilterPanel interBranchArcFilterPanel;
 
 	private JSplitPane centerAndRightHorizontalSplitPane;
 
@@ -217,12 +219,16 @@ public class TopView extends JPanel {
 		nodeBranchPanel = new NodeBranchFilterPanel("Node Branches", null,
 				graph.getGraphArcStyle());
 
+		interBranchArcFilterPanel = new InterBranchArcFilterPanel("", null,
+				graph.getGraphArcStyle());
+
 		
 		rightFilterSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // new
 		rightFilterSplitPane.setVisible(true);
-		//rightFilterSplitPane.add(arcTypeFilterPanel);
-		rightFilterSplitPane.add(nodeLevelFilterPanel);
-		rightFilterSplitPane.add(nodeBranchPanel);
+		rightFilterSplitPane.add(arcTypeFilterPanel);
+		//rightFilterSplitPane.add(nodeLevelFilterPanel);
+		//rightFilterSplitPane.add(nodeBranchPanel);
+		rightFilterSplitPane.add(interBranchArcFilterPanel);
 
 		rightFilterSplitPane.setDividerLocation(0.5f);
 
