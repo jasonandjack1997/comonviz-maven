@@ -33,6 +33,7 @@ import au.uq.dke.comonviz.EntryPoint;
 import au.uq.dke.comonviz.ui.ontology.StyleManager;
 import au.uq.dke.comonviz.utils.DatabaseUtils;
 import au.uq.dke.comonviz.utils.ReflectionUtils;
+import au.uq.dke.comonviz.utils.StringUtils;
 import ca.uvic.cs.chisel.cajun.graph.arc.GraphArc;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNodeStyle;
@@ -874,11 +875,11 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 
 	public Class getRecordType() { 
 		String branchName = DatabaseUtils.getBranchNodeName(this);
-		String parentPackageName = DatabaseUtils.getTableNameByNodeName(branchName);
+		String parentPackageName = StringUtils.getTableNameByNodeName(branchName);
 		String modelClassNamePrefix = "database.model.data."
 				+ ReflectionUtils.toFirstLetterLowerCase(parentPackageName) + ".";
 
-		String tableName = DatabaseUtils.getTableNameByNodeName(this.getText());
+		String tableName = StringUtils.getTableNameByNodeName(this.getText());
 		
 		if(tableName.equalsIgnoreCase("RiskIdentification")
 				|| tableName.equalsIgnoreCase("RiskAnalysis")

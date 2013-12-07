@@ -44,10 +44,6 @@ public class DatabaseUtils {
 		throw new CustomRuntimeException("no branch name found");
 		
 	}
-	public static String getTableNameByNodeName(String nodeName) {
-		String tableName = nodeName.replace(" of ", "Of").replace(" ", "").replace("&", "And").replace("-", "");
-		return tableName;
-	}
 
 	
 	public static List findAll(Class recordType){
