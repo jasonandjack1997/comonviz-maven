@@ -9,11 +9,11 @@ import database.model.data.BasicRecord;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class ResistanceMangementCost extends NonMonetaryResource	{
-	public ResistanceMangementCost(String name){
+public class ResistanceManagementCost extends NonMonetaryResource	{
+	public ResistanceManagementCost(String name){
 		super(name);
 	}
-	public ResistanceMangementCost() {
+	public ResistanceManagementCost() {
 
 	}
 	

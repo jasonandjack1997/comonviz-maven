@@ -44,7 +44,6 @@ public class BasicBeanDialog extends JDialog {
 	public BasicBeanDialog(){
 		this.setModalityType(ModalityType.APPLICATION_MODAL);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setTitle(this.getClass().getSimpleName());
 
 		modelWidget = new SwingMetawidget();
 		modelWidget.addWidgetProcessor(new BeansBindingProcessor(

@@ -872,13 +872,20 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 		this.fixedLocation = fixedLocation;
 	}
 
-	public Class getRecordType() {
-
-		String ontologyName = DatabaseUtils.getModelClassPrefix(this);
+	public Class getRecordType() { 
+		String branchName = DatabaseUtils.getBranchNodeName(this);
+		String parentPackageName = DatabaseUtils.getTableNameByNodeName(branchName);
 		String modelClassNamePrefix = "database.model.data."
-				+ ReflectionUtils.toFirstLetterLowerCase(ontologyName) + ".";
+				+ ReflectionUtils.toFirstLetterLowerCase(parentPackageName) + ".";
 
 		String tableName = DatabaseUtils.getTableNameByNodeName(this.getText());
+		
+		if(tableName.equalsIgnoreCase("RiskIdentification")
+				|| tableName.equalsIgnoreCase("RiskAnalysis")
+				|| tableName.equals("RiskEvaluation")
+				|| tableName.equals("ComplianceManagement")){
+			return null;
+		}
 
 		if (tableName.equalsIgnoreCase("ProcessActivity")) {
 			int a = 1;
@@ -889,7 +896,6 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 		try {
 			recordType = Class.forName(fullClassName);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			 e.printStackTrace();
 		}
 		if (recordType != null) {

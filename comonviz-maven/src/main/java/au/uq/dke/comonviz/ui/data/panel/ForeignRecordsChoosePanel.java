@@ -1,15 +1,17 @@
 package au.uq.dke.comonviz.ui.data.panel;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.util.Set;
 
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import org.metawidget.inspector.annotation.UiAction;
 import org.metawidget.inspector.annotation.UiComesAfter;
-import org.metawidget.util.ClassUtils;
 
+import au.uq.dke.comonviz.ui.data.DialogUtils;
 import au.uq.dke.comonviz.ui.data.table.BasicTable;
 import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.RecordsTableModel;
@@ -27,6 +29,7 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 		RecordsTableModel foreignTableModel = new RecordsTableModel(
 				foreignClass);
 		JTable table = new BasicTable(foreignTableModel);
+		
 		super.init(table);
 		this.callerTablePanel = callerTablePanel;
 		this.mainRecord = primaryRecord;
@@ -62,12 +65,7 @@ public class ForeignRecordsChoosePanel extends ButtonedTablePanel {
 			}
 		}
 
-		Container parent = this.getRootPane();
-		while (!(parent instanceof JDialog) && parent !=null) {
-			parent = parent.getParent();
-		}
-		((JDialog) parent).dispose();
-
+		DialogUtils.getParentDialog(this).dispose();
 		return;
 
 	}

@@ -15,8 +15,8 @@ import database.model.data.obligation.Obligation;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class CultureMangement extends BasicRecord	{
-	public CultureMangement(String name){
+public class CultureManagement extends BasicRecord	{
+	public CultureManagement(String name){
 		super(name);
 	}
 	
@@ -30,7 +30,7 @@ public class CultureMangement extends BasicRecord	{
 	public void setObligations(Set<Obligation> obligations) {
 		this.obligations = obligations;
 	}
-	public CultureMangement() {
+	public CultureManagement() {
 
 	}
 	

@@ -25,7 +25,7 @@ public class EntryPointTest {
 	}
 
 	public void testEntryPointWithData() {
-		initData();
+		//initData();
 		entryPoint.start();
 	}
 

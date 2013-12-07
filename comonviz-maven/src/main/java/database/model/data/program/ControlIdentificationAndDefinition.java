@@ -14,11 +14,11 @@ import database.model.data.businessProcessManagement.ProcessRule;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class ControlIdentificationAndDefination extends ControlAndMonitoring	{
+public class ControlIdentificationAndDefinition extends ControlAndMonitoring	{
 	@ManyToMany( cascade = {CascadeType.PERSIST} )
 	private Set<ProcessRule> processRules = new BasicRecordSet<ProcessRule>();
 
-	public ControlIdentificationAndDefination(String name){
+	public ControlIdentificationAndDefinition(String name){
 		super(name);
 	}
 
@@ -30,7 +30,7 @@ public class ControlIdentificationAndDefination extends ControlAndMonitoring	{
 		this.processRules = processRules;
 	}
 
-	public ControlIdentificationAndDefination() {
+	public ControlIdentificationAndDefinition() {
 
 	}
 	

@@ -14,7 +14,7 @@ import database.model.data.businessProcessManagement.ProcessRule;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class PreventativeControl extends ControlIdentificationAndDefination	{
+public class PreventativeControl extends ControlIdentificationAndDefinition	{
 
 
 	public PreventativeControl(String name){

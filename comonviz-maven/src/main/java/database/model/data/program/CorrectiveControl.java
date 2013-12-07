@@ -9,7 +9,7 @@ import database.model.data.BasicRecord;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class CorrectiveControl extends ControlIdentificationAndDefination	{
+public class CorrectiveControl extends ControlIdentificationAndDefinition	{
 	public CorrectiveControl(String name){
 		super(name);
 	}

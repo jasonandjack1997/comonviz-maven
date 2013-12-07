@@ -8,7 +8,7 @@ import database.model.data.BasicRecord;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class ComplianceCulture extends CultureMangement	{
+public class ComplianceCulture extends CultureManagement	{
 	public ComplianceCulture(String name){
 		super(name);
 	}

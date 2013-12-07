@@ -1,4 +1,4 @@
-package database.model.data.riskMangement;
+package database.model.data.riskManagement;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;

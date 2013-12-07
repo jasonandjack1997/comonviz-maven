@@ -1,5 +1,7 @@
 package au.uq.dke.comonviz.ui.data.panel;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JTable;
 
 import org.metawidget.inspector.annotation.UiAction;
@@ -38,7 +40,7 @@ public class ButtonedTablePanel extends BasicTablePanel {
 			buttonsWidget.setToInspect(this);
 			buttonsWidget.setMaximumInspectionDepth(1);
 
-			this.add(buttonsWidget);
+			this.add(buttonsWidget, BorderLayout.SOUTH);
 		}else {
 			throw new CustomRuntimeException("table has already been initialized!");
 		}

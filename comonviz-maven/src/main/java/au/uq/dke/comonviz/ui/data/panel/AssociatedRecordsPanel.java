@@ -64,9 +64,9 @@ public class AssociatedRecordsPanel extends ButtonedTablePanel {
 		Class foreignClass = associatedTableModel.getmClass();
 
 		// class is the foreign record class
-		ForeignRecordsChoosePanel panel = new ForeignRecordsChoosePanel(primaryRecord,
+		
+		new ForeignRecordsChooseDialog(primaryRecord,
 				foreignClass, this);
-		new ForeignRecordsChooseDialog(panel);
 
 	}
 

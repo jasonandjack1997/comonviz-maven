@@ -19,13 +19,13 @@ public class ControlImplementation extends ControlAndMonitoring	{
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-	private ControlIdentificationAndDefination control;
+	private ControlIdentificationAndDefinition control;
 	
-	public ControlIdentificationAndDefination getControl() {
+	public ControlIdentificationAndDefinition getControl() {
 		return control;
 	}
 
-	public void setControl(ControlIdentificationAndDefination control) {
+	public void setControl(ControlIdentificationAndDefinition control) {
 		this.control = control;
 	}
 

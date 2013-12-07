@@ -24,7 +24,8 @@ public class PrimaryRecordBeanDialog extends BasicBeanDialog {
 	public PrimaryRecordBeanDialog(BasicRecord primaryRecord, boolean isUpdate,
 			BasicTablePanel callerTablePanel) {
 		super();
-
+		
+		this.setTitle(primaryRecord.getClass().getSimpleName());
 		// add associated record
 		List<Set<?>> setList = ReflectionUtils.getSetObjectList(primaryRecord);
 		List<Object> fkRecordList = new ArrayList<Object>();// they are fk
@@ -40,7 +41,7 @@ public class PrimaryRecordBeanDialog extends BasicBeanDialog {
 					primaryRecord, set, setElementType);
 
 			JLabel typeLabel = new JLabel("Associated "
-					+ setElementType.getClass().getSimpleName() + ": ");
+					+ setElementType.getSimpleName() + ": ");
 			this.getModelWidget().add(typeLabel);
 			this.getModelWidget().add(associatedRecordsPanel);
 		}

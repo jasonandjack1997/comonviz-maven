@@ -9,7 +9,7 @@ import database.model.data.BasicRecord;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class DetectiveControl extends ControlIdentificationAndDefination	{
+public class DetectiveControl extends ControlIdentificationAndDefinition	{
 	public DetectiveControl(String name){
 		super(name);
 	}

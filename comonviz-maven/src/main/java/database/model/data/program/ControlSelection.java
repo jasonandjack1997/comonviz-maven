@@ -19,18 +19,18 @@ public class ControlSelection extends ControlAndMonitoring	{
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-	private ControlIdentificationAndDefination control;
+	private ControlIdentificationAndDefinition control;
 	
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	private ControlRank controlRank;
 	
 	
 	
-	public ControlIdentificationAndDefination getControl() {
+	public ControlIdentificationAndDefinition getControl() {
 		return control;
 	}
 
-	public void setControl(ControlIdentificationAndDefination control) {
+	public void setControl(ControlIdentificationAndDefinition control) {
 		this.control = control;
 	}
 

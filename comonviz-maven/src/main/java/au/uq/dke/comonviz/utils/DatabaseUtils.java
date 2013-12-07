@@ -32,7 +32,7 @@ public class DatabaseUtils {
 		return session.get(recordType, id);
 		
 	}
-	public static String getModelClassPrefix(DefaultGraphNode graphNode){
+	public static String getBranchNodeName(DefaultGraphNode graphNode){
 		
 		for(Object record: findAll(OntologyClass.class)){
 			OntologyClass ontologyClass = (OntologyClass) record;
@@ -45,7 +45,7 @@ public class DatabaseUtils {
 		
 	}
 	public static String getTableNameByNodeName(String nodeName) {
-		String tableName = nodeName.replace(" of ", "Of").replace(" ", "").replace("&", "And");
+		String tableName = nodeName.replace(" of ", "Of").replace(" ", "").replace("&", "And").replace("-", "");
 		return tableName;
 	}
 

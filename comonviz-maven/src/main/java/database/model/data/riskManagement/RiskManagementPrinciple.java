@@ -1,4 +1,4 @@
-package database.model.data.riskMangement;
+package database.model.data.riskManagement;
 
 import java.util.Set;
 
@@ -8,14 +8,14 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 
-import database.model.data.BasicRecord;
 import database.model.data.BasicRecordSet;
 import database.model.data.businessProcessManagement.BusinessProcess;
-import database.model.data.obligation.Obligation;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class RiskManagementFramework extends RiskManagement {
+public class RiskManagementPrinciple extends RiskManagement {
+	
+	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<BusinessProcess> associatedBusinessProcesses = new BasicRecordSet<BusinessProcess>();
 
@@ -39,12 +39,12 @@ public class RiskManagementFramework extends RiskManagement {
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<RiskManagementProcess> associatedRiskManagementProcesses = new BasicRecordSet<RiskManagementProcess>();
-
-	public RiskManagementFramework(String name) {
+	
+	public RiskManagementPrinciple(String name) {
 		super(name);
 	}
 	
-	public RiskManagementFramework() {
+	public RiskManagementPrinciple() {
 
 	}
 	
