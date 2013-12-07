@@ -58,6 +58,9 @@ public class NodeBranchFilter implements GraphFilter {
 
 	public void addNodeBranch(GraphNode node) {
 		DefaultGraphNode branchNode = (DefaultGraphNode) EntryPoint.getGraphModel().getBranchGraphNode(node);
+		if (EntryPoint.getGraphModel().findRoot().equals(node)) {
+			//return;
+		}
 		if(!branchNode.equals(node)){
 			return;
 		}
