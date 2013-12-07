@@ -18,7 +18,7 @@ public class IntraBranchNonTreeStyleArcFilterPanel extends FilterPanel {
 	}
 
 	public void setTypeVisibility(Object nodeBranch, boolean visible) {
-		EntryPoint.getFilterManager().getInterBranchArcFilter().setInterBranchArcVisibal(visible);
+		EntryPoint.getFilterManager().getIntraBranchNonTreeStyleArcFilter().setIntraBranchNonTreeStyleArcVisibal(visible);
 		EntryPoint.getFlatGraph().performLayout();
 	}
 

@@ -41,9 +41,16 @@ public class IntraBranchNonTreeStyleArcFilter implements GraphFilter {
 		GraphNode srcNode = EntryPoint.getGraphModel().getSourceNode(rel);
 		GraphNode dstNode = EntryPoint.getGraphModel().getDestinationNode(rel);
 
-		if (!EntryPoint.getGraphModel().isParentChildRelation(srcNode, dstNode) == true) {
-			return isIntraBranchNonTreeStyleArcVisibal;
+		GraphNode srcBranchNode = EntryPoint.getGraphModel().getBranchGraphNode(srcNode);
+		GraphNode dstBranchNode = EntryPoint.getGraphModel().getBranchGraphNode(dstNode);
+
+		//within a branch
+		if(srcBranchNode.equals(dstBranchNode)){
+			if (!EntryPoint.getGraphModel().isParentChildRelation(srcNode, dstNode) == true) {
+				return isIntraBranchNonTreeStyleArcVisibal;
+			}
 		}
+
 
 		// visible by default
 		return true;
