@@ -215,6 +215,24 @@ public class NewGraphModel extends DefaultGraphModel {
 				.findChildren((OntologyClass) graphNode.getUserObject()));
 		return childrenGraphNodeList;
 	}
+	
+	public boolean isParentChildRelation(GraphNode graphNodeA, GraphNode graphNodeB){
+		List<GraphNode> childrenOfA = getChildren(graphNodeA);
+		List<GraphNode> childrenOfB = getChildren(graphNodeB);
+		for(GraphNode child : childrenOfA){
+			if(child.equals(graphNodeB)){
+				return true;
+			}
+		}
+		
+		for(GraphNode child : childrenOfB){
+			if(child.equals(graphNodeA)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	public List<GraphNode> getRelationSrcNodes(GraphNode graphNode) {
 		List<OntologyClass> relationSrcClassList = this.ontologyRelationshipService

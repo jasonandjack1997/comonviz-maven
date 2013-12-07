@@ -9,11 +9,11 @@ import au.uq.dke.comonviz.EntryPoint;
 import au.uq.dke.comonviz.ui.ontology.FilterPanel;
 import ca.uvic.cs.chisel.cajun.graph.GraphItemStyle;
 
-public class InterBranchArcFilterPanel extends FilterPanel {
+public class IntraBranchNonTreeStyleArcFilterPanel extends FilterPanel {
 
 	private static final long serialVersionUID = -1656466039034202473L;
 
-	public InterBranchArcFilterPanel(String title, Icon icon, GraphItemStyle style) {
+	public IntraBranchNonTreeStyleArcFilterPanel(String title, Icon icon, GraphItemStyle style) {
 		super(title, icon, style);
 	}
 
@@ -24,7 +24,7 @@ public class InterBranchArcFilterPanel extends FilterPanel {
 
 	public Map<Object, Boolean> getTypes() {
 		Map interBranchArcFilterMap = new HashMap();
-		interBranchArcFilterMap.put("inter-branch relationships", EntryPoint.getFilterManager().getInterBranchArcFilter().isInterBranchArcVisibal());
+		interBranchArcFilterMap.put("intra-branch cross-tree relationships", EntryPoint.getFilterManager().getIntraBranchNonTreeStyleArcFilter().isIntraBranchNonTreeStyleArcVisibal());
 		return interBranchArcFilterMap;
 	}
 

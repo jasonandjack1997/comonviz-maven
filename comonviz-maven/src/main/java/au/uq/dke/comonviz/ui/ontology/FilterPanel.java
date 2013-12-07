@@ -108,16 +108,17 @@ public abstract class FilterPanel extends JPanel implements FilterChangedListene
 		setOpaque(false);
 		setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
 
+		add(getHeaderPanel(), BorderLayout.NORTH);
+
+
 		JPanel holder = new JPanel(new BorderLayout());
 		holder.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
 		holder.add(getTypesPanel(), BorderLayout.NORTH);
 		holder.setBackground(Color.white);
-		add(getHeaderPanel(), BorderLayout.NORTH);
+		JScrollPane scroll = new JScrollPane(holder, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 		JPanel centrePanel = new JPanel(new BorderLayout());
-		centrePanel.add(getSearchPanel(), BorderLayout.NORTH);
-
-		JScrollPane scroll = new JScrollPane(holder, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		//centrePanel.add(getSearchPanel(), BorderLayout.NORTH);
 		centrePanel.setBorder(BorderFactory.createLineBorder(BORDER_COLOR, 1));
 		centrePanel.add(scroll, BorderLayout.CENTER);
 
@@ -204,7 +205,7 @@ public abstract class FilterPanel extends JPanel implements FilterChangedListene
 			};
 			headerPanel.setBorder(BorderFactory.createEmptyBorder(4, 8, 4, 8));
 			headerPanel.add(getHeaderLabel(), BorderLayout.CENTER);
-			headerPanel.add(getCloseButton(), BorderLayout.EAST);
+			//headerPanel.add(getCloseButton(), BorderLayout.EAST);
 		}
 		return headerPanel;
 	}
@@ -256,7 +257,7 @@ public abstract class FilterPanel extends JPanel implements FilterChangedListene
 	 * Reloads the node/arc types.
 	 */
 	public void reload() {
-		searchTextField.setText(TYPE_FILTER_TEXT);
+		//searchTextField.setText(TYPE_FILTER_TEXT);
 		loadTypes(getTypes());
 	}
 

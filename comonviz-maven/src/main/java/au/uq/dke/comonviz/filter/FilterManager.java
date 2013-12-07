@@ -27,6 +27,7 @@ public class FilterManager {
 	private NodeLevelFilter nodeLevelFilter = new NodeLevelFilter();
 	private NodeBranchFilter nodeBranchFilter = new NodeBranchFilter();
 	private InterBranchArcFilter interBranchArcFilter = new InterBranchArcFilter();
+	private IntraBranchNonTreeStyleArcFilter intraBranchNonTreeStyleArcFilter = new IntraBranchNonTreeStyleArcFilter();
 	
 	
 	public NodeBranchFilter getNodeBranchFilter() {
@@ -77,8 +78,18 @@ public class FilterManager {
 		filters.add(nodeLevelFilter);
 		filters.add(nodeBranchFilter);
 		filters.add(interBranchArcFilter);
+		filters.add(intraBranchNonTreeStyleArcFilter);
 		
 
+	}
+
+	public IntraBranchNonTreeStyleArcFilter getIntraBranchNonTreeStyleArcFilter() {
+		return intraBranchNonTreeStyleArcFilter;
+	}
+
+	public void setIntraBranchNonTreeStyleArcFilter(
+			IntraBranchNonTreeStyleArcFilter intraBranchNonTreeStyleArcFilter) {
+		this.intraBranchNonTreeStyleArcFilter = intraBranchNonTreeStyleArcFilter;
 	}
 
 	public void addFilterChangedListener(FilterChangedListener listener) {

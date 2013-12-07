@@ -3,6 +3,8 @@ package au.uq.dke.comonviz;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +39,7 @@ import au.uq.dke.comonviz.ui.ontology.OpenOntologyFileAction;
 import au.uq.dke.comonviz.ui.ontology.StatusProgressBar;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.ArcTypeFilterPanel;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.InterBranchArcFilterPanel;
+import au.uq.dke.comonviz.ui.ontology.filterPanel.IntraBranchNonTreeStyleArcFilterPanel;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.NodeBranchFilterPanel;
 import au.uq.dke.comonviz.ui.ontology.filterPanel.NodeLevelFilterPanel;
 import ca.uvic.cs.chisel.cajun.graph.FlatGraph;
@@ -54,6 +57,8 @@ import edu.umd.cs.piccolox.swing.PScrollPane;
 
 public class TopView extends JPanel {
 
+	private static final int FilterPanelWidth = 300;
+
 	private static final long serialVersionUID = -7720543969598323711L;
 
 	private FlatGraph graph;
@@ -67,12 +72,14 @@ public class TopView extends JPanel {
 
 	private StatusProgressBar status;
 
-	private JSplitPane rightFilterSplitPane;
+	private JSplitPane rightSplitPane;
 	private FilterPanel nodeFilterPanel;
 	private FilterPanel arcTypeFilterPanel;
 	private FilterPanel nodeLevelFilterPanel;
 	private FilterPanel nodeBranchPanel;
 	private FilterPanel interBranchArcFilterPanel;
+	private FilterPanel intraBranchNonTreeStyleArcFilterPanel;
+	
 
 	private JSplitPane centerAndRightHorizontalSplitPane;
 
@@ -215,28 +222,42 @@ public class TopView extends JPanel {
 				graph.getGraphArcStyle());
 		nodeLevelFilterPanel = new NodeLevelFilterPanel("Node Levels", null,
 				graph.getGraphArcStyle());
-		
+
 		nodeBranchPanel = new NodeBranchFilterPanel("Node Branches", null,
 				graph.getGraphArcStyle());
 
 		interBranchArcFilterPanel = new InterBranchArcFilterPanel("", null,
 				graph.getGraphArcStyle());
+		intraBranchNonTreeStyleArcFilterPanel = new IntraBranchNonTreeStyleArcFilterPanel("", null,
+				graph.getGraphArcStyle());
 
-		
-		rightFilterSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // new
-		rightFilterSplitPane.setVisible(true);
-		rightFilterSplitPane.add(arcTypeFilterPanel);
-		//rightFilterSplitPane.add(nodeLevelFilterPanel);
-		//rightFilterSplitPane.add(nodeBranchPanel);
-		rightFilterSplitPane.add(interBranchArcFilterPanel);
+		rightSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // new
 
-		rightFilterSplitPane.setDividerLocation(0.5f);
+		JPanel filtersPanel = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.FIRST_LINE_START;
+		c.gridy = 0;
+		filtersPanel.add(arcTypeFilterPanel, c);
+		c.gridy = 1;
+		filtersPanel.add(nodeLevelFilterPanel, c);
+		c.gridy = 2;
+		filtersPanel.add(nodeBranchPanel, c);
+		c.gridy = 3;
+		filtersPanel.add(interBranchArcFilterPanel, c);
+		c.gridy = 4;
+		filtersPanel.add(intraBranchNonTreeStyleArcFilterPanel, c);
+
+		rightSplitPane.setVisible(true);
+
+		rightSplitPane.setDividerLocation(0.5f);
+		rightSplitPane.add(filtersPanel);
+		rightSplitPane.setMinimumSize(new Dimension(FilterPanelWidth, FilterPanelWidth));
 
 		centerAndRightHorizontalSplitPane = new JSplitPane(
 				JSplitPane.HORIZONTAL_SPLIT);
 
 		centerAndRightHorizontalSplitPane.add(centerGraphPanel);
-		//centerAndRightHorizontalSplitPane.add(rightFilterSplitPane);
 		centerAndRightHorizontalSplitPane.setVisible(true);
 		centerAndRightHorizontalSplitPane.setOneTouchExpandable(true);
 
@@ -296,8 +317,9 @@ public class TopView extends JPanel {
 				PNode node = e.getPickedNode();
 				if (node instanceof GraphNode) {
 					node.moveToFront();
-					//don't reflect to the tree, it will calls a cycle in reaction!
-					//nodePressed(e, (GraphNode) node);
+					// don't reflect to the tree, it will calls a cycle in
+					// reaction!
+					// nodePressed(e, (GraphNode) node);
 				}
 				if (e.isLeftMouseButton()) {
 					if (e.getClickCount() == 2) {
@@ -363,14 +385,15 @@ public class TopView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(centerAndRightHorizontalSplitPane.getComponentCount() ==  2){
-					
+				if (centerAndRightHorizontalSplitPane.getComponentCount() == 2) {
+
 					TopView.this.centerAndRightHorizontalSplitPane
-					.setDividerLocation(centerAndRightHorizontalSplitPane
-							.getWidth() - 300);
-					TopView.this.centerAndRightHorizontalSplitPane.add(rightFilterSplitPane);
-				}else{
-					centerAndRightHorizontalSplitPane.remove(rightFilterSplitPane);
+							.setDividerLocation(centerAndRightHorizontalSplitPane
+									.getWidth() - FilterPanelWidth);
+					TopView.this.centerAndRightHorizontalSplitPane
+							.add(rightSplitPane);
+				} else {
+					centerAndRightHorizontalSplitPane.remove(rightSplitPane);
 				}
 			}
 
