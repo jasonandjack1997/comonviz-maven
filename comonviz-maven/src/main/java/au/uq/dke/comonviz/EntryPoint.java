@@ -170,7 +170,7 @@ public class EntryPoint {
 		
 		this.topView.getArcTypeFilterPanel().reload();
 		this.topView.getNodeLevelFilterPanel().reload();
-		this.topView.getNodeBranchPanel().reload();
+		this.topView.getNodeBranchFilterPanel().reload();
 
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Display the window.

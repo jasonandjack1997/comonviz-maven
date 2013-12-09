@@ -35,6 +35,18 @@ public class NodeBranchFilter implements GraphFilter {
 		return true;
 	}
 
+	public void setAllBranchesInvisible(){
+		for(Map.Entry<Object, Boolean> entry : nodeBranchesVisibilityMap.entrySet()){
+			entry.setValue(false);
+		}
+	}
+
+	public void setAllBranchesVisible(){
+		for(Map.Entry<Object, Boolean> entry : nodeBranchesVisibilityMap.entrySet()){
+			entry.setValue(true);
+		}
+	}
+	
 	public void setNodeBranchVisible(Object branchNode, boolean visible) {
 
 		// visible by default

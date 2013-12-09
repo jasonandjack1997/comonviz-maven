@@ -65,7 +65,7 @@ public abstract class FilterPanel extends JPanel implements FilterChangedListene
 	private String title;
 	private Icon icon;
 	private GraphItemStyle style;
-
+	
 	public FilterPanel(String title, Icon icon, GraphItemStyle style, boolean showHeader) {
 		super(new BorderLayout());
 		this.title = title;
@@ -278,6 +278,7 @@ public abstract class FilterPanel extends JPanel implements FilterChangedListene
 						FilterPanel.this.typeVisibilityChanged(type, visible);
 					}
 				};
+				checkbox.setEnabled(FilterPanel.this.isEnabled());
 
 				// create an icon for this type - it will be a rounded rectangle
 				// filled with the same color/paint as the node or arc type

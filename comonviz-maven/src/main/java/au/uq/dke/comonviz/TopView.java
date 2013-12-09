@@ -77,7 +77,7 @@ public class TopView extends JPanel {
 	private FilterPanel nodeFilterPanel;
 	private FilterPanel arcTypeFilterPanel;
 	private FilterPanel nodeLevelFilterPanel;
-	private FilterPanel nodeBranchPanel;
+	private FilterPanel nodeBranchFilterPanel;
 	private FilterPanel interBranchArcFilterPanel;
 	private FilterPanel intraBranchNonTreeStyleArcFilterPanel;
 	private FilterPanel hierarchalArcFilter;
@@ -225,7 +225,7 @@ public class TopView extends JPanel {
 		nodeLevelFilterPanel = new NodeLevelFilterPanel("Node Levels", null,
 				graph.getGraphArcStyle());
 
-		nodeBranchPanel = new NodeBranchFilterPanel("Node Branches", null,
+		nodeBranchFilterPanel = new NodeBranchFilterPanel("Node Branches", null,
 				graph.getGraphArcStyle());
 
 		interBranchArcFilterPanel = new InterBranchArcFilterPanel("", null,
@@ -246,7 +246,7 @@ public class TopView extends JPanel {
 		c.gridy = 1;
 		filtersPanel.add(nodeLevelFilterPanel, c);
 		c.gridy = 2;
-		filtersPanel.add(nodeBranchPanel, c);
+		filtersPanel.add(nodeBranchFilterPanel, c);
 		c.gridy = 3;
 		filtersPanel.add(interBranchArcFilterPanel, c);
 		c.gridy = 4;
@@ -277,12 +277,12 @@ public class TopView extends JPanel {
 		initializeToolBar();
 	}
 
-	public FilterPanel getNodeBranchPanel() {
-		return nodeBranchPanel;
+	public FilterPanel getNodeBranchFilterPanel() {
+		return nodeBranchFilterPanel;
 	}
 
-	public void setNodeBranchPanel(FilterPanel nodeBranchPanel) {
-		this.nodeBranchPanel = nodeBranchPanel;
+	public void setNodeBranchFilterPanel(FilterPanel nodeBranchPanel) {
+		this.nodeBranchFilterPanel = nodeBranchPanel;
 	}
 
 	public void setSplitPaneDividers() {
