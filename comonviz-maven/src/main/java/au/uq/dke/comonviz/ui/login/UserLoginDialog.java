@@ -132,6 +132,16 @@ public class UserLoginDialog extends JDialog {
 
 	
 	public static void main(String[] args) {
+		List<OntologyClass> classes = DatabaseUtils.findAll(OntologyClass.class);
+		
+		DatabaseUtils.getSession().beginTransaction();
+		for(OntologyClass cls : classes){
+			cls.setHasDashboard(false);
+			cls.setHasTable(false);
+		}
+		DatabaseUtils.getSession().getTransaction().commit();
+		
+		
 		List<User> users = DatabaseUtils.findAll(User.class);
 		DatabaseUtils.getSession().beginTransaction();
 		for(User user : users){
