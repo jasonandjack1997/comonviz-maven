@@ -1,6 +1,7 @@
 package au.uq.dke.comonviz.ui.login;
 
 import java.awt.BorderLayout;
+import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JPasswordField;
@@ -20,8 +21,8 @@ import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import au.uq.dke.comonviz.misc.CustomRuntimeException;
 import au.uq.dke.comonviz.utils.DatabaseUtils;
 import database.model.ontology.OntologyClass;
-import database.model.user.Role;
 import database.model.user.User;
+import database.model.user.UserRole;
 
 public class UserLoginDialog extends JDialog {
 
@@ -65,6 +66,7 @@ public class UserLoginDialog extends JDialog {
 		this.add(modelWidget, BorderLayout.NORTH);
 		this.add(buttonsWidget, BorderLayout.SOUTH);
 		this.pack();
+		this.setVisible(true);
 
 	}
 
@@ -83,11 +85,11 @@ public class UserLoginDialog extends JDialog {
 			throw new CustomRuntimeException("user is invalid, name or password is incorrect");
 		}
 
-		Role associatedRole = null;
+		UserRole associatedRole = null;
 		if (this.user.getAssociatedRoles() != null
 				&& this.user.getAssociatedRoles().size() > 0) {
 
-			associatedRole = (Role) this.user.getAssociatedRoles().toArray()[0];
+			associatedRole = (UserRole) this.user.getAssociatedRoles().toArray()[0];
 		} else {
 			throw new CustomRuntimeException(
 					"user associated role does not exist");
@@ -113,10 +115,12 @@ public class UserLoginDialog extends JDialog {
 		//set the filter, then call the filter panel to reload to refresh check status
 		EntryPoint.getFilterManager().getNodeBranchFilter().setAllBranchesInvisible();
 		EntryPoint.getFilterManager().getNodeBranchFilter().setNodeBranchVisible(branchNode, true);
-		EntryPoint.getTopView().getNodeBranchFilterPanel().reload();
-		
 		//make filter panel un-editable
 		EntryPoint.getTopView().getNodeBranchFilterPanel().setEnabled(false);
+		EntryPoint.getTopView().getNodeBranchFilterPanel().reload();
+		
+		
+		this.dispose();
 		
 	}
 
@@ -126,8 +130,37 @@ public class UserLoginDialog extends JDialog {
 
 	}
 
+	
 	public static void main(String[] args) {
-		new UserLoginDialog().setVisible(true);
+		List<User> users = DatabaseUtils.findAll(User.class);
+		DatabaseUtils.getSession().beginTransaction();
+		for(User user : users){
+			DatabaseUtils.getSession().delete(user);
+		}
+		DatabaseUtils.getSession().getTransaction().commit();
+		
+		users = DatabaseUtils.findAll(User.class);
+		new EntryPoint().start();
+		
+		
+		User user1 = new User("Steve");
+		UserRole businessProcessManager = new UserRole("Business Process Manager");
+		
+		OntologyClass businessProcessManagementClass = null;
+		
+		businessProcessManagementClass = (OntologyClass) DatabaseUtils.findByUniqueName(OntologyClass.class, "Business Process Management");
+		
+		if(businessProcessManagementClass != null){
+			DatabaseUtils.getSession().save(businessProcessManagementClass);
+			businessProcessManager.getAssociatedOntologyClasses().add(businessProcessManagementClass);
+			businessProcessManager.persist();
+			user1.getAssociatedRoles().add(businessProcessManager);
+			user1.persist();
+		}
+		
+		
+		
+		
 	}
 
 }

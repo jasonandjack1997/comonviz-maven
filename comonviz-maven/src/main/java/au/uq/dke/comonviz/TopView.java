@@ -31,6 +31,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import au.uq.dke.comonviz.ui.login.UserLoginDialog;
 import au.uq.dke.comonviz.ui.ontology.FilterPanel;
 import au.uq.dke.comonviz.ui.ontology.OpenEditConceptsDialogAction;
 import au.uq.dke.comonviz.ui.ontology.OpenEditRelTypesDialogAction;
@@ -405,6 +406,19 @@ public class TopView extends JPanel {
 
 		});
 		this.getToolBar().add(showFilter);
+		
+		JToggleButton showLogin = new JToggleButton("login");
+		showLogin.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new UserLoginDialog();
+			}
+
+		});
+		this.getToolBar().add(showLogin);
+		
+		
 
 		addToolBarAction(new OpenOntologyFileAction());
 		addToolBarAction(new OpenEditConceptsDialogAction());

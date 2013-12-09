@@ -40,6 +40,7 @@ public class Trackable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	@Column(unique = true, nullable = false)
 	private String name;
 
 	public String getName() {

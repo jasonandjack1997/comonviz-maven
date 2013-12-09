@@ -6,16 +6,12 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.annotations.NamedNativeQueries;
-import org.hibernate.annotations.NamedQueries;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import au.uq.dke.comonviz.graph.node.DefaultGraphNode;
 import au.uq.dke.comonviz.misc.CustomRuntimeException;
-import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
-import database.model.data.BasicRecord;
 import database.model.ontology.OntologyClass;
 
 public class DatabaseUtils {
@@ -57,6 +53,11 @@ public class DatabaseUtils {
 
 	public static List findAll(Class recordType) {
 		return session.createCriteria(recordType).list();
+	}
+	
+	public static void deleteAll(Class recordType){
+		Query query = session.createQuery("delete from " + recordType.getSimpleName());
+		query.executeUpdate();
 	}
 
 	public static void importFromOldTable() {

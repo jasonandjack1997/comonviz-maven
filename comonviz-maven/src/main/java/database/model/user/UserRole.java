@@ -4,13 +4,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 
 import database.model.data.BasicRecord;
 import database.model.ontology.OntologyClass;
 
-
-public class Role extends BasicRecord{
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+public class UserRole extends BasicRecord{
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<OntologyClass> associatedOntologyClasses = new HashSet<OntologyClass>();
@@ -23,10 +27,10 @@ public class Role extends BasicRecord{
 		this.associatedOntologyClasses = associatedClasses;
 	}
 	
-	public Role(){
+	public UserRole(){
 	}
 
-	public Role(String name){
+	public UserRole(String name){
 		super(name);
 	}
 }

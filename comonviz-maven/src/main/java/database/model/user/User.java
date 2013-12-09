@@ -3,6 +3,9 @@ package database.model.user;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 
 import org.metawidget.inspector.annotation.UiHidden;
@@ -10,11 +13,13 @@ import org.metawidget.inspector.annotation.UiHidden;
 import database.model.data.BasicRecord;
 import database.model.data.BasicRecordSet;
 
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public class User extends BasicRecord{
 
 	@UiHidden
 	@ManyToMany (cascade = CascadeType.PERSIST)
-	private Set<Role> associatedRoles = new BasicRecordSet<Role>();
+	private Set<UserRole> associatedRoles = new BasicRecordSet<UserRole>();
 	
 	
 	private String password;
@@ -27,11 +32,11 @@ public class User extends BasicRecord{
 		this.password = password;
 	}
 
-	public Set<Role> getAssociatedRoles() {
+	public Set<UserRole> getAssociatedRoles() {
 		return associatedRoles;
 	}
 
-	public void setAssociatedRoles(Set<Role> associatedRoles) {
+	public void setAssociatedRoles(Set<UserRole> associatedRoles) {
 		this.associatedRoles = associatedRoles;
 	}
 	
