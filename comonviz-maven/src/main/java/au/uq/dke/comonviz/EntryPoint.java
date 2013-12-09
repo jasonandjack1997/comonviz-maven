@@ -51,10 +51,14 @@ public class EntryPoint {
 			+ dataBaseFileName);
 	private static LayoutAction radicalLayoutAction;
 
-	static ConfigurableApplicationContext ctx;
-	private static OntologyAxiomService ontologyAxiomService;
-	private static OntologyClassService ontologyClassService;
-	private static OntologyRelationshipService ontologyRelationshipService;
+	private static ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+	private static OntologyAxiomService ontologyAxiomService = (OntologyAxiomService) ctx
+			.getBean("ontologyAxiomService");
+	private static OntologyClassService ontologyClassService = (OntologyClassService) ctx
+			.getBean("ontologyClassService");
+	private static OntologyRelationshipService ontologyRelationshipService = (OntologyRelationshipService) ctx
+			.getBean("ontologyRelationshipService");
+
 
 	public static OntologyAxiomService getOntologyAxiomService() {
 		return ontologyAxiomService;
@@ -131,13 +135,6 @@ public class EntryPoint {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		ontologyAxiomService = (OntologyAxiomService) ctx
-				.getBean("ontologyAxiomService");
-		ontologyClassService = (OntologyClassService) ctx
-				.getBean("ontologyClassService");
-		ontologyRelationshipService = (OntologyRelationshipService) ctx
-				.getBean("ontologyRelationshipService");
 
 		List objects = EntryPoint.getOntologyClassService().findAll();
 

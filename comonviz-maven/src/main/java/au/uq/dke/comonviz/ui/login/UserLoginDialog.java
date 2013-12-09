@@ -136,8 +136,13 @@ public class UserLoginDialog extends JDialog {
 		
 		DatabaseUtils.getSession().beginTransaction();
 		for(OntologyClass cls : classes){
-			cls.setHasDashboard(false);
-			cls.setHasTable(false);
+			if(EntryPoint.getOntologyRelationshipService().findChildren(cls).size() == 0){
+				cls.setHasTable(true);
+				cls.setHasDashboard(false);
+			}else{
+				cls.setHasTable(false);
+				cls.setHasDashboard(true);
+			}
 		}
 		DatabaseUtils.getSession().getTransaction().commit();
 		

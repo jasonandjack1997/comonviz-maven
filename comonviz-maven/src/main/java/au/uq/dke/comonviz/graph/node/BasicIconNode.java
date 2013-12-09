@@ -10,7 +10,7 @@ import edu.umd.cs.piccolo.PNode;
 import edu.umd.cs.piccolo.util.PPaintContext;
 import edu.umd.cs.piccolo.util.PPickPath;
 
-public class BasicNodeIcon extends PNode {
+public class BasicIconNode extends PNode {
 
 
 	@Override

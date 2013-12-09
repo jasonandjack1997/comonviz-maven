@@ -6,7 +6,7 @@ import java.awt.Paint;
 
 import edu.umd.cs.piccolo.util.PPaintContext;
 
-public class RecordsTableIcon extends BasicNodeIcon{
+public class DashboardIconNode extends BasicIconNode{
 	
 	public Class getRecordType(){
 		DefaultGraphNode parentNode = (DefaultGraphNode) this.getParent();
@@ -22,7 +22,7 @@ public class RecordsTableIcon extends BasicNodeIcon{
 
 			Graphics2D g2 = paintContext.getGraphics();
 
-		Paint bg = Color.BLUE;
+		Paint bg = Color.RED;
 		g2.setPaint(bg);
 		g2.fill(this.getBounds());
 

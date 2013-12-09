@@ -72,7 +72,8 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 	protected static final int MAX_TOOLTIP_CHARS_IN_A_LINE = 50;
 	protected static final int MAX_LINES = 5;
 
-	private BasicNodeIcon tableIcon;
+	private BasicIconNode tableIconNode;
+	private BasicIconNode dashboardIconNode;
 
 	private Object userObject;
 	private String fullText;
@@ -176,8 +177,16 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 		setType(type);
 
 		if (this.getRecordType() != null) {
-			tableIcon = new RecordsTableIcon();
-			this.addChild(tableIcon);
+			OntologyClass ontologyClass = (OntologyClass) this.getUserObject();
+			if (ontologyClass.isHasTable()) {
+				tableIconNode = new RecordsTableIconNode();
+				this.addChild(tableIconNode);
+
+			}
+			if (ontologyClass.isHasDashboard()) {
+				dashboardIconNode = new DashboardIconNode();
+				this.addChild(dashboardIconNode);
+			}
 		}
 
 		initBounds();
@@ -595,11 +604,15 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 					- textNode.getHeight() / 2, textNode.getWidth(),
 					textNode.getHeight());
 
-			if (this.tableIcon != null) {
-
-				this.tableIcon.setBounds(centerX - 50, centerY - 50, 30, 30);
+			if (this.tableIconNode != null) {
+				this.tableIconNode
+						.setBounds(centerX - 50, centerY - 50, 30, 30);
 			}
 
+			if (this.dashboardIconNode != null) {
+				this.dashboardIconNode
+						.setBounds(centerX - 50, centerY - 50, 30, 30);
+			}
 			getEllipse().setFrame(centerX - getEllipse().getWidth() / 2,
 					centerY - getEllipse().getHeight() / 2,
 					getEllipse().getWidth(), getEllipse().getHeight());
@@ -873,28 +886,30 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 	public void setFixedLocation(boolean fixedLocation) {
 		this.fixedLocation = fixedLocation;
 	}
-	
-	public boolean hasTable(){
+
+	public boolean hasTable() {
 		Class<BasicRecord> recordType = this.getRecordType();
-		if(recordType != null){
-			//if(recordType)
+		if (recordType != null) {
+			// if(recordType)
 		}
-		
+
 		return false;
 	}
 
-	public Class<BasicRecord> getRecordType() { 
+	public Class<BasicRecord> getRecordType() {
 		String branchName = DatabaseUtils.getBranchNodeName(this);
-		String parentPackageName = StringUtils.getTableNameByNodeName(branchName);
+		String parentPackageName = StringUtils
+				.getTableNameByNodeName(branchName);
 		String modelClassNamePrefix = "database.model.data."
-				+ ReflectionUtils.toFirstLetterLowerCase(parentPackageName) + ".";
+				+ ReflectionUtils.toFirstLetterLowerCase(parentPackageName)
+				+ ".";
 
 		String tableName = StringUtils.getTableNameByNodeName(this.getText());
-		
-		if(tableName.equalsIgnoreCase("RiskIdentification")
+
+		if (tableName.equalsIgnoreCase("RiskIdentification")
 				|| tableName.equalsIgnoreCase("RiskAnalysis")
 				|| tableName.equals("RiskEvaluation")
-				|| tableName.equals("ComplianceManagement")){
+				|| tableName.equals("ComplianceManagement")) {
 			return null;
 		}
 
@@ -907,7 +922,7 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 		try {
 			recordType = Class.forName(fullClassName);
 		} catch (ClassNotFoundException e) {
-			 e.printStackTrace();
+			e.printStackTrace();
 		}
 		if (recordType != null) {
 			int a = 1;
