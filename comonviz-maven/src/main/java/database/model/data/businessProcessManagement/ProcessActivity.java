@@ -15,7 +15,7 @@ import database.model.data.City;
 
 
 @Entity
-public class ProcessActivity extends BasicRecord {
+public class ProcessActivity extends BusinessProcess {
 	
 	public ProcessActivity(){
 		

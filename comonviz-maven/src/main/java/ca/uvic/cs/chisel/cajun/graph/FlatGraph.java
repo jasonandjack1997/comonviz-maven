@@ -17,6 +17,7 @@ import au.uq.dke.comonviz.handler.HighlightHandler;
 import au.uq.dke.comonviz.handler.NodeDragHandler;
 import au.uq.dke.comonviz.handler.NodeSelectionHandler;
 import au.uq.dke.comonviz.handler.RotationHandler;
+import au.uq.dke.comonviz.handler.ShowDashboardHandler;
 import au.uq.dke.comonviz.handler.ShowRecordsTableHandler;
 import au.uq.dke.comonviz.handler.ZoomHandler;
 import ca.uvic.cs.chisel.cajun.graph.arc.GraphArc;
@@ -72,6 +73,7 @@ public class FlatGraph extends AbstractGraph {
 		camera.addInputEventListener(new RotationHandler());
 		
 		camera.addInputEventListener(new ShowRecordsTableHandler());
+		camera.addInputEventListener(new ShowDashboardHandler());
 
 	}
 

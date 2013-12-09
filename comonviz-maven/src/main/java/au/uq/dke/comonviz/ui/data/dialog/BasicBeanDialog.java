@@ -84,6 +84,7 @@ public class BasicBeanDialog extends JDialog {
 		this.dataModel.update(model);
 		
 		// persistent database
+		//this.dataModel.persist();
 
 		
 		//update table

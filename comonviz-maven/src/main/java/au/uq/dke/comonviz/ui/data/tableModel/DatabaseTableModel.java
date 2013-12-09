@@ -55,18 +55,25 @@ public class DatabaseTableModel<T extends BasicRecord> extends
 
 	public void add(T record) {
 		super.add(record);
-		session.save(record);
+		persist(record);
 	}
 
 	public void updateRecord(T newRecord) {
 		super.updateRecord(newRecord);
-		session.save(newRecord);
+		persist(newRecord);
 
 	}
 
 	public void delete(T record) {
 		super.delete(record);
-		session.delete(record);
+		persist(record);
+	}
+	
+	private void persist(T record){
+		session.beginTransaction();
+		session.save(record);
+		session.getTransaction().commit();
+
 	}
 
 
