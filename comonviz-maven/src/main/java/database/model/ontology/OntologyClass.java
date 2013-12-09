@@ -18,6 +18,8 @@ public class OntologyClass extends Trackable{
 	private String iri;
 	private int level;
 	private int siblingRank;
+	private Boolean hasTable = false;
+	private Boolean hasDashboard = false;
 
 	public Long getBranchId() {
 		return branchId;
@@ -72,6 +74,31 @@ public class OntologyClass extends Trackable{
 		this.setIri(c.getIri());
 		this.setSiblingRank(c.getSiblingRank());
 		super.update(c);
+	}
+
+
+	public boolean isHasTable() {
+		return hasTable;
+	}
+
+
+	public void setHasTable(boolean hasTable) {
+		this.hasTable = hasTable;
+	}
+
+
+	public Boolean isHasDashboard() {
+		return hasDashboard;
+	}
+
+
+	public void setHasDashboard(Boolean hasDashboard) {
+		this.hasDashboard = hasDashboard;
+	}
+	
+	public OntologyClass(){
+		this.hasDashboard = false;
+		this.hasTable = false;
 	}
 
 

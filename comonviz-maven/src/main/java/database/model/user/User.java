@@ -1,14 +1,55 @@
 package database.model.user;
 
-import unused.TrackableDatabaseEntity;
+import java.util.Set;
 
-public class User extends TrackableDatabaseEntity{
+import javax.persistence.CascadeType;
+import javax.persistence.ManyToMany;
 
-	private Long roleId;
-	public Long getRoleId() {
-		return roleId;
+import org.metawidget.inspector.annotation.UiHidden;
+
+import database.model.data.BasicRecord;
+import database.model.data.BasicRecordSet;
+
+public class User extends BasicRecord{
+
+	@UiHidden
+	@ManyToMany (cascade = CascadeType.PERSIST)
+	private Set<Role> associatedRoles = new BasicRecordSet<Role>();
+	
+	
+	private String password;
+
+	public String getPassword() {
+		return password;
 	}
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
+	public Set<Role> getAssociatedRoles() {
+		return associatedRoles;
+	}
+
+	public void setAssociatedRoles(Set<Role> associatedRoles) {
+		this.associatedRoles = associatedRoles;
+	}
+	
+	public User(){
+		
+	}
+	
+	public User(String name){
+		super(name);
+	}
+
+	@UiHidden
+	@Override
+	public String getDiscription() {
+		// TODO Auto-generated method stub
+		return super.getDiscription();
+	}
+	
+	
 }
+

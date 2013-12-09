@@ -8,6 +8,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 import org.metawidget.inspector.annotation.UiComesAfter;
+import org.metawidget.inspector.annotation.UiHidden;
 import org.metawidget.inspector.annotation.UiLarge;
 
 import au.uq.dke.comonviz.utils.DatabaseUtils;
@@ -44,13 +45,22 @@ public class BasicRecord extends Trackable implements Comparable<BasicRecord>{
 		return 0;
 	}
 	
-	
+	@UiHidden
 	public String getfieldNameByClass(){
 		return ReflectionUtils.getfieldNameByClass(this.getClass());
 	}
 	
 	public Serializable persist(){
 		return DatabaseUtils.getSession().save(this);
+	}
+	
+	/**inherit classes should rewrite this
+	 * 
+	 * @return
+	 */
+	@UiHidden
+	public boolean isTable(){
+		return false;
 	}
 
 }

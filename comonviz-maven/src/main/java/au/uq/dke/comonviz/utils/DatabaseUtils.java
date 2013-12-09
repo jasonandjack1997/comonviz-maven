@@ -14,7 +14,6 @@ import au.uq.dke.comonviz.misc.CustomRuntimeException;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import database.model.data.BasicRecord;
 import database.model.ontology.OntologyClass;
-import database.model.ontology.OntologyClass2;
 
 public class DatabaseUtils {
 
@@ -57,12 +56,12 @@ public class DatabaseUtils {
 
 		session.beginTransaction();
 
-		List classes = session.createCriteria(OntologyClass2.class).list();
-
-		Query query = session.createSQLQuery("select ontologyClass.id as id, trackable.name, level, iri, discription, branchid from ontologyClass inner join trackable on ontologyClass.id=trackable.id");
-//		Query query = session.createSQLQuery("select * from ontologyClass inner join trackable where ontologyClass.id = trackable.id").addEntity(OntologyClass2.class);
-
-		List result = query.list();
+//		List classes = session.createCriteria(OntologyClass2.class).list();
+//
+//		Query query = session.createSQLQuery("select ontologyClass.id as id, trackable.name, level, iri, discription, branchid from ontologyClass inner join trackable on ontologyClass.id=trackable.id");
+////		Query query = session.createSQLQuery("select * from ontologyClass inner join trackable where ontologyClass.id = trackable.id").addEntity(OntologyClass2.class);
+//
+//		List result = query.list();
 		return;
 
 	}

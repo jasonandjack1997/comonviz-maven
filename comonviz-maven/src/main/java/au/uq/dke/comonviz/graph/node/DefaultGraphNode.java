@@ -37,6 +37,7 @@ import au.uq.dke.comonviz.utils.StringUtils;
 import ca.uvic.cs.chisel.cajun.graph.arc.GraphArc;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNodeStyle;
+import database.model.data.BasicRecord;
 import database.model.ontology.OntologyClass;
 import edu.umd.cs.piccolo.PCamera;
 import edu.umd.cs.piccolo.PLayer;
@@ -872,8 +873,17 @@ public class DefaultGraphNode extends PNode implements GraphNode {
 	public void setFixedLocation(boolean fixedLocation) {
 		this.fixedLocation = fixedLocation;
 	}
+	
+	public boolean hasTable(){
+		Class<BasicRecord> recordType = this.getRecordType();
+		if(recordType != null){
+			//if(recordType)
+		}
+		
+		return false;
+	}
 
-	public Class getRecordType() { 
+	public Class<BasicRecord> getRecordType() { 
 		String branchName = DatabaseUtils.getBranchNodeName(this);
 		String parentPackageName = StringUtils.getTableNameByNodeName(branchName);
 		String modelClassNamePrefix = "database.model.data."
