@@ -2,15 +2,18 @@ package au.uq.dke.comonviz.graph.node;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Paint;
 import java.awt.geom.Rectangle2D;
+import java.net.URL;
 
 import au.uq.dke.comonviz.misc.CustomRuntimeException;
 import edu.umd.cs.piccolo.PNode;
+import edu.umd.cs.piccolo.nodes.PImage;
 import edu.umd.cs.piccolo.util.PPaintContext;
 import edu.umd.cs.piccolo.util.PPickPath;
 
-public class BasicIconNode extends PNode {
+public class BasicIconNode extends PImage {
 
 
 	@Override
@@ -22,6 +25,32 @@ public class BasicIconNode extends PNode {
 			throw new CustomRuntimeException("the node has no parent");
 		}
 
+	}
+
+
+
+	public BasicIconNode() {
+		super();
+	}
+
+
+
+	public BasicIconNode(Image image) {
+		super(image);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public BasicIconNode(URL url) {
+		super(url);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public BasicIconNode(String fileName) {
+		super(fileName);
 	}
 
 
