@@ -28,8 +28,8 @@ public class PrimaryRecordBeanDialogTest {
 
 		ProcessActivity activity = new ProcessActivity("activity 1");
 
-		activity.getAssociatedProcessObjectives().add(objective2);
-		activity.getAssociatedProcessObjectives().add(objective1);
+		activity.getProcessObjectives().add(objective2);
+		activity.getProcessObjectives().add(objective1);
 
 		BasicTablePanel caller = new BasicTablePanel();
 		JDialog dialog = new PrimaryRecordBeanDialog(activity, false, caller);

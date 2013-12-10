@@ -27,13 +27,13 @@ public class TestOneToManyMappingUsingGenericService {
 
 		ProcessActivity activity1 = new ProcessActivity();
 		activity1.setName("activity 1");
-		activity1.setAssociatedProcessObjectives(new HashSet<ProcessObjective>());
+		activity1.setProcessObjectives(new HashSet<ProcessObjective>());
 		activityService.save(activity1);
 
 		ProcessObjective objective1 = new ProcessObjective();
 		objective1.setName("objective 1");
 		objective1.setProcessActivity(activity1);
-		activity1.getAssociatedProcessObjectives().add(objective1);
+		activity1.getProcessObjectives().add(objective1);
 
 
 		objectiveService.save(objective1);

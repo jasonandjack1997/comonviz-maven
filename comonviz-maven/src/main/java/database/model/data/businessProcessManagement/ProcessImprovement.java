@@ -26,15 +26,15 @@ public class ProcessImprovement extends BusinessProcessManagement {
 	}
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-	private Set<ProcessActivity> associatedProcessActivities =  new BasicRecordSet<ProcessActivity>();
+	private Set<ProcessActivity> processActivities =  new BasicRecordSet<ProcessActivity>();
 
 
-	public Set<ProcessActivity> getAssociatedProcessActivities() {
-		return associatedProcessActivities;
+	public Set<ProcessActivity> getProcessActivities() {
+		return processActivities;
 	}
 
-	public void setAssociatedProcessActivities(Set<ProcessActivity> objectives) {
-		this.associatedProcessActivities = objectives;
+	public void setProcessActivities(Set<ProcessActivity> objectives) {
+		this.processActivities = objectives;
 	}
 	
 

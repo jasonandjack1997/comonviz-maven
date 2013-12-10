@@ -34,12 +34,12 @@ public class AssociatedRecordsPanelTest {
 
 		ProcessActivity activity = new ProcessActivity("activity 1");
 
-		activity.getAssociatedProcessObjectives().add(objective2);
-		activity.getAssociatedProcessObjectives().add(objective1);
+		activity.getProcessObjectives().add(objective2);
+		activity.getProcessObjectives().add(objective1);
 
 
 		JFrame frame = new JFrame();
-		frame.add(new AssociatedRecordsPanel(activity, activity.getAssociatedProcessObjectives(), ProcessObjective.class));
+		frame.add(new AssociatedRecordsPanel(activity, activity.getProcessObjectives(), ProcessObjective.class));
 		frame.pack();
 		frame.setVisible(true);
 
