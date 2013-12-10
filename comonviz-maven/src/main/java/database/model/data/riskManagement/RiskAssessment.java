@@ -9,10 +9,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import org.metawidget.inspector.annotation.UiComesAfter;
+import org.metawidget.inspector.annotation.UiHidden;
 
 import database.model.data.BasicRecordSet;
-import database.model.data.businessProcessManagement.BusinessProcess;
 import database.model.data.businessProcessManagement.ProcessActivity;
 import database.model.data.obligation.Obligation;
 import database.model.data.program.Stakeholder;
@@ -32,7 +31,8 @@ public class RiskAssessment extends RiskManagementProcess {
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<Stakeholder> affectedStakeholders = new BasicRecordSet<Stakeholder>();
-	@UiComesAfter("name, discription")
+	//@UiComesAfter("name")
+	@UiHidden
 	private String associatedDamage;
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<Obligation> associatedObligations= new BasicRecordSet<Obligation>();

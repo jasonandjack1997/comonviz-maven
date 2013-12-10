@@ -251,6 +251,19 @@ public class ReflectionUtils {
 
 	}
 
+	public static List<Field> getNonSetFieldList(Class clazz) {
+
+		List<Field> nonSetFieldList = new ArrayList<Field>();
+		for (Field field : clazz.getDeclaredFields()) {
+			if (!Set.class.isAssignableFrom(field.getType())
+					&& BasicRecord.class.isAssignableFrom(field.getType())) {
+				nonSetFieldList.add(field);
+			}
+		}
+		return nonSetFieldList;
+
+	}
+
 	/**
 	 * get the sets of this record object we can do anything once we have the
 	 * sets

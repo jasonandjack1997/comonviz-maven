@@ -12,13 +12,13 @@ public class StringUtils {
 		return tableName;
 	}
 	
-	public static String getClassUserFriendlyName(String className){
-		String userFriendlyName = className.replaceAll("([a-z])([A-Z][a-z])", "$1 $2").replaceAll("And", "&");
+	public static String getUserFriendlyName(String name){
+		String userFriendlyName = name.replaceAll("([a-z])([A-Z][a-z])", "$1 $2").replaceAll("And", "&");
 		return userFriendlyName;
 	}
 
 	
 	public static void main(String[] args) {
-		getClassUserFriendlyName("RiskIdentificationAndAssessment");
+		getUserFriendlyName("RiskIdentificationAndAssessment");
 	}
 }
