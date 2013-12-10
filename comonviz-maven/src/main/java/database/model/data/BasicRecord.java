@@ -62,5 +62,9 @@ public class BasicRecord extends Trackable implements Comparable<BasicRecord>{
 	public boolean isTable(){
 		return false;
 	}
+	
+	public String toString(){
+		return this.getName();
+	}
 
 }
