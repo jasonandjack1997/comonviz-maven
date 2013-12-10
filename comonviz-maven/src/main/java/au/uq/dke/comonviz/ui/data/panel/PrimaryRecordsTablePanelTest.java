@@ -38,8 +38,8 @@ public class PrimaryRecordsTablePanelTest {
 		ProcessObjective objective1 = new ProcessObjective("objective 1");
 		ProcessObjective objective2 = new ProcessObjective("objective 2");
 
-		activity.getProcessObjectives().add(objective2);
-		activity.getProcessObjectives().add(objective1);
+		activity.getAssociatedProcessObjectives().add(objective2);
+		activity.getAssociatedProcessObjectives().add(objective1);
 
 		DatabaseUtils.getSession().save(objective1);
 		DatabaseUtils.getSession().save(objective2);

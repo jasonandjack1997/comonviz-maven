@@ -38,14 +38,14 @@ public class EntryPointTest {
 		ProcessObjective objective1 = new ProcessObjective("objective 1");
 		ProcessObjective objective2 = new ProcessObjective("objective 2");
 
-		activity1.getProcessObjectives().add(objective1);
-		activity1.getProcessObjectives().add(objective2);
+		activity1.getAssociatedProcessObjectives().add(objective1);
+		activity1.getAssociatedProcessObjectives().add(objective2);
 		
 		objective1.persist();
 		objective2.persist();
 		
 		ProcessRule rule1 = new ProcessRule("rule 1");
-		rule1.getProcessActivities().add(activity1);
+		rule1.getAssociatedProcessActivities().add(activity1);
 		rule1.persist();
 
 	}

@@ -26,15 +26,15 @@ public class ProcessActivity extends BusinessProcess {
 	}
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-	private Set<ProcessObjective> processObjectives =  new BasicRecordSet<ProcessObjective>();
+	private Set<ProcessObjective> associatedProcessObjectives =  new BasicRecordSet<ProcessObjective>();
 
 
-	public Set<ProcessObjective> getProcessObjectives() {
-		return processObjectives;
+	public Set<ProcessObjective> getAssociatedProcessObjectives() {
+		return associatedProcessObjectives;
 	}
 
-	public void setProcessObjectives(Set<ProcessObjective> objectives) {
-		this.processObjectives = objectives;
+	public void setAssociatedProcessObjectives(Set<ProcessObjective> objectives) {
+		this.associatedProcessObjectives = objectives;
 	}
 
 

@@ -20,7 +20,7 @@ public class RecordsTableIconNode extends BasicIconNode {
 
 	public RecordsTableIconNode() {
 		super();
-		ImageIcon icon = new ImageIcon(defaultIconFilePath);
+		ImageIcon icon = new ImageIcon(RecordsTableIconNode.class.getResource("/table.png"));
 		Image iconImage = icon.getImage();
 		super.setImage(iconImage);
 	}

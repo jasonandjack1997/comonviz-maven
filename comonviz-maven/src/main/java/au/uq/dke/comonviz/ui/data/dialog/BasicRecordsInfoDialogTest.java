@@ -29,9 +29,9 @@ public class BasicRecordsInfoDialogTest {
 		ProcessObjective objective1 = new ProcessObjective("objective 1");
 		ProcessObjective objective2 = new ProcessObjective("objective 2");
 
-		activity1.getProcessObjectives().add(objective1);
+		activity1.getAssociatedProcessObjectives().add(objective1);
 
-		activity1.getProcessObjectives().add(objective2);
+		activity1.getAssociatedProcessObjectives().add(objective2);
 
 		DatabaseUtils.getSession().save(objective1);
 		DatabaseUtils.getSession().save(objective2);

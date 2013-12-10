@@ -61,7 +61,7 @@ public class RecordsTableModel<T> extends DatabaseTableModel {
 
 		List<String> columnList = new ArrayList<String>();
 		columnList.add("name");
-		columnList.add("discription");
+		//columnList.add("discription");
 
 		// before cast to array we should fetch the set members!
 
@@ -69,9 +69,9 @@ public class RecordsTableModel<T> extends DatabaseTableModel {
 		
 
 		
-		List setFieldList = ReflectionUtils.getSetFieldList(clazz);
+		List<Field> setFieldList = ReflectionUtils.getSetFieldList(clazz);
 		for (int i = 0; i < setFieldList.size(); i++) {
-			columnList.add("FK " + i);
+			columnList.add(setFieldList.get(i).getName());
 		}
 
 		String[] columns = new String[columnList.size()];

@@ -1,5 +1,6 @@
 package au.uq.dke.comonviz.ui.data.panel;
 
+import java.awt.Dimension;
 import java.util.Set;
 
 import javax.swing.JTable;
@@ -10,11 +11,8 @@ import org.metawidget.inspector.annotation.UiAction;
 import au.uq.dke.comonviz.ui.data.dialog.ForeignRecordsChooseDialog;
 import au.uq.dke.comonviz.ui.data.tableModel.AssociatedRecordsTableModel;
 import au.uq.dke.comonviz.ui.data.tableModel.BasicTableModel;
-import au.uq.dke.comonviz.ui.data.tableModel.DatabaseTableModel;
 import au.uq.dke.comonviz.utils.DatabaseUtils;
-import au.uq.dke.comonviz.utils.ReflectionUtils;
 import database.model.data.BasicRecord;
-import database.service.ServiceManager;
 
 /**
  * this panel is in the record dialog this shows a list of associated records in
@@ -40,6 +38,9 @@ public class AssociatedRecordsPanel extends ButtonedTablePanel {
 		TableModel tableModel = new AssociatedRecordsTableModel(this.primaryRecord,
 				set, setElementType);
 		JTable table = new JTable(tableModel);
+		table.setPreferredSize(new Dimension(200, 50));
+		table.setPreferredScrollableViewportSize(table.getPreferredSize());
+		table.setFillsViewportHeight(true);
 		super.init(table);
 		
 	}
