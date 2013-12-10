@@ -21,6 +21,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.zest.layouts.algorithms.RadialLayoutAlgorithm;
+import org.eclipse.zest.layouts.algorithms.TreeLayoutAlgorithm;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -49,7 +50,13 @@ public class EntryPoint {
 	private final String outerDatabaseDirectory = "C:/comonviz/";
 	private final File outerDatabaseFile = new File(outerDatabaseDirectory
 			+ dataBaseFileName);
-	private static LayoutAction radicalLayoutAction;
+	
+	
+	public  static LayoutAction radicalLayoutStyle;
+
+	public  static LayoutAction treeLayoutStyle;
+	
+	private static LayoutAction currentLayoutStyle ;
 
 	private static ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 	private static OntologyAxiomService ontologyAxiomService = (OntologyAxiomService) ctx
@@ -143,10 +150,22 @@ public class EntryPoint {
 		graphModel = new NewGraphModel();
 		this.getFilterManager().getArcTypeFilter().updateArcTypes();
 		flatGraph = new FlatGraph();
+		
+		
+		radicalLayoutStyle = new LayoutAction(LayoutConstants.LAYOUT_RADIAL,
+				null, new RadialLayoutAlgorithm(1), EntryPoint.getFlatGraph());
+
+		treeLayoutStyle = new LayoutAction("tree layout",
+				null, new TreeLayoutAlgorithm(), EntryPoint.getFlatGraph());
+		
+		currentLayoutStyle = radicalLayoutStyle;
+		
+		
+		
 		topView = new TopView();
 		annotationManager = new AnnotationManager();
 		// graphController = new GraphController();
-		radicalLayoutAction = new LayoutAction(LayoutConstants.LAYOUT_RADIAL,
+		currentLayoutStyle = new LayoutAction(LayoutConstants.LAYOUT_RADIAL,
 				null, new RadialLayoutAlgorithm(1), EntryPoint.getFlatGraph());
 
 		graphModel.init();
@@ -162,7 +181,7 @@ public class EntryPoint {
 		topView.addListeners();
 		flatGraph.addListeners();
 
-		this.filterManager.getNodeLevelFilter().updateNodeLevels();
+		this.filterManager.getNodeLevelFilter().updateNodeLevels(3);
 		this.filterManager.getNodeBranchFilter().init();
 		
 		this.topView.getArcTypeFilterPanel().reload();
@@ -186,8 +205,12 @@ public class EntryPoint {
 		return ontologyTreeRoot;
 	}
 
-	public static LayoutAction getRadicalLayoutAction() {
-		return radicalLayoutAction;
+	public static LayoutAction getCurrentLayoutStyle() {
+		return currentLayoutStyle;
+	}
+
+	public static void setCurrentLayoutStyle(LayoutAction currentLayoutStyle) {
+		EntryPoint.currentLayoutStyle = currentLayoutStyle;
 	}
 
 	public static OWLOntology getOntology() {

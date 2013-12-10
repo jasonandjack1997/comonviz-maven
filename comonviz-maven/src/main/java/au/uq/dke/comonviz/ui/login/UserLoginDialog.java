@@ -1,10 +1,12 @@
 package au.uq.dke.comonviz.ui.login;
 
 import java.awt.BorderLayout;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JPasswordField;
+import javax.swing.SwingUtilities;
 
 import org.metawidget.inspector.annotation.UiAction;
 import org.metawidget.inspector.annotation.UiComesAfter;
@@ -73,55 +75,106 @@ public class UserLoginDialog extends JDialog {
 	@UiAction
 	public void login() {
 
-		// update bean
-		modelWidget.getWidgetProcessor(BeansBindingProcessor.class).save(
-				modelWidget);
-		User user = modelWidget.getToInspect();
-		this.user = (User) DatabaseUtils.findByUniqueName(User.class,
-				user.getName());
-
-
-		if (this.user == null) {
-			throw new CustomRuntimeException("user is invalid, name or password is incorrect");
-		}
-
-		UserRole associatedRole = null;
-		if (this.user.getAssociatedRoles() != null
-				&& this.user.getAssociatedRoles().size() > 0) {
-
-			associatedRole = (UserRole) this.user.getAssociatedRoles().toArray()[0];
-		} else {
-			throw new CustomRuntimeException(
-					"user associated role does not exist");
-		}
 		
-		OntologyClass associatedOntologyClass= null;
+		
+		SwingUtilities.invokeLater(new Runnable() {
 
-		if(associatedRole != null
-			&& associatedRole.getAssociatedOntologyClasses() != null
-			&& associatedRole.getAssociatedOntologyClasses().size() > 0){
-			associatedOntologyClass = (OntologyClass) associatedRole.getAssociatedOntologyClasses().toArray()[0];
+			@Override
+			public void run() {
+				
+				// update bean
+				modelWidget.getWidgetProcessor(BeansBindingProcessor.class).save(
+						modelWidget);
+				User user = modelWidget.getToInspect();
+				// root
+				if (user.getName().equals("root")) {
+					EntryPoint.setCurrentLayoutStyle(EntryPoint.radicalLayoutStyle);
+
+
+					EntryPoint.getFilterManager().getNodeLevelFilter()
+							.updateNodeLevels(3);
+					EntryPoint.getTopView().getNodeLevelFilterPanel().reload();
+
 					
-		}else {
-			throw new CustomRuntimeException("user associated ontology class does not exist");
-		}
-		
-		//get the branch node
-		
-		DefaultGraphNode branchNode = null;
-		branchNode = (DefaultGraphNode) EntryPoint.getGraphModel().findGraphNode(associatedOntologyClass);
+					EntryPoint.getTopView().getNodeBranchFilterPanel().setEnabled(true);
+					EntryPoint.getFilterManager().getNodeBranchFilter()
+					.setAllBranchesVisible();
+					EntryPoint.getTopView().getNodeBranchFilterPanel().reload();
+					EntryPoint.getFlatGraph().performLayout();
 
-		//set the check boxes of filter panel
-		//set the filter, then call the filter panel to reload to refresh check status
-		EntryPoint.getFilterManager().getNodeBranchFilter().setAllBranchesInvisible();
-		EntryPoint.getFilterManager().getNodeBranchFilter().setNodeBranchVisible(branchNode, true);
-		//make filter panel un-editable
-		EntryPoint.getTopView().getNodeBranchFilterPanel().setEnabled(false);
-		EntryPoint.getTopView().getNodeBranchFilterPanel().reload();
-		
-		
+
+
+
+				} else {
+
+					UserLoginDialog.this.user = (User) DatabaseUtils.findByUniqueName(User.class,
+							user.getName());
+
+					if (UserLoginDialog.this.user == null) {
+						throw new CustomRuntimeException(
+								"user is invalid, name or password is incorrect");
+					}
+
+					UserRole associatedRole = null;
+					if (UserLoginDialog.this.user.getAssociatedRoles() != null
+							&& UserLoginDialog.this.user.getAssociatedRoles().size() > 0) {
+
+						associatedRole = (UserRole) UserLoginDialog.this.user.getAssociatedRoles()
+								.toArray()[0];
+					} else {
+						throw new CustomRuntimeException(
+								"user associated role does not exist");
+					}
+
+					OntologyClass associatedOntologyClass = null;
+
+					if (associatedRole != null
+							&& associatedRole.getAssociatedOntologyClasses() != null
+							&& associatedRole.getAssociatedOntologyClasses().size() > 0) {
+						associatedOntologyClass = (OntologyClass) associatedRole
+								.getAssociatedOntologyClasses().toArray()[0];
+
+					} else {
+						throw new CustomRuntimeException(
+								"user associated ontology class does not exist");
+					}
+
+					// get the branch node
+
+					DefaultGraphNode branchNode = null;
+					branchNode = (DefaultGraphNode) EntryPoint.getGraphModel()
+							.findGraphNode(associatedOntologyClass);
+
+					// set the check boxes of filter panel
+					// set the filter, then call the filter panel to reload to refresh
+					// check status
+					EntryPoint.setCurrentLayoutStyle(EntryPoint.treeLayoutStyle);
+					EntryPoint.getFilterManager().getNodeBranchFilter()
+							.setAllBranchesInvisible();
+					EntryPoint.getFilterManager().getNodeBranchFilter()
+							.setNodeBranchVisible(branchNode, true);
+					Collection levels = EntryPoint.getFilterManager()
+							.getNodeLevelFilter().getNodeLevels();
+					for (Object level : levels) {
+						EntryPoint.getFilterManager().getNodeLevelFilter()
+								.setNodeLevelVisible(level, true);
+					}
+					EntryPoint.getTopView().getNodeLevelFilterPanel().reload();
+
+					// make filter panel un-editable
+					EntryPoint.getTopView().getNodeBranchFilterPanel()
+							.setEnabled(false);
+					EntryPoint.getTopView().getNodeBranchFilterPanel().reload();
+					EntryPoint.getFlatGraph().performLayout();
+				}
+
+			}
+		});
+
+
+
 		this.dispose();
-		
+
 	}
 
 	@UiAction
@@ -130,52 +183,64 @@ public class UserLoginDialog extends JDialog {
 
 	}
 
-	
 	public static void main(String[] args) {
-		List<OntologyClass> classes = DatabaseUtils.findAll(OntologyClass.class);
-		
-//		DatabaseUtils.getSession().beginTransaction();
-//		for(OntologyClass cls : classes){
-//			if(EntryPoint.getOntologyRelationshipService().findChildren(cls).size() == 0){
-//				cls.setHasTable(true);
-//				cls.setHasDashboard(false);
-//			}else{
-//				cls.setHasTable(false);
-//				cls.setHasDashboard(true);
-//			}
-//		}
-//		DatabaseUtils.getSession().getTransaction().commit();
-		
-		
+		List<OntologyClass> classes = DatabaseUtils
+				.findAll(OntologyClass.class);
+
+		// DatabaseUtils.getSession().beginTransaction();
+		// for(OntologyClass cls : classes){
+		// if(EntryPoint.getOntologyRelationshipService().findChildren(cls).size()
+		// == 0){
+		// cls.setHasTable(true);
+		// cls.setHasDashboard(false);
+		// }else{
+		// cls.setHasTable(false);
+		// cls.setHasDashboard(true);
+		// }
+		// }
+		// DatabaseUtils.getSession().getTransaction().commit();
+
 		List<User> users = DatabaseUtils.findAll(User.class);
 		DatabaseUtils.getSession().beginTransaction();
-		for(User user : users){
+		for (User user : users) {
 			DatabaseUtils.getSession().delete(user);
 		}
 		DatabaseUtils.getSession().getTransaction().commit();
-		
+
 		users = DatabaseUtils.findAll(User.class);
+
+		addUser("ProcessManagerA", "ProcessManager",
+				"Business Process Management");
+		addUser("ProgramManagerA", "ProgramManager", "Program");
+		addUser("ObligationManagerA", "ObligationManager", "Obligation");
+		users = DatabaseUtils.findAll(User.class);
+
 		new EntryPoint().start();
-		
-		
-		User user1 = new User("Steve");
-		UserRole businessProcessManager = new UserRole("Business Process Manager");
-		
-		OntologyClass businessProcessManagementClass = null;
-		
-		businessProcessManagementClass = (OntologyClass) DatabaseUtils.findByUniqueName(OntologyClass.class, "Business Process Management");
-		
-		if(businessProcessManagementClass != null){
-			DatabaseUtils.getSession().save(businessProcessManagementClass);
-			businessProcessManager.getAssociatedOntologyClasses().add(businessProcessManagementClass);
-			businessProcessManager.persist();
-			user1.getAssociatedRoles().add(businessProcessManager);
+
+	}
+
+	private static void addUser(String userName, String roleName,
+			String ontologyClassName) {
+
+		DatabaseUtils.getSession().beginTransaction();
+		User user1 = new User(userName);
+		UserRole role = new UserRole(roleName);
+
+		OntologyClass ontologyClass = null;
+
+		ontologyClass = (OntologyClass) DatabaseUtils.findByUniqueName(
+				OntologyClass.class, ontologyClassName);
+
+		if (ontologyClass != null) {
+			DatabaseUtils.getSession().save(ontologyClass);
+			role.getAssociatedOntologyClasses().add(ontologyClass);
+			role.persist();
+			user1.getAssociatedRoles().add(role);
 			user1.persist();
+		} else {
+			throw new CustomRuntimeException("ontology Class not valid");
 		}
-		
-		
-		
-		
+		DatabaseUtils.getSession().getTransaction().commit();
 	}
 
 }

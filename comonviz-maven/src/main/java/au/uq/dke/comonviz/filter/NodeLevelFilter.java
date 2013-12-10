@@ -92,7 +92,7 @@ public class NodeLevelFilter implements GraphFilter {
 
 	}
 
-	public void updateNodeLevels() {
+	public void updateNodeLevels(int maxLevel) {
 		Collection<GraphNode> graphNodes = EntryPoint.getGraphModel()
 				.getAllNodes();
 		this.nodeLevelsVisibilityMap.clear();
@@ -102,7 +102,7 @@ public class NodeLevelFilter implements GraphFilter {
 			if (!this.nodeLevelsVisibilityMap
 					.containsKey(level)){
 				int l = (int) level;
-				this.nodeLevelsVisibilityMap.put(level, (l <= initialMaxVisibleLevel || 0 > initialMaxVisibleLevel) ? true : false);
+				this.nodeLevelsVisibilityMap.put(level, (l <= maxLevel || 0 > maxLevel) ? true : false);
 			}
 		}
 	}

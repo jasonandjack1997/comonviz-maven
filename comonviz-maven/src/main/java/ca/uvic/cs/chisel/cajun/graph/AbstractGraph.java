@@ -591,13 +591,13 @@ public abstract class AbstractGraph extends PCanvas implements Graph {
 	public void performLayout() {
 			filterManager.applyFilters(model);
 			clearOrphanNodes();//this should be a filter
-			EntryPoint.getRadicalLayoutAction().runLayout();
+			EntryPoint.getCurrentLayoutStyle().runLayout();
 	}
 	
 	public void performLayoutWithoutNodeFilters(){
 		
 		filterManager.applyArcFilters(model);
-		EntryPoint.getRadicalLayoutAction().runLayout();
+		EntryPoint.getCurrentLayoutStyle().runLayout();
 
 	}
 
