@@ -213,6 +213,8 @@ public class UserLoginDialog extends JDialog {
 				"Business Process Management");
 		addUser("ProgramManagerA", "ProgramManager", "Program");
 		addUser("ObligationManagerA", "ObligationManager", "Obligation");
+		addUser("Steve", "RiskManager", "Risk Management");
+		
 		users = DatabaseUtils.findAll(User.class);
 
 		new EntryPoint().start();

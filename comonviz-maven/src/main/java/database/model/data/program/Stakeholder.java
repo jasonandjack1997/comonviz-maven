@@ -18,8 +18,20 @@ public class Stakeholder extends Structure	{
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	private StakeholderType stakeholderType;
 	
+	public StakeholderType getStakeholderType() {
+		return stakeholderType;
+	}
+	public void setStakeholderType(StakeholderType stakeholderType) {
+		this.stakeholderType = stakeholderType;
+	}
 	private String obligation;
 	
+	public String getObligation() {
+		return obligation;
+	}
+	public void setObligation(String obligation) {
+		this.obligation = obligation;
+	}
 	public Stakeholder(String name){
 		super(name);
 	}
