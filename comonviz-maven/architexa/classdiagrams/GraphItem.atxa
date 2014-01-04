@@ -1,0 +1,269 @@
+@prefix atxa-rse-eclipse: <http://www.architexa.com/rdf/rse-eclipse#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix atxa-jdt-wkspc: <http://www.architexa.com/rdf/jdt-wkspc#> .
+@prefix atxa-core: <http://www.architexa.com/rdf/core#> .
+@prefix atxa: <http://www.architexa.com/rdf/> .
+@prefix atxa-jdt: <http://www.architexa.com/rdf/jdt#> .
+
+<http://www.architexa.com/rdf/rse-eclipse#architexa_slclassdiagrams_slClass1.atxa> a atxa-core:reloFile .
+
+atxa:DetailNode atxa-core:detailLevel "0" .
+
+atxa-core:docRoot atxa-core:browseModel "com.architexa.diagrams.relo.jdt/com.architexa.diagrams.relo.jdt.browse.ClassStrucBrowseModel" ;
+	atxa-core:contains _:node18ddcbbvfx118 .
+
+_:node18ddcbbvfx118 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph.node> ;
+	atxa-core:posX "390" ;
+	atxa-core:posY "204" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph.node> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph.node$GraphNode> .
+
+_:node18ddcbbvfx118 atxa-core:contains _:node18ddcbbvfx119 .
+
+_:node18ddcbbvfx119 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph.node$GraphNode> ;
+	atxa-core:posX "396" ;
+	atxa-core:posY "238" .
+
+_:node18ddcbbvfx202 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node18ddcbbvfx119 ;
+	rdf:object _:node18ddcbbvfx2069 ;
+	atxa-core:bendpoint _:node18ddcbbvfx2070 .
+
+_:node18ddcbbvfx2070 atxa-core:bpLocation "466,131" ;
+	atxa-core:bpIndex "0" .
+
+_:node18ddcbbvfx202 atxa-core:bendpoint _:node18ddcbbvfx2071 .
+
+_:node18ddcbbvfx2071 atxa-core:bpLocation "633,131" ;
+	atxa-core:bpIndex "1" .
+
+_:node18ddcbbvfx238 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node18ddcbbvfx119 ;
+	rdf:object _:node18ddcbbvfx2072 ;
+	atxa-core:bendpoint _:node18ddcbbvfx2073 .
+
+_:node18ddcbbvfx2073 atxa-core:bpLocation "466,50" ;
+	atxa-core:bpIndex "0" .
+
+_:node18ddcbbvfx238 atxa-core:bendpoint _:node18ddcbbvfx2074 .
+
+_:node18ddcbbvfx2074 atxa-core:bpLocation "334,50" ;
+	atxa-core:bpIndex "1" .
+
+atxa-core:docRoot atxa-core:contains _:node18ddcbbvfx121 .
+
+_:node18ddcbbvfx121 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#au.uq.dke.comonviz.graph.node> ;
+	atxa-core:posX "266" ;
+	atxa-core:posY "441" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#au.uq.dke.comonviz.graph.node> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#au.uq.dke.comonviz.graph.node$DefaultGraphNode> .
+
+_:node18ddcbbvfx121 atxa-core:contains _:node18ddcbbvfx122 .
+
+_:node18ddcbbvfx122 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#au.uq.dke.comonviz.graph.node$DefaultGraphNode> ;
+	atxa-core:posX "272" ;
+	atxa-core:posY "475" .
+
+_:node18ddcbbvfx59 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node18ddcbbvfx122 ;
+	rdf:object _:node18ddcbbvfx119 ;
+	atxa-core:bendpoint _:node18ddcbbvfx2075 .
+
+_:node18ddcbbvfx2075 atxa-core:bpLocation "373,311" ;
+	atxa-core:bpIndex "0" .
+
+_:node18ddcbbvfx59 atxa-core:bendpoint _:node18ddcbbvfx2076 .
+
+_:node18ddcbbvfx2076 atxa-core:bpLocation "466,311" ;
+	atxa-core:bpIndex "1" .
+
+_:node18ddcbbvfx77 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node18ddcbbvfx122 ;
+	rdf:object _:node18ddcbbvfx125 ;
+	atxa-core:bendpoint _:node18ddcbbvfx2077 .
+
+_:node18ddcbbvfx2077 atxa-core:bpLocation "373,308" ;
+	atxa-core:bpIndex "0" .
+
+_:node18ddcbbvfx77 atxa-core:bendpoint _:node18ddcbbvfx2078 .
+
+_:node18ddcbbvfx2078 atxa-core:bpLocation "210,308" ;
+	atxa-core:bpIndex "1" .
+
+atxa-core:docRoot atxa-core:contains _:node18ddcbbvfx128 .
+
+_:node18ddcbbvfx128 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#edu.umd.cs.piccolo> ;
+	atxa-core:posX "155" ;
+	atxa-core:posY "201" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#edu.umd.cs.piccolo> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#edu.umd.cs.piccolo$PNode> .
+
+_:node18ddcbbvfx128 atxa-core:contains _:node18ddcbbvfx125 .
+
+_:node18ddcbbvfx125 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#edu.umd.cs.piccolo$PNode> ;
+	atxa-core:posX "161" ;
+	atxa-core:posY "235" .
+
+atxa-core:docRoot atxa-core:contains _:node18ddcbbvfx2079 .
+
+_:node18ddcbbvfx2079 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph> ;
+	atxa-core:posX "561" ;
+	atxa-core:posY "24" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph$GraphItem> .
+
+_:node18ddcbbvfx2079 atxa-core:contains _:node18ddcbbvfx2069 .
+
+_:node18ddcbbvfx2069 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph$GraphItem> ;
+	atxa-core:posX "567" ;
+	atxa-core:posY "58" .
+
+atxa-core:docRoot atxa-core:contains _:node18ddcbbvfx2080 .
+
+_:node18ddcbbvfx2080 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.eclipse.zest.layouts> ;
+	atxa-core:posX "253" ;
+	atxa-core:posY "-57" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#org.eclipse.zest.layouts> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#org.eclipse.zest.layouts$LayoutEntity> , <http://www.architexa.com/rdf/jdt-wkspc#org.eclipse.zest.layouts$LayoutRelationship> .
+
+_:node18ddcbbvfx2080 atxa-core:contains _:node18ddcbbvfx2072 .
+
+_:node18ddcbbvfx2072 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.eclipse.zest.layouts$LayoutEntity> ;
+	atxa-core:posX "259" ;
+	atxa-core:posY "-23" .
+
+_:node18ddcbbvfx2080 atxa-core:contains _:node18ddcbbvfx2081 .
+
+_:node18ddcbbvfx2081 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#org.eclipse.zest.layouts$LayoutRelationship> ;
+	atxa-core:posX "832" ;
+	atxa-core:posY "-18" .
+
+atxa-core:docRoot atxa-core:contains _:node18ddcbbvfx2082 .
+
+_:node18ddcbbvfx2082 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph.arc> ;
+	atxa-core:posX "755" ;
+	atxa-core:posY "185" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph.arc> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph.arc$GraphArc> .
+
+_:node18ddcbbvfx2082 atxa-core:contains _:node18ddcbbvfx2083 .
+
+_:node18ddcbbvfx2083 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#ca.uvic.cs.chisel.cajun.graph.arc$GraphArc> ;
+	atxa-core:posX "761" ;
+	atxa-core:posY "219" .
+
+_:node18ddcbbvfx720 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node18ddcbbvfx2083 ;
+	rdf:object _:node18ddcbbvfx2069 ;
+	atxa-core:bendpoint _:node18ddcbbvfx2084 .
+
+_:node18ddcbbvfx2084 atxa-core:bpLocation "822,131" ;
+	atxa-core:bpIndex "0" .
+
+_:node18ddcbbvfx720 atxa-core:bendpoint _:node18ddcbbvfx2085 .
+
+_:node18ddcbbvfx2085 atxa-core:bpLocation "633,131" ;
+	atxa-core:bpIndex "1" .
+
+_:node18ddcbbvfx764 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node18ddcbbvfx2083 ;
+	rdf:object _:node18ddcbbvfx2081 ;
+	atxa-core:bendpoint _:node18ddcbbvfx2086 .
+
+_:node18ddcbbvfx2086 atxa-core:bpLocation "822,55" ;
+	atxa-core:bpIndex "0" .
+
+_:node18ddcbbvfx764 atxa-core:bendpoint _:node18ddcbbvfx2087 .
+
+_:node18ddcbbvfx2087 atxa-core:bpLocation "935,55" ;
+	atxa-core:bpIndex "1" .
+
+atxa-core:docRoot atxa-core:contains _:node18ddcbbvfx2088 .
+
+_:node18ddcbbvfx2088 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#au.uq.dke.comonviz.graph.arc> ;
+	atxa-core:posX "828" ;
+	atxa-core:posY "435" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#au.uq.dke.comonviz.graph.arc> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#au.uq.dke.comonviz.graph.arc$DefaultGraphArc> .
+
+_:node18ddcbbvfx2088 atxa-core:contains _:node18ddcbbvfx2089 .
+
+_:node18ddcbbvfx2089 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#au.uq.dke.comonviz.graph.arc$DefaultGraphArc> ;
+	atxa-core:posX "834" ;
+	atxa-core:posY "469" .
+
+_:node18ddcbbvfx852 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node18ddcbbvfx2089 ;
+	rdf:object _:node18ddcbbvfx2083 ;
+	atxa-core:bendpoint _:node18ddcbbvfx2090 .
+
+_:node18ddcbbvfx2090 atxa-core:bpLocation "927,292" ;
+	atxa-core:bpIndex "0" .
+
+_:node18ddcbbvfx852 atxa-core:bendpoint _:node18ddcbbvfx2091 .
+
+_:node18ddcbbvfx2091 atxa-core:bpLocation "822,292" ;
+	atxa-core:bpIndex "1" .
+
+_:node18ddcbbvfx996 a atxa-core:link ;
+	atxa-core:model atxa-jdt:inherits ;
+	rdf:subject _:node18ddcbbvfx2089 ;
+	rdf:object _:node18ddcbbvfx2092 ;
+	atxa-core:bendpoint _:node18ddcbbvfx2093 .
+
+_:node18ddcbbvfx2093 atxa-core:bpLocation "927,309" ;
+	atxa-core:bpIndex "0" .
+
+_:node18ddcbbvfx996 atxa-core:bendpoint _:node18ddcbbvfx2094 .
+
+_:node18ddcbbvfx2094 atxa-core:bpLocation "1056,309" ;
+	atxa-core:bpIndex "1" .
+
+atxa-core:docRoot atxa-core:contains _:node18ddcbbvfx2095 .
+
+_:node18ddcbbvfx2095 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#edu.umd.cs.piccolo.nodes> ;
+	atxa-core:posX "1004" ;
+	atxa-core:posY "202" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#edu.umd.cs.piccolo.nodes> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#edu.umd.cs.piccolo.nodes$PPath> .
+
+_:node18ddcbbvfx2095 atxa-core:contains _:node18ddcbbvfx2092 .
+
+_:node18ddcbbvfx2092 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#edu.umd.cs.piccolo.nodes$PPath> ;
+	atxa-core:posX "1010" ;
+	atxa-core:posY "236" .
+
+@prefix atxa-rse-eclipse: <http://www.architexa.com/rdf/rse-eclipse#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix atxa-jdt-wkspc: <http://www.architexa.com/rdf/jdt-wkspc#> .
+@prefix atxa-core: <http://www.architexa.com/rdf/core#> .
+@prefix atxa: <http://www.architexa.com/rdf/> .
+@prefix atxa-jdt: <http://www.architexa.com/rdf/jdt#> .
+
+<http://www.architexa.com/rdf/rse-eclipse#architexa_slclassdiagrams_slClass1.atxa> a atxa-core:reloFile ;
+	atxa-core:contains _:node18ddcbbvfx119 , _:node18ddcbbvfx118 , _:node18ddcbbvfx122 , _:node18ddcbbvfx121 , _:node18ddcbbvfx125 , _:node18ddcbbvfx128 , _:node18ddcbbvfx2069 , _:node18ddcbbvfx2079 , _:node18ddcbbvfx2072 , _:node18ddcbbvfx2081 , _:node18ddcbbvfx2080 , _:node18ddcbbvfx2083 , _:node18ddcbbvfx2082 , _:node18ddcbbvfx2089 , _:node18ddcbbvfx2088 , _:node18ddcbbvfx2092 , _:node18ddcbbvfx2095 , atxa-core:docRoot , _:node18ddcbbvfx119 , _:node18ddcbbvfx118 , _:node18ddcbbvfx122 , _:node18ddcbbvfx121 , _:node18ddcbbvfx125 , _:node18ddcbbvfx128 , _:node18ddcbbvfx2069 , _:node18ddcbbvfx2079 , _:node18ddcbbvfx2072 , _:node18ddcbbvfx2081 , _:node18ddcbbvfx2080 , _:node18ddcbbvfx2083 , _:node18ddcbbvfx2082 , _:node18ddcbbvfx2089 , _:node18ddcbbvfx2088 , _:node18ddcbbvfx2092 , _:node18ddcbbvfx2095 , atxa-core:docRoot , _:node18ddcbbvfx202 , _:node18ddcbbvfx238 , _:node18ddcbbvfx59 , _:node18ddcbbvfx77 , _:node18ddcbbvfx720 , _:node18ddcbbvfx764 , _:node18ddcbbvfx852 , _:node18ddcbbvfx996 , _:node18ddcbbvfx202 , _:node18ddcbbvfx238 , _:node18ddcbbvfx59 , _:node18ddcbbvfx77 , _:node18ddcbbvfx720 , _:node18ddcbbvfx764 , _:node18ddcbbvfx852 , _:node18ddcbbvfx996 .
+

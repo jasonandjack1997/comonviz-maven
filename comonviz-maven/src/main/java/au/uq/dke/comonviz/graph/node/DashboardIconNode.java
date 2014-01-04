@@ -20,7 +20,7 @@ public class DashboardIconNode extends BasicIconNode{
 
 	public DashboardIconNode() {
 		super();
-		ImageIcon icon = new ImageIcon(defaultIconFilePath);
+		ImageIcon icon = new ImageIcon(RecordsTableIconNode.class.getResource("/dashboard.png"));
 		Image iconImage = icon.getImage();
 		super.setImage(iconImage);
 	}
